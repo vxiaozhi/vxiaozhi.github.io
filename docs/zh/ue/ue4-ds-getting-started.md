@@ -186,9 +186,12 @@ ThirdPersonGameServer.exe -log
 
 ![ue4_ds_19a](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/2024/ue4_ds_19a.jpg)
  
-### 小技巧
+### 快捷键
 
-客户端打开后， 默认会全屏模式， 此时可以 按下快捷键：~， 会启动调试模式，下方会有一个命令行窗口，输入 exit。 可退出游戏。
+客户端打开后， 默认会全屏模式， 支持的快捷键：
+
+- ~， 会启动调试模式，下方会有一个命令行窗口，输入 exit。 可退出游戏。
+- F11 ： 在全屏和非全屏模式切换。
 
 ![ue4_ds_20a](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/2024/ue4_ds_20a.jpg)
  
