@@ -8,6 +8,23 @@
 
 ## K8s 基础组件
 
+- Etcd
+- APIServer
+- ControllerManager
+- Scheduler
+- Kubelet
+
+## 工作负载（workload）
+
+## 服务、负载均衡和联网
+
+外面服务访问进来，那么需要 支持负载均衡， 通过网关实现。
+里面服务访问外面， 那么需要联网，通过 ？ 实现
+
+## 配置
+
+## 存储
+
 ## k8s中的网关
 ## 参考
 
