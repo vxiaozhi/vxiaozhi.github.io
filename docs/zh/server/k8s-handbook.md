@@ -82,7 +82,35 @@ Kubernetes中内建了很多controller（控制器），这些相当于一个状
 - HPA
 - 准入控制器（Admission Controller）
 
-Kubernetes 中内建了很多 controller（控制器），这些相当于一个状态机，用来控制 Pod 的具体状态和行为。
+## 服务（Service）
+
+### Service 转发原理
+
+在 Kubernetes 集群中，每个 Node 运行一个 kube-proxy 进程。kube-proxy 负责为 Service 实现了一种 VIP（虚拟 IP）的形式，而不是 ExternalName 的形式。 在 Kubernetes v1.0 版本，代理完全在 userspace。在 Kubernetes v1.1 版本，新增了 iptables 代理，但并不是默认的运行模式。 从 Kubernetes v1.2 起，默认就是 iptables 代理。
+
+在Kubernetes v1.8.0-beta.0中，添加了ipvs代理。
+
+在 Kubernetes v1.0 版本，Service 是 “4层”（TCP/UDP over IP）概念。 在 Kubernetes v1.1 版本，新增了 Ingress API（beta 版），用来表示 “7层”（HTTP）服务。
+
+总结起来，支持三种代理模式：
+
+- userspace 代理模式   Client -> iptables -> kube-proxy -> Backend
+- iptables 代理模式    Client -> iptables -> Backend
+- ipvs 代理模式     Client -> ipvs -> kube-proxy
+
+### 服务发现
+
+Kubernetes 支持2种基本的服务发现模式: 环境变量和 DNS。
+
+- 环境变量
+- DNS
+
+### 服务类型
+
+- ClusterIP：通过集群的内部 IP 暴露服务，选择该值，服务只能够在集群内部可以访问，这也是默认的 ServiceType。
+- NodePort：通过每个 Node 上的 IP 和静态端口（NodePort）暴露服务。NodePort 服务会路由到 ClusterIP 服务，这个 ClusterIP 服务会自动创建。通过请求 <NodeIP>:<NodePort>，可以从集群的外部访问一个 NodePort 服务。
+- LoadBalancer：使用云提供商的负载均衡器，可以向外部暴露服务。外部的负载均衡器可以路由到 NodePort 服务和 ClusterIP 服务。
+- ExternalName：通过返回 CNAME 和它的值，可以将服务映射到 externalName 字段的内容（例如， foo.bar.example.com）。
 
 ## 服务、负载均衡和联网
 
