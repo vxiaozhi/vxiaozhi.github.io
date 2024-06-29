@@ -6,13 +6,40 @@
 
 ## k8s 与 云原生的关系
 
-## K8s 基础组件
+### 云原生定义
 
-- Etcd
-- APIServer
-- ControllerManager
-- Scheduler
-- Kubelet
+云原生是一种行为方式和设计理念，究其本质，凡是能够提高云上资源利用率和应用交付效率的行为或方式都是云原生的。
+
+### k8s
+
+Kubernetes 最初源于谷歌内部的 Borg，提供了面向应用的容器集群部署和管理系统。
+Kubernetes 提供的能力包括：多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和在线扩容、可扩展的资源自动调度机制、多粒度的资源配额管理能力。
+Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节。
+
+
+## k8s 架构
+
+- Master 节点
+- Node 节点
+
+### 核心基础组件
+
+- Etcd 保存了整个集群的状态
+- APIServer 供了资源操作的唯一入口，并提供认证、授权、访问控制、API 注册和发现等机制。
+- ControllerManager 负责维护集群的状态，比如故障检测、自动扩展、滚动更新等。
+- Scheduler 负责资源的调度，按照预定的调度策略将 Pod 调度到相应的机器上。
+- Kubelet 负责维护容器的生命周期，同时也负责 Volume（CSI）和网络（CNI）的管理。
+- ContainerRuntime 负责镜像管理以及 Pod 和容器的真正运行（CRI）。
+- kubeProxy 负责为 Service 提供 cluster 内部的服务发现和负载均衡。
+
+### 推荐插件【可选】
+
+- CoreDNS 负责为整个集群提供 DNS 服务
+- Ingress Controller 为服务提供外网入口
+- Prometheus 提供资源监控
+- Dashboard 提供 GUI
+- Federation 提供跨可用区的集群
+
 
 ## 工作负载（workload）
 
