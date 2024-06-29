@@ -40,6 +40,31 @@ Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维
 - Dashboard 提供 GUI
 - Federation 提供跨可用区的集群
 
+## Kubernetes 中的网络
+
+Kubernetes本身并不提供网络功能，只是把网络接口开放出来，通过插件的形式实现。
+
+### 网络要解决的问题
+
+Kubernetes中的网络要解决的核心问题就是每台主机的IP地址网段划分，以及单个容器的IP地址分配。概括为：
+
+- 保证每个Pod拥有一个集群内唯一的IP地址
+- 保证不同节点的IP地址划分不会重复
+- 保证跨节点的Pod可以互相通信
+- 保证不同节点的Pod可以与跨节点的主机互相通信
+
+为了解决该问题，出现了一系列开源的Kubernetes中的网络插件与方案，如：
+
+- [flannel](https://github.com/flannel-io/flannel)
+- [calico](https://github.com/projectcalico/calico)
+- contiv
+- weave net
+- kube-router
+- [cilium](https://github.com/cilium/cilium)
+- canal
+
+只要实现Kubernetes官方的设计的CNI - Container Network Interface（容器网络接口）就可以自己写一个网络插件。
+
 
 ## 工作负载（workload）
 
