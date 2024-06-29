@@ -112,6 +112,34 @@ Kubernetes 支持2种基本的服务发现模式: 环境变量和 DNS。
 - LoadBalancer：使用云提供商的负载均衡器，可以向外部暴露服务。外部的负载均衡器可以路由到 NodePort 服务和 ClusterIP 服务。
 - ExternalName：通过返回 CNAME 和它的值，可以将服务映射到 externalName 字段的内容（例如， foo.bar.example.com）。
 
+## Ingress
+
+Ingress 是从Kubernetes集群外部访问集群内部服务的入口。
+
+通常情况下，service和pod仅可在集群内部网络中通过IP地址访问， 而 Ingress 让其可以在集群外部访问，可以认为 Ingress 是集群的网关。
+
+
+### Ingress Controller
+
+为了使Ingress正常工作，集群中必须运行Ingress controller。 
+
+支持的 Ingress Controllers 包括：
+
+- kubernetes当前支持并维护GCE和nginx两种controller.
+- F5（公司）支持并维护 F5 BIG-IP Controller for Kubernetes.
+- Kong 同时支持并维护社区版与企业版的 Kong Ingress Controller for Kubernetes.
+- Traefik 是功能齐全的 ingress controller(Let’s Encrypt, secrets, http2, websocket…), Containous 也对其提供商业支持。
+- Istio 使用CRD Gateway来控制Ingress流量。
+
+### 替代方案
+
+你可以通过很多种方式暴露service而不必直接使用ingress：
+
+- 使用Service.Type=LoadBalancer
+- 使用Service.Type=NodePort
+- 使用Port Proxy
+- 部署一个Service loadbalancer 这允许你在多个service之间共享单个IP，并通过Service Annotations实现更高级的负载平衡。
+
 ## 服务、负载均衡和联网
 
 外面服务访问进来，那么需要 支持负载均衡， 通过网关实现。
