@@ -45,6 +45,18 @@ Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维
 
 ## 控制器
 
+Kubernetes中内建了很多controller（控制器），这些相当于一个状态机，用来控制Pod的具体状态和行为。
+
+- Deployment
+- StatefulSet
+- DaemonSet
+- ReplicationController 和 ReplicaSet
+- Job
+- CronJob
+- Ingress 控制器
+- HPA
+- 准入控制器（Admission Controller）
+
 Kubernetes 中内建了很多 controller（控制器），这些相当于一个状态机，用来控制 Pod 的具体状态和行为。
 
 ## 服务、负载均衡和联网
