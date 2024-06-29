@@ -128,7 +128,7 @@ Ingress 是从Kubernetes集群外部访问集群内部服务的入口。
 - kubernetes当前支持并维护GCE和nginx两种controller.
 - F5（公司）支持并维护 F5 BIG-IP Controller for Kubernetes.
 - Kong 同时支持并维护社区版与企业版的 Kong Ingress Controller for Kubernetes.
-- Traefik 是功能齐全的 ingress controller(Let’s Encrypt, secrets, http2, websocket…), Containous 也对其提供商业支持。
+- Traefik 是功能齐全的 ingress controller(Let’s Encrypt, secrets, http2, websocket…), Containous 也对其提供商业支持。[Traefik Ingress](https://kubernetes.feisky.xyz/extension/ingress/service-discovery-and-load-balancing)
 - Istio 使用CRD Gateway来控制Ingress流量。
 
 ### 替代方案
@@ -139,6 +139,7 @@ Ingress 是从Kubernetes集群外部访问集群内部服务的入口。
 - 使用Service.Type=NodePort
 - 使用Port Proxy
 - 部署一个Service loadbalancer 这允许你在多个service之间共享单个IP，并通过Service Annotations实现更高级的负载平衡。
+- [Ingress Controller 一些实践](https://kubernetes.feisky.xyz/extension/ingress)
 
 ## 服务、负载均衡和联网
 
