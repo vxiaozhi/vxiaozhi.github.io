@@ -43,6 +43,10 @@ Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维
 
 ## 工作负载（workload）
 
+## 控制器
+
+Kubernetes 中内建了很多 controller（控制器），这些相当于一个状态机，用来控制 Pod 的具体状态和行为。
+
 ## 服务、负载均衡和联网
 
 外面服务访问进来，那么需要 支持负载均衡， 通过网关实现。
@@ -65,6 +69,15 @@ Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维
 - 应用程序无感知
 - 解耦应用程序的重试 / 超时、监控、追踪和服务发现
 
+### 部署模式
+
+- Ingress 或边缘代理
+- 路由器网格
+- Proxy per Node
+- Sidecar 代理 / Fabric 模型
+- Sidecar 代理 / 控制平面
+- 
+
 ### 实现了服务网格的软件由哪些
 
 #### 1. Linkerd
@@ -77,14 +90,14 @@ Istio 是一个服务网格的开源实现。Istio 支持以下功能。
 - 可观测性 Istio 通过跟踪、监控和记录让我们更好地了解你的服务，它让我们能够快速发现和修复问题。
 - 安全性 Istio 可以在代理层面上管理认证、授权和通信的加密。我们可以通过快速的配置变更在各个服务中执行政策。
 
-** Istio 组件 **
+**Istio 组件**
 
 Istio 服务网格有两个部分：数据平面和控制平面。
 
-- 数据平面由 Envoy 代理组成，控制服务之间的通信。网格的控制平面部分负责管理和配置代理。
+- 数据平面由 Envoy 代理组成，控制服务之间的通信。网格的控制平面部分负责管理和配置代理。支持两种部署模式： 1 Sidecar 部署，用于服务网格。 2 边缘代理，用于构建 API 网关。
 - 控制平面 Istiod 是控制平面组件，提供服务发现、配置和证书管理功能。Istiod 采用 YAML 编写的高级规则，并将其转换为 Envoy 的可操作配置。然后，它把这个配置传播给网格中的所有 sidecar。
 
-**  Istio 缺点 **
+**Istio 缺点**
 
 - 无法做到完全对应用透明 服务通信和治理相关的功能迁移到 Sidecar 进程中后，应用中的 SDK 通常需要作出一些对应的改变。
 - Istio 对非 Kubernetes 环境的支持有限
@@ -109,3 +122,4 @@ Istio 服务网格有两个部分：数据平面和控制平面。
 - [etcd-问题-调优-监控](https://github.com/yangpeng14/DevOps/blob/master/kubernetes/etcd-%E9%97%AE%E9%A2%98-%E8%B0%83%E4%BC%98-%E7%9B%91%E6%8E%A7.md)
 - [Istio](https://jimmysong.io/kubernetes-handbook/usecases/istio.html)
 - [Envoy](https://jimmysong.io/kubernetes-handbook/usecases/envoy.html)
+- [服务网格的部署模式](https://jimmysong.io/book/kubernetes-handbook/service-mesh/service-mesh-patterns/)
