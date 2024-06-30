@@ -146,6 +146,13 @@ Ingress 是从Kubernetes集群外部访问集群内部服务的入口。
 外面服务访问进来，那么需要 支持负载均衡， 通过网关实现。
 里面服务访问外面， 那么需要联网，通过 ？ 实现
 
+[Higress：Nacos的最佳拍档](https://nacos.io/zh-cn/blog/higress.html) 这里提到微服务网关演变的两个趋势：
+
+- 趋势一：统一 API 标准，向云原生微服务架构演进
+- 趋势二：合并安全&流量网关，向 DevSecOps 演进
+
+
+
 ### k8s中的网关
 
 ## 服务网格（Service Mesh）
