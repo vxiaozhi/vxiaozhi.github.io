@@ -19,3 +19,4 @@
 - [Linux 内核 | 内存管理——Slab 分配器](https://www.dingmos.com/index.php/archives/23/)
 - [细节拉满，80 张图带你一步一步推演 slab 内存池的设计与实现 ](https://www.cnblogs.com/binlovetech/p/17288990.html)
 - [Linux内存管理slub分配器 ](https://www.cnblogs.com/LoyenWang/p/11922887.html)
+- [高性能内存分配库Libhaisqlmalloc的设计思路](https://zhuanlan.zhihu.com/p/352938740)
