@@ -1,16 +1,8 @@
-# 云原生网络技术与服务通信 (Exploring Network Technologies and Service Communication)
+# kubernetes 网络技术与服务通信 (Exploring Network Technologies and Service Communication)
 
 副标题--K8s网络通信技术
 
 云原生是。。。
-
-Kubernetes作为云原生应用的基础调度平台，相当于云原生的操作系统，为了便于系统的扩展，Kubernetes中开放的以下接口，可以分别对接不同的后端，来实现自己的业务逻辑：
-
-- CRI（Container Runtime Interface）：容器运行时接口，提供计算资源
-
-- CNI（Container Network Interface）：容器网络接口，提供网络资源
-
-- CSI（Container Storage Interface）：容器存储接口，提供存储资源
 
 
 ## 目录
@@ -23,16 +15,19 @@ Kubernetes作为云原生应用的基础调度平台，相当于云原生的操�
 
 ## K8s 基础知识
 
-- Pod
-- Node
-- Controllers
-- Kubernetes API server
+- **Kubernetes API server** 在 Kubernetes 中，一切都是由 Kubernetes API 服务器（kube-apiserver）提供的 API 调用。API 服务器是 etcd 数据存储的网关，它维护应用程序集群的所需状态。要更新 Kubernetes 集群的状态，您可以对描述所需状态的 API 服务器进行 API 调用。
+
+- **Controllers** 控制器是用于构建 Kubernetes 的核心抽象。一旦您使用 API 服务器声明了集群的所需状态，控制器就会通过持续观察 API 服务器的状态并对任何更改做出反应来确保集群的当前状态与所需状态相匹配。控制器内部实现了一个循环，该循环不断检查集群的当前状态与集群的期望状态。如果有任何差异，控制器将执行任务以使当前状态与所需状态匹配。例如，当您使用 API 服务器创建新 Pod 时，Kubernetes 调度程序（控制器）会注意到更改并决定将 Pod 放置在集群中的哪个位置。然后它使用 API 服务器（由 etcd 支持）写入状态更改。kubelet（一个控制器）然后会注意到新的变化并设置所需的网络功能以使 Pod 在集群内可访问。在这里，两个独立的控制器对两个独立的状态变化做出反应，以使集群的现实与用户的意图相匹配。
+
+- **Pods** Pod 是 Kubernetes 的原子——用于构建应用程序的最小可部署对象。单个 Pod 代表集群中正在运行的工作负载，并封装了一个或多个 Docker 容器、任何所需的存储和唯一的 IP 地址，组成 pod 的容器被设计为在同一台机器上共同定位和调度。
+
+- **Nodes** 节点是运行 Kubernetes 集群的机器。这些可以是裸机、虚拟机或其他任何东西。主机一词通常与节点互换使用。我将尝试一致地使用术语节点，但有时会根据上下文使用虚拟机这个词来指代节点。
 
 ## K8s通信原理
 
 网络架构图
 
-https://camo.githubusercontent.com/1aebd968bff43f7def3a57b9e03238ab5dc6a7aaa1e194ca2df40f09f481da9b/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f647178746e3069636b2f696d6167652f75706c6f61642f76313531303537383935372f61727469636c652f6b756265726e657465732f6e6574776f726b2f6e6574776f726b2d617263682e706e67
+![](images/k8s-network-arch.png)
 
 ### 1. 容器间通信
 ### 2. Pod 间通信
@@ -43,7 +38,7 @@ https://camo.githubusercontent.com/1aebd968bff43f7def3a57b9e03238ab5dc6a7aaa1e19
 ## 名字服务
 
 - DSN
-- POlaris
+- Polaris
 
 ## 服务网格
 
@@ -65,3 +60,6 @@ https://camo.githubusercontent.com/1aebd968bff43f7def3a57b9e03238ab5dc6a7aaa1e19
 - [bcs randomhostport Merge Request](https://github.com/TencentBlueKing/bk-bcs/commit/465d67aad900a230bf17116b4ebc3d7761c943b2)
 - [Random host port插件设计方案](https://github.com/TencentBlueKing/bk-bcs/blob/master/docs/features/bcs-webhook-server/plugins/randhostport/design.md)
 - [Random host port插件实现](https://github.com/TencentBlueKing/bk-bcs/tree/master/bcs-runtime/bcs-k8s/bcs-component/bcs-webhook-server/internal/plugin/randhostport)
+- [聊聊k8s的hostport和NodePort](https://cloud.tencent.com/developer/article/1894185)
+- [Kubernetes hostPort 使用](https://www.cnblogs.com/zhangmingcheng/p/17640118.html)
+- [hostPort选项](https://knowledge.zhaoweiguo.com/build/html/cloudnative/k8s/yamls/option_hostport)
