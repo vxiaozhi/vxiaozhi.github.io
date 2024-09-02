@@ -62,3 +62,6 @@ https://camo.githubusercontent.com/1aebd968bff43f7def3a57b9e03238ab5dc6a7aaa1e19
 - [万字长文，带你搞懂 Kubernetes 网络模型](https://www.51cto.com/article/714336.html)
 - [Kubernetes网络原理及方案](https://www.kubernetes.org.cn/2059.html)
 - [【K8S系列 | 12】深入解析k8s网络](https://open.alipay.com/portal/forum/post/125801225)
+- [bcs randomhostport Merge Request](https://github.com/TencentBlueKing/bk-bcs/commit/465d67aad900a230bf17116b4ebc3d7761c943b2)
+- [Random host port插件设计方案](https://github.com/TencentBlueKing/bk-bcs/blob/master/docs/features/bcs-webhook-server/plugins/randhostport/design.md)
+- [Random host port插件实现](https://github.com/TencentBlueKing/bk-bcs/tree/master/bcs-runtime/bcs-k8s/bcs-component/bcs-webhook-server/internal/plugin/randhostport)
