@@ -77,7 +77,18 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 
 ### 2. Pod 间通信
 
+#### 1. 同节点Pod通信
 
+- 给定将每个 Pod 与自己的网络堆栈隔离的网络命名空间
+- 将每个命名空间连接到根命名空间的虚拟以太网设备以及将命名空间连接在一起的网桥
+
+如下图：
+
+![](https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/pod-to-pod-same-node.gif)
+
+
+
+#### 2. 跨节点Pod通信
 
 ### 3. Pod 与 Service 之间通信
 ### 4. Service 与 Internet 之间通信
