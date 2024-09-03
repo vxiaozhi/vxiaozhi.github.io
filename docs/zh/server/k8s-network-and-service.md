@@ -31,9 +31,30 @@
 
 ### 1. 容器间通信
 ### 2. Pod 间通信
+
+【实验】
+1、 主机和 netspace 之间
+```
+ip netns add neta
+ip netns add netb
+
+ip netns exec test ip link set lo  up
+ip netns exec test ip a add 127.0.0.1/8 dev lo
+
+sudo ip netns exec test python3 -m http.server 9000
+
+sudo ip netns exec test2 telnet 127.0.0.1 9000
+
+
+```
+2、 netspace 和 netspace 之间
+
 ### 3. Pod 与 Service 之间通信
 ### 4. Service 与 Internet 之间通信
 ### 5. 跨集群通信
+
+- vpc
+- random hostport
 
 ## 名字服务
 
@@ -63,3 +84,4 @@
 - [聊聊k8s的hostport和NodePort](https://cloud.tencent.com/developer/article/1894185)
 - [Kubernetes hostPort 使用](https://www.cnblogs.com/zhangmingcheng/p/17640118.html)
 - [hostPort选项](https://knowledge.zhaoweiguo.com/build/html/cloudnative/k8s/yamls/option_hostport)
+- [腾讯云 VPC](https://cloud.tencent.com/document/product/215/20046)
