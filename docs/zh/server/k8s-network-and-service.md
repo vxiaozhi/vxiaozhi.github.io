@@ -25,14 +25,40 @@
 
 ## K8s通信原理
 
-网络架构图
+**网络架构图**
 
 ![](images/k8s-network-arch.png)
 
+**基础原则**
+   
+- 每个Pod都拥有一个独立的IP地址，而且假定所有Pod都在一个可以直接连通的、扁平的网络空间中，不管是否运行在同一Node上都可以通过Pod的IP来访问。
+- k8s中Pod的IP是最小粒度IP。同一个Pod内所有的容器共享一个网络堆栈，该模型称为IP-per-Pod模型。
+- Pod由docker0实际分配的IP，Pod内部看到的IP地址和端口与外部保持一致。同一个Pod内的不同容器共享网络，可以通过localhost来访问对方的端口，类似同一个VM内的不同进程。
+- IP-per-Pod模型从端口分配、域名解析、服务发现、负载均衡、应用配置等角度看，Pod可以看作是一台独立的VM或物理机。
+
+## 1.4. k8s集群IP概念汇总
+
+由集群外部到集群内部：
+
+| IP类型                | 说明                                    |
+| ------------------- | ------------------------------------- |
+| Proxy-IP            | 代理层公网地址IP，外部访问应用的网关服务器。[实际需要关注的IP]    |
+| Service-IP          | Service的固定虚拟IP，Service-IP是内部，外部无法寻址到。 |
+| Node-IP             | 容器宿主机的主机IP。                           |
+| Container-Bridge-IP | 容器网桥（docker0）IP，容器的网络都需要通过容器网桥转发。     |
+| Pod-IP              | Pod的IP，等效于Pod中网络容器的Container-IP。      |
+| Container-IP        | 容器的IP，容器的网络是个隔离的网络空间。                 |
+
 ### 1. 容器间通信
-### 2. Pod 间通信
+
+- 在 Linux 中，每个正在运行的进程都在一个网络命名空间内进行通信，该命名空间为逻辑网络堆栈提供了自己的路由、防火墙规则和网络设备。
+- 默认情况下，Linux 将每个进程分配给根网络命名空间以提供对外部世界的访问
+- 就 Docker 结构而言，Pod 被建模为一组共享网络命名空间的 Docker 容器。
+- Pod 中的容器都具有相同的 IP 地址和端口空间，这些 IP 地址和端口空间是通过分配给 Pod 的网络命名空间分配的，并且可以通过 localhost 找到彼此
+- 通过 Docker 的 –net=container: 函数加入该命名空间
 
 【实验】
+
 1、 主机和 netspace 之间
 ```
 ip netns add neta
@@ -47,7 +73,11 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 
 
 ```
-2、 netspace 和 netspace 之间
+2、 netspace 和 netspace 之间  
+
+### 2. Pod 间通信
+
+
 
 ### 3. Pod 与 Service 之间通信
 ### 4. Service 与 Internet 之间通信
