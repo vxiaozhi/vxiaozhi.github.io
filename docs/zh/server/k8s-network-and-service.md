@@ -142,15 +142,78 @@ flannel 解决了如下两个问题：
 
 其中 2 可以通过不同的backend 来实现：
 
-- UDP
-- vxlan
-- host-gw
-- TencentCloud VPC
-  
+- UDP  基于Linux TUN/TAP， 主要是利用 tun 设备来模拟一个虚拟网络进行通信， 使用UDP封装IP包来创建overlay网络 【性能较低，已废弃】
+- VXLAN 利用 vxlan 实现一个三层的覆盖网络，利用 flannel1 这个 vtep 设备来进行封拆包，然后进行路由转发实现通信。 vxlan，这个是在内核实现的，如果用 UDP 封装就是在用户态实现的，用户态实现的等于把包从内核过了两遍，没有直接用 vxlan 封装的直接走内核效率高，所以基本上不会使用 UDP 封装。
+- host-gw 直接改变二层网络的路由信息，实现数据包的转发，从而省去中间层，通信效率更高. 但要求各个节点之间是二层连通的。
+- TencentCloud VPC: 通过弹性公网 IP 和 NAT 网关等，实现 VPC 内的云服务器连接公网。通过对等连接和云联网，实现不同 VPC 间的通信。通过 VPN 连接、专线接入和云联网，实现 VPC 与本地数据中心的互联。[VPC-CNI 模式介绍
+](https://www.tencentcloud.com/zh/document/product/457/38970) [cni-bridge-networking](https://github.com/TencentCloud/cni-bridge-networking)
+
+
+**总结**
+
+为了解决 跨节点间Pod的通信， 引入了 CNI 网络插件。 来进行 IP地址、路由的分配，以及通过主流 vxlan 技术来实现overlay网络。
 
 
 ### 3. Pod 与 Service 之间通信
+
+Why？
+
+- Pod IP 地址不是持久的，并且会随着扩展或缩减、应用程序崩溃或节点重启而出现和消失。这些事件中的每一个都可以使 Pod IP 地址在没有警告的情况下更改。Service被内置到 Kubernetes 中来解决这个问题。
+
+What
+
+- Kubernetes Service 管理一组 Pod 的状态，允许您跟踪一组随时间动态变化的 Pod IP 地址。
+- Service充当对 Pod 的抽象，并将单个虚拟 IP 地址分配给一组 Pod IP 地址。
+- 任何发往 Service 虚拟 IP 的流量都将被转发到与虚拟 IP 关联的 Pod 集。
+- 这允许与 Service 关联的 Pod 集随时更改——客户端只需要知道 Service 的虚拟 IP即可，它不会更改。
+- 在集群中的任何地方，发往虚拟 IP 的流量都将负载均衡到与服务关联的一组支持 Pod。
+
+How - 三种模式
+
+- userspace、 userspace模式是通过用户态程序实现转发，因性能问题基本被弃用
+- iptables、 默认模式，可以通过修改kube-system命名空间下名称为kube-proxy的configMap资源的mode字段来选择kube-proxy的模式
+- ipvs
+
+netfilter 和 iptables
+
+- Netfilter 是 Linux 提供的一个框架，它允许以自定义处理程序的形式实现各种与网络相关的操作。
+- Netfilter 为数据包过滤、网络地址转换和端口转换提供了各种功能和操作，它们提供了引导数据包通过网络所需的功能，以及提供禁止数据包到达计算机网络中敏感位置的能力。
+- iptables 是一个用户空间程序，它提供了一个基于表的系统，用于定义使用 netfilter 框架操作和转换数据包的规则。
+- 在 Kubernetes 中，iptables 规则由 kube-proxy 控制器配置，该控制器监视 Kubernetes API 服务器的更改。
+- 当对 Service 或 Pod 的更改更新 Service 的虚拟 IP 地址或 Pod 的 IP 地址时，iptables 规则会更新以正确地将指向 Service 的流量转发到正确的Pod。
+- iptables 规则监视发往 Service 的虚拟 IP 的流量，并且在匹配时，从可用 Pod 集中选择一个随机 Pod IP 地址，并且 iptables 规则将数据包的目标 IP 地址从 Service 的虚拟 IP 更改为选定的 Pod。
+- 当 Pod 启动或关闭时，iptables 规则集会更新以反映集群不断变化的状态。换句话说，iptables 已经在机器上进行了负载平衡，以将定向到服务 IP 的流量转移到实际 pod 的 IP。
+- 在返回路径上，IP 地址来自目标 Pod。在这种情况下，iptables 再次重写 IP 标头以将 Pod IP 替换为 Service 的 IP，以便 Pod 认为它一直只与 Service 的 IP 通信。
+
+IPVS
+
+- Kubernetes 的最新版本 (1.11) 包括用于集群内负载平衡的第二个选项：IPVS。
+- IPVS（IP 虚拟服务器）也构建在 netfilter 之上，并将传输层负载平衡作为 Linux 内核的一部分实现。IPVS 被合并到 LVS（Linux虚拟服务器）中，它在主机上运行并充当真实服务器集群前面的负载平衡器。
+- IPVS 可以将基于 TCP 和 UDP 的服务的请求定向到真实服务器，并使真实服务器的服务在单个 IP 地址上表现为虚拟服务。这使得 IPVS 非常适合 Kubernetes 服务。
+- IPVS 专为负载平衡而设计，并使用更高效的数据结构（哈希表），与 iptables 相比允许几乎无限的规模。
+- 在使用 IPVS 创建负载均衡的 Service 时，会发生三件事：在 Node 上创建一个虚拟 IPVS 接口，将 Service 的 IP 地址绑定到虚拟 IPVS 接口，并为每个 Service IP 地址创建 IPVS 服务器。
+
+Pod和Service通信
+
+图片
+
+- 数据包首先通过连接到 Pod 的网络命名空间 (1) 的 eth0 接口离开 Pod。
+- 然后它通过虚拟以太网设备到达网桥 (2)。网桥上运行的 ARP 协议不知道 Service，因此它通过默认路由 eth0 (3) 将数据包传输出去。在这里，发生了一些不同的事情。在 eth0 接受之前，数据包会通过 iptables 过滤。
+- iptables 收到数据包后，使用 kube-proxy 安装在 Node 上的规则响应 Service 或 Pod 事件，将数据包的目的地从 Service IP 重写为特定的 Pod IP（4）。
+- 数据包现在注定要到达 Pod 4，而不是服务的虚拟 IP。
+- iptables 利用 Linux 内核的 conntrack 实用程序来记住所做的 Pod 选择，以便将来的流量路由到同一个 Pod（除非发生任何扩展事件）。
+- 本质上，iptables 直接在 Node 上做了集群内负载均衡。然后流量使用我们已经检查过的 Pod 到 Pod 路由流向 Pod (5)。
+
+Service和Pod通信
+图片
+
+- 收到此数据包的 Pod 将响应，将源 IP 识别为自己的 IP，将目标 IP 识别为最初发送数据包的 Pod (1)。
+- 进入节点后，数据包流经 iptables，它使用 conntrack 记住它之前所做的选择，并将数据包的源重写为服务的 IP 而不是 Pod 的 IP (2)。
+- 从这里开始，数据包通过网桥流向与 Pod 的命名空间配对的虚拟以太网设备 (3)，然后流向我们之前看到的 Pod 的以太网设备 (4)。
+
+
 ### 4. Service 与 Internet 之间通信
+
 ### 5. 跨集群通信
 
 - vpc
@@ -186,3 +249,6 @@ flannel 解决了如下两个问题：
 - [Kubernetes hostPort 使用](https://www.cnblogs.com/zhangmingcheng/p/17640118.html)
 - [hostPort选项](https://knowledge.zhaoweiguo.com/build/html/cloudnative/k8s/yamls/option_hostport)
 - [腾讯云 VPC](https://cloud.tencent.com/document/product/215/20046)
+- [探究K8S Service内部iptables路由规则](https://luckymrwang.github.io/2021/02/20/%E6%8E%A2%E7%A9%B6K8S-Service%E5%86%85%E9%83%A8iptables%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/)
+- [理解kubernetes环境的iptables](https://www.cnblogs.com/charlieroro/p/9588019.html)
+- [容器技术 K8s kube-proxy iptables 再谈](https://juejin.cn/post/7134143215380201479)

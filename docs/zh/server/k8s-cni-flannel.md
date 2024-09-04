@@ -71,7 +71,7 @@ Flannel实质上是一种“覆盖网络(overlaynetwork)”，也就是将TCP数
 ## Flannel backend
 
 - UDP  基于Linux TUN/TAP， 主要是利用 tun 设备来模拟一个虚拟网络进行通信， 使用UDP封装IP包来创建overlay网络
-- VXLAN 利用 vxlan 实现一个三层的覆盖网络，利用 flannel1 这个 vtep 设备来进行封拆包，然后进行路由转发实现通信。 vxlan，这个是在内核实现的，如果用 UDP 封装就是在用户态实现的，用户态实现的等于把包从内核过了两遍，没有直接用 vxlan 封装的直接走内核效率高，所以基本上不会使用 UDP 封装。
+- VXLAN 利用 vxlan 实现一个三层的覆盖网络，利用 flannel1 这个 vtep 设备来进行封拆包，然后进行路由转发实现通信。 vxlan，这个是在内核实现的，如果用 UDP 封装就是在用户态实现的，用户态实现的等于把包从内核过了两遍，没有直接用 vxlan 封装的直接走内核效率高，所以基本上不会使用 UDP 封装。VXLAN Port固定为：4789
 - host-gw 直接，直接改变二层网络的路由信息，实现数据包的转发，从而省去中间层，通信效率更高. 但要求各个节点之间是二层连通的。
 
 ## 与 Calico 对比

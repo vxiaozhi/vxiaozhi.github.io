@@ -58,6 +58,7 @@ Kubernetes中的网络要解决的核心问题就是每台主机的IP地址网�
 - [flannel](https://github.com/flannel-io/flannel)
 - [calico](https://github.com/projectcalico/calico)
 - [amazon-vpc-cni-k8s](https://github.com/aws/amazon-vpc-cni-k8s)
+- [阿里云 Terway CNI Network Plugin](https://github.com/AliyunContainerService/terway)
 - contiv
 - weave net
 - kube-router
