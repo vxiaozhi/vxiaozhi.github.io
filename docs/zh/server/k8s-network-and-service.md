@@ -118,6 +118,28 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 - 最后，路由通过位于 Pod 4 的命名空间 (6) 中的虚拟以太网设备对来完成。
 - 一般来说，每个节点都知道如何将数据包传递给在其中运行的 Pod。一旦数据包到达目标节点，数据包的流动方式与在同一节点上的 Pod 之间路由流量的方式相同。
 
+这里存在的问题：
+1、让集群中的不同节点主机创建的 Pod 都具有全集群唯一的虚拟IP地址
+2、Pod怎么跨越节点将数据发送到另外的Pod。 当然一种办法是： 数据从节点发出去之前，进行SNAT（即将容器ip转换为Node IP），但是这样就违背了上面的基础原则（即Pod IP内外一致）。
+
+解决方案： CNI 插件
+
+- flannel
+- 。。。
+
+flannel 解决了如下两个问题：
+
+1、 规划ip地址即路由： 保存在etcd
+2、 实现 overlay 网络
+
+其中 2 可以通过不同的backend 来实现：
+
+- UDP
+- vxlan
+- host-gw
+- TencentCloud VPC
+  
+
 
 ### 3. Pod 与 Service 之间通信
 ### 4. Service 与 Internet 之间通信
