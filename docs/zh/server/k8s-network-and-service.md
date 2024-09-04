@@ -127,6 +127,14 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 - flannel
 - 。。。
 
+What
+
+-  CoreOS 公司主推的容器网络方案
+-  原理其实相当于在原来的网络上加了一层 Overlay 网络，该网络中的结点可以看作通过虚拟或逻辑链路而连接起来的
+-  Flannel 会在每一个宿主机上运行名为 flanneld 代理，其负责为宿主机预先分配一个Subnet 子网，并为 Pod 分配ip地址。
+-  Flannel 使用 Kubernetes 或 etcd 来存储网络配置、分配的子网和主机公共 ip 等信息
+-  数据包则通过 VXLAN、UDP 或 host-gw 这些类型的后端机制进行转发。
+
 flannel 解决了如下两个问题：
 
 1、 规划ip地址即路由： 保存在etcd
