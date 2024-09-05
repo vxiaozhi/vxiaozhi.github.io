@@ -214,6 +214,58 @@ Service和Pod通信
 
 ### 4. Service 与 Internet 之间通信
 
+#### 1. 出流量[Egress]
+
+
+原理
+
+- 每个节点都分配有一个私有 IP 地址，该地址可从 Kubernetes 集群内访问。
+- 要从集群外部访问流量，您需要将 Internet 网关连接到您的 VPC。
+- Internet 网关有两个用途：在您的 VPC 路由表中为可路由到 Internet 的流量提供目标，以及为已分配公共 IP 地址的任何实例执行网络地址转换 (NAT)。
+- NAT 转换负责将集群专用的节点内部 IP 地址更改为公共 Internet 中可用的外部 IP 地址。
+- Pod 有自己的 IP 地址，与托管 Pod 的节点的 IP 地址不同，并且 Internet 网关的 NAT 转换仅适用于 VM IP 地址，因为它不知道 Pod 正在运行什么哪些虚拟机——网关不支持容器。
+
+流程
+
+图片
+
+
+- 数据包源自 Pod 的命名空间 (1)，并经过连接到根命名空间 (2) 的 veth 对。
+- 一旦进入根命名空间，数据包就会从网桥移动到默认设备，因为数据包上的 IP 与连接到网桥的任何网段都不匹配。
+- 在到达根命名空间的以太网设备 (3) 之前，iptables 会破坏数据包 (3)。
+- 在这种情况下，数据包的源 IP 地址是 Pod，如果我们将源保留为 Pod，Internet 网关将拒绝它，因为网关 NAT 只了解连接到 VM 的 IP 地址。解决方案是让 iptables 执行源 NAT——更改数据包源——使数据包看起来来自 VM 而不是 Pod。
+- 有了正确的源 IP，数据包现在可以离开 VM (4) 并到达 Internet 网关 (5)。
+- Internet 网关将执行另一个 NAT，将源 IP 从 VM 内部 IP 重写为外部 IP。最后，数据包将到达公共 Internet (6)。
+- 在返回的路上，数据包遵循相同的路径，并且任何源 IP 修改都被撤消，以便系统的每一层都接收到它理解的 IP 地址：节点或 VM 级别的 VM 内部，以及 Pod 内的 Pod IP命名空间。
+
+
+
+#### 2. 入流量[Ingress]
+
+##### 四层
+
+原理
+
+- 当你创建一个 Kubernetes 服务时，你可以选择指定一个 LoadBalancer 来配合它。
+- LoadBalancer 的实现由知道如何为您的服务创建负载均衡器的云控制器提供。创建服务后，它将公布负载均衡器的 IP 地址。作为最终用户，您可以开始将流量引导到负载均衡器以开始与您的服务通信。
+- 负载均衡器可以了解其目标组中的节点，并将平衡集群中所有节点的流量。一旦流量到达一个节点，之前为您的服务在整个集群中安装的 iptables 规则将确保流量到达您感兴趣的服务的 Pod。
+
+通信过程
+
+图片
+
+- 部署服务后，您正在使用的云提供商将为您创建一个新的负载均衡器 (1)。因为负载均衡器不支持容器，所以一旦流量到达负载均衡器，它就会分布在组成集群的所有虚拟机中 (2)。
+- 每个 VM 上的 iptables 规则会将来自负载均衡器的传入流量引导到正确的 Pod (3) — 这些是在服务创建期间实施并在前面讨论过的相同 IP 表规则。
+- Pod 到客户端的响应将返回 Pod 的 IP，但客户端需要有负载均衡器的 IP 地址。正如我们之前看到的，iptables 和 conntrack 用于在返回路径上正确重写 IP。
+
+VM 不存在pod时的流程：
+
+下图显示了托管 Pod 的三个 VM 前面的网络负载均衡器。传入流量 (1) 指向您的服务的负载均衡器。一旦负载均衡器收到数据包 (2)，它就会随机选择一个 VM。在这种情况下，我们病态地选择了没有运行 Pod 的 VM：VM 2 (3)。在这里，运行在 VM 上的 iptables 规则将使用 kube-proxy 安装到集群中的内部负载平衡规则将数据包定向到正确的 Pod。iptables 执行正确的 NAT 并将数据包转发到正确的 Pod (4)。
+
+##### 七层
+
+
+
 ### 5. 跨集群通信
 
 - vpc
@@ -252,3 +304,4 @@ Service和Pod通信
 - [探究K8S Service内部iptables路由规则](https://luckymrwang.github.io/2021/02/20/%E6%8E%A2%E7%A9%B6K8S-Service%E5%86%85%E9%83%A8iptables%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/)
 - [理解kubernetes环境的iptables](https://www.cnblogs.com/charlieroro/p/9588019.html)
 - [容器技术 K8s kube-proxy iptables 再谈](https://juejin.cn/post/7134143215380201479)
+- [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
