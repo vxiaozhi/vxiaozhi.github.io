@@ -40,8 +40,8 @@
 ## 常见产品
 
 - Linkerd	是一款高性能网络代理程序，标志着Service Mesh时代的开始。 [linkerd2 github](https://github.com/linkerd/linkerd2)
-- Envoy	由C++开发的，为云原生应用而设计，是一款高性能的网络代理
-- Istio	底层为Envoy，是Service Mesh的典型实现
+- Envoy	由C++开发的，为云原生应用而设计，是一款高性能的网络代理 [envoy github](https://github.com/envoyproxy/envoy)
+- Istio	底层为Envoy，是Service Mesh的典型实现 [istio github](https://github.com/istio/istio)
 - Kuma	是一款基于Envoy构建的服务网络控制平面，Kuma设计的数据平面和控制平面可以极大的降低开发团队使用服务网格的难度。
 
 ## 参考
