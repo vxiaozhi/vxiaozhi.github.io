@@ -1,19 +1,36 @@
 # kubernetes 网络技术与服务通信 (Exploring Network Technologies and Service Communication)
 
-副标题--K8s网络通信技术
+**副标题** --K8s网络通信技术
 
-云原生是。。。
+## 1. 序言
+
+- Kubernetes 最初源于谷歌内部的 Borg，提供了面向应用的容器集群部署和管理系统。
+- Kubernetes 提供的能力包括：多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和在线扩容、可扩展的资源自动调度机制、多粒度的资源配额管理能力。
+- Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节。
+- 后台越来越多的服务基于 k8s 搭建。
+
+k8s 是云原生的一种实现， 自然遵循以下云原生系统的设计理念:
+
+- 面向分布式设计（Distribution）：容器、微服务、API 驱动的开发；
+
+- 面向配置设计（Configuration）：一个镜像，多个环境配置；
+
+- 面向韧性设计（Resistancy）：故障容忍和自愈；
+
+- 面向弹性设计（Elasticity）：弹性扩展和对环境变化（负载）做出响应；
+
+- 面向交付设计（Delivery）：自动拉起，缩短交付时间；
+
+- 面向性能设计（Performance）：响应式，并发和资源高效利用；
+
+- 面向自动化设计（Automation）：自动化的 DevOps；
+
+- 面向诊断性设计（Diagnosability）：集群级别的日志、metric 和追踪；
+
+- 面向安全性设计（Security）：安全端点、API Gateway、端到端加密；
 
 
-## 目录
-
-- 网桥 docker网络 K8s 网络插件
-- DSN hosts resolv.conf 
-- Service/Ingress/Lb 及通信原理
-- NameService Polaris
-- 服务网格 istio
-
-## K8s 基础知识
+## 2. K8s 基础知识
 
 - **Kubernetes API server** 在 Kubernetes 中，一切都是由 Kubernetes API 服务器（kube-apiserver）提供的 API 调用。API 服务器是 etcd 数据存储的网关，它维护应用程序集群的所需状态。要更新 Kubernetes 集群的状态，您可以对描述所需状态的 API 服务器进行 API 调用。
 
@@ -23,11 +40,11 @@
 
 - **Nodes** 节点是运行 Kubernetes 集群的机器。这些可以是裸机、虚拟机或其他任何东西。主机一词通常与节点互换使用。我将尝试一致地使用术语节点，但有时会根据上下文使用虚拟机这个词来指代节点。
 
-## K8s通信原理
+## 3. K8s通信原理
 
 **网络架构图**
 
-![](images/k8s-network-arch.png)
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/k8s-network-arch.png)
 
 **基础原则**
    
@@ -36,7 +53,7 @@
 - Pod由docker0实际分配的IP，Pod内部看到的IP地址和端口与外部保持一致。同一个Pod内的不同容器共享网络，可以通过localhost来访问对方的端口，类似同一个VM内的不同进程。
 - IP-per-Pod模型从端口分配、域名解析、服务发现、负载均衡、应用配置等角度看，Pod可以看作是一台独立的VM或物理机。
 
-## 1.4. k8s集群IP概念汇总
+**k8s集群IP概念汇总**
 
 由集群外部到集群内部：
 
@@ -49,15 +66,19 @@
 | Pod-IP              | Pod的IP，等效于Pod中网络容器的Container-IP。      |
 | Container-IP        | 容器的IP，容器的网络是个隔离的网络空间。                 |
 
-### 1. 容器间通信
+### 3.1. 容器间通信
 
 - 在 Linux 中，每个正在运行的进程都在一个网络命名空间内进行通信，该命名空间为逻辑网络堆栈提供了自己的路由、防火墙规则和网络设备。
 - 默认情况下，Linux 将每个进程分配给根网络命名空间以提供对外部世界的访问
 - 就 Docker 结构而言，Pod 被建模为一组共享网络命名空间的 Docker 容器。
 - Pod 中的容器都具有相同的 IP 地址和端口空间，这些 IP 地址和端口空间是通过分配给 Pod 的网络命名空间分配的，并且可以通过 localhost 找到彼此
-- 通过 Docker 的 –net=container: 函数加入该命名空间
+- 通过 Docker 的 –net=container: 
 
-【实验】
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/pod-namespace.png)
+
+
+
+**【实验】**
 
 1、 主机和 netspace 之间
 ```
@@ -75,9 +96,9 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 ```
 2、 netspace 和 netspace 之间  
 
-### 2. Pod 间通信
+### 3.2. Pod 间通信
 
-#### 1. 同节点Pod通信
+#### 3.2.1. 同节点Pod通信
 
 - 给定将每个 Pod 与自己的网络堆栈隔离的网络命名空间
 - 将每个命名空间连接到根命名空间的虚拟以太网设备以及将命名空间连接在一起的网桥
@@ -100,7 +121,7 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 
 个人理解， Pod1 Pod2 和主机网络（根网络）属于不同子网， 不能直接连接到网桥上，因为网桥属于2层转发设备。所以这里需要借助 Veth 进行连接。
 
-#### 2. 跨节点Pod通信
+#### 3.2.2. 跨节点Pod通信
 
 我们现在转向不同节点上的 Pod .
 
@@ -122,12 +143,21 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 1、让集群中的不同节点主机创建的 Pod 都具有全集群唯一的虚拟IP地址
 2、Pod怎么跨越节点将数据发送到另外的Pod。 当然一种办法是： 数据从节点发出去之前，进行SNAT（即将容器ip转换为Node IP），但是这样就违背了上面的基础原则（即Pod IP内外一致）。
 
-解决方案： CNI 插件
+##### 3.2.2.1. CNI 网络插件
 
-- flannel
-- 。。。
+- [flannel](https://github.com/flannel-io/flannel)
+- [calico](https://github.com/projectcalico/calico)
+- [amazon-vpc-cni-k8s](https://github.com/aws/amazon-vpc-cni-k8s)
+- [阿里云 Terway CNI Network Plugin](https://github.com/AliyunContainerService/terway)
+- contiv
+- weave net
+- kube-router
+- [cilium](https://github.com/cilium/cilium)
+- canal
 
-What
+##### 3.2.2.2. flannel
+
+**What**
 
 -  CoreOS 公司主推的容器网络方案
 -  原理其实相当于在原来的网络上加了一层 Overlay 网络，该网络中的结点可以看作通过虚拟或逻辑链路而连接起来的
@@ -137,8 +167,8 @@ What
 
 flannel 解决了如下两个问题：
 
-1、 规划ip地址即路由： 保存在etcd
-2、 实现 overlay 网络
+1. 规划ip地址即路由： 保存在etcd
+2. 实现 overlay 网络
 
 其中 2 可以通过不同的backend 来实现：
 
@@ -154,13 +184,13 @@ flannel 解决了如下两个问题：
 为了解决 跨节点间Pod的通信， 引入了 CNI 网络插件。 来进行 IP地址、路由的分配，以及通过主流 vxlan 技术来实现overlay网络。
 
 
-### 3. Pod 与 Service 之间通信
+### 3.3. Pod 与 Service 之间通信
 
-Why？
+**Why？**
 
 - Pod IP 地址不是持久的，并且会随着扩展或缩减、应用程序崩溃或节点重启而出现和消失。这些事件中的每一个都可以使 Pod IP 地址在没有警告的情况下更改。Service被内置到 Kubernetes 中来解决这个问题。
 
-What
+**What**
 
 - Kubernetes Service 管理一组 Pod 的状态，允许您跟踪一组随时间动态变化的 Pod IP 地址。
 - Service充当对 Pod 的抽象，并将单个虚拟 IP 地址分配给一组 Pod IP 地址。
@@ -168,7 +198,7 @@ What
 - 这允许与 Service 关联的 Pod 集随时更改——客户端只需要知道 Service 的虚拟 IP即可，它不会更改。
 - 在集群中的任何地方，发往虚拟 IP 的流量都将负载均衡到与服务关联的一组支持 Pod。
 
-How - 三种模式
+**How - 三种模式**
 
 - userspace、 userspace模式是通过用户态程序实现转发，因性能问题基本被弃用
 - iptables、 默认模式，可以通过修改kube-system命名空间下名称为kube-proxy的configMap资源的mode字段来选择kube-proxy的模式
@@ -212,7 +242,7 @@ Service和Pod通信
 - 从这里开始，数据包通过网桥流向与 Pod 的命名空间配对的虚拟以太网设备 (3)，然后流向我们之前看到的 Pod 的以太网设备 (4)。
 
 
-### 4. Service 与 Internet 之间通信
+### 3.4. Service 与 Internet 之间通信
 
 #### 1. 出流量[Egress]
 
@@ -285,14 +315,14 @@ Ingress和Service通信 流程
 图片
 
 
-### 5. 跨集群通信
+### 3.5. 跨集群通信
 
 - vpc
 - random hostport
 
-## 名字服务
+## 4. 名字服务
 
-### 1.  DNS
+### 4.1.  DNS
 
 - 递归查询: 客户端只发一次请求，要求对方给出最终结果。
 
@@ -303,11 +333,55 @@ Ingress和Service通信 流程
 ![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-iteration.png)
 
 
-### 2.  Polaris
+### 4.2.  Polaris
 
-## 服务网格
+## 5. 服务网格(Service Mesh)
 
-## 网络术语
+### 为何使用服务网格？
+
+- 服务网格并没有给我们带来新功能，它是用于解决其他工具已经解决过的问题，只不过这次是在云原生的  Kubernetes 环境下的实现。
+
+-  MVC 三层 Web 应用程序架构下，服务之间的通讯并不复杂，在应用程序内部自己管理即可，但是在现今的复杂的大型网站情况下，单体应用被分解为众多的微服务，服务之间的依赖和通讯十分复杂，出现了 Twitter 开发的 Finagle、Netflix 开发的 Hystrix 和 Google 的 Stubby 这样的 ”胖客户端“ 库，这些就是早期的服务网格，但是它们都近适用于特定的环境和特定的开发语言，并不能作为平台级的服务网格支持。
+
+- 在云原生架构下，容器的使用给予了异构应用程序的更多可行性， Kubernetes 增强的应用的横向扩容能力，用户可以快速的编排出复杂环境、复杂依赖关系的应用程序，同时开发者又无须过分关心应用程序的监控、扩展性、服务发现和分布式追踪这些繁琐的事情而专注于程序开发，赋予开发者更多的创造性。
+
+### 什么是服务网格？
+
+服务网格有如下几个特点：
+
+- 应用程序间通讯的中间层
+- 轻量级网络代理
+- 应用程序无感知
+- 解耦应用程序的重试/超时、监控、追踪和服务发现
+
+
+如果用一句话来解释什么是服务网格，可以将它比作是应用程序或者说微服务间的 TCP/IP，负责服务之间的网络调用、限流、熔断和监控。对于编写应用程序来说一般无须关心 TCP/IP 这一层（比如通过 HTTP 协议的 RESTful 应用），同样使用服务网格也就无须关系服务之间的那些原来是通过应用程序或者其他框架实现的事情，比如 Spring Cloud、OSS，现在只要交给服务网格就可以了。
+
+服务网格会在每个 pod 中注入一个 sidecar 代理，该代理对应用程序来说是透明，所有应用程序间的流量都会通过它，所以对应用程序流量的控制都可以在服务网格中实现。
+
+
+### 服务网格的工作流程
+
+- 控制平面将整个网格中的服务配置推送到所有节点的 sidecar 代理中。
+- Sidecar 代理将服务请求路由到目的地址，根据中的参数判断是到生产环境、测试环境还是 staging 环境中的服务（服务可能同时部署在这三个环境中），是路由到本地环境还是公有云环境？所有的这些路由信息可以动态配置，可以是全局配置也可以为某些服务单独配置。
+- 当 sidecar 确认了目的地址后，将流量发送到相应服务发现端点，在  Kubernetes 中是 service，然后 service 会将服务转发给后端的实例。
+- Sidecar 根据它观测到最近请求的延迟时间，选择出所有应用程序的实例中响应最快的实例。
+- Sidecar 将请求发送给该实例，同时记录响应类型和延迟数据。
+- 如果该实例挂了、不响应了或者进程不工作了，sidecar 将把请求发送到其他实例上重试。
+- 如果该实例持续返回 error，sidecar 会将该实例从负载均衡池中移除，稍后再周期性得重试。
+- 如果请求的截止时间已过，sidecar 主动失败该请求，而不是再次尝试添加负载。
+- Sidecar 以 metric 和分布式追踪的形式捕获上述行为的各个方面，这些追踪信息将发送到集中 metric 系统。
+
+### 常见产品(服务网格有哪些实现)
+
+- Linkerd	是一款高性能网络代理程序，标志着Service Mesh时代的开始。 [linkerd2 github](https://github.com/linkerd/linkerd2)
+- Istio	底层为Envoy（由C++开发的，为云原生应用而设计，是一款高性能的网络代理），是Service Mesh的典型实现 [istio github](https://github.com/istio/istio)
+- Kuma	是一款基于Envoy构建的服务网络控制平面，Kuma设计的数据平面和控制平面可以极大的降低开发团队使用服务网格的难度。[kuma github](https://github.com/kumahq/kuma)
+
+### Istio
+
+
+## 6. 网络术语
 
 - **二层网络** 第 2 层是提供节点到节点数据传输的数据链路层。它定义了在两个物理连接的设备之间建立和终止连接的协议。它还定义了它们之间的流量控制协议。
 
@@ -374,8 +448,11 @@ IPVS 是一个类似于 iptables 的工具。它基于 Linux 内核的 netfilter
 - **DNS**
 域名系统 (DNS) 是一个分散的命名系统，用于将系统名称与 IP 地址相关联。它将域名转换为用于定位计算机服务的数字 IP 地址。
 
-## 参考
+## 7. 参考
 
+- [The Kubernetes Book, 2021 Edition](https://github.com/rohitg00/DevOps_Books/blob/main/The%20Kubernetes%20Book%20(Nigel%20Poulton)%20(z-lib.org).pdf)
+- [The Kubernetes Book, 2024 Edition](https://github.com/vxiaozhi/DevOps_Books/blob/main/The.Kubernetes.Book.2024.Edition.pdf)
+- [Kubernetes 中文文档](https://kubernetes.io/zh-cn/docs/home/)
 - [iptables 及 docker 容器网络分析](https://thiscute.world/posts/iptables-and-container-networks/)
 - [Linux 网络工具中的瑞士军刀 - socat & netcat](https://thiscute.world/posts/socat-netcat/)
 - [Docker在雪球的技术实践](https://github.com/vxiaozhi/architecture.of.internet-product/blob/master/B.%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84-Docker-%E5%AE%B9%E5%99%A8%E6%9E%B6%E6%9E%84/Docker%E5%9C%A8%E9%9B%AA%E7%90%83%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.pdf)
