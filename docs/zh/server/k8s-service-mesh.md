@@ -52,6 +52,7 @@
 - [服务网格基础](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh-fundamental.html)
 - [服务网格对比 API 网关](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh-vs-api-gateway.html)
 - [采纳和演进](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh-adoption-and-evolution.html)
+- [深入理解Istio Service Mesh中的Envoy Sidecar注入与流量劫持](https://hezhiqiang.gitbook.io/kubernetes-handbook/ling-yu-ying-yong/service-mesh/istio/understand-sidecar-injection-and-traffic-hijack-in-istio-service-mesh)
 - [Istio](https://jimmysong.io/kubernetes-handbook/usecases/istio.html)
 - [Envoy](https://jimmysong.io/kubernetes-handbook/usecases/envoy.html)
 - [微服务架构下服务网格的出现带来了什么？](https://www.apiseven.com/blog/what-is-service-mesh)
