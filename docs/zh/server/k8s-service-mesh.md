@@ -422,7 +422,7 @@ iptables 是 Linux 内核中的防火墙软件 netfilter 的管理工具，位�
 
 下图展示了 iptables 调用链。
 
-![istio-iptables](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/istio-iptables.jfif)
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/istio-iptables.jfif)
 
 Init 容器中使用的的 iptables 版本是 v1.6.0，共包含 5 张表(注：在本示例中只用到了 nat 表)：
 
