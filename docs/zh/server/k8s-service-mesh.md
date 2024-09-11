@@ -60,21 +60,7 @@ Service Mesh中分为控制平面和数据平面：
 - 对应用来说透明，即可以做到无感知部署
 
 
-
-
-
-常见产品(服务网格有哪些实现?)
-
-- Linkerd	是一款高性能网络代理程序，标志着Service Mesh时代的开始。 [linkerd2 github](https://github.com/linkerd/linkerd2)
-- Istio	底层为Envoy（由C++开发的，为云原生应用而设计，是一款高性能的网络代理），是Service Mesh的典型实现 [istio github](https://github.com/istio/istio)
-- Kuma	是一款基于Envoy构建的服务网络控制平面，Kuma设计的数据平面和控制平面可以极大的降低开发团队使用服务网格的难度。[kuma github](https://github.com/kumahq/kuma)
-- SOFAMesh SOFAMesh由蚂蚁金服开源，在兼容Istio整体架构和协议的基础上，做出部分调整：使用Go语言开发全新的Sidecar，替代Envoy。 [sofa-mesh github](https://github.com/sofastack/sofa-mesh)
-
-
-
-
-
-## 服务网格的工作流程
+**服务网格的工作流程**
 
 - 控制平面将整个网格中的服务配置推送到所有节点的 sidecar 代理中。
 - Sidecar 代理将服务请求路由到目的地址，根据中的参数判断是到生产环境、测试环境还是 staging 环境中的服务（服务可能同时部署在这三个环境中），是路由到本地环境还是公有云环境？所有的这些路由信息可以动态配置，可以是全局配置也可以为某些服务单独配置。
@@ -85,6 +71,19 @@ Service Mesh中分为控制平面和数据平面：
 - 如果该实例持续返回 error，sidecar 会将该实例从负载均衡池中移除，稍后再周期性得重试。
 - 如果请求的截止时间已过，sidecar 主动失败该请求，而不是再次尝试添加负载。
 - Sidecar 以 metric 和分布式追踪的形式捕获上述行为的各个方面，这些追踪信息将发送到集中 metric 系统。
+
+
+常见产品(服务网格有哪些实现?)
+
+- Linkerd	是一款高性能网络代理程序，标志着Service Mesh时代的开始。 [linkerd2 github](https://github.com/linkerd/linkerd2)
+- Istio	底层为Envoy（由C++开发的，为云原生应用而设计，是一款高性能的网络代理），是Service Mesh的典型实现 [istio github](https://github.com/istio/istio)
+- Kuma	是一款基于Envoy构建的服务网络控制平面，Kuma设计的数据平面和控制平面可以极大的降低开发团队使用服务网格的难度。[kuma github](https://github.com/kumahq/kuma)
+- SOFAMesh SOFAMesh由蚂蚁金服开源，在兼容Istio整体架构和协议的基础上，做出部分调整：使用Go语言开发全新的Sidecar，替代Envoy。 [sofa-mesh github](https://github.com/sofastack/sofa-mesh)
+
+## Istio
+
+
+
 
 
 ## 总结
@@ -134,6 +133,7 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [服务网格对比 API 网关](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh-vs-api-gateway.html)
 - [采纳和演进](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh-adoption-and-evolution.html)
 - [深入理解Istio Service Mesh中的Envoy Sidecar注入与流量劫持](https://hezhiqiang.gitbook.io/kubernetes-handbook/ling-yu-ying-yong/service-mesh/istio/understand-sidecar-injection-and-traffic-hijack-in-istio-service-mesh)
+- [深入理解Istio Service Mesh中的Envoy Sidecar注入与流量劫持 英文原文](https://faun.pub/understanding-how-envoy-sidecar-intercept-and-route-traffic-in-istio-service-mesh-20fea2a78833)
 - [Istio](https://jimmysong.io/kubernetes-handbook/usecases/istio.html)
 - [Envoy](https://jimmysong.io/kubernetes-handbook/usecases/envoy.html)
 - [微服务架构下服务网格的出现带来了什么？](https://www.apiseven.com/blog/what-is-service-mesh)
