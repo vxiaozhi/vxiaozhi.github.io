@@ -1,5 +1,19 @@
 # K8s dns 技术实现原理
 
+
+## 基础知识
+
+**记录**
+
+- A 记录
+- NS 记录
+
+**解析方式**
+
+- 递归
+- 迭代
+
+
 ## Kubernetes内部域名解析原理
 
 ### 1. 同一集群同一命名空间下
@@ -172,6 +186,8 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 
 ## 参考
 
+- [k8s 服务注册与发现（一）DNS](https://cloud.tencent.com/developer/article/2126509)
 - [k8s 服务注册与发现（二）Kubernetes内部域名解析原理](https://cloud.tencent.com/developer/article/2126510)
+- [k8s 服务注册与发现（三）CoreDNS](https://cloud.tencent.com/developer/article/2126512)
 - [/etc/resolv.conf文件中的search项作用](https://www.cnblogs.com/zhangmingda/p/13663541.html)
 - [CoreDNS系列1：Kubernetes内部域名解析原理、弊端及优化方式](https://hansedong.github.io/2018/11/20/9/)
