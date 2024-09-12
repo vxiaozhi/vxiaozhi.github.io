@@ -548,6 +548,7 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [采纳和演进](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh-adoption-and-evolution.html)
 - [深入理解Istio Service Mesh中的Envoy Sidecar注入与流量劫持](https://hezhiqiang.gitbook.io/kubernetes-handbook/ling-yu-ying-yong/service-mesh/istio/understand-sidecar-injection-and-traffic-hijack-in-istio-service-mesh)
 - [深入理解Istio Service Mesh中的Envoy Sidecar注入与流量劫持 英文原文](https://faun.pub/understanding-how-envoy-sidecar-intercept-and-route-traffic-in-istio-service-mesh-20fea2a78833)
+- [Istio流量管理实现机制深度解析](https://www.zhaohuabing.com/post/2018-09-25-istio-traffic-management-impl-intro/)
 - [Istio](https://jimmysong.io/kubernetes-handbook/usecases/istio.html)
 - [Envoy](https://jimmysong.io/kubernetes-handbook/usecases/envoy.html)
 - [微服务架构下服务网格的出现带来了什么？](https://www.apiseven.com/blog/what-is-service-mesh)
