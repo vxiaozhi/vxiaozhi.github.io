@@ -559,3 +559,4 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [使用 docker-compose 模拟 Envoy Service-Mesh 代码](https://github.com/envoyproxy/examples/tree/main/front-proxy)
 - [Envoy mesh 手动部署教程](https://hezhiqiang.gitbook.io/kubernetes-handbook/ling-yu-ying-yong/service-mesh/envoy/envoy-mesh-in-kubernetes-tutorial)
 - [Envoy mesh 手动部署教程 英文原文](https://www.getambassador.io/blog/envoy-flask-kubernetes)
+- [[Istio是什么？] 还不知道你就out了,一文40分钟快速理解](https://cloud.tencent.com/developer/article/1986019)
