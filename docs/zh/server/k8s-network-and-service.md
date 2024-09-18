@@ -36,6 +36,18 @@ k8s 是云原生的一种实现， 自然遵循以下云原生系统的设计理
 
 - **Controllers** 控制器是用于构建 Kubernetes 的核心抽象。一旦您使用 API 服务器声明了集群的所需状态，控制器就会通过持续观察 API 服务器的状态并对任何更改做出反应来确保集群的当前状态与所需状态相匹配。控制器内部实现了一个循环，该循环不断检查集群的当前状态与集群的期望状态。如果有任何差异，控制器将执行任务以使当前状态与所需状态匹配。例如，当您使用 API 服务器创建新 Pod 时，Kubernetes 调度程序（控制器）会注意到更改并决定将 Pod 放置在集群中的哪个位置。然后它使用 API 服务器（由 etcd 支持）写入状态更改。kubelet（一个控制器）然后会注意到新的变化并设置所需的网络功能以使 Pod 在集群内可访问。在这里，两个独立的控制器对两个独立的状态变化做出反应，以使集群的现实与用户的意图相匹配。
 
+```
+while true:
+  X = currentState()
+  Y = desiredState()
+
+  if X == Y:
+    return  # Do nothing
+  else:
+    do(tasks to get to Y)
+
+```
+
 - **Pods** Pod 是 Kubernetes 的原子——用于构建应用程序的最小可部署对象。单个 Pod 代表集群中正在运行的工作负载，并封装了一个或多个 Docker 容器、任何所需的存储和唯一的 IP 地址，组成 pod 的容器被设计为在同一台机器上共同定位和调度。
 
 - **Nodes** 节点是运行 Kubernetes 集群的机器。这些可以是裸机、虚拟机或其他任何东西。主机一词通常与节点互换使用。我将尝试一致地使用术语节点，但有时会根据上下文使用虚拟机这个词来指代节点。
@@ -79,22 +91,8 @@ k8s 是云原生的一种实现， 自然遵循以下云原生系统的设计理
 
 
 **【实验】**
+参考 [Container-to-Container-Networking](https://github.com/vxiaozhi/k8s-experiment-code/tree/main/network/Container-to-Container-Networking)
 
-1、 主机和 netspace 之间
-```
-ip netns add neta
-ip netns add netb
-
-ip netns exec test ip link set lo  up
-ip netns exec test ip a add 127.0.0.1/8 dev lo
-
-sudo ip netns exec test python3 -m http.server 9000
-
-sudo ip netns exec test2 telnet 127.0.0.1 9000
-
-
-```
-2、 netspace 和 netspace 之间  
 
 ### 3.2. Pod 间通信
 
@@ -105,7 +103,7 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 
 如下图：
 
-![](https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/pod-to-pod-same-node.gif)
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/pod-to-pod-same-node.gif)
 
 在图 6 中，
 
@@ -130,7 +128,9 @@ sudo ip netns exec test2 telnet 127.0.0.1 9000
 
 下图说明了两个节点之间的流量流，假设网络可以将 CIDR 块中的流量路由到正确的节点。
 
-![](https://s8.51cto.com/oss/202207/19/88506e4076e8872e26a869b778365926d00f2c.gif)
+
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/pod-to-pod-different-nodes.gif)
+
 
 - 目标 Pod（以绿色突出显示）与源 Pod（以蓝色突出显示）位于不同的节点上。
 - 数据包首先通过 Pod 1 的以太网设备发送，该设备与根命名空间 (1) 中的虚拟以太网设备配对。最终，数据包最终到达根命名空间的网桥 (2)。
@@ -225,7 +225,7 @@ IPVS
 
 Pod和Service通信
 
-图片
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/pod-to-service.gif)
 
 - 数据包首先通过连接到 Pod 的网络命名空间 (1) 的 eth0 接口离开 Pod。
 - 然后它通过虚拟以太网设备到达网桥 (2)。网桥上运行的 ARP 协议不知道 Service，因此它通过默认路由 eth0 (3) 将数据包传输出去。在这里，发生了一些不同的事情。在 eth0 接受之前，数据包会通过 iptables 过滤。
@@ -235,7 +235,8 @@ Pod和Service通信
 - 本质上，iptables 直接在 Node 上做了集群内负载均衡。然后流量使用我们已经检查过的 Pod 到 Pod 路由流向 Pod (5)。
 
 Service和Pod通信
-图片
+
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/service-to-pod.gif)
 
 - 收到此数据包的 Pod 将响应，将源 IP 识别为自己的 IP，将目标 IP 识别为最初发送数据包的 Pod (1)。
 - 进入节点后，数据包流经 iptables，它使用 conntrack 记住它之前所做的选择，并将数据包的源重写为服务的 IP 而不是 Pod 的 IP (2)。
@@ -245,7 +246,6 @@ Service和Pod通信
 ### 3.4. Service 与 Internet 之间通信
 
 #### 1. 出流量[Egress]
-
 
 原理
 
@@ -257,7 +257,7 @@ Service和Pod通信
 
 流程
 
-图片
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/pod-to-internet.gif)
 
 
 - 数据包源自 Pod 的命名空间 (1)，并经过连接到根命名空间 (2) 的 veth 对。
@@ -282,7 +282,7 @@ Service和Pod通信
 
 通信过程
 
-图片
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/internet-to-service.gif)
 
 - 部署服务后，您正在使用的云提供商将为您创建一个新的负载均衡器 (1)。因为负载均衡器不支持容器，所以一旦流量到达负载均衡器，它就会分布在组成集群的所有虚拟机中 (2)。
 - 每个 VM 上的 iptables 规则会将来自负载均衡器的传入流量引导到正确的 Pod (3) — 这些是在服务创建期间实施并在前面讨论过的相同 IP 表规则。
@@ -302,7 +302,9 @@ VM 不存在pod时的流程：
 
 
 在 AWS 环境中，ALB 入口控制器使用 Amazon 的第 7 层应用程序负载均衡器提供 Kubernetes 入口。下图详细介绍了此控制器创建的 AWS 组件。它还演示了 Ingress 流量从 ALB 到 Kubernetes 集群的路由。
-图片
+
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/ingress-controller-design.png)
+
 
 
 Ingress和Service通信 流程
@@ -312,13 +314,12 @@ Ingress和Service通信 流程
 - 每个 VM 上的 iptables 规则会将来自负载均衡器的传入流量引导到正确的 Pod (3) — 正如我们之前所见。Pod 到客户端的响应将返回 Pod 的 IP，但客户端需要有负载均衡器的 IP 地址。正如我们之前看到的，iptables 和 conntrack 用于在返回路径上正确重写 IP。
 - 第 7 层负载均衡器的一个好处是它们可以识别 HTTP，因此它们知道 URL 和路径。这使您可以按 URL 路径对服务流量进行分段。它们通常还在 HTTP 请求的 X-Forwarded-For 标头中提供原始客户端的 IP 地址。
 
-图片
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/ingress-to-service.gif)
 
 
 ### 3.5. 跨集群通信
 
-- vpc
-- random hostport
+参考 [k8s-pod-to-pod-different-clusters.md](k8s-pod-to-pod-different-clusters.md)
 
 ## 4. 名字服务
 
@@ -415,6 +416,7 @@ IPVS 是一个类似于 iptables 的工具。它基于 Linux 内核的 netfilter
 - [The Kubernetes Book, 2021 Edition](https://github.com/rohitg00/DevOps_Books/blob/main/The%20Kubernetes%20Book%20(Nigel%20Poulton)%20(z-lib.org).pdf)
 - [The Kubernetes Book, 2024 Edition](https://github.com/vxiaozhi/DevOps_Books/blob/main/The.Kubernetes.Book.2024.Edition.pdf)
 - [Kubernetes 中文文档](https://kubernetes.io/zh-cn/docs/home/)
+- [Docker 进阶与实战 【华为Docker实践小组 著 机械工业出版社 第5章:Docker网络】](https://github.com/gg-daddy/ebooks/blob/master/566432%2BDocker%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%AE%9E%E6%88%98.%E5%8D%8E%E4%B8%BADocker%E5%AE%9E%E8%B7%B5%E5%B0%8F%E7%BB%84%2540www.java1234.com.pdf)
 - [iptables 及 docker 容器网络分析](https://thiscute.world/posts/iptables-and-container-networks/)
 - [Linux 网络工具中的瑞士军刀 - socat & netcat](https://thiscute.world/posts/socat-netcat/)
 - [Docker在雪球的技术实践](https://github.com/vxiaozhi/architecture.of.internet-product/blob/master/B.%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84-Docker-%E5%AE%B9%E5%99%A8%E6%9E%B6%E6%9E%84/Docker%E5%9C%A8%E9%9B%AA%E7%90%83%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.pdf)
