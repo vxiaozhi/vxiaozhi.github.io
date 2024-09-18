@@ -434,6 +434,7 @@ IPVS 是一个类似于 iptables 的工具。它基于 Linux 内核的 netfilter
 - [Kubernetes hostPort 使用](https://www.cnblogs.com/zhangmingcheng/p/17640118.html)
 - [hostPort选项](https://knowledge.zhaoweiguo.com/build/html/cloudnative/k8s/yamls/option_hostport)
 - [腾讯云 VPC](https://cloud.tencent.com/document/product/215/20046)
+- [腾讯云容器网络概述](https://cloud.tencent.com/document/product/457/50353)
 - [探究K8S Service内部iptables路由规则](https://luckymrwang.github.io/2021/02/20/%E6%8E%A2%E7%A9%B6K8S-Service%E5%86%85%E9%83%A8iptables%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/)
 - [理解kubernetes环境的iptables](https://www.cnblogs.com/charlieroro/p/9588019.html)
 - [容器技术 K8s kube-proxy iptables 再谈](https://juejin.cn/post/7134143215380201479)
