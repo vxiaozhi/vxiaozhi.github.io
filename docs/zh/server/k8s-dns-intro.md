@@ -191,3 +191,4 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 - [k8s 服务注册与发现（三）CoreDNS](https://cloud.tencent.com/developer/article/2126512)
 - [/etc/resolv.conf文件中的search项作用](https://www.cnblogs.com/zhangmingda/p/13663541.html)
 - [CoreDNS系列1：Kubernetes内部域名解析原理、弊端及优化方式](https://hansedong.github.io/2018/11/20/9/)
+- [Polaris Sidecar](https://github.com/polarismesh/polaris-sidecar)
