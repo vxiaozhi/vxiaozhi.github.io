@@ -184,6 +184,10 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 }
 ```
 
+## 第三方组件
+
+polaris
+
 ## 参考
 
 - [k8s 服务注册与发现（一）DNS](https://cloud.tencent.com/developer/article/2126509)
@@ -193,3 +197,4 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 - [CoreDNS系列1：Kubernetes内部域名解析原理、弊端及优化方式](https://hansedong.github.io/2018/11/20/9/)
 - [Polaris Github](https://github.com/polarismesh/polaris)
 - [Polaris Sidecar Github](https://github.com/polarismesh/polaris-sidecar)
+- [Polaris DNS 接入](https://polarismesh.cn/docs/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/k8s%E5%92%8C%E7%BD%91%E6%A0%BC%E4%BB%A3%E7%90%86/dns%E6%8E%A5%E5%85%A5/)
