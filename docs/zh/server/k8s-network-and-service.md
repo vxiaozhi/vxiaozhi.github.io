@@ -2,38 +2,51 @@
 
 **副标题** --K8s网络通信技术
 
-## 1. 序言
+## 1. 引言
 
-- Kubernetes 最初源于谷歌内部的 Borg，提供了面向应用的容器集群部署和管理系统。
-- Kubernetes 提供的能力包括：多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和在线扩容、可扩展的资源自动调度机制、多粒度的资源配额管理能力。
-- Kubernetes 还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节。
-- 后台越来越多的服务基于 k8s 搭建。
+K8s 是一个开源的容器编排平台，用来自动化部署、管理容器化的应用程序, Bcs 是腾讯开源的容器管理平台。后者相较于前者，功能要更丰富些，bcs主要聚焦于复杂应用场景下的容器化应用的部署和整合， 除了兼容原生的的K8s外，对于游戏的这种场景提供了特别的适配。
 
-k8s 是云原生的一种实现， 自然遵循以下云原生系统的设计理念:
+本文主要由浅入深的介绍K8s的网络的底层网络通信原理，包括 容器和容器之间、Pod和Pod之间、Pod的Service之间、Service和Internet之间、集群和集群之间的通信技术、接着会介绍名字服务，为了更好的适应和复杂业务场景，会穿插着介绍Bcs针对原生k8s的不足所作的一些改进，如bcs-ingress-controller、random hostport。
 
-- 面向分布式设计（Distribution）：容器、微服务、API 驱动的开发；
-
-- 面向配置设计（Configuration）：一个镜像，多个环境配置；
-
-- 面向韧性设计（Resistancy）：故障容忍和自愈；
-
-- 面向弹性设计（Elasticity）：弹性扩展和对环境变化（负载）做出响应；
-
-- 面向交付设计（Delivery）：自动拉起，缩短交付时间；
-
-- 面向性能设计（Performance）：响应式，并发和资源高效利用；
-
-- 面向自动化设计（Automation）：自动化的 DevOps；
-
-- 面向诊断性设计（Diagnosability）：集群级别的日志、metric 和追踪；
-
-- 面向安全性设计（Security）：安全端点、API Gateway、端到端加密；
+最后会介绍服务网格技术。因为随着容器平台管理的 微服务越来 越多， 需要借助容器网格和第三方的组件，如 Polaris， 来更好的治理微服务。
 
 
-## 2. K8s 基础知识
+## 2. 术语解释
+
+**Linux 网络**
+
+- **二层网络** 第 2 层是提供节点到节点数据传输的数据链路层。它定义了在两个物理连接的设备之间建立和终止连接的协议。它还定义了它们之间的流量控制协议。
+- **四层网络** 传输层通过流量控制控制给定链路的可靠性。在 TCP/IP 中，这一层是指用于在不可靠网络上交换数据的 TCP 协议。
+- **七层网络** 应用层是最接近最终用户的层，这意味着应用层和用户都直接与软件应用程序交互。该层与实现通信组件的软件应用程序交互。通常，第 7 层网络是指 HTTP。
+- **underlay** Underlay网络是底层的物理网络基础架构，负责数据包传输。
+- **overlay** Overlay网络是在Underlay网络之上创建的虚拟网络，用于构建分布式系统中的网络服务。
+
+- **网络名称空间**
+在网络中，每台机器（真实的或虚拟的）都有一个以太网设备（我们将其称为 eth0）。所有流入和流出机器的流量都与该设备相关联。事实上，Linux 将每个以太网设备与一个网络命名空间相关联——整个网络堆栈的逻辑副本，以及它自己的路由、防火墙规则和网络设备。最初，所有进程共享来自 init 进程的相同默认网络命名空间，称为根命名空间。默认情况下，进程从其父进程继承其网络命名空间，因此，如果您不进行任何更改，所有网络流量都会流经为根网络命名空间指定的以太网设备。
+- **veth虚拟网卡对** 计算机系统通常由一个或多个网络设备（eth0、eth1 等）组成，这些设备与负责将数据包放置到物理线路上的物理网络适配器相关联。Veth 设备是虚拟网络设备，始终以互连的对创建。它们可以充当网络命名空间之间的隧道，以创建到另一个命名空间中的物理网络设备的桥接，但也可以用作独立的网络设备。您可以将veth 设备视为设备之间的虚拟跳线——一端连接的设备将连接另一端。
+- **网络桥接**
+网桥是从多个通信网络或网段创建单个聚合网络的设备。桥接连接两个独立的网络，就好像它们是一个网络一样。桥接使用内部数据结构来记录每个数据包发送到的位置，以作为性能优化。
+- **CIDR** CIDR 是一种分配 IP 地址和执行 IP 路由的方法。对于 CIDR，IP 地址由两组组成：网络前缀（标识整个网络或子网）和主机标识符（指定该网络或子网上的主机的特定接口）。CIDR 使用 CIDR 表示法表示 IP
+地址，其中地址或路由前缀写有表示前缀位数的后缀，例如 IPv4 的 192.0.2.0/24。IP 地址是 CIDR 块的一部分，如果地址的初始n 位和 CIDR 前缀相同，则称其属于 CIDR 块。
+
+- **netfilter**
+netfilter 是 Linux 中的包过滤框架。实现此框架的软件负责数据包过滤、网络地址转换 (NAT) 和其他数据包处理。netfilter、ip_tables、连接跟踪（ip_conntrack、nf_conntrack）和NAT子系统共同构建了框架的主要部分。
+- **iptables**
+iptables 是一个允许 Linux 系统管理员配置 netfilter 及其存储的链和规则的程序。IP 表中的每条规则都由许多分类器（iptables 匹配）和一个连接的操作（iptables 目标）组成。
+- **conntrack** conntrack 是建立在 Netfilter 框架之上的用于处理连接跟踪的工具。连接跟踪允许内核跟踪所有逻辑网络连接或会话，并将每个连接或会话的数据包定向到正确的发送者或接收者。NAT依靠此信息以相同的方式翻译所有相关数据包，并且 iptables 可以使用此信息充当状态防火墙。
+- **IPVS** IPVS 将传输层负载平衡作为 Linux 内核的一部分来实现。IPVS 是一个类似于 iptables 的工具。它基于 Linux 内核的 netfilter 钩子函数，但使用哈希表作为底层数据结构。这意味着，与 iptables 相比，IPVS 重定向流量更快，在同步代理规则时具有更好的性能，并提供更多的负载平衡算法。
+- **VIP地址** 虚拟 IP 地址或 VIP 是软件定义的 IP 地址，与实际的物理网络接口不对应。
+- **Nat网络地址转换** NAT 或网络地址转换是将一个地址空间重新映射到另一个地址空间的 IP 级别。映射通过在数据包通过流量路由设备传输时修改数据包的 IP 标头中的网络地址信息来实现。
+- **snat-源地址转换** SNAT 只是指修改 IP 数据包源地址的 NAT 过程。这是上述 NAT 的典型行为。
+- **dnat-目标地址转换** DNAT 是指修改 IP 数据包的目的地址的 NAT 过程。DNAT 用于将位于专用网络中的服务发布到可公开寻址的 IP 地址。
+
+- **DNS**
+域名系统 (DNS) 是一个分散的命名系统，用于将系统名称与 IP 地址相关联。它将域名转换为用于定位计算机服务的数字 IP 地址。
 
 - **Kubernetes API server** 在 Kubernetes 中，一切都是由 Kubernetes API 服务器（kube-apiserver）提供的 API 调用。API 服务器是 etcd 数据存储的网关，它维护应用程序集群的所需状态。要更新 Kubernetes 集群的状态，您可以对描述所需状态的 API 服务器进行 API 调用。
-
+- **Pods** Pod 是 Kubernetes 的原子——用于构建应用程序的最小可部署对象。单个 Pod 代表集群中正在运行的工作负载，并封装了一个或多个 Docker 容器、任何所需的存储和唯一的 IP 地址，组成 pod 的容器被设计为在同一台机器上共同定位和调度。
+- **Nodes** 节点是运行 Kubernetes 集群的机器。这些可以是裸机、虚拟机或其他任何东西。主机一词通常与节点互换使用。我将尝试一致地使用术语节点，但有时会根据上下文使用虚拟机这个词来指代节点。
+- **CNI** CNI（容器网络接口）是一个云原生计算基金会项目，由规范和库组成，用于编写插件以在 Linux 容器中配置网络接口。CNI 只关心容器的网络连接以及在容器被删除时移除分配的资源。
 - **Controllers** 控制器是用于构建 Kubernetes 的核心抽象。一旦您使用 API 服务器声明了集群的所需状态，控制器就会通过持续观察 API 服务器的状态并对任何更改做出反应来确保集群的当前状态与所需状态相匹配。控制器内部实现了一个循环，该循环不断检查集群的当前状态与集群的期望状态。如果有任何差异，控制器将执行任务以使当前状态与所需状态匹配。例如，当您使用 API 服务器创建新 Pod 时，Kubernetes 调度程序（控制器）会注意到更改并决定将 Pod 放置在集群中的哪个位置。然后它使用 API 服务器（由 etcd 支持）写入状态更改。kubelet（一个控制器）然后会注意到新的变化并设置所需的网络功能以使 Pod 在集群内可访问。在这里，两个独立的控制器对两个独立的状态变化做出反应，以使集群的现实与用户的意图相匹配。
 
 ```
@@ -48,26 +61,15 @@ while true:
 
 ```
 
-- **Pods** Pod 是 Kubernetes 的原子——用于构建应用程序的最小可部署对象。单个 Pod 代表集群中正在运行的工作负载，并封装了一个或多个 Docker 容器、任何所需的存储和唯一的 IP 地址，组成 pod 的容器被设计为在同一台机器上共同定位和调度。
-
-- **Nodes** 节点是运行 Kubernetes 集群的机器。这些可以是裸机、虚拟机或其他任何东西。主机一词通常与节点互换使用。我将尝试一致地使用术语节点，但有时会根据上下文使用虚拟机这个词来指代节点。
 
 ## 3. K8s通信原理
 
-**网络架构图**
+这是一张由外向内的典型的容器网络架构图。
 
 ![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/k8s-network-arch.png)
 
-**基础原则**
-   
-- 每个Pod都拥有一个独立的IP地址，而且假定所有Pod都在一个可以直接连通的、扁平的网络空间中，不管是否运行在同一Node上都可以通过Pod的IP来访问。
-- k8s中Pod的IP是最小粒度IP。同一个Pod内所有的容器共享一个网络堆栈，该模型称为IP-per-Pod模型。
-- Pod由docker0实际分配的IP，Pod内部看到的IP地址和端口与外部保持一致。同一个Pod内的不同容器共享网络，可以通过localhost来访问对方的端口，类似同一个VM内的不同进程。
-- IP-per-Pod模型从端口分配、域名解析、服务发现、负载均衡、应用配置等角度看，Pod可以看作是一台独立的VM或物理机。
 
-**k8s集群IP概念汇总**
-
-由集群外部到集群内部：
+为了能够正常通信，图中每个参与通信的实体都需要有一个 IP 地址，由集群外部到集群内部：
 
 | IP类型                | 说明                                    |
 | ------------------- | ------------------------------------- |
@@ -79,6 +81,8 @@ while true:
 | Container-IP        | 容器的IP，容器的网络是个隔离的网络空间。                 |
 
 ### 3.1. 容器间通信
+
+先来看最简单的情况， 即同一个Pod内部容器之间的通信：
 
 - 在 Linux 中，每个正在运行的进程都在一个网络命名空间内进行通信，该命名空间为逻辑网络堆栈提供了自己的路由、防火墙规则和网络设备。
 - 默认情况下，Linux 将每个进程分配给根网络命名空间以提供对外部世界的访问
@@ -247,6 +251,9 @@ Service和Pod通信
 
 #### 1. 出流量[Egress]
 
+
+一般来说，企业作为提供服务的一方，业务中会比较少使用出流量。
+
 原理
 
 - 每个节点都分配有一个私有 IP 地址，该地址可从 Kubernetes 集群内访问。
@@ -316,6 +323,12 @@ Ingress和Service通信 流程
 
 ![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/ingress-to-service.gif)
 
+业界对Ingress 有这些实现：
+
+
+
+
+
 
 ### 3.5. 跨集群通信
 
@@ -340,85 +353,20 @@ Ingress和Service通信 流程
 
 参考 [k8s-service-mesh.md](k8s-service-mesh.md)
 
-## 6. 网络术语
+## 6. 参考
 
-- **二层网络** 第 2 层是提供节点到节点数据传输的数据链路层。它定义了在两个物理连接的设备之间建立和终止连接的协议。它还定义了它们之间的流量控制协议。
+**Linux Net**
 
-- **四层网络** 传输层通过流量控制控制给定链路的可靠性。在 TCP/IP 中，这一层是指用于在不可靠网络上交换数据的 TCP 协议。
+- [Linux 网络工具中的瑞士军刀 - socat & netcat](https://thiscute.world/posts/socat-netcat/)
 
-- **七层网络**
-应用层是最接近最终用户的层，这意味着应用层和用户都直接与软件应用程序交互。该层与实现通信组件的软件应用程序交互。通常，第 7 层网络是指 HTTP。
 
-**underlay**
-
-**overlay**
-
-- **Nat网络地址转换**
-NAT 或网络地址转换是将一个地址空间重新映射到另一个地址空间的 IP 级别。映射通过在数据包通过流量路由设备传输时修改数据包的 IP 标头中的网络地址信息来实现。
-
-基本 NAT 是从一个 IP 地址到另一个 IP 地址的简单映射。更常见的是，NAT 用于将多个私有 IP 地址映射到一个公开的 IP 地址。通常，本地网络使用私有 IP 地址空间，并且该网络上的路由器在该空间中被赋予私有地址。然后路由器使用公共 IP 地址连接到 Internet。当流量从本地网络传递到 Internet 时，每个数据包的源地址都从私有地址转换为公共地址，这使得请求看起来好像直接来自路由器。路由器维护连接跟踪，以将回复转发到本地网络上的正确专用 IP。
-
-NAT 提供了一个额外的好处，即允许大型专用网络使用单个公共 IP 地址连接到 Internet，从而节省公共使用的 IP 地址的数量。
-
-- **snat-源地址转换**
-SNAT 只是指修改 IP 数据包源地址的 NAT 过程。这是上述 NAT 的典型行为。
-
-- **dnat-目标地址转换**
-DNAT 是指修改 IP 数据包的目的地址的 NAT 过程。DNAT 用于将位于专用网络中的服务发布到可公开寻址的 IP 地址。
-
-- **网络名称空间**
-在网络中，每台机器（真实的或虚拟的）都有一个以太网设备（我们将其称为 eth0）。所有流入和流出机器的流量都与该设备相关联。事实上，Linux 将每个以太网设备与一个网络命名空间相关联——整个网络堆栈的逻辑副本，以及它自己的路由、防火墙规则和网络设备。最初，所有进程共享来自 init 进程的相同默认网络命名空间，称为根命名空间。默认情况下，进程从其父进程继承其网络命名空间，因此，如果您不进行任何更改，所有网络流量都会流经为根网络命名空间指定的以太网设备。
-
-- **veth虚拟网卡对**
-计算机系统通常由一个或多个网络设备（eth0、eth1 等）组成，这些设备与负责将数据包放置到物理线路上的物理网络适配器相关联。Veth 设备是虚拟网络设备，始终以互连的对创建。它们可以充当网络命名空间之间的隧道，以创建到另一个命名空间中的物理网络设备的桥接，但也可以用作独立的网络设备。您可以将
-
-veth 设备视为设备之间的虚拟跳线——一端连接的设备将连接另一端。
-
-- **网络桥接**
-网桥是从多个通信网络或网段创建单个聚合网络的设备。桥接连接两个独立的网络，就好像它们是一个网络一样。桥接使用内部数据结构来记录每个数据包发送到的位置，以作为性能优化。
-
-- **CIDR**
-CIDR 是一种分配 IP 地址和执行 IP 路由的方法。对于 CIDR，IP 地址由两组组成：网络前缀（标识整个网络或子网）和主机标识符（指定该网络或子网上的主机的特定接口）。CIDR 使用 CIDR 表示法表示 IP
-
-地址，其中地址或路由前缀写有表示前缀位数的后缀，例如 IPv4 的 192.0.2.0/24。IP 地址是 CIDR 块的一部分，如果地址的初始
-
-n 位和 CIDR 前缀相同，则称其属于 CIDR 块。
-
-- **CNI**
-CNI（容器网络接口）是一个云原生计算基金会项目，由规范和库组成，用于编写插件以在 Linux 容器中配置网络接口。CNI 只关心容器的网络连接以及在容器被删除时移除分配的资源。
-
-- **VIP地址**
-虚拟 IP 地址或 VIP 是软件定义的 IP 地址，与实际的物理网络接口不对应。
-
-- **netfilter**
-netfilter 是 Linux 中的包过滤框架。实现此框架的软件负责数据包过滤、网络地址转换 (NAT) 和其他数据包处理。
-
-netfilter、ip_tables、连接跟踪（ip_conntrack、nf_conntrack）和NAT子系统共同构建了框架的主要部分。
-
-- **iptables**
-iptables 是一个允许 Linux 系统管理员配置 netfilter 及其存储的链和规则的程序。IP 表中的每条规则都由许多分类器（iptables 匹配）和一个连接的操作（iptables 目标）组成。
-
-- **conntrack**
-conntrack 是建立在 Netfilter 框架之上的用于处理连接跟踪的工具。连接跟踪允许内核跟踪所有逻辑网络连接或会话，并将每个连接或会话的数据包定向到正确的发送者或接收者。NAT
-
-依靠此信息以相同的方式翻译所有相关数据包，并且 iptables 可以使用此信息充当状态防火墙。
-
-- **IPVS**
-IPVS 将传输层负载平衡作为 Linux 内核的一部分来实现。
-
-IPVS 是一个类似于 iptables 的工具。它基于 Linux 内核的 netfilter 钩子函数，但使用哈希表作为底层数据结构。这意味着，与 iptables 相比，IPVS 重定向流量更快，在同步代理规则时具有更好的性能，并提供更多的负载平衡算法。
-
-- **DNS**
-域名系统 (DNS) 是一个分散的命名系统，用于将系统名称与 IP 地址相关联。它将域名转换为用于定位计算机服务的数字 IP 地址。
-
-## 7. 参考
+**k8s**
 
 - [The Kubernetes Book, 2021 Edition](https://github.com/rohitg00/DevOps_Books/blob/main/The%20Kubernetes%20Book%20(Nigel%20Poulton)%20(z-lib.org).pdf)
 - [The Kubernetes Book, 2024 Edition](https://github.com/vxiaozhi/DevOps_Books/blob/main/The.Kubernetes.Book.2024.Edition.pdf)
 - [Kubernetes 中文文档](https://kubernetes.io/zh-cn/docs/home/)
 - [Docker 进阶与实战 【华为Docker实践小组 著 机械工业出版社 第5章:Docker网络】](https://github.com/gg-daddy/ebooks/blob/master/566432%2BDocker%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%AE%9E%E6%88%98.%E5%8D%8E%E4%B8%BADocker%E5%AE%9E%E8%B7%B5%E5%B0%8F%E7%BB%84%2540www.java1234.com.pdf)
 - [iptables 及 docker 容器网络分析](https://thiscute.world/posts/iptables-and-container-networks/)
-- [Linux 网络工具中的瑞士军刀 - socat & netcat](https://thiscute.world/posts/socat-netcat/)
 - [Docker在雪球的技术实践](https://github.com/vxiaozhi/architecture.of.internet-product/blob/master/B.%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84-Docker-%E5%AE%B9%E5%99%A8%E6%9E%B6%E6%9E%84/Docker%E5%9C%A8%E9%9B%AA%E7%90%83%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.pdf)
 - [深入理解Docker架构与实现 Sunhongliang.pptx](https://github.com/vxiaozhi/architecture.of.internet-product/blob/master/B.%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84-Docker-%E5%AE%B9%E5%99%A8%E6%9E%B6%E6%9E%84/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Docker%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E7%8E%B0%20Sunhongliang.pptx)
 - [高可用架构·Docker实战-第1期.pdf](https://github.com/vxiaozhi/architecture.of.internet-product/blob/master/B.%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84-Docker-%E5%AE%B9%E5%99%A8%E6%9E%B6%E6%9E%84/%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%C2%B7Docker%E5%AE%9E%E6%88%98-%E7%AC%AC1%E6%9C%9F.pdf)
@@ -429,12 +377,19 @@ IPVS 是一个类似于 iptables 的工具。它基于 Linux 内核的 netfilter
 - [万字长文，带你搞懂 Kubernetes 网络模型](https://www.51cto.com/article/714336.html)
 - [Kubernetes网络原理及方案](https://www.kubernetes.org.cn/2059.html)
 - [【K8S系列 | 12】深入解析k8s网络](https://open.alipay.com/portal/forum/post/125801225)
+
+
+**Bcs**
+- [bk-bcs](https://github.com/TencentBlueKing/bk-bcs)
 - [bcs randomhostport Merge Request](https://github.com/TencentBlueKing/bk-bcs/commit/465d67aad900a230bf17116b4ebc3d7761c943b2)
 - [Random host port插件设计方案](https://github.com/TencentBlueKing/bk-bcs/blob/master/docs/features/bcs-webhook-server/plugins/randhostport/design.md)
 - [Random host port插件实现](https://github.com/TencentBlueKing/bk-bcs/tree/master/bcs-runtime/bcs-k8s/bcs-component/bcs-webhook-server/internal/plugin/randhostport)
 - [聊聊k8s的hostport和NodePort](https://cloud.tencent.com/developer/article/1894185)
 - [Kubernetes hostPort 使用](https://www.cnblogs.com/zhangmingcheng/p/17640118.html)
 - [hostPort选项](https://knowledge.zhaoweiguo.com/build/html/cloudnative/k8s/yamls/option_hostport)
+
+**腾讯云**
+
 - [腾讯云 VPC](https://cloud.tencent.com/document/product/215/20046)
 - [腾讯云容器网络概述](https://cloud.tencent.com/document/product/457/50353)
 - [探究K8S Service内部iptables路由规则](https://luckymrwang.github.io/2021/02/20/%E6%8E%A2%E7%A9%B6K8S-Service%E5%86%85%E9%83%A8iptables%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/)
