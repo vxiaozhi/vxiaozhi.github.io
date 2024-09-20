@@ -25,9 +25,15 @@
 - [submariner](https://github.com/submariner-io/submariner)
 - [Skupper](https://github.com/skupperproject/skupper)
 - [Kubeslice ](https://github.com/kubeslice/kubeslice)
+- [Istio]()
 
 
 ## 参考
 
 - [Kubernetes 多集群通信的五种方案](https://www.cnblogs.com/cheyunhua/p/18227292)
 - [Kubernetes 多集群网络解决方案 Submariner 中文入门指南](https://www.modb.pro/db/623405)
+- [Istio多集群实践](https://cloud.tencent.com/developer/article/2378172)
+- [基于istio实现多集群流量治理 ](https://www.cnblogs.com/huaweiyun/p/18127975)
+- [Istio多集群流量管理](https://istio.io/latest/zh/docs/ops/configuration/traffic-management/multicluster/)
+- [多集群 Istio 服务网格的跨集群无缝访问指南](https://jimmysong.io/blog/seamless-cross-cluster-access-istio/)
+- [Multi-cluster traffic failover with EastWest Gateways](https://docs.tetrate.io/service-bridge/howto/gateway/multi-cluster-traffic-routing-with-eastwest-gateway)
