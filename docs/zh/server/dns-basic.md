@@ -1,0 +1,178 @@
+# dns 基础知识
+
+## 一、基础知识
+
+**记录类型**
+
+- A 记录：它记录域名与 IPv4 地址的对应关系。目前用的最多的 DNS 记录就是这个。
+- AAAA 记录：它对应的是 IPv6，可以理解成新一代的 A 记录。以后会用的越来越多的。
+- NS 记录：记录 DNS 域对应的权威服务器域名，权威服务器域名必须要有对应的 A 记录。通过这个记录，可以将子域名的解析分配给别的 DNS 服务器。
+- CNAME 记录: 记录域名与另一个域名的对应关系，用于给域名起别名。这个用得也挺多的。
+- MX 记录：记录域名对应的邮件服务器域名，邮件服务器的域名必须要有对应的 A 记录。
+- SRV 记录：SRV 记录用于提供服务发现。SRV 记录的内容有固定格式：优先级 权重 端口 目标地址，例如0 5 5060 sipserver.example.com
+
+
+**解析方式**
+
+- 递归查询: 客户端只发一次请求，要求对方给出最终结果。
+
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-recursion.png)
+
+- 迭代查询: 客户端发出一次请求，对方如果没有授权回答，它就会返回一个能解答这个查询的其它名称服务器列表， 客户端会再向返回的列表中发出请求，直到找到最终负责所查域名的名称服务器，从它得到最终结果。
+
+![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-iteration.png)
+
+**DNS 泛解析通配符**
+
+DNS 记录允许使用通配符 *，但仅支持同级匹配，也就是说 * 不能匹配域名中的 . 这个字符。
+
+举例来说，*.aliyun.com 能用于 xx.aliyun.com 和 abc.aliyun.com，但不能用于aliyun.com, a.b.aliyun.com 或 bb.xx.aliyun.com.
+
+**TTL（Time To Live）**
+
+上面讲了公共 DNS 服务器通过缓存技术，降低了上游 DNS 服务器的压力，也加快了网络上的 DNS 查询速度。
+
+可缓存总得有个过期时间吧！为了精确地控制 DNS 记录的过期时间，每条 DNS 记录都要求设置一个时间属性——TTL，单位为秒。这个时间可以自定义。
+
+任何一条 DNS 缓存，在超过过期时间后都必须丢弃！另外在没超时的时候，DNS 缓存也可以被主动或者被动地刷新。
+
+## 二、域名的分层结构
+
+国际域名系统被分成四层：
+
+### 1. 根域（Root Zone）：所有域名的根。
+
+- 根域名服务器负责解析顶级域名，给出顶级域名的 DNS 服务器地址。
+- 全世界仅有十三组根域名服务器，这些服务器的 ip 地址基本不会变动。
+- 它的域名是 “"，空字符串。而它的**全限定域名（FQDN）**是 .，因为 FQDN 总是以 . 结尾。（FQDN 在后面解释，可暂时忽略）
+
+### 2. 顶级域（Top Level Domains, TLD）：.com .cn 等国际、国家级的域名
+
+- 顶级域名服务器负责解析次级域名，给出次级域名的 DNS 服务器地址。
+- 每个顶级域名都对应各自的服务器，它们之间是完全独立的。.cn 的域名解析仅由 .cn 顶级域名服务器提供。
+- 目前国际 DNS 系统中已有上千个 TLD，包括中文「.我爱你」甚至藏文域名，详细列表参见IANA TLD 数据库
+- 除了国际可用的 TLD，还有一类类似「内网 IP 地址」的“私有 TLD”，最常见的比如 xxx.local xxx.lan，被广泛用在集群通信中。后面详细介绍
+
+### 3. 次级域（Second Level Domains）：这个才是个人/企业能够买到的域名，比如 baidu.com
+
+- 每个次级域名都有一到多个权威 DNS 服务器，这些 DNS 服务器会以 NS 记录的形式保存在对应的顶级域名（TLD）服务器中。
+- 权威域名服务器则负责给出最终的解析结果：ip 地址(A 记录 )，另一个域名（CNAME 记录）、另一个 DNS 服务器（NS 记录）等。
+- 子域（Sub Domains）：*.baidu.com 统统都是 baidu.com 的子域。
+- 每一个子域都可以有自己独立的权威 DNS 服务器，这通过在子域中添加 NS 记录实现。
+- 普通用户通常是通过域名提供商如阿里云购买的次级域名，接下来我们以 rea.ink 为例介绍域名的购买到可用的整个流程。
+
+域名的购买与使用流程：
+
+- 你在某域名提供商处购买了一个域名 rea.ink
+- 域名提供商向 .ink 对应的顶级域名服务器中插入一条以上的 NS 记录，指向它自己的次级 DNS 服务器，如 dns25.hichina.com.
+- 阿里云会向 TLD 中插入几条 NS 记录，指向阿里云的次级 DNS 服务器（如vip1.alidns.com）。
+- 你在该域名提供商的 DNS 管理界面中添加 A 记录，值为你的服务器 IP。
+- OK 现在 ping 一下 rea.ink，就会发现它已经解析到你自己的服务器了。
+
+
+
+## 三、操作系统的 DNS 解析器
+
+应用程序实际上都是调用的操作系统的 DNS Resolver 进行域名解析的。在 Linux 中 DNS Resolver 由 glibc/musl 提供，配置文件为 /etc/resolv.conf。
+
+比如 Python 的 DNS 解析，就来自于标准库的 socket 包，这个包只是对底层 c 语言库的一个简单封装。
+
+基本上只有专门用于网络诊断的 DNS 工具包，才会自己实现 DNS 协议。
+
+### 1. hosts 文件
+
+操作系统中还有一个特殊文件：Linux 中的 /etc/hosts 和 Windows 中的C:\Windows\System32\drivers\etc\hosts
+
+系统中的 DNS resolver 会首先查看这个 hosts 文件中有没有该域名的记录，如果有就直接返回了。没找到才会去查找本地 DNS 缓存、别的 DNS 服务器。
+
+只有部分专门用于网络诊断的应用程序（e.g. dig）不会依赖 OS 的 DNS 解析器，因此这个 hosts 会失效。hosts 对于绝大部分程序都有效。
+
+移动设备上 hosts 可能会失效，部分 app 会绕过系统，使用新兴的 HTTPDNS 协议进行 DNS 解析。
+
+### 2. HTTPDNS
+
+传统的 DNS 协议因为使用了明文的 UDP 协议，很容易被劫持。顺应移动互联网的兴起，目前一种新型的 DNS 协议——HTTPDNS 应用越来越广泛，国内的阿里云腾讯云都提供了这项功能。
+
+HTTPDNS 通过 HTTP 协议直接向权威 DNS 服务器发起请求，绕过了一堆中间的 DNS 递归解析器。好处有二：
+
+权威 DNS 服务器能直接获取到客户端的真实 IP（而不是某个中间 DNS 递归解析器的 IP），能实现就近调度。
+因为是直接与权威 DNS 服务器连接，避免了 DNS 缓存污染的问题。
+HTTPDNS 协议需要程序自己引入 SDK，或者直接请求 HTTP API。
+
+### 3. 默认 DNS 服务器
+
+操作系统的 DNS 解析器通常会允许我们配置多个上游 Name Servers，比如 Linux 就是通过/etc/resolv.conf 配置 DNS 服务器的。
+
+```
+$ cat /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+search lan
+```
+
+> 不过现在这个文件基本不会手动修改了，各 Linux 发行版都推出了自己的网络配置工具，由这些工具自动生成 Linux 的各种网络配置，更方便。比如 Ubuntu 就推荐使用 netplan 工具进行网络设置。
+
+> Kubernetes 就是通过使用容器卷映射的功能，修改 /etc/resolv.conf，使集群的所有容器都使用集群 DNS 服务器（CoreDNS）进行 DNS 解析。
+
+通过重复使用 nameserver 字段，可以指定多个 DNS 服务器（Linux 最多三个）。DNS 查询会按配置中的顺序选用 DNS 服务器。 仅在靠前的 DNS 服务器没有响应（timeout）时，才会使用后续的 DNS 服务器！所以指定的服务器中的 DNS 记录最好完全一致！！！不要把第一个配内网 DNS，第二个配外网！！！
+
+### 4. DNS 搜索域
+
+上一小节给出的 /etc/resolv.conf 文件内容的末尾，有这样一行: search lan，它指定的，是所谓的 DNS 搜索域。
+
+讲到 DNS 搜索域，就不得不提到一个名词：全限定域名（Full Qulified Domain Name, FQDN），即一个域名的完整名称，www.baidu.com。
+
+一个普通的域名，有下列四种可能：
+
+- www.baidu.com.: 末尾的 . 表示根域，说明 www.baidu.com 是一个 FQDN，因此不会使用搜索域！
+- www.baidu.com: 末尾没 .，但是域名包含不止一个 .。首先当作 FQDN 进行查询，没查找再按顺序在各搜索域中查询。
+- /etc/resolv.conf 的 options 参数中，可以指定域名中包含 . 的临界个数，默认是 1.
+- local: 不包含 .，被当作 host 名称，非 FQDN。首先在 /etc/hosts 中查找，没找到的话，再按顺序在各搜索域中查找。
+
+> 上述搜索顺序可以通过 host -v <domain-name> 进行测试，该命令会输出它尝试过的所有 FQDN。修改 /etc/resolv.conf 中的 search 属性并测试，然后查看输出。
+
+就如上面说例举的，在没有 DNS 搜索域 这个东西的条件下，我们访问任何域名，都必须输入一个全限定域名 FQDN。有了搜索域我们就可以稍微偷点懒，省略掉域名的一部分后缀，让 DNS Resolver 自己去在各搜索域中搜索。
+
+在 Kubernetes 中就使用到了搜索域，k8s 中默认的域名 FQDN 是service.namespace.svc.cluster.local，但是对于 default namespace 中的 service，我们可以直接通过 service 名称查询到它的 IP。对于其他名字空间中的 service，也可以通过service.namespace 查询到它们的 IP，不需要给出 FQDN。
+
+Kubernetes 中 /etc/resolv.conf 的示例如下：
+
+```
+nameserver 10.43.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5
+```
+
+可以看到 k8s 设置了一系列的搜索域，并且将 . 的临界值设为了 5。也就是少于 5 个 dots 的域名，都首先当作非 FQDN 看待，优先在搜索域里面查找。
+
+该配置文件的详细描述参见[manpage - resolv.conf](https://man7.org/linux/man-pages/man5/resolv.conf.5.html)，或者在 Linux 中使用 `man resolv.conf` 命令查看。
+
+## 四、DNS 诊断的命令行工具
+
+```
+dig +trace baidu.com  # 诊断 dns 的主要工具，非常强大
+host -a baidu.com  # host 基本就是 dig 的弱化版，不过 host 有个有点就是能打印出它测试过的所有 FQDN
+
+
+nslookup baidu.com # 和 host 没啥大差别，多个交互式查询不过一般用不到
+whois baidu.com # 查询域名注册信息，内网诊断用不到
+```
+
+详细的使用请` man dig`。
+
+## 五、业界实现
+
+- bind
+- polaris
+
+## 参考
+
+- [k8s 服务注册与发现（一）DNS](https://cloud.tencent.com/developer/article/2126509)
+- [k8s 服务注册与发现（二）Kubernetes内部域名解析原理](https://cloud.tencent.com/developer/article/2126510)
+- [k8s 服务注册与发现（三）CoreDNS](https://cloud.tencent.com/developer/article/2126512)
+- [/etc/resolv.conf文件中的search项作用](https://www.cnblogs.com/zhangmingda/p/13663541.html)
+- [CoreDNS系列1：Kubernetes内部域名解析原理、弊端及优化方式](https://hansedong.github.io/2018/11/20/9/)
+- [Polaris Github](https://github.com/polarismesh/polaris)
+- [Polaris Sidecar Github](https://github.com/polarismesh/polaris-sidecar)
+- [Polaris DNS 接入](https://polarismesh.cn/docs/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/k8s%E5%92%8C%E7%BD%91%E6%A0%BC%E4%BB%A3%E7%90%86/dns%E6%8E%A5%E5%85%A5/)
+- [HaProxy 配置DNS srv记录 服务发现](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/dns-resolution/)

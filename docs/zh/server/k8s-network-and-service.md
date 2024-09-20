@@ -327,9 +327,6 @@ Ingress和Service通信 流程
 
 
 
-
-
-
 ### 3.5. 跨集群通信
 
 参考 [k8s-pod-to-pod-different-clusters.md](k8s-pod-to-pod-different-clusters.md)
@@ -338,14 +335,7 @@ Ingress和Service通信 流程
 
 ### 4.1.  DNS
 
-- 递归查询: 客户端只发一次请求，要求对方给出最终结果。
-
-![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-recursion.png)
-
-- 迭代查询: 客户端发出一次请求，对方如果没有授权回答，它就会返回一个能解答这个查询的其它名称服务器列表， 客户端会再向返回的列表中发出请求，直到找到最终负责所查域名的名称服务器，从它得到最终结果。
-
-![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-iteration.png)
-
+参考 [k8s-dns-intro.md](k8s-dns-intro.md)
 
 ### 4.2.  Polaris
 

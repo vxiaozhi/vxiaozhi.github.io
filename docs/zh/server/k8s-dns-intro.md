@@ -1,26 +1,26 @@
 # K8s dns 技术实现原理
 
+K8s 的DNS 也在不断演变， 从 1.11 版本开始 默认的dns服务器 由 kube-dns切换到了 coredns。
 
-## 基础知识
+[kube-dns 与 coredns 性能数据对比](https://coredns.io/2018/11/27/cluster-dns-coredns-vs-kube-dns/)
 
-**记录**
-
-- A 记录
-- NS 记录
-
-**解析方式**
-
-- 递归
-- 迭代
+- coredns 基于Canddy实现，非常灵活的配置，可以根据不同的需求给不同的域名配置不同的插件
+- 对于内部域名解析 KubeDNS 要优于 CoreDNS 大约 10%，可能是因为 dnsmasq 对于缓存的优化会比 CoreDNS 要好
+- 对于外部域名 CoreDNS 要比 KubeDNS 好 3 倍。但这个值大家看看就好，因为 kube-dns 不会缓存 Negative cache。但即使 kubeDNS 使用了 Negative cache，表现仍然也差不多
+- CoreDNS 的内存占用情况会优于 KubeDNS
 
 
-## Kubernetes内部域名解析原理
+## 一、K8s 内部域名解析原理
+
 
 ### 1. 同一集群同一命名空间下
-### 2. 同一集群不同命名空间下
-### 3. DNS 记录
 
-## Kubernetes DNS 策略
+
+### 2. 同一集群不同命名空间下
+
+### Kubernetes DNS 策略
+
+## 二、K8s dns源码分析
 
 在Kubernetes 中，有4种 DNS 策略，从 Kubernetes 源码中看：
 
@@ -99,7 +99,7 @@ spec:
  在某些场景下，我们的 POD 是用 HOST 模式启动的（HOST模式，是共享宿主机网络的），一旦用 HOST 模式，表示这个 POD 中的所有容器，都要使用宿主机的 /etc/resolv.conf 配置进行DNS查询，但如果你想使用了 HOST 模式，还继续使用 Kubernetes 的DNS服务，那就将 dnsPolicy 设置为 ClusterFirstWithHostNet。
  
 
-## Kubernetes 创建 resolv.conf 文件流程分析
+**Kubernetes 创建 resolv.conf 文件流程分析**
 
 以下是 Kubernetes 源码中 dns 创建的逻辑：
 
@@ -198,3 +198,6 @@ polaris
 - [Polaris Github](https://github.com/polarismesh/polaris)
 - [Polaris Sidecar Github](https://github.com/polarismesh/polaris-sidecar)
 - [Polaris DNS 接入](https://polarismesh.cn/docs/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/k8s%E5%92%8C%E7%BD%91%E6%A0%BC%E4%BB%A3%E7%90%86/dns%E6%8E%A5%E5%85%A5/)
+- [HaProxy 配置DNS srv记录 服务发现](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/dns-resolution/)
+- [Cluster DNS: CoreDNS vs Kube-DNS](https://coredns.io/2018/11/27/cluster-dns-coredns-vs-kube-dns/)
+- [Cluster DNS: CoreDNS vs KubeDNS 中文](https://juejin.cn/post/6890060925840130061)
