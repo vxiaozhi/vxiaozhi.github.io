@@ -1,6 +1,6 @@
 # K8s dns 技术实现原理
 
-K8s 的DNS 也在不断演变， 从 1.11 版本开始 默认的dns服务器 由 kube-dns切换到了 coredns。
+K8s 中DNS采用的服务器方案也在不断演变， 早期用的是 kube-dns， 从 1.11 版本开始 默认的dns服务器 由 kube-dns切换到了 coredns。
 
 [kube-dns 与 coredns 性能数据对比](https://coredns.io/2018/11/27/cluster-dns-coredns-vs-kube-dns/)
 
@@ -346,7 +346,18 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 
 ## 第三方组件
 
-polaris
+原生DNS服务治理方面存在不足， 如： 
+
+- 延时，ttl最短只能设置10S导致，dns缓存导致服务地址变更，客户端没法及时拿到最新的地址。
+- 不支持服务存活检查，如果后台的某台Web服务器出现故障,DNS服务器仍然会把DNS 请求分配到这台故障服务器上,导致不能响应客户端
+- 不能够按照Web服务器的处理能力分配负载｡DNS负载均衡采用的是简单的轮循负载算法,不能区分服务器之间的差异,不能反映服务器的当前运行状态。
+
+**polaris：**
+
+-  服务发现  operator： UI/Polaris-config.  random hostport.   operator 对比自主上报好处： 1 无需创建polaris名字  2 反注册可靠。
+-  作为主调  支持agent/side-car 模式部署。
+
+
 
 ## 参考
 
@@ -362,3 +373,4 @@ polaris
 - [Cluster DNS: CoreDNS vs Kube-DNS](https://coredns.io/2018/11/27/cluster-dns-coredns-vs-kube-dns/)
 - [Cluster DNS: CoreDNS vs KubeDNS 中文](https://juejin.cn/post/6890060925840130061)
 - [Kubernetes DNS-Based Service Discovery](https://github.com/kubernetes/dns/blob/master/docs/specification.md)
+- [DNS TTL 值理解及配置](https://jaminzhang.github.io/dns/DNS-TTL-Understanding-and-Config/)
