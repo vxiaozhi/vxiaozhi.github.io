@@ -13,4 +13,5 @@
 - [Multi CNI 腾讯tkestack的galaxy](https://github.com/tkestack/galaxy)
 - [sriov-cni 为POD提供sriov功能和DPDK驱动配置，提供具体的VF功能](https://github.com/k8snetworkplumbingwg/sriov-cni)
 - [Benchmark results of Kubernetes network plugins (CNI) over 10Gbit/s network (Updated: August 2020)](https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-august-2020-6e1b757b9e49)
-- [Benchmark results of Kubernetes network plugins (CNI) over 40Gbit/s network [2024]](https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-40gbit-s-network-2024-156f085a5e4e#89d8-90c23c8caeb4-reply) 
+- [Benchmark results of Kubernetes network plugins (CNI) over 40Gbit/s network [2024]](https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-40gbit-s-network-2024-156f085a5e4e#89d8-90c23c8caeb4-reply)
+- [What is Kube-Proxy and why move from iptables to eBPF?](https://isovalent.com/blog/post/why-replace-iptables-with-ebpf/)
