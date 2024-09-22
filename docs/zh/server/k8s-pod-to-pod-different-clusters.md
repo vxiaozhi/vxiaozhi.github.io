@@ -26,6 +26,7 @@
 - [Skupper](https://github.com/skupperproject/skupper)
 - [Kubeslice ](https://github.com/kubeslice/kubeslice)
 - [Istio]()
+- [Cilium 多集群 Cluster Mesh](https://github.com/cilium/cilium)
 
 
 ## 参考
@@ -37,3 +38,5 @@
 - [Istio多集群流量管理](https://istio.io/latest/zh/docs/ops/configuration/traffic-management/multicluster/)
 - [多集群 Istio 服务网格的跨集群无缝访问指南](https://jimmysong.io/blog/seamless-cross-cluster-access-istio/)
 - [Multi-cluster traffic failover with EastWest Gateways](https://docs.tetrate.io/service-bridge/howto/gateway/multi-cluster-traffic-routing-with-eastwest-gateway)
+- [Setting up Cluster Mesh](https://docs.cilium.io/en/stable/network/clustermesh/clustermesh/)
+- [Cilium 多集群 Cluster Mesh 介绍](https://cloud.tencent.com/developer/article/2029179)
