@@ -21,6 +21,7 @@
 ## 参考
 - [CNCF Landscape](https://landscape.cncf.io/)
 - [k8s cni](https://kubernetes.feisky.xyz/extension/network/cni)
+- [CNI 规范定义](https://github.com/containernetworking/cni/blob/main/SPEC.md)
 - [Kubernetes CNI 插件选型和应用场景探讨](https://kubesphere.io/zh/blogs/kubernetes-cni/)
 - [腾讯云容器网络概述](https://cloud.tencent.com/document/product/457/50353)
 - [循序渐进理解CNI机制与Flannel工作原理](https://blog.yingchi.io/posts/2020/8/k8s-flannel.html)
