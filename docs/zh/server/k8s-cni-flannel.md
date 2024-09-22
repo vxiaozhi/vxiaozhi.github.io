@@ -86,6 +86,7 @@ Flannel实质上是一种“覆盖网络(overlaynetwork)”，也就是将TCP数
 - [flannel github](https://github.com/flannel-io/flannel)
 - [flannel backends](https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md)
 - [白话 OSI 七层网络模型](https://www.freecodecamp.org/chinese/news/osi-model-networking-layers/)
+- [K8s 指南-Flannel](https://kubernetes.feisky.xyz/extension/network/flannel)
 - [云原生虚拟网络之 Flannel 工作原理](https://www.luozhiyun.com/archives/695)
 - [云原生虚拟网络之 VXLAN 协议](https://www.luozhiyun.com/archives/687)
 - [k8s网络之Flannel网络](https://www.cnblogs.com/goldsunshine/p/10740928.html)
