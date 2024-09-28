@@ -1,13 +1,13 @@
 {
-    "title": "Gitbook使用入门",
-    "description": "Gitbook使用入门",
-    "keywords": "使用手册,markdown,gitbook,",
+    "title": "微小智技术博客",
+    "description": "微小智技术博客",
+    "keywords": "微小智技术博客, AI, LLM, Server, 使用手册,markdown,gitbook,",
     "introduction": {
         "path": "README.md",
-        "title": "Gitbook使用入门概述"
+        "title": "微小智技术博客概述"
     },
      "plugins": [
-        // "-mathjax", "ga", "duoshuo"
+       
     ],
     "pluginsConfig": {
         "fontSettings": {
@@ -29,10 +29,10 @@
         "issues": false,
         "contribute": false,
         "sidebar": {
-            "Tony Deng": "http://tonydeng.github.io/"
+            "微小智": "https://vxiaozhi.github.io/"
         },
         "tail": {
-            "Gitbook使用入门": "http://tonydeng.github.io/gitbook-zh/gitbook-howtouse/",
+            "微小智技术博客": "https://vxiaozhi.github.io"
         },
         "gitbook": false,
         "sharing": {
