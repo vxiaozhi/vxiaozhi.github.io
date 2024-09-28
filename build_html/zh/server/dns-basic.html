@@ -1,0 +1,507 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>DNS 基础知识 · 微小智技术博客</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="linux-virtual-network-interfaces.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://vxiaozhi.github.io/" target="_blank" class="custom-link">微小智</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    后台技术
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="dns-basic.html">
+            
+                <a href="dns-basic.html">
+            
+                    
+                    DNS 基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="linux-virtual-network-interfaces.html">
+            
+                <a href="linux-virtual-network-interfaces.html">
+            
+                    
+                    Linux 中的虚拟网络接口
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    K8s
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="k8s-service-mesh.html">
+            
+                <a href="k8s-service-mesh.html">
+            
+                    
+                    K8s 服务网格
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../gitbook/">
+            
+                <a href="../gitbook/">
+            
+                    
+                    Gitbook
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../gitbook/howtouse/">
+            
+                <a href="../gitbook/howtouse/">
+            
+                    
+                    基本安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../gitbook/howtouse/gitbookcli.html">
+            
+                <a href="../gitbook/howtouse/gitbookcli.html">
+            
+                    
+                    Gitbook命令行速览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../gitbook/book/">
+            
+                <a href="../gitbook/book/">
+            
+                    
+                    图书项目结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../gitbook/output/">
+            
+                <a href="../gitbook/output/">
+            
+                    
+                    图书输出
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../gitbook/output/outfile.html">
+            
+                <a href="../gitbook/output/outfile.html">
+            
+                    
+                    输出为静态网站
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../gitbook/output/pdfandebook.html">
+            
+                <a href="../gitbook/output/pdfandebook.html">
+            
+                    
+                    输出PDF
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >DNS 基础知识</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="dns-&#x57FA;&#x7840;&#x77E5;&#x8BC6;">dns &#x57FA;&#x7840;&#x77E5;&#x8BC6;</h1><h2 id="&#x4E00;&#x3001;&#x57FA;&#x7840;&#x77E5;&#x8BC6;">&#x4E00;&#x3001;&#x57FA;&#x7840;&#x77E5;&#x8BC6;</h2><p><strong>&#x8BB0;&#x5F55;&#x7C7B;&#x578B;</strong></p><ul><li>A &#x8BB0;&#x5F55;&#xFF1A;&#x5B83;&#x8BB0;&#x5F55;&#x57DF;&#x540D;&#x4E0E; IPv4 &#x5730;&#x5740;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#x3002;&#x76EE;&#x524D;&#x7528;&#x7684;&#x6700;&#x591A;&#x7684; DNS &#x8BB0;&#x5F55;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x3002;
+</li>
+<li>AAAA &#x8BB0;&#x5F55;&#xFF1A;&#x5B83;&#x5BF9;&#x5E94;&#x7684;&#x662F; IPv6&#xFF0C;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x6210;&#x65B0;&#x4E00;&#x4EE3;&#x7684; A &#x8BB0;&#x5F55;&#x3002;&#x4EE5;&#x540E;&#x4F1A;&#x7528;&#x7684;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#x7684;&#x3002;
+</li>
+<li>NS &#x8BB0;&#x5F55;&#xFF1A;&#x8BB0;&#x5F55; DNS &#x57DF;&#x5BF9;&#x5E94;&#x7684;&#x6743;&#x5A01;&#x670D;&#x52A1;&#x5668;&#x57DF;&#x540D;&#xFF0C;&#x6743;&#x5A01;&#x670D;&#x52A1;&#x5668;&#x57DF;&#x540D;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x5BF9;&#x5E94;&#x7684; A &#x8BB0;&#x5F55;&#x3002;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x8BB0;&#x5F55;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5B50;&#x57DF;&#x540D;&#x7684;&#x89E3;&#x6790;&#x5206;&#x914D;&#x7ED9;&#x522B;&#x7684; DNS &#x670D;&#x52A1;&#x5668;&#x3002;
+</li>
+<li>CNAME &#x8BB0;&#x5F55;: &#x8BB0;&#x5F55;&#x57DF;&#x540D;&#x4E0E;&#x53E6;&#x4E00;&#x4E2A;&#x57DF;&#x540D;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF0C;&#x7528;&#x4E8E;&#x7ED9;&#x57DF;&#x540D;&#x8D77;&#x522B;&#x540D;&#x3002;&#x8FD9;&#x4E2A;&#x7528;&#x5F97;&#x4E5F;&#x633A;&#x591A;&#x7684;&#x3002;
+</li>
+<li>MX &#x8BB0;&#x5F55;&#xFF1A;&#x8BB0;&#x5F55;&#x57DF;&#x540D;&#x5BF9;&#x5E94;&#x7684;&#x90AE;&#x4EF6;&#x670D;&#x52A1;&#x5668;&#x57DF;&#x540D;&#xFF0C;&#x90AE;&#x4EF6;&#x670D;&#x52A1;&#x5668;&#x7684;&#x57DF;&#x540D;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x5BF9;&#x5E94;&#x7684; A &#x8BB0;&#x5F55;&#x3002;
+</li>
+<li>SRV &#x8BB0;&#x5F55;&#xFF1A;SRV &#x8BB0;&#x5F55;&#x7528;&#x4E8E;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x3002;SRV &#x8BB0;&#x5F55;&#x7684;&#x5185;&#x5BB9;&#x6709;&#x56FA;&#x5B9A;&#x683C;&#x5F0F;&#xFF1A;&#x4F18;&#x5148;&#x7EA7; &#x6743;&#x91CD; &#x7AEF;&#x53E3; &#x76EE;&#x6807;&#x5730;&#x5740;&#xFF0C;&#x4F8B;&#x5982;0 5 5060 sipserver.example.com
+</li></ul>
+<p><strong>&#x89E3;&#x6790;&#x65B9;&#x5F0F;</strong></p><ul><li>&#x9012;&#x5F52;&#x67E5;&#x8BE2;: &#x5BA2;&#x6237;&#x7AEF;&#x53EA;&#x53D1;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#xFF0C;&#x8981;&#x6C42;&#x5BF9;&#x65B9;&#x7ED9;&#x51FA;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x3002;
+</li></ul>
+<p><img src="https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-recursion.png"></p><ul><li>&#x8FED;&#x4EE3;&#x67E5;&#x8BE2;: &#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x51FA;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#xFF0C;&#x5BF9;&#x65B9;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6388;&#x6743;&#x56DE;&#x7B54;&#xFF0C;&#x5B83;&#x5C31;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x80FD;&#x89E3;&#x7B54;&#x8FD9;&#x4E2A;&#x67E5;&#x8BE2;&#x7684;&#x5176;&#x5B83;&#x540D;&#x79F0;&#x670D;&#x52A1;&#x5668;&#x5217;&#x8868;&#xFF0C; &#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x518D;&#x5411;&#x8FD4;&#x56DE;&#x7684;&#x5217;&#x8868;&#x4E2D;&#x53D1;&#x51FA;&#x8BF7;&#x6C42;&#xFF0C;&#x76F4;&#x5230;&#x627E;&#x5230;&#x6700;&#x7EC8;&#x8D1F;&#x8D23;&#x6240;&#x67E5;&#x57DF;&#x540D;&#x7684;&#x540D;&#x79F0;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4ECE;&#x5B83;&#x5F97;&#x5230;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x3002;
+</li></ul>
+<p><img src="https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/dns-iteration.png"></p><p><strong>DNS &#x6CDB;&#x89E3;&#x6790;&#x901A;&#x914D;&#x7B26;</strong></p><p>DNS &#x8BB0;&#x5F55;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26; <em>&#xFF0C;&#x4F46;&#x4EC5;&#x652F;&#x6301;&#x540C;&#x7EA7;&#x5339;&#x914D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4; </em> &#x4E0D;&#x80FD;&#x5339;&#x914D;&#x57DF;&#x540D;&#x4E2D;&#x7684; . &#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x3002;</p><p>&#x4E3E;&#x4F8B;&#x6765;&#x8BF4;&#xFF0C;*.aliyun.com &#x80FD;&#x7528;&#x4E8E; xx.aliyun.com &#x548C; abc.aliyun.com&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x7528;&#x4E8E;aliyun.com, a.b.aliyun.com &#x6216; bb.xx.aliyun.com.</p><p><strong>TTL&#xFF08;Time To Live&#xFF09;</strong></p><p>&#x4E0A;&#x9762;&#x8BB2;&#x4E86;&#x516C;&#x5171; DNS &#x670D;&#x52A1;&#x5668;&#x901A;&#x8FC7;&#x7F13;&#x5B58;&#x6280;&#x672F;&#xFF0C;&#x964D;&#x4F4E;&#x4E86;&#x4E0A;&#x6E38; DNS &#x670D;&#x52A1;&#x5668;&#x7684;&#x538B;&#x529B;&#xFF0C;&#x4E5F;&#x52A0;&#x5FEB;&#x4E86;&#x7F51;&#x7EDC;&#x4E0A;&#x7684; DNS &#x67E5;&#x8BE2;&#x901F;&#x5EA6;&#x3002;</p><p>&#x53EF;&#x7F13;&#x5B58;&#x603B;&#x5F97;&#x6709;&#x4E2A;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x5427;&#xFF01;&#x4E3A;&#x4E86;&#x7CBE;&#x786E;&#x5730;&#x63A7;&#x5236; DNS &#x8BB0;&#x5F55;&#x7684;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#xFF0C;&#x6BCF;&#x6761; DNS &#x8BB0;&#x5F55;&#x90FD;&#x8981;&#x6C42;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x5C5E;&#x6027;&#x2014;&#x2014;TTL&#xFF0C;&#x5355;&#x4F4D;&#x4E3A;&#x79D2;&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x3002;</p><p>&#x4EFB;&#x4F55;&#x4E00;&#x6761; DNS &#x7F13;&#x5B58;&#xFF0C;&#x5728;&#x8D85;&#x8FC7;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x540E;&#x90FD;&#x5FC5;&#x987B;&#x4E22;&#x5F03;&#xFF01;&#x53E6;&#x5916;&#x5728;&#x6CA1;&#x8D85;&#x65F6;&#x7684;&#x65F6;&#x5019;&#xFF0C;DNS &#x7F13;&#x5B58;&#x4E5F;&#x53EF;&#x4EE5;&#x88AB;&#x4E3B;&#x52A8;&#x6216;&#x8005;&#x88AB;&#x52A8;&#x5730;&#x5237;&#x65B0;&#x3002;</p><h2 id="&#x4E8C;&#x3001;&#x57DF;&#x540D;&#x7684;&#x5206;&#x5C42;&#x7ED3;&#x6784;">&#x4E8C;&#x3001;&#x57DF;&#x540D;&#x7684;&#x5206;&#x5C42;&#x7ED3;&#x6784;</h2><p>&#x56FD;&#x9645;&#x57DF;&#x540D;&#x7CFB;&#x7EDF;&#x88AB;&#x5206;&#x6210;&#x56DB;&#x5C42;&#xFF1A;</p><h3 id="1-&#x6839;&#x57DF;&#xFF08;root-zone&#xFF09;&#xFF1A;&#x6240;&#x6709;&#x57DF;&#x540D;&#x7684;&#x6839;&#x3002;">1. &#x6839;&#x57DF;&#xFF08;Root Zone&#xFF09;&#xFF1A;&#x6240;&#x6709;&#x57DF;&#x540D;&#x7684;&#x6839;&#x3002;</h3><ul><li>&#x6839;&#x57DF;&#x540D;&#x670D;&#x52A1;&#x5668;&#x8D1F;&#x8D23;&#x89E3;&#x6790;&#x9876;&#x7EA7;&#x57DF;&#x540D;&#xFF0C;&#x7ED9;&#x51FA;&#x9876;&#x7EA7;&#x57DF;&#x540D;&#x7684; DNS &#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#x3002;
+</li>
+<li>&#x5168;&#x4E16;&#x754C;&#x4EC5;&#x6709;&#x5341;&#x4E09;&#x7EC4;&#x6839;&#x57DF;&#x540D;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8FD9;&#x4E9B;&#x670D;&#x52A1;&#x5668;&#x7684; ip &#x5730;&#x5740;&#x57FA;&#x672C;&#x4E0D;&#x4F1A;&#x53D8;&#x52A8;&#x3002;
+</li>
+<li>&#x5B83;&#x7684;&#x57DF;&#x540D;&#x662F; &#x201C;&quot;&#xFF0C;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x800C;&#x5B83;&#x7684;<strong>&#x5168;&#x9650;&#x5B9A;&#x57DF;&#x540D;&#xFF08;FQDN&#xFF09;</strong>&#x662F; .&#xFF0C;&#x56E0;&#x4E3A; FQDN &#x603B;&#x662F;&#x4EE5; . &#x7ED3;&#x5C3E;&#x3002;&#xFF08;FQDN &#x5728;&#x540E;&#x9762;&#x89E3;&#x91CA;&#xFF0C;&#x53EF;&#x6682;&#x65F6;&#x5FFD;&#x7565;&#xFF09;
+</li></ul>
+<h3 id="2-&#x9876;&#x7EA7;&#x57DF;&#xFF08;top-level-domains-tld&#xFF09;&#xFF1A;com-cn-&#x7B49;&#x56FD;&#x9645;&#x3001;&#x56FD;&#x5BB6;&#x7EA7;&#x7684;&#x57DF;&#x540D;">2. &#x9876;&#x7EA7;&#x57DF;&#xFF08;Top Level Domains, TLD&#xFF09;&#xFF1A;.com .cn &#x7B49;&#x56FD;&#x9645;&#x3001;&#x56FD;&#x5BB6;&#x7EA7;&#x7684;&#x57DF;&#x540D;</h3><ul><li>&#x9876;&#x7EA7;&#x57DF;&#x540D;&#x670D;&#x52A1;&#x5668;&#x8D1F;&#x8D23;&#x89E3;&#x6790;&#x6B21;&#x7EA7;&#x57DF;&#x540D;&#xFF0C;&#x7ED9;&#x51FA;&#x6B21;&#x7EA7;&#x57DF;&#x540D;&#x7684; DNS &#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#x3002;
+</li>
+<li>&#x6BCF;&#x4E2A;&#x9876;&#x7EA7;&#x57DF;&#x540D;&#x90FD;&#x5BF9;&#x5E94;&#x5404;&#x81EA;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x662F;&#x5B8C;&#x5168;&#x72EC;&#x7ACB;&#x7684;&#x3002;.cn &#x7684;&#x57DF;&#x540D;&#x89E3;&#x6790;&#x4EC5;&#x7531; .cn &#x9876;&#x7EA7;&#x57DF;&#x540D;&#x670D;&#x52A1;&#x5668;&#x63D0;&#x4F9B;&#x3002;
+</li>
+<li>&#x76EE;&#x524D;&#x56FD;&#x9645; DNS &#x7CFB;&#x7EDF;&#x4E2D;&#x5DF2;&#x6709;&#x4E0A;&#x5343;&#x4E2A; TLD&#xFF0C;&#x5305;&#x62EC;&#x4E2D;&#x6587;&#x300C;.&#x6211;&#x7231;&#x4F60;&#x300D;&#x751A;&#x81F3;&#x85CF;&#x6587;&#x57DF;&#x540D;&#xFF0C;&#x8BE6;&#x7EC6;&#x5217;&#x8868;&#x53C2;&#x89C1;IANA TLD &#x6570;&#x636E;&#x5E93;
+</li>
+<li>&#x9664;&#x4E86;&#x56FD;&#x9645;&#x53EF;&#x7528;&#x7684; TLD&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x7C7B;&#x7C7B;&#x4F3C;&#x300C;&#x5185;&#x7F51; IP &#x5730;&#x5740;&#x300D;&#x7684;&#x201C;&#x79C1;&#x6709; TLD&#x201D;&#xFF0C;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x6BD4;&#x5982; xxx.local xxx.lan&#xFF0C;&#x88AB;&#x5E7F;&#x6CDB;&#x7528;&#x5728;&#x96C6;&#x7FA4;&#x901A;&#x4FE1;&#x4E2D;&#x3002;&#x540E;&#x9762;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;
+</li></ul>
+<h3 id="3-&#x6B21;&#x7EA7;&#x57DF;&#xFF08;second-level-domains&#xFF09;&#xFF1A;&#x8FD9;&#x4E2A;&#x624D;&#x662F;&#x4E2A;&#x4EBA;&#x4F01;&#x4E1A;&#x80FD;&#x591F;&#x4E70;&#x5230;&#x7684;&#x57DF;&#x540D;&#xFF0C;&#x6BD4;&#x5982;-baiducom">3. &#x6B21;&#x7EA7;&#x57DF;&#xFF08;Second Level Domains&#xFF09;&#xFF1A;&#x8FD9;&#x4E2A;&#x624D;&#x662F;&#x4E2A;&#x4EBA;/&#x4F01;&#x4E1A;&#x80FD;&#x591F;&#x4E70;&#x5230;&#x7684;&#x57DF;&#x540D;&#xFF0C;&#x6BD4;&#x5982; baidu.com</h3><ul><li>&#x6BCF;&#x4E2A;&#x6B21;&#x7EA7;&#x57DF;&#x540D;&#x90FD;&#x6709;&#x4E00;&#x5230;&#x591A;&#x4E2A;&#x6743;&#x5A01; DNS &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8FD9;&#x4E9B; DNS &#x670D;&#x52A1;&#x5668;&#x4F1A;&#x4EE5; NS &#x8BB0;&#x5F55;&#x7684;&#x5F62;&#x5F0F;&#x4FDD;&#x5B58;&#x5728;&#x5BF9;&#x5E94;&#x7684;&#x9876;&#x7EA7;&#x57DF;&#x540D;&#xFF08;TLD&#xFF09;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x3002;
+</li>
+<li>&#x6743;&#x5A01;&#x57DF;&#x540D;&#x670D;&#x52A1;&#x5668;&#x5219;&#x8D1F;&#x8D23;&#x7ED9;&#x51FA;&#x6700;&#x7EC8;&#x7684;&#x89E3;&#x6790;&#x7ED3;&#x679C;&#xFF1A;ip &#x5730;&#x5740;(A &#x8BB0;&#x5F55; )&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x57DF;&#x540D;&#xFF08;CNAME &#x8BB0;&#x5F55;&#xFF09;&#x3001;&#x53E6;&#x4E00;&#x4E2A; DNS &#x670D;&#x52A1;&#x5668;&#xFF08;NS &#x8BB0;&#x5F55;&#xFF09;&#x7B49;&#x3002;
+</li>
+<li>&#x5B50;&#x57DF;&#xFF08;Sub Domains&#xFF09;&#xFF1A;*.baidu.com &#x7EDF;&#x7EDF;&#x90FD;&#x662F; baidu.com &#x7684;&#x5B50;&#x57DF;&#x3002;
+</li>
+<li>&#x6BCF;&#x4E00;&#x4E2A;&#x5B50;&#x57DF;&#x90FD;&#x53EF;&#x4EE5;&#x6709;&#x81EA;&#x5DF1;&#x72EC;&#x7ACB;&#x7684;&#x6743;&#x5A01; DNS &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8FD9;&#x901A;&#x8FC7;&#x5728;&#x5B50;&#x57DF;&#x4E2D;&#x6DFB;&#x52A0; NS &#x8BB0;&#x5F55;&#x5B9E;&#x73B0;&#x3002;
+</li>
+<li>&#x666E;&#x901A;&#x7528;&#x6237;&#x901A;&#x5E38;&#x662F;&#x901A;&#x8FC7;&#x57DF;&#x540D;&#x63D0;&#x4F9B;&#x5546;&#x5982;&#x963F;&#x91CC;&#x4E91;&#x8D2D;&#x4E70;&#x7684;&#x6B21;&#x7EA7;&#x57DF;&#x540D;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x4EE5; rea.ink &#x4E3A;&#x4F8B;&#x4ECB;&#x7ECD;&#x57DF;&#x540D;&#x7684;&#x8D2D;&#x4E70;&#x5230;&#x53EF;&#x7528;&#x7684;&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x3002;
+</li></ul>
+<p>&#x57DF;&#x540D;&#x7684;&#x8D2D;&#x4E70;&#x4E0E;&#x4F7F;&#x7528;&#x6D41;&#x7A0B;&#xFF1A;</p><ul><li>&#x4F60;&#x5728;&#x67D0;&#x57DF;&#x540D;&#x63D0;&#x4F9B;&#x5546;&#x5904;&#x8D2D;&#x4E70;&#x4E86;&#x4E00;&#x4E2A;&#x57DF;&#x540D; rea.ink
+</li>
+<li>&#x57DF;&#x540D;&#x63D0;&#x4F9B;&#x5546;&#x5411; .ink &#x5BF9;&#x5E94;&#x7684;&#x9876;&#x7EA7;&#x57DF;&#x540D;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x63D2;&#x5165;&#x4E00;&#x6761;&#x4EE5;&#x4E0A;&#x7684; NS &#x8BB0;&#x5F55;&#xFF0C;&#x6307;&#x5411;&#x5B83;&#x81EA;&#x5DF1;&#x7684;&#x6B21;&#x7EA7; DNS &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5982; dns25.hichina.com.
+</li>
+<li>&#x963F;&#x91CC;&#x4E91;&#x4F1A;&#x5411; TLD &#x4E2D;&#x63D2;&#x5165;&#x51E0;&#x6761; NS &#x8BB0;&#x5F55;&#xFF0C;&#x6307;&#x5411;&#x963F;&#x91CC;&#x4E91;&#x7684;&#x6B21;&#x7EA7; DNS &#x670D;&#x52A1;&#x5668;&#xFF08;&#x5982;vip1.alidns.com&#xFF09;&#x3002;
+</li>
+<li>&#x4F60;&#x5728;&#x8BE5;&#x57DF;&#x540D;&#x63D0;&#x4F9B;&#x5546;&#x7684; DNS &#x7BA1;&#x7406;&#x754C;&#x9762;&#x4E2D;&#x6DFB;&#x52A0; A &#x8BB0;&#x5F55;&#xFF0C;&#x503C;&#x4E3A;&#x4F60;&#x7684;&#x670D;&#x52A1;&#x5668; IP&#x3002;
+</li>
+<li>OK &#x73B0;&#x5728; ping &#x4E00;&#x4E0B; rea.ink&#xFF0C;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x5DF2;&#x7ECF;&#x89E3;&#x6790;&#x5230;&#x4F60;&#x81EA;&#x5DF1;&#x7684;&#x670D;&#x52A1;&#x5668;&#x4E86;&#x3002;
+</li></ul>
+<h2 id="&#x4E09;&#x3001;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;-dns-&#x89E3;&#x6790;&#x5668;">&#x4E09;&#x3001;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684; DNS &#x89E3;&#x6790;&#x5668;</h2><p>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5B9E;&#x9645;&#x4E0A;&#x90FD;&#x662F;&#x8C03;&#x7528;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684; DNS Resolver &#x8FDB;&#x884C;&#x57DF;&#x540D;&#x89E3;&#x6790;&#x7684;&#x3002;&#x5728; Linux &#x4E2D; DNS Resolver &#x7531; glibc/musl &#x63D0;&#x4F9B;&#xFF0C;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E3A; /etc/resolv.conf&#x3002;</p><p>&#x6BD4;&#x5982; Python &#x7684; DNS &#x89E3;&#x6790;&#xFF0C;&#x5C31;&#x6765;&#x81EA;&#x4E8E;&#x6807;&#x51C6;&#x5E93;&#x7684; socket &#x5305;&#xFF0C;&#x8FD9;&#x4E2A;&#x5305;&#x53EA;&#x662F;&#x5BF9;&#x5E95;&#x5C42; c &#x8BED;&#x8A00;&#x5E93;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x5C01;&#x88C5;&#x3002;</p><p>&#x57FA;&#x672C;&#x4E0A;&#x53EA;&#x6709;&#x4E13;&#x95E8;&#x7528;&#x4E8E;&#x7F51;&#x7EDC;&#x8BCA;&#x65AD;&#x7684; DNS &#x5DE5;&#x5177;&#x5305;&#xFF0C;&#x624D;&#x4F1A;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0; DNS &#x534F;&#x8BAE;&#x3002;</p><h3 id="1-hosts-&#x6587;&#x4EF6;">1. hosts &#x6587;&#x4EF6;</h3><p>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x6587;&#x4EF6;&#xFF1A;Linux &#x4E2D;&#x7684; /etc/hosts &#x548C; Windows &#x4E2D;&#x7684;C:\Windows\System32\drivers\etc\hosts</p><p>&#x7CFB;&#x7EDF;&#x4E2D;&#x7684; DNS resolver &#x4F1A;&#x9996;&#x5148;&#x67E5;&#x770B;&#x8FD9;&#x4E2A; hosts &#x6587;&#x4EF6;&#x4E2D;&#x6709;&#x6CA1;&#x6709;&#x8BE5;&#x57DF;&#x540D;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5C31;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x4E86;&#x3002;&#x6CA1;&#x627E;&#x5230;&#x624D;&#x4F1A;&#x53BB;&#x67E5;&#x627E;&#x672C;&#x5730; DNS &#x7F13;&#x5B58;&#x3001;&#x522B;&#x7684; DNS &#x670D;&#x52A1;&#x5668;&#x3002;</p><p>&#x53EA;&#x6709;&#x90E8;&#x5206;&#x4E13;&#x95E8;&#x7528;&#x4E8E;&#x7F51;&#x7EDC;&#x8BCA;&#x65AD;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF08;e.g. dig&#xFF09;&#x4E0D;&#x4F1A;&#x4F9D;&#x8D56; OS &#x7684; DNS &#x89E3;&#x6790;&#x5668;&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x4E2A; hosts &#x4F1A;&#x5931;&#x6548;&#x3002;hosts &#x5BF9;&#x4E8E;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x7A0B;&#x5E8F;&#x90FD;&#x6709;&#x6548;&#x3002;</p><p>&#x79FB;&#x52A8;&#x8BBE;&#x5907;&#x4E0A; hosts &#x53EF;&#x80FD;&#x4F1A;&#x5931;&#x6548;&#xFF0C;&#x90E8;&#x5206; app &#x4F1A;&#x7ED5;&#x8FC7;&#x7CFB;&#x7EDF;&#xFF0C;&#x4F7F;&#x7528;&#x65B0;&#x5174;&#x7684; HTTPDNS &#x534F;&#x8BAE;&#x8FDB;&#x884C; DNS &#x89E3;&#x6790;&#x3002;</p><h3 id="2-httpdns">2. HTTPDNS</h3><p>&#x4F20;&#x7EDF;&#x7684; DNS &#x534F;&#x8BAE;&#x56E0;&#x4E3A;&#x4F7F;&#x7528;&#x4E86;&#x660E;&#x6587;&#x7684; UDP &#x534F;&#x8BAE;&#xFF0C;&#x5F88;&#x5BB9;&#x6613;&#x88AB;&#x52AB;&#x6301;&#x3002;&#x987A;&#x5E94;&#x79FB;&#x52A8;&#x4E92;&#x8054;&#x7F51;&#x7684;&#x5174;&#x8D77;&#xFF0C;&#x76EE;&#x524D;&#x4E00;&#x79CD;&#x65B0;&#x578B;&#x7684; DNS &#x534F;&#x8BAE;&#x2014;&#x2014;HTTPDNS &#x5E94;&#x7528;&#x8D8A;&#x6765;&#x8D8A;&#x5E7F;&#x6CDB;&#xFF0C;&#x56FD;&#x5185;&#x7684;&#x963F;&#x91CC;&#x4E91;&#x817E;&#x8BAF;&#x4E91;&#x90FD;&#x63D0;&#x4F9B;&#x4E86;&#x8FD9;&#x9879;&#x529F;&#x80FD;&#x3002;</p><p>HTTPDNS &#x901A;&#x8FC7; HTTP &#x534F;&#x8BAE;&#x76F4;&#x63A5;&#x5411;&#x6743;&#x5A01; DNS &#x670D;&#x52A1;&#x5668;&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#xFF0C;&#x7ED5;&#x8FC7;&#x4E86;&#x4E00;&#x5806;&#x4E2D;&#x95F4;&#x7684; DNS &#x9012;&#x5F52;&#x89E3;&#x6790;&#x5668;&#x3002;&#x597D;&#x5904;&#x6709;&#x4E8C;&#xFF1A;</p><p>&#x6743;&#x5A01; DNS &#x670D;&#x52A1;&#x5668;&#x80FD;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x771F;&#x5B9E; IP&#xFF08;&#x800C;&#x4E0D;&#x662F;&#x67D0;&#x4E2A;&#x4E2D;&#x95F4; DNS &#x9012;&#x5F52;&#x89E3;&#x6790;&#x5668;&#x7684; IP&#xFF09;&#xFF0C;&#x80FD;&#x5B9E;&#x73B0;&#x5C31;&#x8FD1;&#x8C03;&#x5EA6;&#x3002;
+&#x56E0;&#x4E3A;&#x662F;&#x76F4;&#x63A5;&#x4E0E;&#x6743;&#x5A01; DNS &#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#xFF0C;&#x907F;&#x514D;&#x4E86; DNS &#x7F13;&#x5B58;&#x6C61;&#x67D3;&#x7684;&#x95EE;&#x9898;&#x3002;
+HTTPDNS &#x534F;&#x8BAE;&#x9700;&#x8981;&#x7A0B;&#x5E8F;&#x81EA;&#x5DF1;&#x5F15;&#x5165; SDK&#xFF0C;&#x6216;&#x8005;&#x76F4;&#x63A5;&#x8BF7;&#x6C42; HTTP API&#x3002;</p><h3 id="3-&#x9ED8;&#x8BA4;-dns-&#x670D;&#x52A1;&#x5668;">3. &#x9ED8;&#x8BA4; DNS &#x670D;&#x52A1;&#x5668;</h3><p>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684; DNS &#x89E3;&#x6790;&#x5668;&#x901A;&#x5E38;&#x4F1A;&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x914D;&#x7F6E;&#x591A;&#x4E2A;&#x4E0A;&#x6E38; Name Servers&#xFF0C;&#x6BD4;&#x5982; Linux &#x5C31;&#x662F;&#x901A;&#x8FC7;/etc/resolv.conf &#x914D;&#x7F6E; DNS &#x670D;&#x52A1;&#x5668;&#x7684;&#x3002;</p><pre><code>$ cat /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+search lan</code></pre>
+<blockquote><p>&#x4E0D;&#x8FC7;&#x73B0;&#x5728;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x57FA;&#x672C;&#x4E0D;&#x4F1A;&#x624B;&#x52A8;&#x4FEE;&#x6539;&#x4E86;&#xFF0C;&#x5404; Linux &#x53D1;&#x884C;&#x7248;&#x90FD;&#x63A8;&#x51FA;&#x4E86;&#x81EA;&#x5DF1;&#x7684;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#x5DE5;&#x5177;&#xFF0C;&#x7531;&#x8FD9;&#x4E9B;&#x5DE5;&#x5177;&#x81EA;&#x52A8;&#x751F;&#x6210; Linux &#x7684;&#x5404;&#x79CD;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;&#xFF0C;&#x66F4;&#x65B9;&#x4FBF;&#x3002;&#x6BD4;&#x5982; Ubuntu &#x5C31;&#x63A8;&#x8350;&#x4F7F;&#x7528; netplan &#x5DE5;&#x5177;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x8BBE;&#x7F6E;&#x3002;</p><p>Kubernetes &#x5C31;&#x662F;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x5BB9;&#x5668;&#x5377;&#x6620;&#x5C04;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4FEE;&#x6539; /etc/resolv.conf&#xFF0C;&#x4F7F;&#x96C6;&#x7FA4;&#x7684;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x90FD;&#x4F7F;&#x7528;&#x96C6;&#x7FA4; DNS &#x670D;&#x52A1;&#x5668;&#xFF08;CoreDNS&#xFF09;&#x8FDB;&#x884C; DNS &#x89E3;&#x6790;&#x3002;</p></blockquote><p>&#x901A;&#x8FC7;&#x91CD;&#x590D;&#x4F7F;&#x7528; nameserver &#x5B57;&#x6BB5;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x591A;&#x4E2A; DNS &#x670D;&#x52A1;&#x5668;&#xFF08;Linux &#x6700;&#x591A;&#x4E09;&#x4E2A;&#xFF09;&#x3002;DNS &#x67E5;&#x8BE2;&#x4F1A;&#x6309;&#x914D;&#x7F6E;&#x4E2D;&#x7684;&#x987A;&#x5E8F;&#x9009;&#x7528; DNS &#x670D;&#x52A1;&#x5668;&#x3002; &#x4EC5;&#x5728;&#x9760;&#x524D;&#x7684; DNS &#x670D;&#x52A1;&#x5668;&#x6CA1;&#x6709;&#x54CD;&#x5E94;&#xFF08;timeout&#xFF09;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x4F7F;&#x7528;&#x540E;&#x7EED;&#x7684; DNS &#x670D;&#x52A1;&#x5668;&#xFF01;&#x6240;&#x4EE5;&#x6307;&#x5B9A;&#x7684;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7684; DNS &#x8BB0;&#x5F55;&#x6700;&#x597D;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#xFF01;&#xFF01;&#xFF01;&#x4E0D;&#x8981;&#x628A;&#x7B2C;&#x4E00;&#x4E2A;&#x914D;&#x5185;&#x7F51; DNS&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x914D;&#x5916;&#x7F51;&#xFF01;&#xFF01;&#xFF01;</p><h3 id="4-dns-&#x641C;&#x7D22;&#x57DF;">4. DNS &#x641C;&#x7D22;&#x57DF;</h3><p>&#x4E0A;&#x4E00;&#x5C0F;&#x8282;&#x7ED9;&#x51FA;&#x7684; /etc/resolv.conf &#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x7684;&#x672B;&#x5C3E;&#xFF0C;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x884C;: search lan&#xFF0C;&#x5B83;&#x6307;&#x5B9A;&#x7684;&#xFF0C;&#x662F;&#x6240;&#x8C13;&#x7684; DNS &#x641C;&#x7D22;&#x57DF;&#x3002;</p><p>&#x8BB2;&#x5230; DNS &#x641C;&#x7D22;&#x57DF;&#xFF0C;&#x5C31;&#x4E0D;&#x5F97;&#x4E0D;&#x63D0;&#x5230;&#x4E00;&#x4E2A;&#x540D;&#x8BCD;&#xFF1A;&#x5168;&#x9650;&#x5B9A;&#x57DF;&#x540D;&#xFF08;Full Qulified Domain Name, FQDN&#xFF09;&#xFF0C;&#x5373;&#x4E00;&#x4E2A;&#x57DF;&#x540D;&#x7684;&#x5B8C;&#x6574;&#x540D;&#x79F0;&#xFF0C;www.baidu.com&#x3002;</p><p>&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x57DF;&#x540D;&#xFF0C;&#x6709;&#x4E0B;&#x5217;&#x56DB;&#x79CD;&#x53EF;&#x80FD;&#xFF1A;</p><ul><li>www.baidu.com.: &#x672B;&#x5C3E;&#x7684; . &#x8868;&#x793A;&#x6839;&#x57DF;&#xFF0C;&#x8BF4;&#x660E; www.baidu.com &#x662F;&#x4E00;&#x4E2A; FQDN&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x641C;&#x7D22;&#x57DF;&#xFF01;
+</li>
+<li>www.baidu.com: &#x672B;&#x5C3E;&#x6CA1; .&#xFF0C;&#x4F46;&#x662F;&#x57DF;&#x540D;&#x5305;&#x542B;&#x4E0D;&#x6B62;&#x4E00;&#x4E2A; .&#x3002;&#x9996;&#x5148;&#x5F53;&#x4F5C; FQDN &#x8FDB;&#x884C;&#x67E5;&#x8BE2;&#xFF0C;&#x6CA1;&#x67E5;&#x627E;&#x518D;&#x6309;&#x987A;&#x5E8F;&#x5728;&#x5404;&#x641C;&#x7D22;&#x57DF;&#x4E2D;&#x67E5;&#x8BE2;&#x3002;
+</li>
+<li>/etc/resolv.conf &#x7684; options &#x53C2;&#x6570;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x57DF;&#x540D;&#x4E2D;&#x5305;&#x542B; . &#x7684;&#x4E34;&#x754C;&#x4E2A;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 1.
+</li>
+<li>local: &#x4E0D;&#x5305;&#x542B; .&#xFF0C;&#x88AB;&#x5F53;&#x4F5C; host &#x540D;&#x79F0;&#xFF0C;&#x975E; FQDN&#x3002;&#x9996;&#x5148;&#x5728; /etc/hosts &#x4E2D;&#x67E5;&#x627E;&#xFF0C;&#x6CA1;&#x627E;&#x5230;&#x7684;&#x8BDD;&#xFF0C;&#x518D;&#x6309;&#x987A;&#x5E8F;&#x5728;&#x5404;&#x641C;&#x7D22;&#x57DF;&#x4E2D;&#x67E5;&#x627E;&#x3002;
+</li></ul>
+<blockquote><p>&#x4E0A;&#x8FF0;&#x641C;&#x7D22;&#x987A;&#x5E8F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; host -v <domain-name> &#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x4F1A;&#x8F93;&#x51FA;&#x5B83;&#x5C1D;&#x8BD5;&#x8FC7;&#x7684;&#x6240;&#x6709; FQDN&#x3002;&#x4FEE;&#x6539; /etc/resolv.conf &#x4E2D;&#x7684; search &#x5C5E;&#x6027;&#x5E76;&#x6D4B;&#x8BD5;&#xFF0C;&#x7136;&#x540E;&#x67E5;&#x770B;&#x8F93;&#x51FA;&#x3002;</domain-name></p></blockquote><p>&#x5C31;&#x5982;&#x4E0A;&#x9762;&#x8BF4;&#x4F8B;&#x4E3E;&#x7684;&#xFF0C;&#x5728;&#x6CA1;&#x6709; DNS &#x641C;&#x7D22;&#x57DF; &#x8FD9;&#x4E2A;&#x4E1C;&#x897F;&#x7684;&#x6761;&#x4EF6;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x8BBF;&#x95EE;&#x4EFB;&#x4F55;&#x57DF;&#x540D;&#xFF0C;&#x90FD;&#x5FC5;&#x987B;&#x8F93;&#x5165;&#x4E00;&#x4E2A;&#x5168;&#x9650;&#x5B9A;&#x57DF;&#x540D; FQDN&#x3002;&#x6709;&#x4E86;&#x641C;&#x7D22;&#x57DF;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x7A0D;&#x5FAE;&#x5077;&#x70B9;&#x61D2;&#xFF0C;&#x7701;&#x7565;&#x6389;&#x57DF;&#x540D;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x540E;&#x7F00;&#xFF0C;&#x8BA9; DNS Resolver &#x81EA;&#x5DF1;&#x53BB;&#x5728;&#x5404;&#x641C;&#x7D22;&#x57DF;&#x4E2D;&#x641C;&#x7D22;&#x3002;</p><p>&#x5728; Kubernetes &#x4E2D;&#x5C31;&#x4F7F;&#x7528;&#x5230;&#x4E86;&#x641C;&#x7D22;&#x57DF;&#xFF0C;k8s &#x4E2D;&#x9ED8;&#x8BA4;&#x7684;&#x57DF;&#x540D; FQDN &#x662F;service.namespace.svc.cluster.local&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x4E8E; default namespace &#x4E2D;&#x7684; service&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7; service &#x540D;&#x79F0;&#x67E5;&#x8BE2;&#x5230;&#x5B83;&#x7684; IP&#x3002;&#x5BF9;&#x4E8E;&#x5176;&#x4ED6;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x4E2D;&#x7684; service&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;service.namespace &#x67E5;&#x8BE2;&#x5230;&#x5B83;&#x4EEC;&#x7684; IP&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x7ED9;&#x51FA; FQDN&#x3002;</p><p>Kubernetes &#x4E2D; /etc/resolv.conf &#x7684;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p><pre><code>nameserver 10.43.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230; k8s &#x8BBE;&#x7F6E;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x641C;&#x7D22;&#x57DF;&#xFF0C;&#x5E76;&#x4E14;&#x5C06; . &#x7684;&#x4E34;&#x754C;&#x503C;&#x8BBE;&#x4E3A;&#x4E86; 5&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x5C11;&#x4E8E; 5 &#x4E2A; dots &#x7684;&#x57DF;&#x540D;&#xFF0C;&#x90FD;&#x9996;&#x5148;&#x5F53;&#x4F5C;&#x975E; FQDN &#x770B;&#x5F85;&#xFF0C;&#x4F18;&#x5148;&#x5728;&#x641C;&#x7D22;&#x57DF;&#x91CC;&#x9762;&#x67E5;&#x627E;&#x3002;</p><p>&#x8BE5;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x8BE6;&#x7EC6;&#x63CF;&#x8FF0;&#x53C2;&#x89C1;<a href="https://man7.org/linux/man-pages/man5/resolv.conf.5.html" target="_blank">manpage - resolv.conf</a>&#xFF0C;&#x6216;&#x8005;&#x5728; Linux &#x4E2D;&#x4F7F;&#x7528; <code>man resolv.conf</code> &#x547D;&#x4EE4;&#x67E5;&#x770B;&#x3002;</p><h2 id="&#x56DB;&#x3001;dns-&#x8BCA;&#x65AD;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;">&#x56DB;&#x3001;DNS &#x8BCA;&#x65AD;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;</h2><pre><code>dig +trace baidu.com  # &#x8BCA;&#x65AD; dns &#x7684;&#x4E3B;&#x8981;&#x5DE5;&#x5177;&#xFF0C;&#x975E;&#x5E38;&#x5F3A;&#x5927;
+host -a baidu.com  # host &#x57FA;&#x672C;&#x5C31;&#x662F; dig &#x7684;&#x5F31;&#x5316;&#x7248;&#xFF0C;&#x4E0D;&#x8FC7; host &#x6709;&#x4E2A;&#x6709;&#x70B9;&#x5C31;&#x662F;&#x80FD;&#x6253;&#x5370;&#x51FA;&#x5B83;&#x6D4B;&#x8BD5;&#x8FC7;&#x7684;&#x6240;&#x6709; FQDN
+
+
+nslookup baidu.com # &#x548C; host &#x6CA1;&#x5565;&#x5927;&#x5DEE;&#x522B;&#xFF0C;&#x591A;&#x4E2A;&#x4EA4;&#x4E92;&#x5F0F;&#x67E5;&#x8BE2;&#x4E0D;&#x8FC7;&#x4E00;&#x822C;&#x7528;&#x4E0D;&#x5230;
+whois baidu.com # &#x67E5;&#x8BE2;&#x57DF;&#x540D;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#xFF0C;&#x5185;&#x7F51;&#x8BCA;&#x65AD;&#x7528;&#x4E0D;&#x5230;</code></pre>
+<p>&#x8BE6;&#x7EC6;&#x7684;&#x4F7F;&#x7528;&#x8BF7;<code>man dig</code>&#x3002;</p><h2 id="&#x4E94;&#x3001;&#x4E1A;&#x754C;&#x5B9E;&#x73B0;">&#x4E94;&#x3001;&#x4E1A;&#x754C;&#x5B9E;&#x73B0;</h2><ul><li>bind
+</li>
+<li>polaris
+</li></ul>
+<h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2><ul><li><a href="https://cloud.tencent.com/developer/article/2126509" target="_blank">k8s &#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E0E;&#x53D1;&#x73B0;&#xFF08;&#x4E00;&#xFF09;DNS</a>
+</li>
+<li><a href="https://cloud.tencent.com/developer/article/2126510" target="_blank">k8s &#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E0E;&#x53D1;&#x73B0;&#xFF08;&#x4E8C;&#xFF09;Kubernetes&#x5185;&#x90E8;&#x57DF;&#x540D;&#x89E3;&#x6790;&#x539F;&#x7406;</a>
+</li>
+<li><a href="https://cloud.tencent.com/developer/article/2126512" target="_blank">k8s &#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4E0E;&#x53D1;&#x73B0;&#xFF08;&#x4E09;&#xFF09;CoreDNS</a>
+</li>
+<li><a href="https://www.cnblogs.com/zhangmingda/p/13663541.html" target="_blank">/etc/resolv.conf&#x6587;&#x4EF6;&#x4E2D;&#x7684;search&#x9879;&#x4F5C;&#x7528;</a>
+</li>
+<li><a href="https://hansedong.github.io/2018/11/20/9/" target="_blank">CoreDNS&#x7CFB;&#x5217;1&#xFF1A;Kubernetes&#x5185;&#x90E8;&#x57DF;&#x540D;&#x89E3;&#x6790;&#x539F;&#x7406;&#x3001;&#x5F0A;&#x7AEF;&#x53CA;&#x4F18;&#x5316;&#x65B9;&#x5F0F;</a>
+</li>
+<li><a href="https://github.com/polarismesh/polaris" target="_blank">Polaris Github</a>
+</li>
+<li><a href="https://github.com/polarismesh/polaris-sidecar" target="_blank">Polaris Sidecar Github</a>
+</li>
+<li><a href="https://polarismesh.cn/docs/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/k8s%E5%92%8C%E7%BD%91%E6%A0%BC%E4%BB%A3%E7%90%86/dns%E6%8E%A5%E5%85%A5/" target="_blank">Polaris DNS &#x63A5;&#x5165;</a>
+</li>
+<li><a href="https://www.haproxy.com/documentation/haproxy-configuration-tutorials/dns-resolution/" target="_blank">HaProxy &#x914D;&#x7F6E;DNS srv&#x8BB0;&#x5F55; &#x670D;&#x52A1;&#x53D1;&#x73B0;</a>
+</li></ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 后台技术">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="linux-virtual-network-interfaces.html" class="navigation navigation-next " aria-label="Next page: Linux 中的虚拟网络接口">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"DNS 基础知识","level":"1.2.1","depth":2,"next":{"title":"Linux 中的虚拟网络接口","level":"1.2.2","depth":2,"path":"zh/server/linux-virtual-network-interfaces.md","ref":"zh/server/linux-virtual-network-interfaces.md","articles":[]},"previous":{"title":"后台技术","level":"1.2","depth":1,"path":"zh/server/README.md","ref":"zh/server/README.md","articles":[{"title":"DNS 基础知识","level":"1.2.1","depth":2,"path":"zh/server/dns-basic.md","ref":"zh/server/dns-basic.md","articles":[]},{"title":"Linux 中的虚拟网络接口","level":"1.2.2","depth":2,"path":"zh/server/linux-virtual-network-interfaces.md","ref":"zh/server/linux-virtual-network-interfaces.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"duoshuo":{"short_name":"wiznote","theme":"default"},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"serif","size":2},"highlight":{},"ga":{"token":"UA-39088953-8"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","keywords":"微小智技术博客, AI, LLM, Server, 使用手册,markdown,gitbook,","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":36,"bottom":36},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"微小智技术博客","links":{"home":false,"about":false,"issues":false,"contribute":false,"sidebar":{"微小智":"https://vxiaozhi.github.io/"},"tail":{"微小智技术博客":"https://vxiaozhi.github.io"},"gitbook":false,"sharing":{"google":true,"facebook":true,"twitter":true,"weibo":true,"qq":true,"qrcode":true}},"introduction":{"path":"README.md","title":"微小智技术博客概述"},"gitbook":"*","description":"微小智技术博客"},"file":{"path":"zh/server/dns-basic.md","mtime":"2024-09-28T07:15:55.918Z","type":"markdown"},"gitbook":{"version":"3.2.1","time":"2024-09-28T16:57:42.121Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
