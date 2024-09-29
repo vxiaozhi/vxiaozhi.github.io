@@ -353,7 +353,7 @@ Ingress和Service通信 流程
 
 
 **k8s**
-
+- [K8s 词汇表](https://kubernetes.io/zh-cn/docs/reference/glossary/?fundamental=true)
 - [The Kubernetes Book, 2021 Edition](https://github.com/rohitg00/DevOps_Books/blob/main/The%20Kubernetes%20Book%20(Nigel%20Poulton)%20(z-lib.org).pdf)
 - [The Kubernetes Book, 2024 Edition](https://github.com/vxiaozhi/DevOps_Books/blob/main/The.Kubernetes.Book.2024.Edition.pdf)
 - [Kubernetes 中文文档](https://kubernetes.io/zh-cn/docs/home/)
