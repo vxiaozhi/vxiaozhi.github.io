@@ -562,3 +562,13 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [[Istio是什么？] 还不知道你就out了,一文40分钟快速理解](https://cloud.tencent.com/developer/article/1986019)
 - [KubeCon 2021｜使用 eBPF 代替 iptables 优化服务网格数据面性能](https://www.cnblogs.com/tencent-cloud-native/p/15696518.html)
 - [Polaris Envoy 网格接入](https://polarismesh.cn/docs/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/k8s%E5%92%8C%E7%BD%91%E6%A0%BC%E4%BB%A3%E7%90%86/envoy%E7%BD%91%E6%A0%BC%E6%8E%A5%E5%85%A5/)
+
+**Jimmy Song 2022**
+
+- [为什么 Istio 要使用 SPIRE 做身份认证？](https://jimmysong.io/blog/why-istio-need-spire/)
+- [Istio 中的 Sidecar 注入、透明流量劫持及流量路由过程详解 By Jimmy Song 2022](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/)
+- [Istio 数据平面 Pod 启动过程详解 By Jimmy Song 2022](https://jimmysong.io/blog/istio-pod-process-lifecycle/)
+- [理解 Iptables](https://jimmysong.io/blog/understanding-iptables/)
+- [[译] 在 Istio 中引入 Wasm 意味着什么？](https://jimmysong.io/trans/importance-of-wasm-in-istio/)
+- [如何理解 Istio Ingress，它与 API Gateway 有什么区别？](https://jimmysong.io/blog/istio-servicemesh-api-gateway/)
+- [什么是 Istio？为什么 Kubernetes 需要 Istio？](https://jimmysong.io/blog/what-is-istio-and-why-does-kubernetes-need-it/)
