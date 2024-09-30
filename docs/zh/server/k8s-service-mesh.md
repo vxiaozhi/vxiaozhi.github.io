@@ -71,6 +71,12 @@ Service Mesh中分为控制平面和数据平面：
 
 ### 1. 客户端库模式
 
+这个阶段可以认为是 服务网格的雏形，出现了一些 胖客户端 的库，如：
+- twitter 开发的 [Finagle](https://github.com/twitter/finagle)
+- Netflix 开发的 [Hystrix](https://github.com/Netflix/Hystrix)
+- Google 的 [Stubby](https://github.com/Netflix/Hystrix)
+- Tencent 的 [Trpc](https://github.com/trpc-group/trpc-go) 
+
 ### 2. Ingress或边缘代理
 
 ### 3. 路由器网格
