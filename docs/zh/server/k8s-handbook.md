@@ -221,7 +221,7 @@ Istio 服务网格有两个部分：数据平面和控制平面。
 - [K8s 指南](https://kubernetes.feisky.xyz/)
 - [Kubernetes Handbook （Kubernetes指南）](https://github.com/feiskyer/kubernetes-handbook)
 - [Kubernetes 基础教程](https://jimmysong.io/book/kubernetes-handbook/)
-- [kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook)
+- [kubernetes-handbook 【Star 11K】](https://github.com/rootsongjc/kubernetes-handbook) 
 - [etcd-问题-调优-监控](https://github.com/yangpeng14/DevOps/blob/master/kubernetes/etcd-%E9%97%AE%E9%A2%98-%E8%B0%83%E4%BC%98-%E7%9B%91%E6%8E%A7.md)
 - [Istio](https://jimmysong.io/kubernetes-handbook/usecases/istio.html)
 - [Envoy](https://jimmysong.io/kubernetes-handbook/usecases/envoy.html)
