@@ -74,7 +74,7 @@ Service Mesh中分为控制平面和数据平面：
 这个阶段可以认为是 服务网格的雏形，出现了一些 胖客户端 的库，如：
 - twitter 开发的 [Finagle](https://github.com/twitter/finagle)
 - Netflix 开发的 [Hystrix](https://github.com/Netflix/Hystrix)
-- Google 的 [Stubby]([https://github.com/getdnsapi/stubby](https://www.iminho.me/wiki/docs/grpc-cloud-native-go-and-java/grpc-cloud-native-go-and-java-1f07n63dblm47))-gRPC的前身
+- Google 的 [Stubby]([https://github.com/getdnsapi/stubby](https://www.iminho.me/wiki/docs/grpc-cloud-native-go-and-java/grpc-cloud-native-go-and-java-1f07n63dblm47)-gRPC的前身
 - Tencent 的 [Trpc](https://github.com/trpc-group/trpc-go) 
 
 ### 2. Ingress或边缘代理
