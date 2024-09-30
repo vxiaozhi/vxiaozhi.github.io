@@ -216,6 +216,7 @@ Istio 服务网格有两个部分：数据平面和控制平面。
 
 - [The Kubernetes Book, 2021 Edition](https://github.com/rohitg00/DevOps_Books/blob/main/The%20Kubernetes%20Book%20(Nigel%20Poulton)%20(z-lib.org).pdf)
 - [The Kubernetes Book, 2024 Edition](https://github.com/vxiaozhi/DevOps_Books/blob/main/The.Kubernetes.Book.2024.Edition.pdf)
+- [CNCF大使宋净超：云原生专家背后的一万个小时](https://developer.aliyun.com/article/708593)
 - [Kubernetes 中文文档](https://kubernetes.io/zh-cn/docs/home/)
 - [Kubernetes 中文指南/云原生应用架构实践手册](https://hezhiqiang.gitbook.io/kubernetes-handbook)
 - [K8s 指南](https://kubernetes.feisky.xyz/)
