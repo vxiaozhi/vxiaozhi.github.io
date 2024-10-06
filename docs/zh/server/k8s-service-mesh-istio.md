@@ -551,6 +551,7 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [Istio流量管理实现机制深度解析](https://www.zhaohuabing.com/post/2018-09-25-istio-traffic-management-impl-intro/)
 - [Istio](https://jimmysong.io/kubernetes-handbook/usecases/istio.html)
 - [Envoy](https://jimmysong.io/kubernetes-handbook/usecases/envoy.html)
+- [Istio基础概念](https://github.com/chenzongshu/Kubernetes/blob/master/Istio/Istio%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.md)
 - [微服务架构下服务网格的出现带来了什么？](https://www.apiseven.com/blog/what-is-service-mesh)
 - [Kubernetes 上的服务网格技术大比较: Istio, Linkerd 和 Consul](https://cloud.tencent.com/developer/article/1628101)
 - [什么是服务网格](https://help.aliyun.com/zh/mesh/product-overview/what-is-service-mesh)
