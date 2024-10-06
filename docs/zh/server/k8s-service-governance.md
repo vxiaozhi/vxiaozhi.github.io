@@ -9,3 +9,7 @@
 
 Istio 相当于时网关/代理 模式。
 Polaris 则是旁路模式。
+
+## 参考
+
+- [万字长文分享腾讯云原生微服务治理实践及企业落地建议](https://mp.weixin.qq.com/s/BCK8WdzUVtJjfqLbAFJLMg)
