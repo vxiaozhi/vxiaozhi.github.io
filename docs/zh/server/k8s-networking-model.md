@@ -279,6 +279,8 @@ Ingress和Service通信 流程
 - [万字长文，带你搞懂 Kubernetes 网络模型](https://www.51cto.com/article/714336.html)
 - [揭秘 IPIP 隧道](https://morven.life/posts/networking-3-ipip/)
 - [Infra container 容器](https://jimmysong.io/book/kubernetes-handbook/objects/pause-container/)
+- [k8s那些事之万法之源Pod](https://github.com/chenzongshu/Kubernetes/blob/master/k8s%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/k8s%E9%82%A3%E4%BA%9B%E4%BA%8B%E4%B9%8B%E4%B8%87%E6%B3%95%E4%B9%8B%E6%BA%90Pod.md)
+- [k8s那些事之容器网络](https://github.com/chenzongshu/Kubernetes/blob/master/k8s%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/k8s%E9%82%A3%E4%BA%9B%E4%BA%8B%E4%B9%8B%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C.md)
 
 **分享**
 
