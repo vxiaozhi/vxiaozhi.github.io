@@ -501,8 +501,35 @@ Chain ISTIO_REDIRECT (2 references)
 
 ![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/envoy-sidecar-traffic-interception-20181227.png)
 
+## 4. 性能
 
-## 4. 总结
+Istio-1.18 数据平面性能
+
+**CPU 和内存**
+
+- 代理每秒每 1000 个请求消耗大约 0.5 个 vCPU。
+- 代理的内存消耗取决于代理保存的总配置状态。大量的侦听器、集群和路由会增加内存使用量。在启用命名空间隔离的大型命名空间中，代理消耗大约 50 MB 内存。
+- 由于代理通常不会缓冲通过的数据，因此请求速率不会影响内存消耗。
+
+**延迟**
+
+由于 Istio 在数据路径上注入了 sidecar 代理，因此延迟是一个重要的考虑因素。Istio 添加的每个功能也会增加代理内部的路径长度，并可能影响延迟。
+
+Envoy 代理在响应发送到客户端后收集原始遥测数据。收集请求的原始遥测数据所花费的时间不会影响完成该请求所需的总时间。但是，由于 worker 正忙于处理请求，因此 worker 不会立即开始处理下一个请求。此过程会增加下一个请求的队列等待时间，并影响平均延迟和尾部延迟。实际尾部延迟取决于流量模式。
+
+**延迟**
+
+- 使用 http/1.1 协议，使用 16 个客户端连接、2 个代理工作线程并启用了相互 TLS，负载为 1 kB，每秒 1000 个请求。
+- 第 90 个百分位延迟和第 99 个百分位数延迟分别比基准数据平面延迟增加了约 1.7 毫秒和 2.7 毫秒。
+
+
+
+参考
+
+- [最佳实践：Service Mesh Istio 1.2 基准性能测试](https://istio.io/latest/zh/blog/2019/performance-best-practices/)
+- [Istio 1.18 性能测试结果](https://cloudnative.to/blog/performance-and-scalability/)
+
+## 5. 总结
 
 **用还是不用**
 
@@ -538,7 +565,7 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 | 安全模型    | 通过边缘、防火墙可信内部网络的方式控制安全 | 所有的服务都需要认证和鉴权、服务间要加密、zero-trust安全观念 |
 
 
-## 5. 参考
+## 参考
 
 - [服务网格（Service Mesh ）](https://jimmysong.io/kubernetes-handbook/usecases/service-mesh.html)
 - [揭开服务网格～Istio Service Mesh神秘的面纱](https://www.cnblogs.com/ZhuChangwu/p/16464316.html)
