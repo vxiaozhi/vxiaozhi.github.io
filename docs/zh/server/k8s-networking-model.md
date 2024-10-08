@@ -286,3 +286,4 @@ Ingress和Service通信 流程
 
 - [k8s 主流网络方案（OVS、Flannel、Calico）及原理](https://www.youtube.com/watch?v=cyKUaT0SEtU)
 - [技术分享：Kubernetes Networking Model （赵锟）](https://www.youtube.com/watch?v=HxS4s11rmyA)
+- [深入理解Kubernetes网络](https://www.bilibili.com/video/BV1Ft4y117Ch/?spm_id_from=333.337.search-card.all.click&vd_source=a9df3242be9eb413a269ab45ec32652e)
