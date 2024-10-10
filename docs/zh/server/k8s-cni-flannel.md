@@ -93,6 +93,7 @@ Flannel实质上是一种“覆盖网络(overlaynetwork)”，也就是将TCP数
 - [flannel 网络架构](https://ggaaooppeenngg.github.io/zh-CN/2017/09/21/flannel-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/)
 - [理解flannel的三种容器网络方案原理](https://www.zhengwenfeng.com/pages/d9d0ce/)
 - [kubernetes Flannel网络剖析](https://plantegg.github.io/2022/01/19/kubernetes_Flannel%E7%BD%91%E7%BB%9C%E5%89%96%E6%9E%90/)
+- [一文看懂Flannel-UDP在kubernetes中如何工作](https://cloud.tencent.com/developer/article/1793755)
 - [Linux 下 VxLAN 实践](https://github.com/xujiyou/blog-data/blob/master/Linux/%E7%BD%91%E7%BB%9C/Linux%E4%B8%8BVxLAN%E5%AE%9E%E8%B7%B5.md)
 - [Linux虚拟网络设备之Bridge](https://github.com/xujiyou/blog-data/blob/master/Linux/%E7%BD%91%E7%BB%9C/Linux%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B9%8BBridge.md)
 - [Linux 虚拟网络设备 veth-pair 详解，看这一篇就够了](https://www.cnblogs.com/bakari/p/10613710.html)
