@@ -9,6 +9,18 @@
 - TUN 与 TAP 的关系，就类似于 socket 和 raw socket.
 - TUN/TAP 应用最多的场景是 VPN 代理，比如:clash、tun2socks。
 
+## ipip
+
+即 IPv4 in IPv4，在 IPv4 报文的基础上再封装一个 IPv4 报文。
+
+Linux 原生支持多种三层隧道，其底层实现原理都是基于 tun 设备。我们可以通过命令` ip tunnel help 查看 IP` 隧道的相关操作。 Linux 原生一共支持 5 种 IP 隧道。
+
+- ipip：即 IPv4 in IPv4，在 IPv4 报文的基础上再封装一个 IPv4 报文。
+- gre：即通用路由封装（Generic Routing Encapsulation），定义了在任意一种网络层协议上封装其他任意一种网络层协议的机制，IPv4 和 IPv6 都适用。
+- sit：和 ipip 类似，不同的是 sit 是用 IPv4 报文封装 IPv6 报文，即 IPv6 over IPv4。
+- isatap：即站内自动隧道寻址协议（Intra-Site Automatic Tunnel Addressing Protocol），和 sit 类似，也是用于 IPv6 的隧道封装。
+- vti：即虚拟隧道接口（Virtual Tunnel Interface），是 cisco 提出的一种 IPsec 隧道技术。
+
 ## veth 
 
 -  虚拟网络接口，它和 TUN/TAP 或者其他物理网络接口一样，也都能配置 mac/ip 地址（但是并不是一定得配 mac/ip 地址）。
@@ -71,7 +83,12 @@
 - 目前所有 overlay 的跨主机容器网络方案，几乎都是基于 vxlan 实现的（例外：cilium 也支持 geneve）。
 - 单机的容器网络，通常不需要用到 vxlan，而跨主机容器网络方案如 flannel/calico/cilium 基本都会采用 vxlan(overlay) 及 BGP(underlay)实现。
 
+
 ## 参考
 
 - [Linux 中的虚拟网络接口](https://thiscute.world/posts/linux-virtual-network-interfaces/)
 - [linux 上实现 vxlan 网络](https://cizixs.com/2017/09/28/linux-vxlan/)
+- [什么是 IP 隧道，Linux 怎么实现隧道通信？](https://www.cnblogs.com/bakari/p/10564347.html)
+- [理解Linux IPIP隧道](https://cloud.tencent.com/developer/article/2350062)
+- [Linux ipip隧道技术测试二，模拟calico网络（三主机、单网卡、多namespace）](http://www.asznl.com/post/83)
+  
