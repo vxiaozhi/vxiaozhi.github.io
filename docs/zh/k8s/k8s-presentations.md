@@ -10,6 +10,7 @@
 - [K8s Introduction](https://drive.google.com/file/d/1p65kmMRyDL4_r2MWSJLTMAZyMnHEZUXt/view?pli=1)
 - [Deep dive into Kubernetes Networking](https://www.slideshare.net/slideshow/deep-dive-into-kubernetes-networking-108505405/108505405#1)
 - [Kubernetes Networking 101](https://www.slideshare.net/slideshow/kubernetes-networking-78049891/78049891#1)
+- [Kubernetes 101/201 ](https://itdks.su.bcebos.com/03ede220525049a7aea7ad4966c21387.pdf)
 
 ## 分享视频
 
