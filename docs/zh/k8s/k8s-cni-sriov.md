@@ -21,6 +21,14 @@ SR-IOV主要用于虚拟化中，当然也可以用于容器。
 
 目前使用 sriov 的方式比较复杂繁琐，需要管理员完全手动配置，如手动确认网卡是否支持 SRIOV、配置 PF 和 VF 等，参考 sriov。社区开源[Sriov-network-operator](https://github.com/k8snetworkplumbingwg/sriov-network-operator) ， 旨在降低使用 sriov-cni 的难度。sriov-operator 整合 sriov-cni 和 sriov-device-plugin 两个项目， 完全使用 CRD 的方式统一使用和配置 sriov，包括组件本身和节点上的必要配置，极大地降低了使用难度。
 
+**sriov-network-device-plugin**
+
+sriov-cni通常以附加网络形式使用，需要使用multus这类CNI，与flannel结合使用。以multus为例，通常由三个组件组成：
+
+- [Multus-CNI ](https://github.com/k8snetworkplumbingwg/multus-cni) 是为POD提供多网卡的能力，其采用CRD方式添加附加网卡到POD中，并为网卡分配IP，具有IPAM功能。华为的cni-genie、tkestack的galaxy都与此类似
+- [sriov-cni](https://github.com/k8snetworkplumbingwg/sriov-cni)  为POD提供sriov功能
+- [sriov-network-device-plugin](https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin) 为sriov提供设备功能，将vf抽象为资源，管理vf的分配、释放等功能
+
 
 ## SR-IOV CNI 配置
 
@@ -158,3 +166,4 @@ Allocatable:
 
 - [SR-IOV](https://kubernetes.feisky.xyz/extension/network/sriov)
 - [SR-IOV CNI 配置](https://docs.daocloud.io/network/modules/multus-underlay/sriov/)
+- [玩转sriov-network-device-plugin](https://rexrock.github.io/post/k8s-net-sriov/)
