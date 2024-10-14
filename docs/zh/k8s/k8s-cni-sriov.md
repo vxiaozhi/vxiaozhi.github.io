@@ -11,16 +11,144 @@ SR-IOV主要用于虚拟化中，当然也可以用于容器。
 [sriov-cni](https://github.com/hustcat/sriov-cni)最初是由Tencent IEG开源的，被CNI社区接纳后， Intel [fork](https://github.com/k8snetworkplumbingwg/sriov-cni)了项目后，并对其进行了扩展，增加了更多的网卡支持、VF的自动分配管理、支持DPDK等。
 
 
-## 优点
+**Sriov-network-operator**
+
+目前使用 sriov 的方式比较复杂繁琐，需要管理员完全手动配置，如手动确认网卡是否支持 SRIOV、配置 PF 和 VF 等，参考 sriov。社区开源[Sriov-network-operator](https://github.com/k8snetworkplumbingwg/sriov-network-operator) ， 旨在降低使用 sriov-cni 的难度。sriov-operator 整合 sriov-cni 和 sriov-device-plugin 两个项目， 完全使用 CRD 的方式统一使用和配置 sriov，包括组件本身和节点上的必要配置，极大地降低了使用难度。
+
+
+## SR-IOV CNI 配置
+
+### 1. 环境要求
+
+使用 SR-IOV CNI 需要先确认节点是否为物理主机并且节点拥有支持 SR-IOV 的物理网卡。 如果节点为 VM 虚拟机或者没有支持 SR-IOV 的网卡，那么 SR-IOV 将无法工作。 可通过下面的方式检查节点是否存在支持 SR-IOV 功能的网卡。
+
+检查是否支持 SR-IOV
+
+通过 ip link show 获取所有网卡：
+
+```
+root@172-17-8-120:~# ip link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether b8:ca:3a:67:e5:fc brd ff:ff:ff:ff:ff:ff
+    altname enp1s0f0
+3: eno2: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN mode DEFAULT group default qlen 1000
+    link/ether b8:ca:3a:67:e5:fd brd ff:ff:ff:ff:ff:ff
+    altname enp1s0f1
+4: eno3: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN mode DEFAULT group default qlen 1000
+    link/ether b8:ca:3a:67:e5:fe brd ff:ff:ff:ff:ff:ff
+    altname enp1s0f2
+5: eno4: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN mode DEFAULT group default qlen 1000
+    link/ether b8:ca:3a:67:e5:ff brd ff:ff:ff:ff:ff:ff
+    altname enp1s0f3
+6: enp4s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 04:3f:72:d0:d2:86 brd ff:ff:ff:ff:ff:ff
+7: enp4s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 04:3f:72:d0:d2:87 brd ff:ff:ff:ff:ff:ff
+8: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN mode DEFAULT group default
+    link/ether 02:42:60:cb:04:10 brd ff:ff:ff:ff:ff:ff
+```
+
+过滤常见的虚拟网卡（如 docker0、cali*、vlan 子接口等），以 enp4s0f0np0 为例，确认其是否支持 SR-IOV：
+
+```
+root@172-17-8-120:~# ethtool -i enp4s0f0np0
+driver: mlx5_core    # 网卡驱动
+version: 5.15.0-52-generic
+firmware-version: 16.27.6008 (LNV0000000033)
+expansion-rom-version:
+bus-info: 0000:04:00.0  # PCI 设备号
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: no
+supports-register-dump: no
+supports-priv-flags: yes
+```
+
+通过 bus-info 查询其 PCI 设备详细信息：
+
+```
+root@172-17-8-120:~# lspci -s 0000:04:00.0 -v | grep SR-IOV
+    Capabilities: [180] Single Root I/O Virtualization (SR-IOV)
+```
+
+如果输出有上面此行，说明此网卡支持 SR-IOV。获取此网卡的 vendor 和 device：
+
+```
+root@172-17-8-120:~# lspci -s 0000:04:00.0 -n
+04:00.0 0200: 15b3:1017
+```
+
+其中，
+
+- 15b3：表示此 PCI 设备的厂商号，如 15b3 表示 Mellanox
+- 1017：表示此 PCI 设备的设备型号，如 1017 表示 Mellanox MT27800 Family [ConnectX-5] 系列网卡
+
+> 可通过 https://devicehunt.com/all-pci-vendors 查询所有 PCI 设备信息。
+
+### 2. 配置 VF（虚拟功能）¶
+
+通过下面的方式为支持 SR-IOV 的网卡配置 VF：
+
+```
+root@172-17-8-120:~# echo 8 > /sys/class/net/enp4s0f0np0/device/sriov_numvfs
+```
+
+确认 VF 配置成功：
+
+```
+root@172-17-8-120:~# cat /sys/class/net/enp4s0f0np0/device/sriov_numvfs
+8
+root@172-17-8-120:~# ip l show enp4s0f0np0
+6: enp4s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 04:3f:72:d0:d2:86 brd ff:ff:ff:ff:ff:ff
+    vf 0     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 1     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 2     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 3     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 4     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 5     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 6     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+    vf 7     link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+```
+
+输出上图内容，表示配置成功。
+
+### 3. 安装 SR-IOV CNI¶
+
+通过安装 Multus-underlay 来安装 SR-IOV CNI，具体安装流程参考[安装](https://docs.daocloud.io/network/modules/multus-underlay/install/)。 注意, 安装时需正确配置 sriov-device-plugin resource 资源，包括 vendor、device 等信息。 否则 SRIOV-Device-Plugin 无法找到正确的 VF。
+
+### 4. 配置 SRIOV-Device-Plugin¶
+安装完 SR-IOV CNI 之后，通过下面的方式查看 SR-IOV CNI 是否发现了主机上的 VF：
+
+```
+root@172-17-8-110:~# kubectl describe nodes 172-17-8-110
+...
+Allocatable:
+  cpu:                           24
+  ephemeral-storage:             881675818368
+  hugepages-1Gi:                 0
+  hugepages-2Mi:                 0
+  intel.com/sriov-netdevice:     8      # 此行表示 SR-IOV CNI 成功的发现了该主机上的 VFs 
+  memory:                        16250260Ki
+  pods:                          110
+```
+
+## 优缺点
+
+**优点**
 
 - 性能好
 - 不占用计算资源
 
-## 缺点
+**缺点**
 
 - VF数量有限
 - 硬件绑定，不支持容器迁移
+- 环境要求高：使用 SR-IOV CNI 需要先确认节点是否为物理主机并且节点拥有支持 SR-IOV 的物理网卡。 如果节点为 VM 虚拟机或者没有支持 SR-IOV 的网卡，那么 SR-IOV 将无法工作。 
 
 ## 简介
 
 - [SR-IOV](https://kubernetes.feisky.xyz/extension/network/sriov)
+- [SR-IOV CNI 配置](https://docs.daocloud.io/network/modules/multus-underlay/sriov/)
