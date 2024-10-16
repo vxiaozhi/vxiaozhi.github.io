@@ -14,6 +14,18 @@
 - [阿里云 Terway CNI Network Plugin](https://github.com/AliyunContainerService/terway)
 
 
+## CNI 性能
+
+ITNEXT 网站对不同插件的测评
+
+- [Benchmark results of Kubernetes network plugins (CNI) over 10Gbit/s network (Updated: August 2020)](https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-august-2020-6e1b757b9e49)
+- [Benchmark results of Kubernetes network plugins (CNI) over 40Gbit/s network [2024]](https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-40gbit-s-network-2024-156f085a5e4e#89d8-90c23c8caeb4-reply)
+
+作者给的建议是：
+
+- 小规模集群： 推荐使用 Kube-router（发展迅速）！轻量级、高效，支持广泛的架构（amd64、arm64、riscv64等），如果追求稳定、省事，考虑Flannel或Canal作为替代方案。
+- 标准集群： Cilium是首选，其次是Calico或Antrea。（可观测性、故障排除和配置的CLI、基于eBPF的kube-proxy替代方案、文档全面）。
+- 高性能集群：Calico 或 Calico VPP。（高性能/流量加密）。
 
 
 
