@@ -153,9 +153,14 @@ options ndots:5
 dig +trace baidu.com  # 诊断 dns 的主要工具，非常强大
 host -a baidu.com  # host 基本就是 dig 的弱化版，不过 host 有个有点就是能打印出它测试过的所有 FQDN
 
-
 nslookup baidu.com # 和 host 没啥大差别，多个交互式查询不过一般用不到
-whois baidu.com # 查询域名注册信息，内网诊断用不到
+
+# 查询 SRV 记录
+nslookup -type=SRV _my-port-name._my-port-protocol.my-svc.{my-namespace}.svc.{cluster-domain}
+
+# 查询域名注册信息，内网诊断用不到
+whois baidu.com
+
 ```
 
 详细的使用请` man dig`。
