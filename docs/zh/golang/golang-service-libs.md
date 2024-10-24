@@ -4,3 +4,8 @@
 - [trpc-go](https://github.com/trpc-group/trpc-go)
 - [gin](https://github.com/gin-gonic/gin)
 - [Beego ](https://github.com/beego/beego)
+- [gRPC-Gateway gRPC to JSON proxy generator following the gRPC HTTP spec](https://github.com/grpc-ecosystem/grpc-gateway)
+
+## 参考
+
+- [gRPC-Gateway使用指南](https://www.liwenzhou.com/posts/Go/grpc-gateway/)
