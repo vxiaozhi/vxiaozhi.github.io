@@ -20,6 +20,7 @@ Apache Traffic Server（ATS或TS）是一个高性能的、模块化的HTTP代�
 ## Squid
 
 - [Squid Web Proxy Cache](https://github.com/squid-cache/squid)
+- 注意： github上并没有提供代码的发行版本，直接编译会失败。需要到其[官网](https://www.squid-cache.org/Versions/v6/)下载代码编译。
 
 Squid：是一个高性能的代理缓存服务器，Squid 支持 FTP、gopher、HTTPS 和 HTTP协议。和一般的代理缓存软件不同，Squid用一个单独的、非模块化的、I/O驱动的进程来处理所有的客户端请求，作为应用层的代理服务软件，Squid 主要提供缓存加速、应用层过滤控制的功能。
 
