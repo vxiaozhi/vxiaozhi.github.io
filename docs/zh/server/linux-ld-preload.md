@@ -25,6 +25,9 @@ LD_PRELOAD > LD_LIBRARY_PATH > /etc/ld.so.cache > /lib > /usr/lib
 需要注意的是，使用LD_PRELOAD需要注意一些安全和兼容性问题。为了避免程序崩溃或产生意外的行为，替换的函数必须与被替换的函数具有相同的函数原型和行为。在使用LD_PRELOAD时需要注意共享库与程序之间的交互，避免产生意外的结果。
 
 
+## 其它类似技术
+
+- [PLTHook](https://github.com/kubo/plthook) 这个库提供了类似的函数替换功能，但使用的是 Procedure Linkage Table 技术。
 
 ## 应用场景
 
