@@ -19,6 +19,23 @@
 - 计算出测试未覆盖的代码的所有行号
 - 对比计算增量代码被测试覆盖的比例，得出增量覆盖率
 
+## 跨版本合并
+
+跨版本，代码合并的流程大致如下：
+
+```
+# Pathnames in the diff file need to be absolute (note
+# to self: document)
+diff -u $(PWD)/hello_old.c $(PWD)/hello_new.c > difffile
+
+# Without --convert-filenames, the data from RUN1 will
+# still be associated with hello_old.c
+lcov --diff RUN1.INFO difffile --convert-filenames -o RUN1_CONVERTED.INFO
+
+# Add data from both runs
+lcov -a RUN1_CONVERTED.INFO -a RUN2.INFO -o RUN_ALL.INFO
+```
+
 **参考**
 
 - [如何计算增量测试覆盖率](https://juejin.cn/post/6850418111573655565)
