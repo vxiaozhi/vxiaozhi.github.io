@@ -91,7 +91,16 @@ Istio中的各个组件和一些关键信息请参考下面的mindmap。
 
 ### Istio 架构
 
-下面是Istio的架构图。
+Istio 支持两种主要的数据平面模式：
+
+- Sidecar 模式，它会与您在集群中启动的每个 Pod 一起部署一个 Envoy 代理，或者与在虚拟机上运行的服务一同运行。
+- Ambient 模式，使用每个节点的四层代理，并且可选地使用每个命名空间的 Envoy 代理来实现七层功能。
+
+备注： 2022年开始， Istio新增了Ambient模式（目前处于Beta版），旨在解决Sidecar模式的缺点，具体参考： [Istio / Sidecar 还是 Ambient？](https://istio.io/latest/zh/docs/overview/dataplane-modes/) 
+
+下文均以Sidercar模式进行介绍。
+
+下面是Istio的架构图(Sidercar模式)。
 
 ![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/istio-arch.avif)
 
@@ -101,21 +110,23 @@ Istio架构分为控制平面和数据平面。
 
 - 控制平面：负责管理和配置代理路由流量，以及在运行时执行的政策。
 
-一些组件说明：
+**控制面：**
 
-- **Envoy**
-Istio使用Envoy代理的扩展版本，该代理是以C++开发的高性能代理，用于调解service mesh中所有服务的所有入站和出站流量。 Istio利用了Envoy的许多内置功能，例如动态服务发现，负载平衡，TLS终止，HTTP/2＆gRPC代理，断路器，运行状况检查，基于百分比的流量拆分分阶段上线，故障注入和丰富指标。
+Mixer组件：
+-  独立于平台，负责在服务网格上执行访问控制和使用策略，并从 Envoy 代理和其他服务收集遥测数据，代理提取请求级属性，发送到 Mixer 进行评估。
+-  Mixer 中包括一个灵活的插件模型，使其能够接入到各种主机环境和基础设施后端。
 
-Envoy在kubernetes中作为pod的sidecar来部署。 这允许Istio将大量关于流量行为的信号作为属性提取出来，这些属性又可以在Mixer中用于执行策略决策，并发送给监控系统以提供有关整个mesh的行为的信息。 Sidecar代理模型还允许你将Istio功能添加到现有部署中，无需重新构建或重写代码。
+Pilot组件：
+- 为 Envoy Sidecar 提供服务发现功能，为智能路由（例如 A/B 测试、金丝雀部署等）和弹性（超时、重试、熔断器等）提供流量管理功能。
+- 将控制流量行为的高级路由规则转换为特定于 Envoy 的配置，并同步到Envoy。
 
-- **Mixer**
-Mixer负责在service mesh上执行访问控制和使用策略，并收集Envoy代理和其他服务的遥测数据。代理提取请求级属性，发送到mixer进行评估。有关此属性提取和策略评估的更多信息，请参见Mixer配置。 混音器包括一个灵活的插件模型，使其能够与各种主机环境和基础架构后端进行接口，从这些细节中抽象出Envoy代理和Istio管理的服务。
+Istio新版本中 Mixer 已被WebAssembly 替代，参考：https://istio.io/latest/zh/docs/concepts/wasm/ 
 
-- **Istio Manager**
-Istio-Manager用作用户和Istio之间的接口，收集和验证配置，并将其传播到各种Istio组件。它从Mixer和Envoy中抽取环境特定的实现细节，为他们提供独立于底层平台的用户服务的抽象表示。 此外，流量管理规则（即通用4层规则和七层HTTP/gRPC路由规则）可以在运行时通过Istio-Manager进行编程。
+**数据面：**
 
-- **Istio-auth**
-Istio-Auth提供强大的服务间和最终用户认证，使用相互TLS，内置身份和凭据管理。它可用于升级service mesh中的未加密流量，并为运营商提供基于服务身份而不是网络控制的策略的能力。 Istio的未来版本将增加细粒度的访问控制和审计，以使用各种访问控制机制（包括属性和基于角色的访问控制以及授权hook）来控制和监控访问你服务、API或资源的人员。
+Envoy代理 :  C++开发的高性能代理服务，用于调解service mesh中所有服务的所有入站和出站流量。 Istio利用了Envoy的许多内置功能，例如动态服务发现，负载平衡，TLS终止，HTTP/2＆gRPC代理，断路器，运行状况检查，基于百分比的流量拆分分阶段上线，故障注入和丰富指标。Envoy在kubernetes中作为pod的sidecar来部署。 这允许Istio将大量关于流量行为的信号作为属性提取出来，这些属性又可以在Mixer中用于执行策略决策，并发送给监控系统以提供有关整个mesh的行为的信息。 Sidecar代理模型还允许你将Istio功能添加到现有部署中，无需重新构建或重写代码。
+
+
 
 ### 3.1. 应用示例 Bookinfo Sample
 
@@ -501,7 +512,12 @@ Chain ISTIO_REDIRECT (2 references)
 
 ![](https://wmxiaozhi.github.io/picx-images-hosting/picx-imgs/k8s-net/envoy-sidecar-traffic-interception-20181227.png)
 
-## 4. 性能
+## 4. 插件
+
+- [[译] 使用 WebAssembly 验证请求负载](https://jimmysong.io/trans/validating-a-request-payload-with-wasm/)
+
+
+## 5. 性能
 
 Istio-1.18 数据平面性能
 
@@ -523,7 +539,7 @@ Istio-1.18 数据平面性能
 - [最佳实践：Service Mesh Istio 1.2 基准性能测试](https://istio.io/latest/zh/blog/2019/performance-best-practices/)
 - [Istio 1.18 性能测试结果](https://cloudnative.to/blog/performance-and-scalability/)
 
-## 5. 总结
+## 6. 总结
 
 **用还是不用**
 
@@ -587,6 +603,7 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 
 **Jimmy Song 2022**
 
+- [什么是 Istio?](https://jimmysong.io/book/kubernetes-handbook/service-mesh/what-is-istio/)
 - [为什么 Istio 要使用 SPIRE 做身份认证？](https://jimmysong.io/blog/why-istio-need-spire/)
 - [Istio 中的 Sidecar 注入、透明流量劫持及流量路由过程详解 By Jimmy Song 2022](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/)
 - [Istio 数据平面 Pod 启动过程详解 By Jimmy Song 2022](https://jimmysong.io/blog/istio-pod-process-lifecycle/)
@@ -594,3 +611,4 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [[译] 在 Istio 中引入 Wasm 意味着什么？](https://jimmysong.io/trans/importance-of-wasm-in-istio/)
 - [如何理解 Istio Ingress，它与 API Gateway 有什么区别？](https://jimmysong.io/blog/istio-servicemesh-api-gateway/)
 - [什么是 Istio？为什么 Kubernetes 需要 Istio？](https://jimmysong.io/blog/what-is-istio-and-why-does-kubernetes-need-it/)
+
