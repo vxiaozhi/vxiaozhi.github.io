@@ -607,8 +607,12 @@ Service Mesh还有一些遗留的问题没有解决或者说比较薄弱的功�
 - [为什么 Istio 要使用 SPIRE 做身份认证？](https://jimmysong.io/blog/why-istio-need-spire/)
 - [Istio 中的 Sidecar 注入、透明流量劫持及流量路由过程详解 By Jimmy Song 2022](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/)
 - [Istio 数据平面 Pod 启动过程详解 By Jimmy Song 2022](https://jimmysong.io/blog/istio-pod-process-lifecycle/)
-- [理解 Iptables](https://jimmysong.io/blog/understanding-iptables/)
 - [[译] 在 Istio 中引入 Wasm 意味着什么？](https://jimmysong.io/trans/importance-of-wasm-in-istio/)
 - [如何理解 Istio Ingress，它与 API Gateway 有什么区别？](https://jimmysong.io/blog/istio-servicemesh-api-gateway/)
 - [什么是 Istio？为什么 Kubernetes 需要 Istio？](https://jimmysong.io/blog/what-is-istio-and-why-does-kubernetes-need-it/)
+
+**Iptables**
+
+- [iptables详解](https://lixiangyun.gitbook.io/iptables_doc_zh_cn)
+- [理解 Iptables](https://jimmysong.io/blog/understanding-iptables/)
 
