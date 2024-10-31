@@ -23,7 +23,11 @@
 
 ### 5. HCL
 
-- [HCL](https://github.com/hashicorp/hcl) 
+- [HCL](https://github.com/hashicorp/hcl)
+
+### 其它库
+
+- [Viper](https://github.com/spf13/viper) Viper是一个完全配置解析库，可以支持上面所有类型的配置文件的解析。
 
 ## 最佳实践
 
