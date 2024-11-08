@@ -24,6 +24,13 @@
 **golang + Vue**
 
 - [迷你网址导航NavSite (mini navigate site)](https://github.com/cifaz/nav-site) 后端：golang + gin
+- [Navigation-Web](https://github.com/tanghancheng/Navigation-Web) 后端：golang + gin
+
+**golang + template**
+
+- [lczero-server](https://github.com/LeelaChessZero/lczero-server)
+- [Golang+gin+vue+MySQL 实现的blog网站](https://github.com/izghua/go-blog)
+- [a fast blog system in golang](https://github.com/eiblog/eiblog) gin 
 
 **Python+Django+Vue**
 
