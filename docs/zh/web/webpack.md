@@ -1,0 +1,13 @@
+# Webpack 教程
+
+关于Webpack 的教程，最有名的莫过于 阮一峰在github上关于 Webpack 示例集合了。仓库为：
+
+- [webpack-demos](https://github.com/ruanyf/webpack-demos)
+
+为全英文版本， 也有人将这个翻译成了中文版本：
+
+- [webpack-demos-cn](https://github.com/userkang/webpack-demos-cn)
+
+同时，在csdn 博客园、掘金上也有大量对改仓库的介绍。如 博客园上：
+
+- [阮一峰 Webpack 教程 ](https://www.cnblogs.com/luckyting/articles/11278171.html)
