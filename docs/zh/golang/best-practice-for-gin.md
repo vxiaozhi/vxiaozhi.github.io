@@ -7,15 +7,20 @@
 
 ## 脚手架项目 
 
+github上有这么些 stars 数排名较高的：
+
 - [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) Vite+Vue3+Gin拥有AI辅助的基础开发平台，支持TS和JS混用。它集成了JWT鉴权、权限管理、动态路由、casbin鉴权、显隐可控组件、分页封装、多点登录拦截、资源权限、上传下载、代码生成器、表单生成器和可配置的导入导出等开发必备功能。
 
-- [go-gin-api](https://github.com/xinliangnote/go-gin-api) 基于 Gin 进行模块化设计的 API 框架，封装了常用功能，使用简单，致力于进行快速的业务研发。比如，支持 cors 跨域、jwt 签名验证、zap 日志收集、panic 异常捕获、trace 链路追踪、prometheus 监控指标、swagger 文档生成、viper 配置文件解析、gorm 数据库组件、gormgen 代码生成工具、graphql 查询语言、errno 统一定义错误码、gRPC 的使用、cron 定时任务 等等。
+- [go-gin-api](https://github.com/xinliangnote/go-gin-api) 基于 Gin 进行模块化设计的 API 框架，封装了常用功能，使用简单，致力于进行快速的业务研发。比如，支持 cors 跨域、jwt 签名验证、zap 日志收集、panic 异常捕获、trace 链路追踪、prometheus 监控指标、swagger 文档生成、viper 配置文件解析、gorm 数据库组件、gormgen 代码生成工具、graphql 查询语言、errno 统一定义错误码、gRPC 的使用、cron 定时任务 等等。【集成前端，采用bootstrap+template实现，并且 embed.FS 嵌入到一个可执行文件中。】
 
 - [Go Gin Web Server](https://github.com/render-examples/go-gin-web-server)
 
-- [gin-boilerplate](https://github.com/Massad/gin-boilerplate) The fastest way to deploy a restful api's with Gin Framework with a structured project that defaults to PostgreSQL database and JWT authentication middleware stored in Redis
+- [gin-boilerplate](https://github.com/Massad/gin-boilerplate) The fastest way to deploy a restful api's with Gin Framework with a structured project that defaults to PostgreSQL database and JWT authentication middleware stored in Redis 【实现的一般，没有支持log，没有按照cmd、pkg、标准目录结构。】
 
-- [Gin-Admin](https://github.com/LyricTian/gin-admin) 基于 GIN + GORM 2.0 + Casbin 2.0 + Wire DI 的轻量级、灵活、优雅且功能齐全的 RBAC 脚手架。
+- [Gin-Admin](https://github.com/LyricTian/gin-admin) 基于 GIN + GORM 2.0 + Casbin 2.0 + Wire DI 的轻量级、灵活、优雅且功能齐全的 RBAC 脚手架。【代码可读性好，生态丰富】
+
+其中 gin-vue-admin go-gin-api 的stars数最多，但是商业化严重。
+最终考虑使用 Gin-Admin
 
 ## 中间件
 
