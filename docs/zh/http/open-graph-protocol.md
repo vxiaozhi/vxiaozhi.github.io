@@ -1,4 +1,4 @@
-# 
+# Open Graph Protocol（开放图谱协议）
 
 Open Graph Protocol（开放图谱协议），简称 OG 协议。它是 Facebook 在 2010 年 F8 开发者大会公布的一种网页元信息（Meta Information）标记协议，属于 Meta Tag （Meta 标签）的范畴，是一种为社交分享而生的 Meta 标签，用于标准化网页中元数据的使用，使得社交媒体得以以丰富的“图形”对象来表示共享的页面内容。它允许在 Facebook 上，其他网站能像 Facebook 内容一样具有丰富的“图形”对象，进而促进 Facebook 和其他网站之间的集成。
 
