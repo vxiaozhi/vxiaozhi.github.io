@@ -12,6 +12,7 @@
 **Vue**
 
 - [naviii 一个简单优雅的导航页](https://github.com/eehhh/naviii) 个人设置存储于本地
+- [Dashy](https://github.com/lissy93/dashy) Github 18K. 支持可视化编辑。
 
 **angular**
 
@@ -55,14 +56,28 @@
 
 **html**
 
-- [Tilde: Tilde is a minimal browser homepage for pro web surfers.](https://github.com/xvvvyz/tilde)
+- [Tilde: Tilde is a minimal browser homepage for pro web surfers.](https://github.com/xvvvyz/tilde) 极大提升搜索效率。
 - [Pintree](https://github.com/Pintree-io/pintree) Chrome扩展导出收藏夹
 - [Webstack网址导航](https://github.com/WebStackPage/WebStackPage.github.io) 中英文 + 丰富生态(Hugo主题，各种语言后端)
-- [网址导航（静态页面通用模板）](https://github.com/geneasy/nav) Handlebars 模板语言
+- [Webstack网址导航 Hugo版本](https://github.com/shenweiyan/WebStack-Hugo) 导航支持yaml配置。
+- [网址导航（静态页面通用模板）](https://github.com/geneasy/nav) Handlebars 模板语言, 页面效果与 “Webstack网址导航” 类似。
+- [极速页导航-无服务版本](https://github.com/iuv/jisuye) 支持编辑
+- [Homer](https://github.com/bastienwirtz/homer) Github 9.3K . Vue 纯静态页面导航系统。支持搜索。
+- [static-nav](https://github.com/haixuxu/static-nav) 只言片语 -- 静态导航主页, 集成baidu/google 等搜索引擎
+
+
 - [蜗牛个人导航](https://github.com/eallion/favorite)
 - [一个导航](https://github.com/HoYuenhang/aNavigation) bootstrap
 - [MyNav 我的导航](https://github.com/j67678/MyNav) 仿Windows 10
 
+
+## 业内产品
+
+- [about.me](https://about.me/)
+- [linktree](https://linktr.ee/)
+- [google sites](https://sites.google.com/)
+
 ## 参考
 
 - [Awesome Navigation](https://github.com/eryajf/awesome-navigation)
+- [v2ex 能否分享一下你的个人导航/信息展示的纯静态网页？非 Blog](https://v2ex.com/t/927686)
