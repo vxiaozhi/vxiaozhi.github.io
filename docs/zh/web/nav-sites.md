@@ -39,7 +39,7 @@
 
 **Java + Vue**
 
-- [team-nav 网站导航服务](https://github.com/tuituidan/team-nav)
+- [team-nav 网站导航服务](https://github.com/tuituidan/team-nav) 前端 + 后端，后端功能完善。
 
 **jekyll** 
 
