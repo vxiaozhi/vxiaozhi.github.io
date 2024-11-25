@@ -97,6 +97,10 @@ Rspack 是一款由字节团队提供的项目打包工具。和 Turbopack 一�
 
 但是与 Turbopack 不同的是，Rspack 选择了优先对 webpack 生态兼容的路线。一方面，这些兼容可能会带来一定的性能开销，但是在实际的业务落地中，这写性能开销是可以接受的。另外一方面，这些兼容也使得 Rspack 可以更好的与上层框架和生态进行集成，能够实现业务的渐进式迁移。
 
+Rspack 的耗时大概是 Webpack 的十分之一。如果 Webpack 需要10秒，Rspack 就是1秒。但是，它的最大优势还不是快，而是 Webpack 的无缝替换。你基本上不需要改动配置，直接把配置文件webpack.config.js改名为rspack.config.js即可。
+
+Rspack 不仅兼容 Webpack 的语法，还兼容插件。根据官方文档，下载量最高的50个 Webpack 插件，80%以上可以直接使用，剩下的也有替代方案。
+
 
 ## 服务端渲染（SSR）
 
