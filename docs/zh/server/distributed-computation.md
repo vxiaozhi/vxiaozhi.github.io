@@ -32,12 +32,22 @@
 
 可以使用 预制的 [WrapperApp](https://boinc.berkeley.edu/trac/wiki/WrapperApp) 对我们已有的程序进行包装配置即可。
 
+
+### 4. 提交任务
+
+- [JobSubmission](https://boinc.berkeley.edu/trac/wiki/JobSubmission)
+- [任务输入输出模板定义](https://boinc.berkeley.edu/trac/wiki/JobTemplates)
+
 ### 状态查看
 
 参考 [Administrative web interfaces](https://boinc.berkeley.edu/trac/wiki/HtmlOps)
 
+管理员：
+- http://127.0.0.1.com/{project}_ops/
+- 
 
-参考：
+
+### 参考：
 
 - [BOINC:使用教程](https://www.equn.com/wiki/BOINC:%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)
 - [Boinc Server搭建](https://boinc.berkeley.edu/trac/wiki/ServerIntro)
