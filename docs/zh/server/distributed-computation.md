@@ -32,6 +32,16 @@
 
 可以使用 预制的 [WrapperApp](https://boinc.berkeley.edu/trac/wiki/WrapperApp) 对我们已有的程序进行包装配置即可。
 
+**创建App Version**
+
+AppVersion 和 App 不是一个东西， APPVersion 表示将 APP 和 版本以及平台（Windows/Linux/Mac） 进行绑定后的实体。
+管理员可以在界面上通过 Manage application versions 直接修改 AppVersion 的属性值。
+
+AppVersion 的一些属性：
+
+- [AppPlan](https://github.com/BOINC/boinc/wiki/AppPlan) 这个很关键，取值如果填错会导致调度失败,如：`[CRITICAL]   Unknown plan class: xx`
+  
+
 
 ### 4. 提交任务
 
