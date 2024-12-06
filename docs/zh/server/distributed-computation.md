@@ -66,11 +66,11 @@ AppVersion 的一些属性：
 
 server 端调用 ./bin/start 后会根据 {project}/config.xml 中的daemons 和 tasks 配置开启守护进程和定时任务，一般会开启如下几个守护进程
 
-- feeder The feeder tries to keep the work array filled.
+- **feeder** The feeder tries to keep the work array filled. 该程序通过共享内存和cgi进行通信，如果不开启，cgi（log_boincserver/scheduler.log） 会打印如下错误： `[CRITICAL] Can't attach shmem: -144 (feeder not running?)`
 - transitioner 负责 work unit 的状态轮转，如检测任务是否超时等。
 - file_deleter
 - **script_assimilator** An assimilator that runs a script to handle completed jobs, so that you can do assimilation in Python, PHP, Perl, bash, etc.
-- sample_trivial_validator
+- sample_trivial_validator [可选]，验证任务结果有效性。
 
 常见tasks 有如下：
 
