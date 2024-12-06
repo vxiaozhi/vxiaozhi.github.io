@@ -56,6 +56,17 @@ AppVersion 的一些属性：
 - http://127.0.0.1.com/{project}_ops/
 - 
 
+### 实现原理
+
+- [BOINC Design Documents](https://github.com/BOINC/boinc/wiki/SoftwareDevelopment)
+
+server 端调用 ./bin/start 后会开启如下几个守护进行
+
+- feeder The feeder tries to keep the work array filled.
+- transitioner 负责 work unit 的状态轮转，如检测任务是否超时等。
+- file_deleter
+- **script_assimilator** An assimilator that runs a script to handle completed jobs, so that you can do assimilation in Python, PHP, Perl, bash, etc.
+- sample_trivial_validator
 
 ### 参考：
 
