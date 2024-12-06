@@ -80,11 +80,12 @@ server 端调用 ./bin/start 后会根据 {project}/config.xml 中的daemons 和
 
 **核心调度程序**
 
-核心调度程序的入口文件是：`https://github.com/BOINC/boinc/blob/master/sched/sched_main.cpp`
-该程序是一个标准的 cgi 程序，没想到吧！
+核心调度程序的入口文件是：`https://github.com/BOINC/boinc/blob/master/sched/sched_main.cpp`， 该程序是一个标准的 cgi 程序，没想到吧！
 
 当boinc客户端请求调度任务时，处理该任务的 是 cgi程序，而不是php。后台的cgi程序包括两个： cgi、file_upload_handler。实现代码均在sched目录中。
+
 这也是为什么 当 AppVersion 配置不对时，打印 `[CRITICAL]   Unknown plan class: xx` 的代码位置是在 cpp 代码中而不是 php 中。
+
 这也是为什么 log_boincserver/*.log 均有对应的守护进程，而 log_boincserver/scheduler.log 却没有对应的 scheduler 进程，因为它是 cgi 程序输出的。
 
 php代码只用来实现用于界面逻辑，如用于登录查看服务器状态、管理员查看内部任务状态等。
