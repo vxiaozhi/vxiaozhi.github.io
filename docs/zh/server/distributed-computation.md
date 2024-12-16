@@ -136,12 +136,14 @@ php代码只用来实现用于界面逻辑，如用于登录查看服务器状�
 
 
 用于 APP-Version 签名的密钥对
-keys/code_sign_private
-keys/code_sign_public
+
+- keys/code_sign_private
+- keys/code_sign_public
 
 用于 文件上传的密钥对， 缺失会导致守护进程 transitioner 启动失败。
-keys/upload_private
-keys/upload_public
+
+- keys/upload_private
+- keys/upload_public
 
 ### 参考：
 

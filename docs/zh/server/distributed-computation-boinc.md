@@ -73,3 +73,20 @@ vi input.txt
 ./bin/stage_file input.txt
 ./bin/create_work --appname worker --wu_name worker_nodelete input.txt
 ```
+
+## 调试记录
+
+**服务端**
+
+- 确保 服务正常运行 `./bin/status`
+- 确保 App Plan 正确配置
+- 确保有平台对应的 workunit
+- 查看调度日志：` tail -f log_boincserver/*.log` 
+
+
+**客户端**
+
+- 客户端task不运行，可以通过日志查看原因。例如： 客户端能拉取到任务，但是没有运行，也没有向服务端上报状态，可能是程序的输入输出模板(templates/work_in  templates/work_out)配置错误。
+- 查看日志: 工具 -> 事件日志
+- 设置显示更多类型的日志：选项-> 事件日志选项 。 
+- 选中 `http_debug`, 可以查看到客户端与服务通信的详细http协议内容。
