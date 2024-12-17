@@ -87,6 +87,8 @@ bin/create_work --appname worker --wu_name worker_nodelete input
 - ./bin/make_work 【用于测试阶段】将任务单元进行拷贝并维持 N 个未发送的result。 `make_work --wu_name name [--wu_name name2 ... ] --cushion N`
 - ./bin/crypt_prog 生成密钥对
 - ./bin/sign_executable 对程序签名
+- ./bin/show_shmem 查看当前共享内存队列中的 workunit
+- ./bin/script_assimilator 用于处理完成的任务，可以在此处理任务完成的后处理，如对出错任务进行告警、重新调度等。
 
 ### 实现原理
 
@@ -107,6 +109,8 @@ server 端调用 ./bin/start 后会根据 {project}/config.xml 中的daemons 和
 - **feeder** The feeder tries to keep the work array filled. 该程序通过共享内存和cgi进行通信，如果不开启，cgi（log_boincserver/scheduler.log） 会打印如下错误： `[CRITICAL] Can't attach shmem: -144 (feeder not running?)`
 - **transitioner** 负责 work unit 的状态轮转，如检测result是否完成（超时或者客户端应答）等。
 - **file_deleter** 负责清理临时文件， 如 workunit（工作单元）执行完毕后，对应的输入文件如果不再被引用则会被删除。
+
+以下为可选：
 
 - **script_assimilator** An assimilator that runs a script to handle completed jobs, so that you can do assimilation in Python, PHP, Perl, bash, etc.
 - **sample_trivial_validator** [可选]，验证任务结果有效性。

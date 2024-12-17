@@ -1,5 +1,15 @@
 # 分布式计算平台-Boinc 
 
+
+## App 定义
+
+- [Boinc App介绍](https://github.com/BOINC/boinc/wiki/BOINC-apps-(introduction))
+
+BOINC中, 'app' 是程序的抽象， 每个App由一个唯一的名字标识。
+
+app version 是一个特定的App版本。 AppVersion = Platform + VersionNumber + version.xml + Input/Output Templates。
+
+
 以 Wrapper 为例，记录其部署流程。
 
 假设我们的程序名为： worker.exe, 其运行过程还依赖于当前目录下 _internal/*.dll. 
