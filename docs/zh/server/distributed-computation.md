@@ -48,7 +48,14 @@ AppVersion 和 App 不是一个东西， APPVersion 表示将 APP 和 版本以�
 AppVersion 的一些属性：
 
 - [AppPlan](https://github.com/BOINC/boinc/wiki/AppPlan) 这个很关键，取值如果填错会导致调度失败,如：`[CRITICAL]   Unknown plan class: xx`
-  
+
+PlanClass 用来设置 AppVersion 的调度策略。如：
+
+- 是否可以在指定host上运行
+- 可以使用哪些 GPU、CPU、内存资源
+- 运行速度控制
+
+默认内置了一些预定义的PlanClass，如：mt/nci/vbox_64/cuda 等，如果预定义的不能满足需求，则可以自定义，参考：[AppPlanSpec](https://github.com/BOINC/boinc/wiki/AppPlanSpec)
 
 
 ### 4. 提交任务
@@ -65,6 +72,17 @@ bin/stage_file input
 bin/create_work --appname worker --wu_name worker_nodelete input
 ```
 
+create_work 的一些重要参数说明：
+
+- --appname name  
+- --wu_name name 
+- --wu_template filename ： 指定工作单元输入模板的文件名字，如果不指定默认为： templates/appname_in
+- --target_user ID : 将工作单元分配给指定ID的用户。
+- --target_nresults n ： 指定工作单元生成的result数量，默认为：2
+- --priority n ： 指定优先级
+
+
+更多可参考：
 
 - [JobSubmission](https://boinc.berkeley.edu/trac/wiki/JobSubmission)
 - [任务输入输出模板定义](https://boinc.berkeley.edu/trac/wiki/JobTemplates)

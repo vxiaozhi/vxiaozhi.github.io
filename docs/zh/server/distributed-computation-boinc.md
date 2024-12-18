@@ -9,6 +9,22 @@ BOINC中, 'app' 是程序的抽象， 每个App由一个唯一的名字标识。
 
 app version 是一个特定的App版本。 AppVersion = Platform + VersionNumber + version.xml + Input/Output Templates。
 
+## 最佳实践
+
+AppVersion的更新以及任务单元的创建通常会是一个高频的操作。提供的命令行只能在本地操作：
+
+- ./bin/update_versions
+- ./bin/create_work
+
+这样会带来很多不便。最佳的办法是：
+
+AppVersion 可以打包后采用第三方云存储如cos进行管理， 本地实现一个定时脚本，定时检测如果由最新AppVersion则拉取到本地，然后进行签名、更新等操作。
+
+任务单元的创建，虽然Boinc官方提供了python远程提交等方式，但是使用起来很麻烦。官方也没有说明 Python 库要如何安装。我认为这里不如自己封装一个HTTP API来实现远程调用，可以部署一个 WebHook Server 如：[golang webhook](https://github.com/adnanh/webhook), 来实现远程调用命令行。
+这样也几乎是不用开发，通过配置即可实现。
+
+
+## 示例
 
 以 Wrapper 为例，记录其部署流程。
 
@@ -65,19 +81,22 @@ worker_job_1.0.xml
 ```
 
 **sign**
+
 ```
 ./bin/sign_executable apps/worker/1.0/windows_x86_64/worker.exe code_sign_private > apps/worker/1.0/windows_x86_64/woker.exe.sig
 ./bin/sign_executable apps/worker/1.0/windows_x86_64/_internal.zip code_sign_private > apps/worker/1.0/windows_x86_64/_internal.zip.sig
 
 ./bin/sign_executable apps/worker/1.0/windows_x86_64/worker_job_1.0.xml code_sign_private > apps/worker/1.0/windows_x86_64/worker_job_1.0.xml.sig
-``
+```
 
 **Update**
+
 ```
 ./bin/update_versions
 ```
 
 **提交任务**
+
 ```
 vi input.txt
 ./bin/stage_file input.txt
