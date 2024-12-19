@@ -37,5 +37,5 @@ create_work 的一些重要参数说明：
 
 当任务被绑定时， the workunit.transitioner_flags field is set to TRANSITION_NO_NEW_RESULTS（值为：2）. This tells the transitioner to not create instances of the job; 
 
-所以提交一个绑定的任务单元时， 在 result表里不会创建记录， 其记录创建在 assignment 表里。
+所以提交一个绑定的任务单元时， 不会直接在result表里不会创建记录， 其记录创建在 assignment 表里，然后当有host被分配到该任务后，再在result表里创建记录。
 
