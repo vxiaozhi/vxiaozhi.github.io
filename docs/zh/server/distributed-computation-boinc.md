@@ -112,7 +112,57 @@ vi input.txt
 - 确保 服务正常运行 `./bin/status`
 - 确保 App Plan 正确配置
 - 确保有平台对应的 workunit
-- 查看调度日志：` tail -f log_boincserver/*.log` 
+- 查看调度日志：` tail -f log_boincserver/*.log`
+- 查看源码中的调度逻辑看调度条件是否满足。
+- 开启调试日志 在config.xml config标签下开启模块调试开关，如：` <debug_version_select>1</debug_version_select>`
+
+调度条件源码分析：
+```
+// sched_check.cpp check_memory() 检查内存决定任务是否被调度
+static inline int check_memory(WORKUNIT& wu) {
+    double diff = wu.rsc_memory_bound - g_wreq->usable_ram;
+    if (diff > 0) {
+        char message[256];
+        sprintf(message,
+            "%s needs %0.2f MB RAM but only %0.2f MB is available for use.",
+            find_user_friendly_name(wu.appid),
+            wu.rsc_memory_bound/MEGA, g_wreq->usable_ram/MEGA
+        );
+        add_no_work_message(message);
+
+        if (config.debug_send_job) {
+            log_messages.printf(MSG_NORMAL,
+                "[send_job] [WU#%lu %s] needs %0.2fMB RAM; [HOST#%lu] has %0.2fMB, %0.2fMB usable\n",
+                wu.id, wu.name, wu.rsc_memory_bound/MEGA,
+                g_reply->host.id, g_wreq->ram/MEGA, g_wreq->usable_ram/MEGA
+            );
+        }
+        g_wreq->mem.set_insufficient(wu.rsc_memory_bound);
+        g_reply->set_delay(DELAY_NO_WORK_TEMP);
+        return INFEASIBLE_MEM;
+    }
+    return 0;
+}
+
+// Fast checks (no DB access) to see if the job can be sent to the host.
+// Reasons why not include:
+// 1) the host doesn't have enough memory;
+// 2) the host doesn't have enough disk space;
+// 3) based on CPU speed, resource share and estimated delay,
+//    the host probably won't get the result done within the delay bound
+// 4) app isn't in user's "approved apps" list
+//
+// If the job is feasible, return 0 and fill in wu.delay_bound
+// with the delay bound we've decided to use.
+//
+int wu_is_infeasible_fast(
+    WORKUNIT& wu,
+    int res_server_state, int res_priority, double res_report_deadline,
+    APP& app, BEST_APP_VERSION& bav
+) {
+// ... ...
+}
+```
 
 
 **客户端**
