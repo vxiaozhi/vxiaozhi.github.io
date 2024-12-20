@@ -105,6 +105,8 @@ vi input.txt
 
 ## 调试记录
 
+服务端调试可参考 [Trouble-shooting a BOINC server](https://boinc.berkeley.edu/trac/wiki/ServerDebug)
+
 **服务端**
 
 - 确保 服务正常运行 `./bin/status`
