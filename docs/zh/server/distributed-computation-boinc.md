@@ -232,8 +232,11 @@ bool CLIENT_STATE::scheduler_rpc_poll() {
 2024/12/20 12:40:47 |  | [work_fetch] No project chosen for work fetch
 
 ```
-经排查，是由 Boinc 的失败退避机制导致的，参考 [Thread 'Way to adjust/disable project backoff'](https://boinc.n-helix.com/forum_thread.php?id=12633)
+经排查，是由 Boinc 的失败退避机制导致的，参考
 
-解决办法是在服务端 config.xml中添加如下配置： `<next_rpc_delay>5</next_rpc_delay>`
+- [Thread 'Way to adjust/disable project backoff'](https://boinc.n-helix.com/forum_thread.php?id=12633)
+- [Low-latency computing](https://github.com/BOINC/boinc/wiki/LowLatency)
+
+解决办法是在服务端 config.xml中添加如下配置： `<next_rpc_delay>5</next_rpc_delay>`,表示5秒后发起下次rpc查询。
 
 
