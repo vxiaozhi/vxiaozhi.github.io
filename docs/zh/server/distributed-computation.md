@@ -33,6 +33,8 @@ TAG=
 
 参考 [MakeProject](https://boinc.berkeley.edu/trac/wiki/MakeProject)
 
+项目配置： config.xml 选项说明参考：[Project configuration](https://github.com/BOINC/boinc/wiki/ProjectOptions)
+
 
 ### 3. 创建Apps
 
