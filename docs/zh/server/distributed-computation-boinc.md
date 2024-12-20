@@ -103,7 +103,7 @@ vi input.txt
 ./bin/create_work --appname worker --wu_name worker_nodelete input.txt
 ```
 
-## 调试记录
+## 调试方法论
 
 服务端调试可参考 [Trouble-shooting a BOINC server](https://boinc.berkeley.edu/trac/wiki/ServerDebug)
 
@@ -203,4 +203,37 @@ bool CLIENT_STATE::poll_slow_events() {
 bool CLIENT_STATE::scheduler_rpc_poll() {
 }
 ```
+
+## 调试记录
+
+**客户端拉取不到任务**
+
+客户端拉取不到任务，事件日志选项开启 work_fetch_debug, Boinc Manager 事件日志每分钟会刷新打印如下log：
+
+```
+2024/12/20 12:40:47 |  | [work_fetch] ------- start work fetch state -------
+2024/12/20 12:40:47 |  | [work_fetch] target work buffer: 8640.00 + 43200.00 sec
+2024/12/20 12:40:47 |  | [work_fetch] --- project states ---
+2024/12/20 12:40:47 | 3drender | [work_fetch] REC 1.167 prio -1.000 can request work
+2024/12/20 12:40:47 |  | [work_fetch] --- state for CPU ---
+2024/12/20 12:40:47 |  | [work_fetch] shortfall 829440.00 nidle 16.00 saturated 0.00 busy 0.00
+2024/12/20 12:40:47 | 3drender | [work_fetch] share 0.000 project is backed off  (resource backoff: 33257.53, inc 38400.00)
+2024/12/20 12:40:47 |  | [work_fetch] --- state for NVIDIA GPU ---
+2024/12/20 12:40:47 |  | [work_fetch] shortfall 51840.00 nidle 1.00 saturated 0.00 busy 0.00
+2024/12/20 12:40:47 | 3drender | [work_fetch] share 0.000 no applications
+2024/12/20 12:40:47 |  | [work_fetch] --- state for Intel GPU ---
+2024/12/20 12:40:47 |  | [work_fetch] shortfall 51840.00 nidle 1.00 saturated 0.00 busy 0.00
+2024/12/20 12:40:47 | 3drender | [work_fetch] share 0.000 no applications
+2024/12/20 12:40:47 |  | [work_fetch] ------- end work fetch state -------
+2024/12/20 12:40:47 | 3drender | choose_project: scanning
+2024/12/20 12:40:47 | 3drender | can't fetch CPU: project is backed off
+2024/12/20 12:40:47 | 3drender | can't fetch NVIDIA GPU: no applications
+2024/12/20 12:40:47 | 3drender | can't fetch Intel GPU: no applications
+2024/12/20 12:40:47 |  | [work_fetch] No project chosen for work fetch
+
+```
+经排查，是由 Boinc 的失败退避机制导致的，参考 [Thread 'Way to adjust/disable project backoff'](https://boinc.n-helix.com/forum_thread.php?id=12633)
+
+解决办法是在服务端 config.xml中添加如下配置： `<next_rpc_delay>5</next_rpc_delay>`
+
 
