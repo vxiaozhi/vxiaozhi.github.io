@@ -171,3 +171,36 @@ int wu_is_infeasible_fast(
 - 查看日志: 工具 -> 事件日志
 - 设置显示更多类型的日志：选项-> 事件日志选项 。 
 - 选中 `http_debug`, 可以查看到客户端与服务通信的详细http协议内容。
+
+代码分析，客户端核心代码全在 client/ 目录下：
+
+```
+// 主循环逻辑微码
+int boinc_main_loop() {
+    //... ...
+    // client main loop; poll interval is 1 sec
+    while (1) {
+        gstate.poll_slow_events() ->  scheduler_rpc_poll()  
+ }
+ // ...
+```
+
+```
+// 有限状态机轮询函数
+// Poll the client's finite-state machines
+// possibly triggering state transitions.
+// Returns true if something happened
+// (in which case should call this again immediately)
+// Called every POLL_INTERVAL (1 sec)
+//
+bool CLIENT_STATE::poll_slow_events() {
+}
+
+// cs_scheduler.cpp
+// Called once/sec.
+// Initiate scheduler RPC activity if needed and possible
+//
+bool CLIENT_STATE::scheduler_rpc_poll() {
+}
+```
+
