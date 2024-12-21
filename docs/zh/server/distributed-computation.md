@@ -8,26 +8,14 @@
 
 ### 1. 部署服务
 
+**源码编译安装部署**
+
 参考  [Boinc Server搭建](https://boinc.berkeley.edu/trac/wiki/ServerIntro)
 
-建议使用docker搭建,参考 [Boinc Server Docker](https://github.com/marius311/boinc-server-docker)
 
-```
-git clone https://github.com/marius311/boinc-server-docker.git
-   cd boinc-server-docker
-   docker-compose pull
-   docker-compose up -d
-```
+**docker部署**
 
-执行 docker-compose up 前， 确定 .env 中 的URL_BASE 设置正常
-
-```
-# the URL the server thinks its at
-URL_BASE=http://127.0.0.1
-
-# 该字段设置为空，则默认创建一个App为空的项目，否则创建一个支持 docker-app 的项目。
-TAG=
-```
+参考 [Boinc Server Docker](https://github.com/marius311/boinc-server-docker)
 
 ### 2. 创建项目(Make Project)
 
