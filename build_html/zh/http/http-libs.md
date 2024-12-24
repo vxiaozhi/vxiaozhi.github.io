@@ -6,6 +6,10 @@
 
 libmicrohttpd 是 GUN 下开源的一个小型的 HTTP 库，能够方便的嵌入到系统中。支持 HTTP 1.1 可以同时侦听多个端口，具有 select, poll, pthread, thread poo 等多种模式，库平台支持 GNU/Linux, FreeBSD, OpenBSD, NetBSD, Android, Darwin (macOS), W32, OpenIndiana/Solaris, z/OS 等。
 
+使用 libmicrohttpd 的项目：
+
+- [prometheus C语言库](https://github.com/digitalocean/prometheus-client-c)
+
 参考：
 
 - [libmicrohttpd github](https://github.com/Karlson2k/libmicrohttpd)
