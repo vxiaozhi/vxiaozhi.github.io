@@ -106,6 +106,7 @@ vi input.txt
 ## 调试方法论
 
 服务端调试可参考 [Trouble-shooting a BOINC server](https://boinc.berkeley.edu/trac/wiki/ServerDebug)
+
 客户端调试相对更简单， 因为Boinc客户端会将每次请求应答的信息及状态信息保存在本地数据目录（默认C:\ProgramData\BOINC）中，包括：
 
 - stderrdae.txt/stdoutdae.txt 日志信息
