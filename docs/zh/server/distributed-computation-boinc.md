@@ -212,6 +212,20 @@ bool CLIENT_STATE::poll_slow_events() {
 // Initiate scheduler RPC activity if needed and possible
 //
 bool CLIENT_STATE::scheduler_rpc_poll() {
+  // ...
+   scheduler_op->poll();
+  // ...
+}
+
+bool SCHEDULER_OP::poll() {
+   switch(state) {
+    case SCHEDULER_OP_STATE_GET_MASTER:  // 获取 master文件，并解析出调度器url
+    case SCHEDULER_OP_STATE_RPC:   // 处理RPC请求
+    {
+     retval = start_rpc(cur_proj);  // RPC请求
+     retval = gstate.handle_scheduler_reply(cur_proj, scheduler_url); RPC应答
+    }
+   }
 }
 ```
 
