@@ -106,6 +106,16 @@ vi input.txt
 ## 调试方法论
 
 服务端调试可参考 [Trouble-shooting a BOINC server](https://boinc.berkeley.edu/trac/wiki/ServerDebug)
+客户端调试相对更简单， 因为Boinc客户端会将每次请求应答的信息及状态信息保存在本地数据目录（默认C:\ProgramData\BOINC）中，包括：
+
+- stderrdae.txt/stdoutdae.txt 日志信息
+- client_state.xml 客户端状态
+- account_{project_url}.xml 加入项目成功后的账号信息
+- get_project_config.xml 调用 get_project_config.php 请求返回的信息
+- lookup_account.xml 调用 lookup_account.php 请求返回的信息
+- master_{project_url}.xml 拉取项目主页返回的信息，该信息中包含调度器列表url。
+- sched_reply_{project_url}.xml 调度请求信息
+- sched_request_{project_url}.xml 调度应答信息
 
 **服务端**
 
