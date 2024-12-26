@@ -5,6 +5,7 @@
 - [Wiki索引](https://boinc.berkeley.edu/trac/wiki/TitleIndex)
     - [config.xml 字段说明](https://boinc.berkeley.edu/trac/wiki/ProjectOptions#Schedulingoptionsandparameters)
 
+- [github wiki](https://github.com/BOINC/boinc.wiki.git)
 
 ### 1. 部署服务
 

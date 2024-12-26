@@ -13,7 +13,8 @@ bin/create_work --appname worker --wu_name worker_nodelete input
 create_work 的一些重要参数说明：
 
 - --appname name
-- --wu_name name
+- --app_version_num N ： 指定应用版本号
+- --wu_name name 任务单元名字，不能重复。可以省略，默认不填的话，系统会分配一个不重复的值。
 - --wu_template filename ： 指定工作单元输入模板的文件名字，如果不指定默认为： templates/appname_in
 - --target_user ID : 将工作单元分配给指定ID的用户。
 - --target_host ID target the job to the given host
@@ -22,6 +23,7 @@ create_work 的一些重要参数说明：
 - --broadcast 任务广播给所有主机
 - --broadcast_user ID 任务广播给指定用户
 - --broadcast_team ID 任务广播给指定team的所有主机
+- --stdin 用于读取一个文件列表， 一次提交多个workunit。
 
 广播 和 绑定的区别在于：
 
@@ -38,4 +40,50 @@ create_work 的一些重要参数说明：
 当任务被绑定时， the workunit.transitioner_flags field is set to TRANSITION_NO_NEW_RESULTS（值为：2）. This tells the transitioner to not create instances of the job; 
 
 所以提交一个绑定的任务单元时， 不会直接在result表里不会创建记录， 其记录创建在 assignment 表里，然后当有host被分配到该任务后，再在result表里创建记录。
+
+## 任务限制
+
+任务限制可以用来限定每个主机上运行的任务实例的数量，通过配置可以用来详细制定cpu、gpu 、project、app等维度的详细控制规则。
+
+实现代码在以下文件中：
+
+```
+sched_limit.cpp
+sched_limit.h
+```
+
+配置时，需要结合 config.xml 中的以下字段：
+
+```
+<max_wus_in_progress> N </max_wus_in_progress>
+<max_wus_in_progress_gpu> M </max_wus_in_progress_gpu>
+```
+
+以及  **config_aux.xml** 中的 max_jobs_in_progress 字段来控制， config_aux.xml格式如下：
+
+```xml
+<?xml version="1.0" ?>
+<config>
+<max_jobs_in_progress>
+	<project>
+		<total_limit>
+			<jobs>N</jobs>
+		</total_limit>
+		[ <gpu_limit> ]
+			<jobs>N</jobs>
+			[ <per_proc/> ]
+				if set, limit is per processor
+		[ <cpu_limit> ]
+		...
+	</project>
+	<app>
+		<app_name>name</app_name>
+		[ <total_limit> ... ]
+		[ <cpu_limit> ... ]
+		[ <gpu_limit> ... ]
+	</app>
+	...
+</max_jobs_in_progress>
+</config>
+```
 
