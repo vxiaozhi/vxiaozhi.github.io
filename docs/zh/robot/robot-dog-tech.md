@@ -28,3 +28,4 @@
 
 - [云深处]()
 - [宇树科技]()
+- [智元灵犀X1 推理、训练、硬件开源](https://github.com/AgibotTech)

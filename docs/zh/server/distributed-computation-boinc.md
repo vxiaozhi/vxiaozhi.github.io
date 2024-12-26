@@ -107,6 +107,17 @@ vi input.txt
 
 服务端调试可参考 [Trouble-shooting a BOINC server](https://boinc.berkeley.edu/trac/wiki/ServerDebug)
 
+客户端调试相对更简单， 因为Boinc客户端会将每次请求应答的信息及状态信息保存在本地数据目录（默认C:\ProgramData\BOINC）中，包括：
+
+- stderrdae.txt/stdoutdae.txt 日志信息
+- client_state.xml 客户端状态
+- account_{project_url}.xml 加入项目成功后的账号信息
+- get_project_config.xml 调用 get_project_config.php 请求返回的信息
+- lookup_account.xml 调用 lookup_account.php 请求返回的信息
+- master_{project_url}.xml 拉取项目主页返回的信息，该信息中包含调度器列表url。
+- sched_reply_{project_url}.xml 调度请求信息
+- sched_request_{project_url}.xml 调度应答信息
+
 **服务端**
 
 - 确保 服务正常运行 `./bin/status`
@@ -201,6 +212,20 @@ bool CLIENT_STATE::poll_slow_events() {
 // Initiate scheduler RPC activity if needed and possible
 //
 bool CLIENT_STATE::scheduler_rpc_poll() {
+  // ...
+   scheduler_op->poll();
+  // ...
+}
+
+bool SCHEDULER_OP::poll() {
+   switch(state) {
+    case SCHEDULER_OP_STATE_GET_MASTER:  // 获取 master文件，并解析出调度器url
+    case SCHEDULER_OP_STATE_RPC:   // 处理RPC请求
+    {
+     retval = start_rpc(cur_proj);  // RPC请求
+     retval = gstate.handle_scheduler_reply(cur_proj, scheduler_url); RPC应答
+    }
+   }
 }
 ```
 
