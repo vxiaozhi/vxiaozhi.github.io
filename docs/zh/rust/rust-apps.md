@@ -9,6 +9,7 @@
 
 - [zed](https://github.com/zed-industries/zed)
 - [Lapce](https://github.com/lapce/lapce) Lightning-fast and Powerful Code Editor written in Rust
+- [Typst](https://github.com/typst/typst) A new markup-based typesetting system that is powerful and easy to learn.
 
 ## 在线图像编辑
 
