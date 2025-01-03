@@ -377,6 +377,12 @@ docker-compose up -d
 ./bin/start
 ```
 
+也可以执行以下命令将 start 命令的执行添加到 crontab, 默认会每5分钟执行一次。
+
+```
+crontab  {project}.cronjob
+```
+
 
 至此，部署完毕， 可通过如下链接打开项目主页：
 
