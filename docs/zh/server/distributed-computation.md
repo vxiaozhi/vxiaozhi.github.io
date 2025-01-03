@@ -97,6 +97,7 @@ create_work 的一些重要参数说明：
 - ./bin/crypt_prog 生成密钥对
 - ./bin/sign_executable 对程序签名
 - ./bin/show_shmem 查看当前共享内存队列中的 workunit
+- ./bin/wu_check 显示当前 workunit 实例状态统计。包括未发送的以及正在处理中的。
 - ./bin/script_assimilator 用于处理完成的任务，可以在此处理任务完成的后处理，如对出错任务进行告警、重新调度等。
 - ./bin/xadd [PHP脚本] 遍历 config.xml 中的 platform 和app 配置，并将其插入到 db 表中。 
 - ./bin/update_versions [PHP脚本] 遍历 app 目录下的文件，检查签名，并将其插入到db表中。 
