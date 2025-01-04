@@ -229,6 +229,11 @@ bool SCHEDULER_OP::poll() {
 }
 ```
 
+**任务状态查看**
+
+- 对志愿者：http://{URL_BASE}/server_status.php 注意该页面获取到的状态信息是有延迟的，默认延迟一个小时，因为内部使用了缓存。
+- 对管理员：http://{URL_BASE}/{project}_ops/
+ 
 ## 调试记录
 
 **客户端拉取不到任务**

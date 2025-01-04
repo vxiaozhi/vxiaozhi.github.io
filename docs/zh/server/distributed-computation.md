@@ -121,11 +121,18 @@ server 端调用 ./bin/start 后会根据 {project}/config.xml 中的daemons 和
 - **feeder** The feeder tries to keep the work array filled. 该程序通过共享内存和cgi进行通信，如果不开启，cgi（log_boincserver/scheduler.log） 会打印如下错误： `[CRITICAL] Can't attach shmem: -144 (feeder not running?)`
 - **transitioner** 负责 work unit 的状态轮转，如检测result是否完成（超时或者客户端应答）等。
 - **file_deleter** 负责清理临时文件， 如 workunit（工作单元）执行完毕后，对应的输入文件如果不再被引用则会被删除。
+- **validator** 对 workunit 的多个result 进行有效性校验。 validator 是统称，实际上没有这个程序， 但是boinc提供了validator的几种实现，可以根据需要选择合适的validator，也可以实现自定义的validator。
+    - sample_trivial_validator 验证任务结果有效性。
+    - sched/sample_bitwise_validator.cpp 上传的任务结果文件只要能正常打开并计算md5值，就是有效。
+    - sched/sample_substr_validator.cpp  任务的stdout中没有查找到自定义的字符串，就是有效。
+    - sched/script_validator.cpp 可以通过自定义脚本验证任务结果有效性。
+- **assimilator** 对任务的结果文件进行处理。assimilator 是统称，实际上没有这个程序， 但是boinc提供了assimilator的几种实现，可以根据需要选择合适的assimilator，也可以实现自定义的validator。
+    - script_assimilator An assimilator that runs a script to handle completed jobs, so that you can do assimilation in Python, PHP, Perl, bash, etc.
+    - sched/pymw_assimilator.py py版本
+    - sched/sample_assimilator.cpp  将结果文件复制到指定目录。
+    - sched/sample_dummy_assimilator.cpp 只打印结果文件信息，不做任何处理。
+    - sched/single_job_assimilator.cpp 只对单任务有效，将结果文件复制到指定目录， 并清理任务资源。
 
-以下为可选：
-
-- **script_assimilator** An assimilator that runs a script to handle completed jobs, so that you can do assimilation in Python, PHP, Perl, bash, etc.
-- **sample_trivial_validator** [可选]，验证任务结果有效性。
 
 常见tasks 有如下：
 
