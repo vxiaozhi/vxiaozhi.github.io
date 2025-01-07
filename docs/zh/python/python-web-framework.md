@@ -2,7 +2,13 @@
 
 ## django
 
-## fastapi
+## FastAPI
+
+OpenAPI 文档相关
+
+- [请求体 - 字段](https://fastapi.tiangolo.com/zh/tutorial/body-fields/)
+- [元数据和文档 URL](https://fastapi.tiangolo.com/zh/tutorial/metadata/)
+- [BaseModel 字段约束的Field定义](https://docs.pydantic.dev/latest/api/fields/)
 
 ## Sanic
 
