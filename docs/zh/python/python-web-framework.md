@@ -4,6 +4,11 @@
 
 ## FastAPI
 
+**路由**
+
+- [路径参数 定义一般路由](https://fastapi.tiangolo.com/zh/tutorial/path-params/)
+- [对路由分组](https://fastapi.tiangolo.com/zh/reference/apirouter/)
+
 OpenAPI 文档相关
 
 - [请求体 - 字段](https://fastapi.tiangolo.com/zh/tutorial/body-fields/)
