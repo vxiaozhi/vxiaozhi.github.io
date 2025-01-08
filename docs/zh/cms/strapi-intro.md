@@ -20,7 +20,7 @@ Strapi 的主要特点包括：
 
 ## 安装
 
-**docker**
+**docker【非官方】**
 
 参考
 
@@ -59,6 +59,22 @@ Creating a new Strapi application at /srv/app.
 Creating files.
 ⠹ Installing dependencies: warning url-loader@1.1.2: Invalid bin field for "url-loader".
 ```
+
+这里开始思考一个问题，为什么要在运行过程中下载依赖呢，为什么官方不提供docker部署方式呢？
+
+继续看完下面的命令行安装方式就明白了。
+
+**命令行方式**
+
+参考
+
+- [使用 strapi 快速构建 API 和 CMS 管理系统](https://cloud.tencent.com/developer/article/2236257)
+
+```
+npx create-strapi-app@latest my-api --quickstart --ts
+```
+
+strapi创建项目的方式，类似于 boinc 平台。有一个项目的概念。 创建项目后，有可能需要自定义修改项目代码。所以在项目创建之前不适合用docker的方式部署。
 
 ## 参考
 
