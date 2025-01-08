@@ -9,11 +9,15 @@
 - [路径参数 定义一般路由](https://fastapi.tiangolo.com/zh/tutorial/path-params/)
 - [对路由分组](https://fastapi.tiangolo.com/zh/reference/apirouter/)
 
-OpenAPI 文档相关
+**OpenAPI 文档相关**
 
 - [请求体 - 字段](https://fastapi.tiangolo.com/zh/tutorial/body-fields/)
 - [元数据和文档 URL](https://fastapi.tiangolo.com/zh/tutorial/metadata/)
 - [BaseModel 字段约束的Field定义](https://docs.pydantic.dev/latest/api/fields/)
+
+**中间件**
+
+- [如何使用中间件修改请求及应答包体](https://dev.to/avirgvd/python-fastapi-middleware-to-modify-request-and-response-body-3f7f)
 
 **单元测试**
 
