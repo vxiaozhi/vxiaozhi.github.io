@@ -17,6 +17,49 @@ Strapi 的主要特点包括：
 - 定制化 CMS 需求（ 通过插件等扩展性高度定制 ）
 - 快速开发api（API管理界面能够大大加快开发速度，尤其是MVP（最小可行产品）阶段 ）
 
+
+## 安装
+
+**docker**
+
+参考
+
+- [strapi-docker](https://github.com/strapi/strapi-docker)
+
+```
+docker run -it -p 1337:1337 -v `pwd`/project-name:/srv/app strapi/strapi
+```
+
+启动容器的过程中会安装 js 依赖包，很可能会出现老的依赖包无法下载的问题。
+
+```
+$ docker run -it -p 1337:1337 -v `pwd`/project-strapi:/srv/app strapi/strapi
+Unable to find image 'strapi/strapi:latest' locally
+latest: Pulling from strapi/strapi
+1e987daa2432: Pull complete
+a0edb687a3da: Pull complete
+6891892cc2ec: Pull complete
+684eb726ddc5: Pull complete
+b0af097f0da6: Pull complete
+154aee36a7da: Pull complete
+769e77dee537: Pull complete
+44a6ee72a664: Pull complete
+f374f834ba21: Pull complete
+4959172eae3e: Pull complete
+1eb96a0de363: Pull complete
+4f4fb700ef54: Pull complete
+02b141244aae: Pull complete
+Digest: sha256:be2aa1b207c74474319873d2a343c572e17273f5c3017c308c4a21bd6e1992e9
+Status: Downloaded newer image for strapi/strapi:latest
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+Using strapi 3.6.8
+No project found at /srv/app. Creating a new strapi project
+Creating a project from the database CLI arguments.
+Creating a new Strapi application at /srv/app.
+Creating files.
+⠹ Installing dependencies: warning url-loader@1.1.2: Invalid bin field for "url-loader".
+```
+
 ## 参考
 
 - [探索开源世界：7款引人入胜的殿堂级CMS，从WordPress到strapi](https://zhuanlan.zhihu.com/p/652732748)
