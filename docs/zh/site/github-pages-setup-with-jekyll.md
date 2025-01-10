@@ -44,6 +44,8 @@ theme: jekyll-theme-minimal
 
 **站点目录结构**
 
+参考：[jekyll 站点目录结构](https://jekyllcn.com/docs/structure/)
+
 jekyll 站点目录结构通常如下， 上述主题无一例外也都采用了如下的结构进行文件组织。
 
 ```
@@ -60,7 +62,7 @@ jekyll 站点目录结构通常如下， 上述主题无一例外也都采用了
 ├── _layouts
 │   ├── default.html
 │   └── post.html
-├── _posts
+├── _posts  这里放的就是你的文章了。文件格式很重要，必须要符合: YEAR-MONTH-DAY-title.MARKUP。 
 │   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
 │   └── 2009-04-26-barcamp-boston-4-roundup.md
 ├── _sass
