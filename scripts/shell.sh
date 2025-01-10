@@ -1,0 +1,1 @@
+docker run -it --rm -p 4000:4000 -v $PWD/docs:/app -w /app ruby:3.2.0 bash
