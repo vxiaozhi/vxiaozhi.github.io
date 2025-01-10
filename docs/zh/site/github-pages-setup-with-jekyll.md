@@ -18,8 +18,6 @@ nojekyll搭建参考：
 - https://github.com/Huxpro/huxpro.github.io
 - https://github.com/qiubaiying/qiubaiying.github.io
 
-- []()
-
 ## 总结如下
 
 **设置主题**
@@ -40,7 +38,7 @@ google_analytics:
 theme: jekyll-theme-minimal
 ```
 
-注意：如果使用了github内置的主题，github就会把你仓库的内容和内置主题内容合并到一起编译成静态网页。
+注意：如果使用了github内置的主题(即设置了theme字段且其值为内置的名字)，github就会把你仓库的内容和内置主题内容合并到一起编译成静态网页。
 
 **站点目录结构**
 
