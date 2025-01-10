@@ -88,6 +88,31 @@ jekyll 站点目录结构通常如下， 上述主题无一例外也都采用了
 2. Run bundle exec jekyll serve to start the preview server
 3. Visit localhost:4000 in your browser to preview the theme
 
+使用docker方式：
+
+```
+docker run -it --rm -p 4000:4000 -v $PWD:/app -w /app jekyll/jekyll bash
+docker run -it --rm -p 4000:4000 -v $PWD:/app -w /app ruby:3.2.0 bash
+
+gem install bundler jekyll
+./script/bootstrap
+bundle exec jekyll serve --host 0.0.0.0
+
+```
+
+```
+fde67d60000-7fde67d63000 rw-p 00000000 00:00 0 
+7ffc11a21000-7ffc12220000 rw-p 00000000 00:00 0                          [stack]
+7ffc12244000-7ffc12247000 r--p 00000000 00:00 0                          [vvar]
+7ffc12247000-7ffc12248000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+
+/usr/jekyll/bin/bundle: line 34:   299 Aborted                 (core dumped) su-exec jekyll $exe "$@"
+```
+
+
+
 
 
 
