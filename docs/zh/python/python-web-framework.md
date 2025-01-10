@@ -19,6 +19,18 @@
 
 - [如何使用中间件修改请求及应答包体](https://dev.to/avirgvd/python-fastapi-middleware-to-modify-request-and-response-body-3f7f)
 
+**日志**
+
+参考：[为 FastAPI 配置日志的三种方法](https://cloud.tencent.com/developer/article/2009553) 
+
+第一种，就像写脚本那样记录日志。 具体到fastapi框架中，可以在初始化时建立一个全局的logger，然后其它模块获取该logger即可输出日志。当然最好的方式是像 go Macaron web框架那样， 在中间件中创建一个logger对象然后传递到其它路由中调用，可以fastAPI不支持这种模式。
+
+第二种，记录 uvicorn 的日志
+
+第三种，配置 uvicorn 的日志
+
+
+
 **单元测试**
 
 依赖
