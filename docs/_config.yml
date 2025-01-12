@@ -14,7 +14,7 @@ future: true
 # SNS settings
 RSS: false
 weibo_username: wmxiaozhi
-zhihu_username: erik-laurence
+zhihu_username: vxiaozhi
 github_username: vxiaozhi
 twitter_username: wmxiaozhi
 #facebook_username:  vxiaozhi
@@ -70,8 +70,8 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: "UA-xxxx" # Format: UA-xxxxxx-xx
-ga_domain: vxiaozhi.com
+# ga_track_id: "UA-xxxx" # Format: UA-xxxxxx-xx
+# ga_domain: vxiaozhi.com
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
