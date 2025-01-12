@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "VuePress 使用指南"
+subtitle:   "VuePress 使用指南"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 建站
+    - VuePress
+---
+
 # VuePress 使用指南
 
 本文档基于 [VuePress 文档](https://vuepress.vuejs.org/zh/) 总结而成。

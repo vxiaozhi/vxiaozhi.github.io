@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      "Golang 服务相关的库"
+subtitle:   "Golang 服务相关的库"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - golang
+    - webframework
+---
+
 # Golang 服务相关的库
 
 - [go-zero 一个集成了各种工程实践的 web 和 rpc 框架](https://github.com/zeromicro/go-zero)

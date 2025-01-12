@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "内存优化综述"
+subtitle:   "内存优化综述"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
 # 内存优化综述
 
 任何一个复杂的系统内存分配释放的最佳策略一定是： 按照其特性进行内存分类管理。 一般来说可将其特性分为以下几类：

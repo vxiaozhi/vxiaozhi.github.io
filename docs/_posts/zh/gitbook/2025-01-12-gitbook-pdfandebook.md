@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Gitbook 输出PDF"
+subtitle:   "Gitbook 输出PDF"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - gitbook
+---
+
 # 输出PDF
 
 输出为PDF文件，需要先安装```gitbook pdf```

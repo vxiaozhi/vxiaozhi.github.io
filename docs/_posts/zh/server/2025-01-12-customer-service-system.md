@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "客服系统"
+subtitle:   "客服系统"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - customerservice
+---
+
 # 客服系统
 
 ## 开源

@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "如何在 K8s 上运行 Spark"
+subtitle:   "如何在 K8s 上运行 Spark"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 #  如何在 K8s 上运行 Spark
 
 ## Operators

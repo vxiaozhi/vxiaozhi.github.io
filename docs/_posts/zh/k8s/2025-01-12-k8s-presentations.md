@@ -1,4 +1,15 @@
-# K8s 演示文稿及分析
+---
+layout:     post
+title:      "K8s 演示文稿及分享"
+subtitle:   "K8s 演示文稿及分享"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
+# K8s 演示文稿及分享
 
 
 ## CNCF 组织的一些分享

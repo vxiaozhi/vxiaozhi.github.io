@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "计算机经典书籍"
+subtitle:   "计算机经典书籍"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - cs
+---
+
 # 计算机经典书籍
 
 

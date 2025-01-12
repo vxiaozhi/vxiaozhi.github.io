@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Kube-dns"
+subtitle:   "Kube-dns"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # Kube-dns
 
 ## 简介

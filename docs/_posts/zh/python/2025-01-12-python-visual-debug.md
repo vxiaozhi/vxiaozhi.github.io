@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Python 可视化调试"
+subtitle:   "Python 可视化调试"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - python
+---
+
 # Python 可视化调试
 
 ## 方法1： VsCode

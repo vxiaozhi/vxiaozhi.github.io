@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Gitbook 简介"
+subtitle:   "Gitbook 简介"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - gitbook
+---
+
 # 图书项目结构
 
 ```README.md```和```SUMMARY.md```

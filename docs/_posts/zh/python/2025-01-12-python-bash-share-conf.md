@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Python 与 bash 脚本共享配置文件的最佳实践"
+subtitle:   "Python 与 bash 脚本共享配置文件的最佳实践"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - python
+---
+
 # Python 与 bash 脚本共享配置文件的最佳实践
 
 同一个工程的代码中可能会同时包含 python 代码和 bash 脚本， 不可避免的会用到配置文件。一些场景下，这两种语言需要共享相同的配置。 怎么实现呢？ 有两种方案：

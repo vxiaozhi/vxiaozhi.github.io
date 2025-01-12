@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s 网络插件 SRIOV-CNI"
+subtitle:   "K8s 网络插件 SRIOV-CNI"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s 网络插件 SRIOV-CNI
 
 SRIOV-CNI最早由腾讯互娱计算资源团队开发， 后被 CNI 社区接纳，并被Intel关注和[Fork](https://github.com/Intel-Corp/sriov-cni)。

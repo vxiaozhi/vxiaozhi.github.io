@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "分布式计算平台-Boinc"
+subtitle:   "分布式计算平台-Boinc"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - boinc
+---
+
 # 分布式计算平台-Boinc 
 
 

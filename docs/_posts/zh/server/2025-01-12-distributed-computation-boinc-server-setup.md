@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Boinc 后台服务搭建"
+subtitle:   "Boinc 后台服务搭建"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - boinc
+---
+
 # Boinc 后台服务搭建
 
 

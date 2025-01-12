@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Gitbook 输出为静态网站"
+subtitle:   "Gitbook 输出为静态网站"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - gitbook
+---
+
 # 输出为静态网站
 
 你有两种方式输出一个静态的网站：

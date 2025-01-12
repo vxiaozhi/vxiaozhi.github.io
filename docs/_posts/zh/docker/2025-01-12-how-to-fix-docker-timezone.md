@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Docker容器时间如何与宿主机同步问题解决方案"
+subtitle:   "Docker容器时间如何与宿主机同步问题解决方案"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - docker
+---
+
 # Docker容器时间如何与宿主机同步问题解决方案
 
 宿主机设置了时区，而Docker容器并没有设置，会导致导致两者相差8小时

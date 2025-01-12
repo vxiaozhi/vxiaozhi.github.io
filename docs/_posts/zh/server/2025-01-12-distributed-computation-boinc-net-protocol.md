@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Boinc 网络通信协议"
+subtitle:   "Boinc 网络通信协议"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - boinc
+---
+
 # Boinc 网络通信协议
 
 官网文档这里有作简单介绍：

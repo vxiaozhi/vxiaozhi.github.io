@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Android 应用程序中的 Coredump 抓取与分析"
+subtitle:   "Android 应用程序中的 Coredump 抓取与分析"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - android
+    - coredump
+---
+
 # Android 应用程序中的 Coredump 抓取与分析
 
 ## coredump 开启

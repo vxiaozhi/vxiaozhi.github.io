@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Php + Nginx 部署"
+subtitle:   "Php + Nginx 部署"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - php
+---
+
 # Php + Nginx 部署
 
 这里介绍三种部署模式：

@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "k8s 网络插件 Cilium"
+subtitle:   "k8s 网络插件 Cilium"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # k8s 网络插件 Cilium
 
 ## 简介

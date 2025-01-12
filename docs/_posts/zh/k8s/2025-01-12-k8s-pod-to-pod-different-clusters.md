@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "K8s 跨集群通信"
+subtitle:   "K8s 跨集群通信"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
+
 # K8s 跨集群通信
 
 分两种情况讨论：

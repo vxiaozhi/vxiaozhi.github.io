@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Golang 学习"
+subtitle:   "Golang 学习"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - golang
+---
+
 # Golang 学习
 
 云风说：

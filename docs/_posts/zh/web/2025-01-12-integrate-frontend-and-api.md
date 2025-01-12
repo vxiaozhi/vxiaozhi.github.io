@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "集成前端UI和API Server 的最佳实践"
+subtitle:   "集成前端UI和API Server 的最佳实践"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - web
+---
+
 # 集成前端UI和API Server 的最佳实践
 
 ## 一些开源项目

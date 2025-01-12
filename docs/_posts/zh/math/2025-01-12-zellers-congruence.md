@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "蔡勒(Zeller)公式"
+subtitle:   "蔡勒(Zeller)公式"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - math
+---
+
 # 蔡勒(Zeller)公式
 
 短视频刷到漫画家 蔡志忠 说他可以根据任意日期快速说出是星期几，比较好奇，就查了以下。

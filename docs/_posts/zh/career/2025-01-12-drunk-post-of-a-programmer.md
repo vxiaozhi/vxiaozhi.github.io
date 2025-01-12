@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "程序员的酒后真言"
+subtitle:   "程序员的酒后真言"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 职业生涯
+---
+
 # 程序员的酒后真言
 
 

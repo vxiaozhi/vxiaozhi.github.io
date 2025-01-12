@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "kubernetes 网络技术与服务通信"
+subtitle:   "Exploring Network Technologies and Service Communication"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # kubernetes 网络技术与服务通信 (Exploring Network Technologies and Service Communication)
 
 **副标题** --K8s网络通信技术

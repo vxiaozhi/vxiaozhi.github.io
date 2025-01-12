@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Github Pages + jekyll 搭建个人网站和博客"
+subtitle:   "Github Pages + jekyll 搭建个人网站和博客"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 建站
+    - jekyll
+---
+
 # Github Pages + jekyll 搭建个人网站和博客
 
 
@@ -81,6 +93,23 @@ jekyll 站点目录结构通常如下， 上述主题无一例外也都采用了
 **目录配置**
 
 **Markdown格式**
+
+参考如下：
+
+```
+---
+layout:     post
+title:      "Blender简介"
+subtitle:   "Blender简介"
+date:       2025-01-10
+author:     "vxiaozhi"
+header-img: "imgs/home-bg.jpg"
+catalog: true
+tags:
+    - 3d
+    - blender
+---
+```
 
 **本地预览**
 

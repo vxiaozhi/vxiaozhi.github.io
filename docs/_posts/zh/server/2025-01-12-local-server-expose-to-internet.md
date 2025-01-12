@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "内网穿透工具"
+subtitle:   "内网穿透工具"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
 # 内网穿透工具
 
 如果希望自己二次开发（有API可以调用）或者有多个租户（每个客户端一个单独的key），建议使用nps。

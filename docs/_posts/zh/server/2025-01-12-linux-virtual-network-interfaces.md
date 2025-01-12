@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Linux 中的虚拟网络接口"
+subtitle:   "Linux 中的虚拟网络接口"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
+
 # Linux 中的虚拟网络接口
 
 ## tun/tap

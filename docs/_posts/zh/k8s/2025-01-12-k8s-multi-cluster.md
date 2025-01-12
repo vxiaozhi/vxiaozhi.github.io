@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s 多集群"
+subtitle:   "K8s 多集群"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s 多集群
 
 ## 1. 为什么需要 K8s 多集群？

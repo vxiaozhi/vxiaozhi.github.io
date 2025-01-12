@@ -1,3 +1,17 @@
+---
+layout:     post
+title:      "Gin 开发后台服务最佳实践"
+subtitle:   "Gin 开发后台服务最佳实践"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - golang
+    - gin
+---
+
+
 # Gin 开发后台服务最佳实践
 
 [gin](https://github.com/gin-gonic/gin) 是一个 golang 实现的 http web 框架。

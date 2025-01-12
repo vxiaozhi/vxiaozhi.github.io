@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "后台技术"
+subtitle:   "后台技术"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
 # 后台技术
 
 ## 参考

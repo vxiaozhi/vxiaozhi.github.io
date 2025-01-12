@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "docker-compose 简介"
+subtitle:   "docker-compose 简介"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - docker
+---
+
 # docker-compose 简介
 
 ## docker-compose 中volumes参数说明

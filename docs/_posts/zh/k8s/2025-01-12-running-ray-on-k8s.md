@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "使用 KubeRay 在 Kubernetes 中托管 Ray 工作负载"
+subtitle:   "使用 KubeRay 在 Kubernetes 中托管 Ray 工作负载"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # 使用 KubeRay 在 Kubernetes 中托管 Ray 工作负载
 
 ## 参考

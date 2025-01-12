@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Linux LD_PRELOAD 技术介绍"
+subtitle:   "Linux LD_PRELOAD 技术介绍"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - LD_PRELOAD
+---
+
 # Linux LD_PRELOAD 技术介绍
 
 ##  LD_PRELOAD介绍

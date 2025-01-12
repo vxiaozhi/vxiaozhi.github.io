@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s 中的开放接口"
+subtitle:   "K8s 中的开放接口"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s 中的开放接口
 
 Kubernetes作为云原生应用的基础调度平台，相当于云原生的操作系统，为了便于系统的扩展，Kubernetes中开放的以下接口，可以分别对接不同的后端，来实现自己的业务逻辑：

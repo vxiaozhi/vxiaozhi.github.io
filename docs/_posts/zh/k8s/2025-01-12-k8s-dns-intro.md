@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s dns 技术实现原理"
+subtitle:   "K8s dns 技术实现原理"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s dns 技术实现原理
 
 K8s 中DNS采用的服务器方案也在不断演变， 早期用的是 kube-dns， 从 1.11 版本开始 默认的dns服务器 由 kube-dns切换到了 coredns。

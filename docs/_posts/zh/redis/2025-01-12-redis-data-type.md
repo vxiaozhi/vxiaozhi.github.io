@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Reids 数据类型"
+subtitle:   "Reids 数据类型"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - redis
+---
+
 # Reids 数据类型
 
 Redis 主要支持以下几种数据类型：

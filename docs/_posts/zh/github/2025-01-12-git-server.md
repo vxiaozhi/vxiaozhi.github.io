@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Git 服务搭建"
+subtitle:   "Git 服务搭建"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - github
+---
+
 # Git 服务搭建
 
 - [最简单的 Git 服务器](https://www.ruanyifeng.com/blog/2022/10/git-server.html)

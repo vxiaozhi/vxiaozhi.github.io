@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Kubernetes 中文指南"
+subtitle:   "Kubernetes 中文指南"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # Kubernetes 中文指南
 
 ## 术语解释

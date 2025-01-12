@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Golang 程序加载配置最佳实践"
+subtitle:   "Golang 程序加载配置最佳实践"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - golang
+---
+
 # Golang 程序加载配置最佳实践
 
 ## 常用配置文件读取方式

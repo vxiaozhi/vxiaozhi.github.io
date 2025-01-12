@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      "Zig 语言简介"
+subtitle:   "Zig 语言简介"
+date:       2025-01-12
+author:     "vxiaozhi"
+header-img: "imgs/home-bg.jpg"
+catalog: true
+tags:
+    - 编程语言
+    - zig
+---
+
 # Zig 语言简介
 
 根据其官网所述：

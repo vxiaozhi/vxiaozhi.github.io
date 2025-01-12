@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Linux 网络负载均衡"
+subtitle:   "Linux 网络负载均衡"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
 # Linux 网络负载均衡
 
 ## 参考

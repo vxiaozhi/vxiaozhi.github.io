@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Vite 学习"
+subtitle:   "Vite 学习"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - web
+---
+
 # Vite 学习
 
 Next generation frontend tooling. It's fast!

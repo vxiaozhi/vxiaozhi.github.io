@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      "Golang 常用的程序库"
+subtitle:   "Golang 常用的程序库"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - golang
+    - library
+---
+
 # Golang 常用的程序库
 
 ## 通用库

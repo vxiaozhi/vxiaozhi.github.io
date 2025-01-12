@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "代码风格最佳实践"
+subtitle:   "代码风格最佳实践"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - code
+---
+
 # 代码风格最佳实践
 
 下面收录了一些 代码风格比较好，值得学习的开源项目

@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Linux 中C/C++代码通过函数名称字符串发起调用"
+subtitle:   "Linux 中C/C++代码通过函数名称字符串发起调用"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - gre
+---
+
 # Linux 中C/C++代码通过函数名称字符串发起调用
 
 分两种情况：

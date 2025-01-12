@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Linux GRE 协议"
+subtitle:   "Linux GRE 协议"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - gre
+---
+
 # Linux GRE 协议
 
 ## 参考

@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Ollama-WebUI"
+subtitle:   "Ollama-WebUI"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - web
+---
+
 # Ollama-WebUI
 
 [ollama](https://github.com/ollama/ollama) 

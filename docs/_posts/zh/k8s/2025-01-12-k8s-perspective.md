@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s 的一些设计理念"
+subtitle:   "K8s 的一些设计理念"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s 的一些设计理念
 
 分析和理解 K8s 的设计理念可以使我们更深入地了解 Kubernetes 系统，更好地利用它管理分布式部署的云原生应用，另一方面也可以让我们借鉴其在分布式系统设计方面的经验。

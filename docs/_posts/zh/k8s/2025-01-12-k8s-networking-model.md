@@ -1,7 +1,15 @@
+---
+layout:     post
+title:      "kubernetes 网络模型"
+subtitle:   "kubernetes 网络模型"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # kubernetes 网络模型
-
-
-
 
 ## K8s通信原理
 

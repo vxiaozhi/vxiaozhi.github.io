@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "机器狗技术"
+subtitle:   "机器狗技术"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - robot
+---
+
 # 机器狗技术
 
 国内外所有搞机器狗的公司，全都是基于 MIT 的开源项目基础上做的。包括 机器人操作系统 ROS 和 Mini Cheetah。

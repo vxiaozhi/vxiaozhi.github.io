@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      "Golang 模板"
+subtitle:   "Golang 模板"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - golang
+    - template
+---
+
 # Golang 模板
 
 ## 标准库实现
@@ -14,11 +27,11 @@
 
 如 href 中的变量，被渲染后会经过如下处理：
 
-```
-<a href="/search?q={{.}}">{{.}}</a>
+```html
+<a href="/search?q={{.}}">"{{.}}"</a>
 ```
 
-```
+```html
 <a href="/search?q={{. | urlescaper | attrescaper}}">{{. | htmlescaper}}</a>
 ```
 

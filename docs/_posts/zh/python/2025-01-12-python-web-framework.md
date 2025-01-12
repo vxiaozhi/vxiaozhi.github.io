@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Python Web 框架"
+subtitle:   "Python Web 框架"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - python
+---
+
 # Python Web 框架
 
 ## django

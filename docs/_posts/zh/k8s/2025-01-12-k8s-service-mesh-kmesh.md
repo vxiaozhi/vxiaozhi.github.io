@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Kmesh 技术"
+subtitle:   "Kmesh 技术"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # Kmesh 技术
 
 ## 背景

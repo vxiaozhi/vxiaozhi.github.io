@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s Nginx Ingress Controller 简介"
+subtitle:   "K8s Nginx Ingress Controller 简介"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s Nginx Ingress Controller 简介
 
 在Kubernetes集群中，Ingress作为集群内服务对外暴露的访问接入点，几乎承载着集群内服务访问的所有流量。

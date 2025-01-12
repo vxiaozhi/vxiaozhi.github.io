@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Gitbook 命令行速览"
+subtitle:   "Gitbook 命令行速览"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - gitbook
+---
+
 # Gitbook命令行速览
 
 Gitbook是一个命令行工具，使用方法：

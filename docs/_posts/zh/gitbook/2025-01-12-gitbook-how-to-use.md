@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Gitbook 基本安装"
+subtitle:   "Gitbook 基本安装"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - gitbook
+---
+
 # 基本安装
 
 Gitbook的安装及命令行的快速功能预览说明。

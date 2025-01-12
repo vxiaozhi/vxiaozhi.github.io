@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Kubernetes Gateway API 简介"
+subtitle:   "Kubernetes Gateway API 简介"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # Kubernetes Gateway API 简介
 
 ## 背景

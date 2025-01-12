@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "代码覆盖率"
+subtitle:   "代码覆盖率"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - code
+    - 代码覆盖率
+---
+
 # 代码覆盖率
 
 代码覆盖率是软件测试中的一种度量，描述程序中源代码被测试的比例和程度，所得比例称为代码覆盖率 。

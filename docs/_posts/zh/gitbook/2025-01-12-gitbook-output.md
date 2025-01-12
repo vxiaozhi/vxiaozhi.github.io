@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Gitbook 输出格式"
+subtitle:   "Gitbook 输出格式"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - gitbook
+---
+
 # 图书输出
 
 目前为止，Gitbook支持如下输出：

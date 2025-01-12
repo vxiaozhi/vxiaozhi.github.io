@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "k8s 服务网格（Service Mesh）"
+subtitle:   "k8s 服务网格（Service Mesh）"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # k8s 服务网格（Service Mesh）
 
 希腊语言中大概是风帆的意思， 发音  [iːst'iəʊ] ，相当于中文的 伊斯特亿欧。

@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "如何使用主机当前用户运行 docker"
+subtitle:   "如何使用主机当前用户运行 docker"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - docker
+---
+
 # 如何使用主机当前用户运行 docker
 
 这里提供两种方法：

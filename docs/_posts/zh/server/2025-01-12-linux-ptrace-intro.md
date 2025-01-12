@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "ptrace 学习笔记"
+subtitle:   "ptrace 学习笔记"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
 # ptrace 学习笔记
 
 ## 参考

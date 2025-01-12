@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      "php-with-golang"
+subtitle:   "php-with-golang"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - php
+    - golang
+---
+
 # php-with-golang
 
 参考

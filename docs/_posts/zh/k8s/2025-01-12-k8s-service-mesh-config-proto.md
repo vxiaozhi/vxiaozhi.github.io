@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s 服务网格配置发现协议"
+subtitle:   "K8s 服务网格配置发现协议"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s 服务网格配置发现协议
 
 ## MCP

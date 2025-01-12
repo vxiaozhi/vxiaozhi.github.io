@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "域名解析(DNS) -- CoreDNS"
+subtitle:   "域名解析(DNS) -- CoreDNS"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # 域名解析(DNS) -- CoreDNS
 
 ## 参考

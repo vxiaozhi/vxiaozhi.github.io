@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "为什么选择 WordPress "
+subtitle:   "为什么选择 WordPress "
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - web
+    - WordPress
+---
+
 # 为什么选择 WordPress 
 
 WordPress 是PHP开发的内容管理系统(CMS), 常用来搭建博客网站、企业网站等。

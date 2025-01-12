@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Strapi 介绍"
+subtitle:   "Strapi 介绍"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - cms
+    - strapi
+---
+
 # Strapi 介绍
 
 Strapi 是一个开源的 Headless CMS（无头内容管理系统）。它允许开发者通过自定义的方式快速构建、管理和分发内容。Strapi 提供了一个强大的后端 API，支持 RESTful 和 GraphQL 两种方式，使得开发者可以方便地将内容分发到任何设备或服务，无论是网站、移动应用还是 IoT 设备。

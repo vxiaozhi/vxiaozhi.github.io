@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "wordpress 安装配置实践"
+subtitle:   "wordpress 安装配置实践"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - web
+    - WordPress
+---
+
 # wordpress 安装配置实践
 
 如果在本地测试查看效果，可采用 docker-compose 方式启动， 参考

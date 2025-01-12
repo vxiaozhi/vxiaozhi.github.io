@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Boinc 任务分配"
+subtitle:   "Boinc 任务分配"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - boinc
+---
+
 # Boinc 任务分配
 
 参考 [AssignedWork](https://github.com/BOINC/boinc/wiki/AssignedWork)

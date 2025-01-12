@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Linux 反弹Shell"
+subtitle:   "Linux 反弹Shell"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+---
+
 # Linux 反弹Shell
 
 

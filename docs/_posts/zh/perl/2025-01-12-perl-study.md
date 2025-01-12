@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      "Perl 语言学习"
+subtitle:   "Perl 语言学习"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - perl
+---
+
+
 # Perl 语言学习
 
 ## [Perl](https://github.com/Perl/perl5) 背景

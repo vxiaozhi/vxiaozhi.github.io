@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Python 的 dataclass"
+subtitle:   "Python 的 dataclass"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - python
+---
+
 # Python 的 dataclass
 
 dataclass是从Python3.7版本开始，作为标准库中的模块被引入。Python 3.6 版本可通过手动安装 `python3.6 -m pip install dataclasses `.

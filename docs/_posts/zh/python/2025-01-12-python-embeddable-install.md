@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Python embeddable 版本安装过程记录"
+subtitle:   "Python embeddable 版本安装过程记录"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - python
+---
+
 # Python embeddable 版本安装过程记录
 
 - 操作系统： Win11

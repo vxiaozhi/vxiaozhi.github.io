@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s Ingress 介绍"
+subtitle:   "K8s Ingress 介绍"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s Ingress 介绍
 
 

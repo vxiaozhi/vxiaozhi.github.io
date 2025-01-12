@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Typst"
+subtitle:   "Typst"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - 编程语言
+    - rust
+---
+
 # Typst
 
 Typst 是一款专门为排版而生的新生代工具。它完全摒弃了现有系统的约束，着眼于现代化的功能与设计，成功地克服了传统方案上的一些不足之处。

@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "K8s 服务治理"
+subtitle:   "K8s 服务治理"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - k8s
+---
+
 # K8s 服务治理
 
 微服务治理的手段

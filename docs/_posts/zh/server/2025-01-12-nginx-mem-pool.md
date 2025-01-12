@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Nginx 内存池机制"
+subtitle:   "Nginx 内存池机制"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - nginx
+---
+
 # Nginx 内存池机制
 
 nginx 的内存池设计得非常精妙，它在满足小块内存申请的同时，也处理大块内存的申请请求，同时还允许挂载自己的数据区域及对应的数据清楚操作。

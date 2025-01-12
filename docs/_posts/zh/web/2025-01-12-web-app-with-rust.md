@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "使用 Rust 创建 Web 应用程序"
+subtitle:   "使用 Rust 创建 Web 应用程序"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - web
+    - rust
+---
+
 # 使用 Rust 创建 Web 应用程序
 
 - [dioxus](https://github.com/DioxusLabs/dioxus)

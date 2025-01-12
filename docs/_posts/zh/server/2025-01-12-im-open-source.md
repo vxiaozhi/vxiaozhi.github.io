@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "IM 开源解决方案"
+subtitle:   "IM 开源解决方案"
+date:       2025-01-12
+author:     "vxiaozhi"
+catalog: true
+tags:
+    - server
+    - im
+---
+
 # IM 开源解决方案
 
 ## 开源方案
