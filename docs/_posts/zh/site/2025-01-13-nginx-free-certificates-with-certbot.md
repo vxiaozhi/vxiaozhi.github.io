@@ -12,7 +12,15 @@ tags:
 
 # 使用 Certbot 为 Nginx 网站服务器设置永久免费的 HTTPS 证书
 
+目前流行的设置https证书的方案有2种：
+
+- [acme](https://github.com/acmesh-official/acme.sh) 采用纯Shell实现， 并且有完善的中文文档。【只能支持Nginx配置安装在标准目录，如果自定义了配置目录，则无法使用】
+- certbot
+
+本文介绍第二种方式。
+
 参考 [使用Nginx结合CertBot配置HTTPS协议](https://developer.aliyun.com/article/689901)
+
 
 ## Certbot 安装
 
