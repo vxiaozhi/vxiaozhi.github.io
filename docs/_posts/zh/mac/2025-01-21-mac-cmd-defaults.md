@@ -19,7 +19,7 @@ tags:
 
 以下是它的manual介绍：
 
-```
+
  > Defaults allows users to read, write, and delete Mac OS X user defaults from a command-line shell. Mac OS X applications and other programs use the
  > defaults system to record user preferences and other information that must be maintained when the applications aren't running (such as default font
  > for new documents, or the position of an Info panel). Much of this information is accessible through an application's Preferences panel, but some of
@@ -34,7 +34,7 @@ tags:
  > 
  > Though all applications, system services, and other programs have their own domains, they also share a domain named NSGlobalDomain.  If a default
  > isn't specified in the application's domain, but is specified in NSGlobalDomain, then the application uses the value in that domain.
-```
+
 
 在macOS和iOS开发中我们可以通过Defaults来进行一些信息的管理，实现对于一些数据的暂存，因为它最终是存储到文件的，所以可以实现跨进程、线程和跨控制器等进行数据的传递和处理。因为NSUserDefaults是属于Foundation.framework，所以它是跨平台的，除了macOS和iOS还可用于tvOS和watchOS。具体的Api，大家可以参考Apple的开发文档。而macOS下的/usr/bin/defaults命令用来管理用户对于程序预设值，这些预设值可以确保离线存储，哪怕程序停止运行，一般这些值会在程序的偏好设置里找到对应的UI操作来进行修改。也可以通过/usr/bin/defaults命令进行增、删、改、查。
 
