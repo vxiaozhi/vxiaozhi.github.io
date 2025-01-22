@@ -12,6 +12,15 @@ tags:
 
 # 分布式计算平台-Boinc 
 
+BOINC 是 Berkeley Open Infrastructure for Network Computing 的首字母缩写，即伯克利开放式网络计算平台，是用于志愿计算和网格计算的开放的中间件系统。
+
+BOINC 最早是为了支持 SETI@home 项目而开发的，之后逐渐成了最为主流的分布式计算平台，为众多的数学、物理、化学、生命科学、地球科学等学科类别的项目所使用。BOINC 的开发目的是为了帮助研究人员更方便地获得分布在世界各地的志愿者的计算资源。
+
+BOINC 由美国加州大学伯克利分校（U.C.Berkeley）空间科学实验室的一个团队所开发，领导者为 David Anderson，他也领导了 SETI@home 项目的开发。BOINC 项目的开发得到了美国国家科学基金会（National Science Foundation）的赞助。
+
+一些强化训练项目需要收集大量的对局数据，可以使用 Boinc 来实现， 如：
+
+- [lczero](https://github.com/LeelaChessZero/lc0)
 
 ## App 定义
 
