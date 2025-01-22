@@ -30,6 +30,12 @@ BOINC中, 'app' 是程序的抽象， 每个App由一个唯一的名字标识。
 
 app version 是一个特定的App版本。 AppVersion = Platform + VersionNumber + version.xml + Input/Output Templates。
 
+BOINC 支持如下三种模式的App： 
+
+- Native app: add BOINC API calls to the program source code, then compile it (for a given platform) and link it to the BOINC runtime library.
+- Wrapper: use a BOINC-supplied program (wrapper) that interfaces between the BOINC client and an unmodified executable. This removes the need to change your program's source code, but you still need to build it for different platforms (e.g. Windows).
+- VM apps: your app runs inside a virtual machine (typically Linux). A BOINC-supplied program called vboxwrapper interfaces between the BOINC client, VirtualBox, and the VM.
+
 ## 最佳实践
 
 AppVersion的更新以及任务单元的创建通常会是一个高频的操作。提供的命令行只能在本地操作：
