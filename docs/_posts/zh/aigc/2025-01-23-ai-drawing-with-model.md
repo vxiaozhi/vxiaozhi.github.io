@@ -63,12 +63,12 @@ Create a cheerful and intelligent cartoon portrait of a young man named 'Xiao Zh
 
 sdxl-lightning-4step
 
-![sdxl-lightning-4step](imgs/vxiaozhi-sdxl-lightning-4step.png)
+![sdxl-lightning-4step](/imgs/vxiaozhi-sdxl-lightning-4step.png)
 
 
 flux-schnell
 
-![flux-schnell](imgs/vxiaozhi-flux-schnell.webp)
+![flux-schnell](/imgs/vxiaozhi-flux-schnell.webp)
 
 
 
