@@ -82,6 +82,21 @@ http://www.example.com/catalog?item=83&amp;desc=vacation_usa
 
 - [Jekyll Sitemap Generator Plugin](https://github.com/jekyll/jekyll-sitemap)
 
+Jekyll Sitemap 安装流程如下：
+
+- Jekyll version must greater than 3.5.0, run `bundle exec jekyll -v` to show version
+- Add gem 'jekyll-sitemap' to your site's Gemfile and run bundle
+- Add the following to your site's _config.yml:
+  
+```
+url: "https://example.com" # the base hostname & protocol for your site
+plugins:
+  - jekyll-sitemap
+```
+
+- finally, `sitemap.xml` 将会在网站根目录下生成。
+
+
 
 
 ## 提交SiteMap到google
