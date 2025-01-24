@@ -11,6 +11,8 @@ tags:
 
 ## 谷歌是如何找到并索引你的内容的？
 
+Google 自己出了一集视频叫 [《How Search Works》](https://www.youtube.com/watch?v=BNHR6IQJGZs)
+
 谷歌会通过4个主要的方法来查找并索引你的内容
 
 小提示. 由于谷歌内部算法复杂，因此下面的流程在一定程度上做了简化。
@@ -59,8 +61,41 @@ tags:
 - 网站提交完成，大概几天时间，GOOGLE就会收录您的网站，并可在GOOGLE网站管理员工具查看您的网站关键词在GOOGLE中的排名结果，搜索次数等。
 
 
-## 提交站点地图（SiteMap）
+## SEO技巧
 
+### 1. 网站结构层次不要太深
+
+### 2. 页面标题要准确
+
+`<title>` 作用是告诉用户和搜索引擎特定网页的主题是什么。网站上的每个页面最好具有唯一专用标题，这有助于搜索引擎了解该页面与您网站上其他页面的区别。
+
+```
+ <title>小智晖的博客 | VXiaoZhi Blog</title>
+```
+
+### 3. 准确的提炼 “description”
+
+```
+<meta name="description" content="这里是 小智晖 的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员">
+```
+
+### 4. 优化您的图片，使用“alt”属性
+
+### 5. 重要内容不要用动态页面（即JS输出）
+
+### 6. 明智地使用链接：<a>
+
+对于站内链接，要加 “title” 属性加以说明
+
+```
+<a href="/feature.shtml" title="功能" class="nav-link"></a>
+```
+
+对于而外部链接，通常都需要加上 rel=”nofollow” 属性，告诉 “蜘蛛” 不要往下爬了。因为一旦“蜘蛛”爬了外部链接之后，就不会再回来了！
+
+```
+<a href="https://www.xxx.com/xx.stml" rel="nofollow">xxx</a>
+```
 
 
 ## 禁止抓取
@@ -86,4 +121,5 @@ Disallow: /
 
 ## 参考
 
+- [The Beginner's Guide to SEO](https://moz.com/beginners-guide-to-seo)
 - [2021年如何向谷歌提交自己的网站](2021年如何向谷歌提交自己的网站)
