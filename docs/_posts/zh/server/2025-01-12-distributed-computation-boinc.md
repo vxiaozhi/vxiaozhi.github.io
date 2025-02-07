@@ -335,7 +335,7 @@ Max Disk Usage	953.67 MB
 Need validate?	no [0]
 ```
 
-解决办法为：常见任务时，设置 rsc_disk_bound 参数(内存资源限制同理):
+解决办法为：创建任务时，设置 rsc_disk_bound 参数(内存资源限制同理):
 
 ```
 ./bin/create_work --rsc_disk_bound
