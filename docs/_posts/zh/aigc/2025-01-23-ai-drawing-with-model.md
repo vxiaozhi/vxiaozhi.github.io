@@ -42,7 +42,9 @@ Prompt 怎么写呢，这里提供一些方法：
 
 ### 方法3：大模型Prompt
 
-利用 OpenAI / DeepSeek 等LLM模型， 生成 Prompt。
+利用 OpenAI / DeepSeek 等LLM模型， 生成 Prompt。可参考：
+
+- [openwebui prompt](https://openwebui.com/models/?query=prompt)
 
 ## 实践
 
