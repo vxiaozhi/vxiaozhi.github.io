@@ -301,4 +301,48 @@ bool SCHEDULER_OP::poll() {
 - 如果一开始没有设置 next_rpc_delay ，那么退避时间可能会比较久，那么当添加该值后，客户端并不会立即获取到该值，客户端需要等到下次调度请求的返回值中拿到该值再更新。 目前没有办法在后台强制控制客户端更新该配置，只能手动在客户端项目标签下点击更新。
 - 所以最好是一开始就设置该值为一个较小的值。
 
+**资源不足导致任务失败**
+
+result错误如下，显示磁盘使用达到限制。 
+
+```
+<core_client_version>8.0.2</core_client_version>
+<![CDATA[
+<message>
+Disk usage limit exceeded</message>
+<stderr_txt>
+16:56:12 (1919924): wrapper (7.7.26016): starting
+16:56:12 (1919924): wrapper: running ../..
+...
+</stderr_txt>
+]]>
+```
+
+但是查看 host 的机器信息发现磁盘空间其实还很充裕。
+
+```
+Total Disk Space	953.25 GB
+Free Disk Space	638.49 GB
+```
+
+查看其对应的workunit信息发现， `Max Disk Usage` 设置的很小（该参数的默认值为 1G），猜测应该是触达了该阈值导致的。
+
+```
+Estimated FP Operations	100,000.00 GFLOPS
+Max FP Operations	1,000.00 GFLOPS
+Max Memory Usage	476.84 MB
+Max Disk Usage	953.67 MB
+Need validate?	no [0]
+```
+
+解决办法为：常见任务时，设置 rsc_disk_bound 参数(内存资源限制同理):
+
+```
+./bin/create_work --rsc_disk_bound
+```
+
+综上可知： 任务的资源制约不仅与Host的资源状态有关，与 workunit 的资源设定也是有关系的。 所以当因为资源不足导致任务失败时，记得同时检查这两处的参数。
+
+
+
 
