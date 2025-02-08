@@ -105,18 +105,18 @@ flux-schnell 效果如下：
 
 ```
 根据以下对单词 "regret" 的定义和示例，创建一个用于生成有助于记忆该单词的prompt。
-```
+"""
 regret	 v. 懊悔；抱歉 n. 懊悔
-```
+"""
 
 这个prompt必须仅使用视觉线索来生成图像，因此请专注于独特的、易于与单词含义相关联的事物。
 你可以忽略不太重要或难以想象的定义，并添加一些单字特征描述场景和图片风格的视觉外观。保持简洁准确的同时坚持完整的句子。解释你的答案并只生成一个prompt。以以下JSON格式提供你的回答(使用单引号在JSON值中，explanation字段的值用中文，prompt字段的值用英文):
-```json
+"""json
 {
     "explanation": "explain why proposed prompt is suitable for remembering the word 'regret'",
     "prompt": "your prompt here",
 }
-```
+"""
 
 ```
 
