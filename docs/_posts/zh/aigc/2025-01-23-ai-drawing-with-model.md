@@ -40,7 +40,7 @@ Prompt 怎么写呢，这里提供一些方法：
 
 - [kyrick/prompt-parrot](https://replicate.com/kyrick/prompt-parrot)
 
-### 方法3：大模型Prompt
+### 方法3：大模型生成Prompt
 
 利用 OpenAI / DeepSeek 等LLM模型， 生成 Prompt。可参考：
 
@@ -48,15 +48,18 @@ Prompt 怎么写呢，这里提供一些方法：
 
 ## 实践
 
+### 1. 个人图像生成
+
 以生成博客个人图像为例，这里记录其生成过程：
 
 先用 deepseek 深度思考(R1) 生成 Prompt。
 
-prompt：
+生成prompt的提示词如下：
 
 ```
 我想让你为我生成一段详细的画图prompt(只要英文描述即可)： 画一个男士卡通头像，体现"小智晖"这个名字的意义。
 ```
+最终生成的prompt：
 
 ```
 Create a cheerful and intelligent cartoon portrait of a young man named 'Xiao Zhihui' (小智晖), emphasizing the meaning of his name. 'Zhi' (智) represents wisdom and intellect, while 'Hui' (晖) symbolizes sunshine and radiant energy. Design him with bright, warm-toned circular glasses that reflect tiny sparkles of light to showcase intelligence. Style his hair in soft, windswept brown strands with subtle golden highlights resembling sunrays. Dress him in a modern blue-gray hoodie featuring abstract circuit-pattern embroidery on the sleeves, blending technology with approachability. Add a faint glowing halo effect around his head, transitioning from yellow to orange like a miniature sunrise. Include playful elements: a floating lightbulb icon near his shoulder with a smiling face, and three geometric-shaped paper planes (triangle, hexagon, circle) trailing dotted innovation sparks behind them. Make his expression kind yet mischievous, with one eyebrow slightly raised in curiosity and cheeks glowing soft peach. Use a clean line art style with cel-shaded coloring, keeping background minimal but adding faint concentric circles of light radiating outward. Include two subtle motifs: tiny star constellations reflected in his glasses and sunflower petal shapes integrated into the glow effects. Render in 2D vector-based illustration with smooth gradients, optimized for digital avatar use.
@@ -72,5 +75,30 @@ flux-schnell 效果如下：
 
 ![flux-schnell](/imgs/vxiaozhi-flux-schnell.webp)
 
+### 2. 英语单词助记图片生成
+
+根据单词的释义，生成一副可帮助记忆单词的图片。
+
+生成prompt的提示词如下：
+
+>You are a master of prompt engineering for image generation models. Respond only with a prompt and nothing else.
+>
+>Your task is to create a prompt that would be used to generate a mnemonic image helpful in remembering the word "{{ word }}".
+>
+>Base your answer on your knowledge and the following HTML, which contains definitions and examples of this word from an English Dictionary.
+>```html
+>{{ definition }}
+>```
+>
+>The prompt must generate an image without any text, so work only with visual cues. Think of something unique, memorable and easy to connect with the word's meaning. You can omit less important or hard-to-visualize definitions. Add additional single-word features to the prompt describing the visual appearance of the scenery and the style of the image. 
+>
+>Keep it concise and precise while sticking to full sentences. Explain your answer and generate only one prompt. Provide your answer as JSON with the following format:
+>```json
+>{
+>    "explanation": "explain why proposed prompt is suitable for remembering the word '{{ word }}'",
+>    "prompt": "your prompt here",
+>}
+>```
+>Use single quotation marks in JSON values. Remember to keep the prompt short and simple. Good luck!
 
 
