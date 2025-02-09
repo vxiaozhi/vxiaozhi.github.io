@@ -94,7 +94,18 @@ Cline 特点：
 - 不支持系统级操作。
 - 模型支持较为基础。
 - 处理复杂工作流程时灵活性不足。
-  
+
+## 模型选择
+
+理想情况下， 使用 DeepSeek-R1 作规划(Plan), ClaudClaude 3.5 Sonnet 作执行(Act) 最佳。但考虑到商业模型收费较贵。
+
+尝试了下 Ollama 本地模型，如 DeepSeek-R1:16b, Cline 基本无法工作。
+
+幸好，Ollama 模型市场中，有基于DeepSeek-R1适配Cline的模型，尝试了以下两个模型的 16b 版本， 对于简单的任务测试都是OK的。
+
+- ishumilin/deepseek-r1-coder-tools
+- tom_himanen/deepseek-r1-roo-cline-tools
+
 ## Cline 实践
 
 ### 1. “对联王”的微信小程序
