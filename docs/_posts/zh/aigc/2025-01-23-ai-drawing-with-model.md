@@ -15,7 +15,7 @@ tags:
 
 -  [replicate](https://replicate.com/explore)
 
-例如：图像生成（Generate images）模型，用户使用次数最多的是 字节跳动的这个 sdxl 模型：
+例如：图像生成（Generate images）模型，用户使用次数最多的是 字节跳动的这个 sdxl 模型, 但经过实际验证，flux-schnell的效果要更好：
 
 - [bytedance/sdxl-lightning-4step](https://replicate.com/bytedance/sdxl-lightning-4step)
 - [black-forest-labs/flux-schnell](https://replicate.com/black-forest-labs/flux-schnell)
@@ -119,4 +119,21 @@ regret	 v. 懊悔；抱歉 n. 懊悔
 """
 
 ```
+
+使用 DeepSeek-R1生成的Prompt如下：
+
+```
+{
+    "explanation": "黄昏象征错过的时光，破碎相框暗示无法挽回的过去，沙漏中的'Sorry'沙字直接关联懊悔的情感，柔和的暗色调强化忧郁氛围。阴影中模糊的人形轮廓避免了具体人物特征，使观者能代入自身经历。",
+    "prompt": "A dimly lit room at dusk with a shattered photo frame on wooden floor, golden sand from an hourglass forming the word 'Sorry', soft shadows of a person with lowered head cast on peach-toned walls, in muted watercolor style with blurred edges."
+}
+```
+
+flux-schnell 效果如下：
+
+![flux-schnell](/imgs/word-regret.png)
+
+![flux-schnell2](/imgs/word-regret-2.png)
+
+
 
