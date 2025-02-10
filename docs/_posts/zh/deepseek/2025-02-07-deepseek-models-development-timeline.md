@@ -29,6 +29,8 @@ tags:
 
 **DeepSeek-V2.5**
 
+- [deepseek-v2.5](https://ollama.com/library/deepseek-v2.5)
+
 升级到V2.5，不仅保留了原有Chat模型的通用对话能力和Coder模型的强大代码处理能力，还更好地对齐了人类偏好，在写作任务、指令跟随等多个方面实现了大幅提升。
 
 **DeepSeek-R1-Lite**
