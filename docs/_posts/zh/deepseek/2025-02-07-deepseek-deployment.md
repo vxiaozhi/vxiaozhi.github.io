@@ -49,7 +49,27 @@ ollama run deepseek-r1:14b
 
 ## 支持DeepSeek的云服务平台
 
+### deepseek 官方
+
 - [deepseek 官方](https://chat.deepseek.com/)
+
+### 字节火山引擎
+
+- [字节火山引擎](https://console.volcengine.com/ark/region:ark+cn-beijing/model?feature=&vendor=Bytedance&view=LIST_VIEW)
+- [火山引擎控制台](https://console.volcengine.com/home)
+- [ChatCompletions-文本生成](https://www.volcengine.com/docs/82379/1298454)
+
+### 阿里云百炼
+
+- [阿里云百炼 模型广场](https://bailian.console.aliyun.com/?spm=5176.29597918.J__Xz0dtrgG-8e2H7vxPlPy.8.67b67ca0NBXQtk#/model-market)
+- [DeepSeek-V3 API示例](https://bailian.console.aliyun.com/?spm=5176.29597918.J__Xz0dtrgG-8e2H7vxPlPy.8.67b67ca0NBXQtk#/model-market/detail/deepseek-v3?tabKey=sdk)
+
+## 腾讯云大模型知识引擎
+
+- [DeepSeek应用创建](https://cloud.tencent.com/document/product/1759/116006)
+  
+### 其它
+
 - [硅基流动](https://siliconflow.cn/zh-cn/models)
 - [openrouter](https://openrouter.ai/deepseek/deepseek-r1)
 - [huggingface](https://huggingface.co/spaces/llamameta/DeepSeek-R1-Chat-Assistant-Web-Search)
