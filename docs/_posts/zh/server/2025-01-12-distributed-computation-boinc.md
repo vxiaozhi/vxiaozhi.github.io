@@ -349,6 +349,28 @@ Need validate?	no [0]
 Exit status	197 (0x000000C5) EXIT_TIME_LIMIT_EXCEEDED
 ```
 
+另外 --rsc_fpops_bound 也可通过 template_in 模版进行设置，并且此处的优先级要高于create_work参数。 
+
+```
+<?xml version="1.0"?>
+
+<input_template>
+    <file_info>
+        <!-- <physical_name>input_url.list</physical_name> -->
+         <number>0</number>
+    </file_info>
+    <workunit>
+        <file_ref>
+            <file_number>0</file_number>
+            <open_name>in</open_name>
+            <copy_file/>
+        </file_ref>
+        <rsc_fpops_bound>1e14</rsc_fpops_bound>
+        <rsc_fpops_est>1e14</rsc_fpops_est>
+    </workunit>
+</input_template>
+```
+
 
 
 
