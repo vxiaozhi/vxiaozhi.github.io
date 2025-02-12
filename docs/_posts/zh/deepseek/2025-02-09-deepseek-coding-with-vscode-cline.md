@@ -105,6 +105,7 @@ Cline 特点：
 
 - ishumilin/deepseek-r1-coder-tools
 - tom_himanen/deepseek-r1-roo-cline-tools
+- qwen2.5-coder:14b-instruct-q8_0[bolt.new 上可运行，cline待验证]
 
 ## Cline 实践
 

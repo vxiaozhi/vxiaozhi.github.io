@@ -335,13 +335,41 @@ Max Disk Usage	953.67 MB
 Need validate?	no [0]
 ```
 
-解决办法为：创建任务时，设置 rsc_disk_bound 参数(内存资源限制同理):
+解决办法为：创建任务时，设置 rsc_disk_bound 参数(内存资源(--rsc_memory_bound)、算力资源(--rsc_fpops_bound) 限制同理):
 
 ```
 ./bin/create_work --rsc_disk_bound
 ```
 
 综上可知： 任务的资源制约不仅与Host的资源状态有关，与 workunit 的资源设定也是有关系的。 所以当因为资源不足导致任务失败时，记得同时检查这两处的参数。
+
+特别指出， 算力资源(--rsc_fpops_bound) 达到限制，会报“时间超限”的错误，但其实错误是由于使用的算力达到了阈值导致的。
+
+```
+Exit status	197 (0x000000C5) EXIT_TIME_LIMIT_EXCEEDED
+```
+
+另外 --rsc_fpops_bound 也可通过 template_in 模版进行设置，并且此处的优先级要高于create_work参数。 
+
+```
+<?xml version="1.0"?>
+
+<input_template>
+    <file_info>
+        <!-- <physical_name>input_url.list</physical_name> -->
+         <number>0</number>
+    </file_info>
+    <workunit>
+        <file_ref>
+            <file_number>0</file_number>
+            <open_name>in</open_name>
+            <copy_file/>
+        </file_ref>
+        <rsc_fpops_bound>1e14</rsc_fpops_bound>
+        <rsc_fpops_est>1e14</rsc_fpops_est>
+    </workunit>
+</input_template>
+```
 
 
 
