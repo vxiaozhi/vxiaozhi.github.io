@@ -9,6 +9,8 @@ tags:
     - deepseek
 ---
 
+联网搜索实现方案，参考: [基于ChatGPT开发Agent实现互联网内容搜索](https://zhuanlan.zhihu.com/p/673524057)
+
 提供联网搜索API的搜索引擎有如下：
 
 ## 免费开源
