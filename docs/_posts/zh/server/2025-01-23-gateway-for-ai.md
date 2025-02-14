@@ -81,11 +81,13 @@ LLM 结果缓存插件，默认配置方式可以直接用于 openai 协议的�
 
 网关具备开箱即用的 AI 可观测能力，提供了全局、provider 维度、模型维度以及消费者维度的 token 消耗/延时等观测能力。
 
-## 开源项目
+## 开源AI网关项目
 
 - [gateway](https://github.com/Portkey-AI/gateway)
 - [higress](https://github.com/alibaba/higress)
 - [kong](https://github.com/Kong/kong)
+- [Dify](https://github.com/langgenius/dify)
+- [One API](https://github.com/songquanpeng/one-api)
 
 ## 参考
 
