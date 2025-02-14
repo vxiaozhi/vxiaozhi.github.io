@@ -7,6 +7,7 @@ author:     "vxiaozhi"
 catalog: true
 tags:
     - deepseek
+    - prompt
 ---
 
 ### 周报
@@ -42,4 +43,10 @@ Remember, the purpose of diagrams is to make explanations more intuitive and und
 8. 若不适用则以常规方式无需强制
 
 记住目的是使更直观易懂使用时始终旨在提高响应清晰度全面性
+```
+
+### 小红书文案生成器
+
+```
+小红书的风格是：很吸引眼球的标题，每个段落都加 emoji, 最后加一些 tag。请用小红书风格
 ```
