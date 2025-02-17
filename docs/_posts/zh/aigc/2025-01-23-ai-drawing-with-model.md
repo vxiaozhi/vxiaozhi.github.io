@@ -20,6 +20,10 @@ tags:
 - [bytedance/sdxl-lightning-4step](https://replicate.com/bytedance/sdxl-lightning-4step)
 - [black-forest-labs/flux-schnell](https://replicate.com/black-forest-labs/flux-schnell)
 
+**图片上显示汉字的模型**
+
+- [AnyText](https://github.com/tyxsspa/AnyText)
+
 或者根据人脸生成模型（Use a face to make images）
 
 - [tencentarc/photomaker](https://replicate.com/tencentarc/photomaker)
