@@ -49,6 +49,10 @@ tags:
 - 2025年1月26日：DeepSeek应用登顶苹果中国地区和美国地区应用商店免费APP下载排行榜，在美区下载榜上超越了ChatGPT。
 - 2025年1月31日：DeepSeek-R1模型现已作为NVIDIA NIM微服务预览版提供，可以在单个NVIDIA HGX H200系统上每秒提供多达3872tokens。
 
+huggingface
+
+- [DeepSeek-R1](https://huggingface.co/deepseek-ai/DeepSeek-R1)
+
 **Janus-Pro**
 
 DeepSeek Janus-Pro 是由 DeepSeek 团队推出的一款开源多模态 AI 模型，旨在通过统一的框架实现高效的多模态理解和生成能力。该模型系列基于自回归框架设计，具备强大的文本到图像生成和视觉理解能力。其目标是解决传统多模态模型中视觉编码器在不同任务中的功能冲突问题，同时提升模型在多模态任务中的灵活性和性能。
