@@ -90,6 +90,7 @@ Stoplight 是一款全面的 API 开发平台，包括 API 设计、文档化、
 
 
 ## 基于Swagger的API管理方案设计
+
 ### swagger生态组件
 swagger是OpenAPI的前身，生态组件非常丰富。  
 
@@ -108,12 +109,20 @@ swagger是OpenAPI的前身，生态组件非常丰富。
 ## Swagger一些命令备忘
 
 API可视化
+
 ```
 docker run --rm -p 80:8080 swaggerapi/swagger-ui
 ```
 
 可视化编辑API SPEC文件
+
 ```
 docker run --rm -p 80:8080 swaggerapi/swagger-editor
+```
+生成 markdown 文档
+
+```
+npm i -g openapi-to-md
+openapi-to-md -s openapi.json api.md
 ```
 
