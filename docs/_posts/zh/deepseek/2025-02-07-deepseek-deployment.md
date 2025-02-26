@@ -19,7 +19,9 @@ DeepSeek是最近非常火的开源大模型，国产大模型 DeepSeek 凭借�
 
 今天就跟大家分享一下，DeepSeek部署的几种方案。
 
-## Ollama本地部署
+## 本地部署方案
+
+### Ollama
 
 首先我们需要安装Ollama，Ollama是一个用于本地管理和运行大模型的工具，能够简化模型的下载和调度操作。
 
@@ -47,6 +49,21 @@ ollama run deepseek-r1:14b
 
 在 Apple M1 Pro / 32 GB 机器上运行 14b 模型毫无压力， 可以达到大约 10 token/s 的速度。
 
+### SGLang
+
+- [sglang](https://github.com/sgl-project/sglang) SGLang is a fast serving framework for large language models and vision language models.
+
+
+
+### VLLM
+
+- [vllm](https://github.com/vllm-project/vllm)
+
+### inference
+
+- [inference](https://github.com/xorbitsai/inference)
+
+
 ## 支持DeepSeek的云服务平台
 
 ### deepseek 官方
@@ -54,6 +71,45 @@ ollama run deepseek-r1:14b
 - [deepseek 官方](https://chat.deepseek.com/)
 
 ### 字节火山引擎
+
+- [模型体验入口](https://console.volcengine.com/ark/region:ark+cn-beijing/experience/chat)
+- [我的应用-我的DeepSeek-R1-联网搜索版](https://console.volcengine.com/ark/region:ark+cn-beijing/assistant/detail?id=bot-20250226234543-fdsdl&templateType=InfoSource)
+
+预埋推理接入点：
+
+```
+curl https://ark.cn-beijing.volces.com/api/v3/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ARK_API_KEY" \
+  -d '{
+    "model": "deepseek-r1-250120",
+    "messages": [
+      {"role": "system","content": "你是人工智能助手."},
+      {"role": "user","content": "常见的十字花科植物有哪些？"}
+    ]
+  }'
+```
+
+同时也支持自定义在线接入点（Endpoint）
+
+- [创建在线接入点](https://console.volcengine.com/ark/region:ark+cn-beijing/endpoint?config=%7B%7D)
+
+示例代码如下， ep-20250226225639-lbdsg 即为 Endpoint ID：
+
+```
+curl https://ark.cn-beijing.volces.com/api/v3/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ARK_API_KEY" \
+  -d '{
+    "model": "ep-20250226225639-lbdsg",
+    "messages": [
+      {"role": "system","content": "你是人工智能助手."},
+      {"role": "user","content": "常见的十字花科植物有哪些？"}
+    ]
+  }'
+```
+
+其它参考：
 
 - [字节火山引擎](https://console.volcengine.com/ark/region:ark+cn-beijing/model?feature=&vendor=Bytedance&view=LIST_VIEW)
 - [火山引擎控制台](https://console.volcengine.com/home)
