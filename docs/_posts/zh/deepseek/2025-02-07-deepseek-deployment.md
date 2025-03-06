@@ -49,6 +49,14 @@ ollama run deepseek-r1:14b
 
 在 Apple M1 Pro / 32 GB 机器上运行 14b 模型毫无压力， 可以达到大约 10 token/s 的速度。
 
+如果需要对API 进行加密，可参考：
+
+- [How to secure the API with api key](https://github.com/ollama/ollama/issues/849)
+  
+### llama.cpp
+
+- [llama.cpp](https://github.com/ggml-org/llama.cpp)
+
 ### SGLang
 
 - [sglang](https://github.com/sgl-project/sglang) SGLang is a fast serving framework for large language models and vision language models.
