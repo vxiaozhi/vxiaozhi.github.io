@@ -53,6 +53,43 @@ ollama run deepseek-r1:14b
 
 - [sglang](https://github.com/sgl-project/sglang) SGLang is a fast serving framework for large language models and vision language models.
 
+参考启动命令
+
+ds1:
+
+```
+docker run  -e GLOO_SOCKET_IFNAME=bond0 -e NCCL_SOCKET_IFNAME=bond0 -e NCCL_DEBUG=INFO --gpus all \
+    --shm-size 128g \
+    --network=host \
+    -v /modelshare_readonly/deepseek-ai:/deepseek \
+    --name sglang_multinode1 \
+    -d \
+    --restart always \
+    -p 50000:50000 \
+    --ipc=host \
+    --privileged --device=/dev/infiniband:/dev/infiniband \
+    lmsysorg/sglang:v0.4.2.post4-cu125-srt \
+    python3 -m sglang.launch_server --model-path /deepseek/DeepSeek-R1 --served-model-name DeepSeek-R1 --enable-metrics --enable-dp-attention --enable-cache-report --tp 16 --dist-init-addr 192.168.253.81:20001 --nnodes 2 --node-rank 0 --trust-remote-code --host 0.0.0.0 --port 50000
+
+```
+
+ds2:
+
+```
+docker run -e GLOO_SOCKET_IFNAME=bond0 -e NCCL_SOCKET_IFNAME=bond0 -e NCCL_DEBUG=INFO --gpus all \
+    --shm-size 128g \
+    --network=host \
+    -v /modelshare_readonly/deepseek-ai:/deepseek \
+    --name sglang_multinode2 \
+    -d \
+    --restart always \
+    -p 50000:50000 \
+    --ipc=host \
+    --privileged --device=/dev/infiniband:/dev/infiniband \
+    lmsysorg/sglang:v0.4.2.post4-cu125-srt \
+    python3 -m sglang.launch_server --model-path /deepseek/DeepSeek-R1 --served-model-name DeepSeek-R1 --enable-metrics --enable-dp-attention --enable-cache-report --tp 16 --dist-init-addr 192.168.253.81:20001 --nnodes 2 --node-rank 1 --trust-remote-code --host 0.0.0.0 --port 50000
+
+```
 
 
 ### VLLM
