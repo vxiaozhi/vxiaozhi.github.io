@@ -365,3 +365,8 @@ data: {"id":"chatcmpl-835","object":"chat.completion.chunk","created":1740118946
 data: [DONE]
 ```
 
+## 其它同类产品
+
+- [MetaGPT](https://github.com/geekan/MetaGPT)
+- [OpenManus](https://github.com/mannaandpoem/OpenManus)
+
