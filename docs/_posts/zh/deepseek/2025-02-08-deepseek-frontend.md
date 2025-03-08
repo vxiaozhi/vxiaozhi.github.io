@@ -23,7 +23,7 @@ tags:
 - TTS
 - 丰富的应用市场
   
-### 3.  [Lobe Chat](https://github.com/lobehub/lobe-chat)
+### 3. [Lobe Chat](https://github.com/lobehub/lobe-chat)
 
 - TTS & STT 语音会话
 - Text to Image 文生图
@@ -39,3 +39,8 @@ $ docker run -d -p 3210:3210 \
   --name lobe-chat \
   lobehub/lobe-chat
 ```
+
+### Html 纯静态页面部署
+
+- [Tifa-Deepsex-OllamaWebUI](https://github.com/Value99/Tifa-Deepsex-OllamaWebUI)
+- [ollama-simple-webui](https://github.com/Joburgess/ollama-simple-webui) 一个简单的与ollama交互的网页应用
