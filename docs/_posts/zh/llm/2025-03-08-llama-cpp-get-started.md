@@ -88,9 +88,48 @@ Bash./llama.cpp/main -m phi-2-Q4_K_M.gguf -p "测试文本" -n 128
 - 部署使用Q4_K_M
 - 移动端使用Q2_K
 
+## 命令行
+
+启动客户端：
+
+```
+llama-cli -m DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf
+```
+
+启动服务器：
+
+```
+llama-server -m DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf --port 8080
+```
+
+启动服务器（并发： 4， 窗口大小： 16384）：
+
+```
+llama-server -m DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf -c 16384 -np 4  --port 8080
+# Basic web UI can be accessed via browser: http://localhost:8080
+# Chat completion endpoint: http://localhost:8080/v1/chat/completions
+```
+
+
+
+性能测试：
+
+```
+llama-bench -m DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf
+```
+测试结果如下：
+
+| model                          |       size |     params | backend    | threads |          test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | ------------: | -------------------: |
+| qwen2 14B Q5_K - Medium        |   9.78 GiB |    14.77 B | Metal,BLAS |       8 |         pp512 |        114.96 ± 0.08 |
+| qwen2 14B Q5_K - Medium        |   9.78 GiB |    14.77 B | Metal,BLAS |       8 |         tg128 |         11.27 ± 0.03 |
+
+build: 3ffbbd5c (4840)
+
 
 ## GGUF 模型推荐
 
 - [Tifa-Deepseek-14b-CoT](https://huggingface.co/ValueFX9507/Tifa-Deepsex-14b-CoT-GGUF-Q4) 本模型基于Deepseek-R1-14B进行深度优化，借助Tifa_220B生成的数据集通过三重训练策略显著增强角色扮演、小说文本生成与思维链（CoT）能力。特别适合需要长程上下文关联的创作场景。
 - [DeepSeek-R1-Distill-Qwen-32B-GGUF](https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF)
+- [DeepSeek-R1-Distill-Qwen-14B-Uncensored-GGU](https://huggingface.co/mradermacher/DeepSeek-R1-Distill-Qwen-14B-Uncensored-GGUF)
 - [Llamacpp imatrix Quantizations of QwQ-32B by Qwen](https://huggingface.co/bartowski/Qwen_QwQ-32B-GGUF)
