@@ -133,3 +133,410 @@ build: 3ffbbd5c (4840)
 - [DeepSeek-R1-Distill-Qwen-32B-GGUF](https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF)
 - [DeepSeek-R1-Distill-Qwen-14B-Uncensored-GGU](https://huggingface.co/mradermacher/DeepSeek-R1-Distill-Qwen-14B-Uncensored-GGUF)
 - [Llamacpp imatrix Quantizations of QwQ-32B by Qwen](https://huggingface.co/bartowski/Qwen_QwQ-32B-GGUF)
+
+## 部署实践
+
+**启动服务**
+
+默认上下文大小为 4096
+
+```
+llama-server -m DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf
+```
+
+```
+build: 4840 (3ffbbd5c) with Apple clang version 14.0.0 (clang-1400.0.29.202) for arm64-apple-darwin23.4.0
+system info: n_threads = 8, n_threads_batch = 8, total_threads = 10
+
+system_info: n_threads = 8 (n_threads_batch = 8) / 10 | Metal : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | DOTPROD = 1 | LLAMAFILE = 1 | ACCELERATE = 1 | AARCH64_REPACK = 1 | 
+
+main: HTTP server is listening, hostname: 127.0.0.1, port: 8080, http threads: 9
+main: loading model
+srv    load_model: loading model 'DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf'
+llama_model_load_from_file_impl: using device Metal (Apple M1 Pro) - 21845 MiB free
+llama_model_loader: loaded meta data with 44 key-value pairs and 579 tensors from DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen2
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = DeepSeek R1 Distill Qwen 14B Uncensored
+llama_model_loader: - kv   3:                           general.finetune str              = Uncensored
+llama_model_loader: - kv   4:                           general.basename str              = DeepSeek-R1-Distill-Qwen
+llama_model_loader: - kv   5:                         general.size_label str              = 14B
+llama_model_loader: - kv   6:                            general.license str              = mit
+llama_model_loader: - kv   7:                   general.base_model.count u32              = 1
+llama_model_loader: - kv   8:                  general.base_model.0.name str              = DeepSeek R1 Distill Qwen 14B
+llama_model_loader: - kv   9:          general.base_model.0.organization str              = Deepseek Ai
+llama_model_loader: - kv  10:              general.base_model.0.repo_url str              = https://huggingface.co/deepseek-ai/De...
+llama_model_loader: - kv  11:                      general.dataset.count u32              = 1
+llama_model_loader: - kv  12:                     general.dataset.0.name str              = Uncensor
+llama_model_loader: - kv  13:             general.dataset.0.organization str              = Guilherme34
+llama_model_loader: - kv  14:                 general.dataset.0.repo_url str              = https://huggingface.co/Guilherme34/un...
+llama_model_loader: - kv  15:                               general.tags arr[str,1]       = ["generated_from_trainer"]
+llama_model_loader: - kv  16:                          qwen2.block_count u32              = 48
+llama_model_loader: - kv  17:                       qwen2.context_length u32              = 131072
+llama_model_loader: - kv  18:                     qwen2.embedding_length u32              = 5120
+llama_model_loader: - kv  19:                  qwen2.feed_forward_length u32              = 13824
+llama_model_loader: - kv  20:                 qwen2.attention.head_count u32              = 40
+llama_model_loader: - kv  21:              qwen2.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  22:                       qwen2.rope.freq_base f32              = 1000000.000000
+llama_model_loader: - kv  23:     qwen2.attention.layer_norm_rms_epsilon f32              = 0.000010
+llama_model_loader: - kv  24:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  25:                         tokenizer.ggml.pre str              = deepseek-r1-qwen
+llama_model_loader: - kv  26:                      tokenizer.ggml.tokens arr[str,151665]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  27:                  tokenizer.ggml.token_type arr[i32,151665]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  28:                      tokenizer.ggml.merges arr[str,151387]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  29:                tokenizer.ggml.bos_token_id u32              = 151646
+llama_model_loader: - kv  30:                tokenizer.ggml.eos_token_id u32              = 151643
+llama_model_loader: - kv  31:            tokenizer.ggml.padding_token_id u32              = 151643
+llama_model_loader: - kv  32:               tokenizer.ggml.add_bos_token bool             = true
+llama_model_loader: - kv  33:               tokenizer.ggml.add_eos_token bool             = false
+llama_model_loader: - kv  34:                    tokenizer.chat_template str              = {% if not add_generation_prompt is de...
+llama_model_loader: - kv  35:               general.quantization_version u32              = 2
+llama_model_loader: - kv  36:                          general.file_type u32              = 17
+llama_model_loader: - kv  37:                                general.url str              = https://huggingface.co/mradermacher/D...
+llama_model_loader: - kv  38:              mradermacher.quantize_version str              = 2
+llama_model_loader: - kv  39:                  mradermacher.quantized_by str              = mradermacher
+llama_model_loader: - kv  40:                  mradermacher.quantized_at str              = 2025-01-25T03:07:17+01:00
+llama_model_loader: - kv  41:                  mradermacher.quantized_on str              = marco
+llama_model_loader: - kv  42:                         general.source.url str              = https://huggingface.co/nicoboss/DeepS...
+llama_model_loader: - kv  43:                  mradermacher.convert_type str              = hf
+llama_model_loader: - type  f32:  241 tensors
+llama_model_loader: - type q5_K:  289 tensors
+llama_model_loader: - type q6_K:   49 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q5_K - Medium
+print_info: file size   = 9.78 GiB (5.69 BPW) 
+load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+load: special tokens cache size = 22
+load: token to piece cache size = 0.9310 MB
+print_info: arch             = qwen2
+print_info: vocab_only       = 0
+print_info: n_ctx_train      = 131072
+print_info: n_embd           = 5120
+print_info: n_layer          = 48
+print_info: n_head           = 40
+print_info: n_head_kv        = 8
+print_info: n_rot            = 128
+print_info: n_swa            = 0
+print_info: n_embd_head_k    = 128
+print_info: n_embd_head_v    = 128
+print_info: n_gqa            = 5
+print_info: n_embd_k_gqa     = 1024
+print_info: n_embd_v_gqa     = 1024
+print_info: f_norm_eps       = 0.0e+00
+print_info: f_norm_rms_eps   = 1.0e-05
+print_info: f_clamp_kqv      = 0.0e+00
+print_info: f_max_alibi_bias = 0.0e+00
+print_info: f_logit_scale    = 0.0e+00
+print_info: n_ff             = 13824
+print_info: n_expert         = 0
+print_info: n_expert_used    = 0
+print_info: causal attn      = 1
+print_info: pooling type     = 0
+print_info: rope type        = 2
+print_info: rope scaling     = linear
+print_info: freq_base_train  = 1000000.0
+print_info: freq_scale_train = 1
+print_info: n_ctx_orig_yarn  = 131072
+print_info: rope_finetuned   = unknown
+print_info: ssm_d_conv       = 0
+print_info: ssm_d_inner      = 0
+print_info: ssm_d_state      = 0
+print_info: ssm_dt_rank      = 0
+print_info: ssm_dt_b_c_rms   = 0
+print_info: model type       = 14B
+print_info: model params     = 14.77 B
+print_info: general.name     = DeepSeek R1 Distill Qwen 14B Uncensored
+print_info: vocab type       = BPE
+print_info: n_vocab          = 151665
+print_info: n_merges         = 151387
+print_info: BOS token        = 151646 '<｜begin▁of▁sentence｜>'
+print_info: EOS token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: EOT token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: PAD token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: LF token         = 198 'Ċ'
+print_info: FIM PRE token    = 151659 '<|fim_prefix|>'
+print_info: FIM SUF token    = 151661 '<|fim_suffix|>'
+print_info: FIM MID token    = 151660 '<|fim_middle|>'
+print_info: FIM PAD token    = 151662 '<|fim_pad|>'
+print_info: FIM REP token    = 151663 '<|repo_name|>'
+print_info: FIM SEP token    = 151664 '<|file_sep|>'
+print_info: EOG token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: EOG token        = 151662 '<|fim_pad|>'
+print_info: EOG token        = 151663 '<|repo_name|>'
+print_info: EOG token        = 151664 '<|file_sep|>'
+print_info: max token length = 256
+load_tensors: loading model tensors, this can take a while... (mmap = true)
+load_tensors: offloading 48 repeating layers to GPU
+load_tensors: offloading output layer to GPU
+load_tensors: offloaded 49/49 layers to GPU
+load_tensors: Metal_Mapped model buffer size = 10013.43 MiB
+load_tensors:   CPU_Mapped model buffer size =   509.13 MiB
+..........................................................................................
+llama_init_from_model: n_seq_max     = 1
+llama_init_from_model: n_ctx         = 4096
+llama_init_from_model: n_ctx_per_seq = 4096
+llama_init_from_model: n_batch       = 2048
+llama_init_from_model: n_ubatch      = 512
+llama_init_from_model: flash_attn    = 0
+llama_init_from_model: freq_base     = 1000000.0
+llama_init_from_model: freq_scale    = 1
+llama_init_from_model: n_ctx_per_seq (4096) < n_ctx_train (131072) -- the full capacity of the model will not be utilized
+ggml_metal_init: allocating
+ggml_metal_init: found device: Apple M1 Pro
+ggml_metal_init: picking default device: Apple M1 Pro
+ggml_metal_init: using embedded metal library
+ggml_metal_init: GPU name:   Apple M1 Pro
+ggml_metal_init: GPU family: MTLGPUFamilyApple7  (1007)
+ggml_metal_init: GPU family: MTLGPUFamilyCommon3 (3003)
+ggml_metal_init: GPU family: MTLGPUFamilyMetal3  (5001)
+ggml_metal_init: simdgroup reduction   = true
+ggml_metal_init: simdgroup matrix mul. = true
+ggml_metal_init: has residency sets    = false
+ggml_metal_init: has bfloat            = true
+ggml_metal_init: use bfloat            = false
+ggml_metal_init: hasUnifiedMemory      = true
+ggml_metal_init: recommendedMaxWorkingSetSize  = 22906.50 MB
+ggml_metal_init: skipping kernel_get_rows_bf16                     (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_f32                   (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_f32_1row              (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_f32_l4                (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_bf16                  (not supported)
+ggml_metal_init: skipping kernel_mul_mv_id_bf16_f32                (not supported)
+ggml_metal_init: skipping kernel_mul_mm_bf16_f32                   (not supported)
+ggml_metal_init: skipping kernel_mul_mm_id_bf16_f32                (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h64           (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h80           (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h96           (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h112          (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h128          (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h256          (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_vec_bf16_h128      (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_vec_bf16_h256      (not supported)
+ggml_metal_init: skipping kernel_cpy_f32_bf16                      (not supported)
+ggml_metal_init: skipping kernel_cpy_bf16_f32                      (not supported)
+ggml_metal_init: skipping kernel_cpy_bf16_bf16                     (not supported)
+llama_kv_cache_init: kv_size = 4096, offload = 1, type_k = 'f16', type_v = 'f16', n_layer = 48, can_shift = 1
+llama_kv_cache_init:      Metal KV buffer size =   768.00 MiB
+llama_init_from_model: KV self size  =  768.00 MiB, K (f16):  384.00 MiB, V (f16):  384.00 MiB
+llama_init_from_model:        CPU  output buffer size =     0.58 MiB
+llama_init_from_model:      Metal compute buffer size =   368.00 MiB
+llama_init_from_model:        CPU compute buffer size =    18.01 MiB
+llama_init_from_model: graph nodes  = 1686
+llama_init_from_model: graph splits = 2
+common_init_from_params: setting dry_penalty_last_n to ctx_size = 4096
+common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+srv          init: initializing slots, n_slots = 1
+slot         init: id  0 | task -1 | new slot n_ctx_slot = 4096
+main: model loaded
+main: chat template, chat_template: {% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% set ns = namespace(is_first=false, is_tool=false, is_output_first=true, system_prompt='') %}{%- for message in messages %}{%- if message['role'] == 'system' %}{% set ns.system_prompt = message['content'] %}{%- endif %}{%- endfor %}{{bos_token}}{{ns.system_prompt}}{%- for message in messages %}{%- if message['role'] == 'user' %}{%- set ns.is_tool = false -%}{{'<｜User｜>' + message['content']}}{%- endif %}{%- if message['role'] == 'assistant' and message['content'] is none %}{%- set ns.is_tool = false -%}{%- for tool in message['tool_calls']%}{%- if not ns.is_first %}{{'<｜Assistant｜><｜tool▁calls▁begin｜><｜tool▁call▁begin｜>' + tool['type'] + '<｜tool▁sep｜>' + tool['function']['name'] + '\n' + '```json' + '\n' + tool['function']['arguments'] + '\n' + '```' + '<｜tool▁call▁end｜>'}}{%- set ns.is_first = true -%}{%- else %}{{'\n' + '<｜tool▁call▁begin｜>' + tool['type'] + '<｜tool▁sep｜>' + tool['function']['name'] + '\n' + '```json' + '\n' + tool['function']['arguments'] + '\n' + '```' + '<｜tool▁call▁end｜>'}}{{'<｜tool▁calls▁end｜><｜end▁of▁sentence｜>'}}{%- endif %}{%- endfor %}{%- endif %}{%- if message['role'] == 'assistant' and message['content'] is not none %}{%- if ns.is_tool %}{{'<｜tool▁outputs▁end｜>' + message['content'] + '<｜end▁of▁sentence｜>'}}{%- set ns.is_tool = false -%}{%- else %}{% set content = message['content'] %}{% if '</think>' in content %}{% set content = content.split('</think>')[-1] %}{% endif %}{{'<｜Assistant｜>' + content + '<｜end▁of▁sentence｜>'}}{%- endif %}{%- endif %}{%- if message['role'] == 'tool' %}{%- set ns.is_tool = true -%}{%- if ns.is_output_first %}{{'<｜tool▁outputs▁begin｜><｜tool▁output▁begin｜>' + message['content'] + '<｜tool▁output▁end｜>'}}{%- set ns.is_output_first = false %}{%- else %}{{'\n<｜tool▁output▁begin｜>' + message['content'] + '<｜tool▁output▁end｜>'}}{%- endif %}{%- endif %}{%- endfor -%}{% if ns.is_tool %}{{'<｜tool▁outputs▁end｜>'}}{% endif %}{% if add_generation_prompt and not ns.is_tool %}{{'<｜Assistant｜>'}}{% endif %}, example_format: 'You are a helpful assistant
+
+<｜User｜>Hello<｜Assistant｜>Hi there<｜end▁of▁sentence｜><｜User｜>How are you?<｜Assistant｜>'
+main: server is listening on http://127.0.0.1:8080 - starting the main loop
+srv  update_slots: all slots are idle
+
+```
+
+上下文窗口能设置的大小和系统显存有关，当上下文窗口设置太大时，启动会报错，如下：
+
+```
+# 设置上下文大小为 64K
+llama-server -m DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf -c 64000
+```
+
+```
+build: 4840 (3ffbbd5c) with Apple clang version 14.0.0 (clang-1400.0.29.202) for arm64-apple-darwin23.4.0
+system info: n_threads = 8, n_threads_batch = 8, total_threads = 10
+
+system_info: n_threads = 8 (n_threads_batch = 8) / 10 | Metal : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | DOTPROD = 1 | LLAMAFILE = 1 | ACCELERATE = 1 | AARCH64_REPACK = 1 | 
+
+main: HTTP server is listening, hostname: 127.0.0.1, port: 8080, http threads: 9
+main: loading model
+srv    load_model: loading model 'DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf'
+llama_model_load_from_file_impl: using device Metal (Apple M1 Pro) - 21845 MiB free
+llama_model_loader: loaded meta data with 44 key-value pairs and 579 tensors from DeepSeek-R1-Distill-Qwen-14B-Uncensored.Q5_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen2
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = DeepSeek R1 Distill Qwen 14B Uncensored
+llama_model_loader: - kv   3:                           general.finetune str              = Uncensored
+llama_model_loader: - kv   4:                           general.basename str              = DeepSeek-R1-Distill-Qwen
+llama_model_loader: - kv   5:                         general.size_label str              = 14B
+llama_model_loader: - kv   6:                            general.license str              = mit
+llama_model_loader: - kv   7:                   general.base_model.count u32              = 1
+llama_model_loader: - kv   8:                  general.base_model.0.name str              = DeepSeek R1 Distill Qwen 14B
+llama_model_loader: - kv   9:          general.base_model.0.organization str              = Deepseek Ai
+llama_model_loader: - kv  10:              general.base_model.0.repo_url str              = https://huggingface.co/deepseek-ai/De...
+llama_model_loader: - kv  11:                      general.dataset.count u32              = 1
+llama_model_loader: - kv  12:                     general.dataset.0.name str              = Uncensor
+llama_model_loader: - kv  13:             general.dataset.0.organization str              = Guilherme34
+llama_model_loader: - kv  14:                 general.dataset.0.repo_url str              = https://huggingface.co/Guilherme34/un...
+llama_model_loader: - kv  15:                               general.tags arr[str,1]       = ["generated_from_trainer"]
+llama_model_loader: - kv  16:                          qwen2.block_count u32              = 48
+llama_model_loader: - kv  17:                       qwen2.context_length u32              = 131072
+llama_model_loader: - kv  18:                     qwen2.embedding_length u32              = 5120
+llama_model_loader: - kv  19:                  qwen2.feed_forward_length u32              = 13824
+llama_model_loader: - kv  20:                 qwen2.attention.head_count u32              = 40
+llama_model_loader: - kv  21:              qwen2.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  22:                       qwen2.rope.freq_base f32              = 1000000.000000
+llama_model_loader: - kv  23:     qwen2.attention.layer_norm_rms_epsilon f32              = 0.000010
+llama_model_loader: - kv  24:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  25:                         tokenizer.ggml.pre str              = deepseek-r1-qwen
+llama_model_loader: - kv  26:                      tokenizer.ggml.tokens arr[str,151665]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  27:                  tokenizer.ggml.token_type arr[i32,151665]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  28:                      tokenizer.ggml.merges arr[str,151387]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  29:                tokenizer.ggml.bos_token_id u32              = 151646
+llama_model_loader: - kv  30:                tokenizer.ggml.eos_token_id u32              = 151643
+llama_model_loader: - kv  31:            tokenizer.ggml.padding_token_id u32              = 151643
+llama_model_loader: - kv  32:               tokenizer.ggml.add_bos_token bool             = true
+llama_model_loader: - kv  33:               tokenizer.ggml.add_eos_token bool             = false
+llama_model_loader: - kv  34:                    tokenizer.chat_template str              = {% if not add_generation_prompt is de...
+llama_model_loader: - kv  35:               general.quantization_version u32              = 2
+llama_model_loader: - kv  36:                          general.file_type u32              = 17
+llama_model_loader: - kv  37:                                general.url str              = https://huggingface.co/mradermacher/D...
+llama_model_loader: - kv  38:              mradermacher.quantize_version str              = 2
+llama_model_loader: - kv  39:                  mradermacher.quantized_by str              = mradermacher
+llama_model_loader: - kv  40:                  mradermacher.quantized_at str              = 2025-01-25T03:07:17+01:00
+llama_model_loader: - kv  41:                  mradermacher.quantized_on str              = marco
+llama_model_loader: - kv  42:                         general.source.url str              = https://huggingface.co/nicoboss/DeepS...
+llama_model_loader: - kv  43:                  mradermacher.convert_type str              = hf
+llama_model_loader: - type  f32:  241 tensors
+llama_model_loader: - type q5_K:  289 tensors
+llama_model_loader: - type q6_K:   49 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q5_K - Medium
+print_info: file size   = 9.78 GiB (5.69 BPW) 
+load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+load: special tokens cache size = 22
+load: token to piece cache size = 0.9310 MB
+print_info: arch             = qwen2
+print_info: vocab_only       = 0
+print_info: n_ctx_train      = 131072
+print_info: n_embd           = 5120
+print_info: n_layer          = 48
+print_info: n_head           = 40
+print_info: n_head_kv        = 8
+print_info: n_rot            = 128
+print_info: n_swa            = 0
+print_info: n_embd_head_k    = 128
+print_info: n_embd_head_v    = 128
+print_info: n_gqa            = 5
+print_info: n_embd_k_gqa     = 1024
+print_info: n_embd_v_gqa     = 1024
+print_info: f_norm_eps       = 0.0e+00
+print_info: f_norm_rms_eps   = 1.0e-05
+print_info: f_clamp_kqv      = 0.0e+00
+print_info: f_max_alibi_bias = 0.0e+00
+print_info: f_logit_scale    = 0.0e+00
+print_info: n_ff             = 13824
+print_info: n_expert         = 0
+print_info: n_expert_used    = 0
+print_info: causal attn      = 1
+print_info: pooling type     = 0
+print_info: rope type        = 2
+print_info: rope scaling     = linear
+print_info: freq_base_train  = 1000000.0
+print_info: freq_scale_train = 1
+print_info: n_ctx_orig_yarn  = 131072
+print_info: rope_finetuned   = unknown
+print_info: ssm_d_conv       = 0
+print_info: ssm_d_inner      = 0
+print_info: ssm_d_state      = 0
+print_info: ssm_dt_rank      = 0
+print_info: ssm_dt_b_c_rms   = 0
+print_info: model type       = 14B
+print_info: model params     = 14.77 B
+print_info: general.name     = DeepSeek R1 Distill Qwen 14B Uncensored
+print_info: vocab type       = BPE
+print_info: n_vocab          = 151665
+print_info: n_merges         = 151387
+print_info: BOS token        = 151646 '<｜begin▁of▁sentence｜>'
+print_info: EOS token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: EOT token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: PAD token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: LF token         = 198 'Ċ'
+print_info: FIM PRE token    = 151659 '<|fim_prefix|>'
+print_info: FIM SUF token    = 151661 '<|fim_suffix|>'
+print_info: FIM MID token    = 151660 '<|fim_middle|>'
+print_info: FIM PAD token    = 151662 '<|fim_pad|>'
+print_info: FIM REP token    = 151663 '<|repo_name|>'
+print_info: FIM SEP token    = 151664 '<|file_sep|>'
+print_info: EOG token        = 151643 '<｜end▁of▁sentence｜>'
+print_info: EOG token        = 151662 '<|fim_pad|>'
+print_info: EOG token        = 151663 '<|repo_name|>'
+print_info: EOG token        = 151664 '<|file_sep|>'
+print_info: max token length = 256
+load_tensors: loading model tensors, this can take a while... (mmap = true)
+load_tensors: offloading 48 repeating layers to GPU
+load_tensors: offloading output layer to GPU
+load_tensors: offloaded 49/49 layers to GPU
+load_tensors: Metal_Mapped model buffer size = 10013.43 MiB
+load_tensors:   CPU_Mapped model buffer size =   509.13 MiB
+..........................................................................................
+llama_init_from_model: n_seq_max     = 1
+llama_init_from_model: n_ctx         = 64000
+llama_init_from_model: n_ctx_per_seq = 64000
+llama_init_from_model: n_batch       = 2048
+llama_init_from_model: n_ubatch      = 512
+llama_init_from_model: flash_attn    = 0
+llama_init_from_model: freq_base     = 1000000.0
+llama_init_from_model: freq_scale    = 1
+llama_init_from_model: n_ctx_per_seq (64000) < n_ctx_train (131072) -- the full capacity of the model will not be utilized
+ggml_metal_init: allocating
+ggml_metal_init: found device: Apple M1 Pro
+ggml_metal_init: picking default device: Apple M1 Pro
+ggml_metal_init: using embedded metal library
+ggml_metal_init: GPU name:   Apple M1 Pro
+ggml_metal_init: GPU family: MTLGPUFamilyApple7  (1007)
+ggml_metal_init: GPU family: MTLGPUFamilyCommon3 (3003)
+ggml_metal_init: GPU family: MTLGPUFamilyMetal3  (5001)
+ggml_metal_init: simdgroup reduction   = true
+ggml_metal_init: simdgroup matrix mul. = true
+ggml_metal_init: has residency sets    = false
+ggml_metal_init: has bfloat            = true
+ggml_metal_init: use bfloat            = false
+ggml_metal_init: hasUnifiedMemory      = true
+ggml_metal_init: recommendedMaxWorkingSetSize  = 22906.50 MB
+ggml_metal_init: skipping kernel_get_rows_bf16                     (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_f32                   (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_f32_1row              (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_f32_l4                (not supported)
+ggml_metal_init: skipping kernel_mul_mv_bf16_bf16                  (not supported)
+ggml_metal_init: skipping kernel_mul_mv_id_bf16_f32                (not supported)
+ggml_metal_init: skipping kernel_mul_mm_bf16_f32                   (not supported)
+ggml_metal_init: skipping kernel_mul_mm_id_bf16_f32                (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h64           (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h80           (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h96           (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h112          (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h128          (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_bf16_h256          (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_vec_bf16_h128      (not supported)
+ggml_metal_init: skipping kernel_flash_attn_ext_vec_bf16_h256      (not supported)
+ggml_metal_init: skipping kernel_cpy_f32_bf16                      (not supported)
+ggml_metal_init: skipping kernel_cpy_bf16_f32                      (not supported)
+ggml_metal_init: skipping kernel_cpy_bf16_bf16                     (not supported)
+llama_kv_cache_init: kv_size = 64000, offload = 1, type_k = 'f16', type_v = 'f16', n_layer = 48, can_shift = 1
+llama_kv_cache_init:      Metal KV buffer size = 12000.00 MiB
+llama_init_from_model: KV self size  = 12000.00 MiB, K (f16): 6000.00 MiB, V (f16): 6000.00 MiB
+llama_init_from_model:        CPU  output buffer size =     0.58 MiB
+llama_init_from_model:      Metal compute buffer size =  5165.00 MiB
+llama_init_from_model:        CPU compute buffer size =   135.01 MiB
+llama_init_from_model: graph nodes  = 1686
+llama_init_from_model: graph splits = 2
+common_init_from_params: setting dry_penalty_last_n to ctx_size = 64000
+common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+ggml_metal_graph_compute: command buffer 1 failed with status 5
+error: Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
+llama_graph_compute: ggml_backend_sched_graph_compute_async failed with error -1
+llama_decode: failed to decode, ret = -3
+srv          init: initializing slots, n_slots = 1
+slot         init: id  0 | task -1 | new slot n_ctx_slot = 64000
+main: model loaded
+main: chat template, chat_template: {% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% set ns = namespace(is_first=false, is_tool=false, is_output_first=true, system_prompt='') %}{%- for message in messages %}{%- if message['role'] == 'system' %}{% set ns.system_prompt = message['content'] %}{%- endif %}{%- endfor %}{{bos_token}}{{ns.system_prompt}}{%- for message in messages %}{%- if message['role'] == 'user' %}{%- set ns.is_tool = false -%}{{'<｜User｜>' + message['content']}}{%- endif %}{%- if message['role'] == 'assistant' and message['content'] is none %}{%- set ns.is_tool = false -%}{%- for tool in message['tool_calls']%}{%- if not ns.is_first %}{{'<｜Assistant｜><｜tool▁calls▁begin｜><｜tool▁call▁begin｜>' + tool['type'] + '<｜tool▁sep｜>' + tool['function']['name'] + '\n' + '```json' + '\n' + tool['function']['arguments'] + '\n' + '```' + '<｜tool▁call▁end｜>'}}{%- set ns.is_first = true -%}{%- else %}{{'\n' + '<｜tool▁call▁begin｜>' + tool['type'] + '<｜tool▁sep｜>' + tool['function']['name'] + '\n' + '```json' + '\n' + tool['function']['arguments'] + '\n' + '```' + '<｜tool▁call▁end｜>'}}{{'<｜tool▁calls▁end｜><｜end▁of▁sentence｜>'}}{%- endif %}{%- endfor %}{%- endif %}{%- if message['role'] == 'assistant' and message['content'] is not none %}{%- if ns.is_tool %}{{'<｜tool▁outputs▁end｜>' + message['content'] + '<｜end▁of▁sentence｜>'}}{%- set ns.is_tool = false -%}{%- else %}{% set content = message['content'] %}{% if '</think>' in content %}{% set content = content.split('</think>')[-1] %}{% endif %}{{'<｜Assistant｜>' + content + '<｜end▁of▁sentence｜>'}}{%- endif %}{%- endif %}{%- if message['role'] == 'tool' %}{%- set ns.is_tool = true -%}{%- if ns.is_output_first %}{{'<｜tool▁outputs▁begin｜><｜tool▁output▁begin｜>' + message['content'] + '<｜tool▁output▁end｜>'}}{%- set ns.is_output_first = false %}{%- else %}{{'\n<｜tool▁output▁begin｜>' + message['content'] + '<｜tool▁output▁end｜>'}}{%- endif %}{%- endif %}{%- endfor -%}{% if ns.is_tool %}{{'<｜tool▁outputs▁end｜>'}}{% endif %}{% if add_generation_prompt and not ns.is_tool %}{{'<｜Assistant｜>'}}{% endif %}, example_format: 'You are a helpful assistant
+
+<｜User｜>Hello<｜Assistant｜>Hi there<｜end▁of▁sentence｜><｜User｜>How are you?<｜Assistant｜>'
+main: server is listening on http://127.0.0.1:8080 - starting the main loop
+srv  update_slots: all slots are idle
+
+```
