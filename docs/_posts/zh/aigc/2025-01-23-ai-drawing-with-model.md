@@ -139,5 +139,11 @@ flux-schnell 效果如下：
 
 ![flux-schnell2](/imgs/word-regret-2.png)
 
+## 自动化方案
+
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [Stable Diffusion WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+
+
 
 

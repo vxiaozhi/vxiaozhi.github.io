@@ -99,13 +99,103 @@ Cline 特点：
 
 理想情况下， 使用 DeepSeek-R1 作规划(Plan), ClaudClaude 3.5 Sonnet 作执行(Act) 最佳。但考虑到商业模型收费较贵。
 
-尝试了下 Ollama 本地模型，如 DeepSeek-R1:16b, Cline 基本无法工作。
+尝试了下 Ollama 本地模型，如 DeepSeek-R1:16b, Cline 基本无法工作。原因有两个：
 
-幸好，Ollama 模型市场中，有基于DeepSeek-R1适配Cline的模型，尝试了以下两个模型的 16b 版本， 对于简单的任务测试都是OK的。
+- ollama 默认模型 ctx_size 为 4096，太小。
+- ollama 默认模型 无法调用工具， 需要 调整其 template。
+
+调整上述两个参数，需要生成性的模型。 幸好，Ollama 模型市场中，有基于DeepSeek-R1调配好的模型， 对于简单的任务测试都是OK的。
 
 - ishumilin/deepseek-r1-coder-tools
 - tom_himanen/deepseek-r1-roo-cline-tools
-- qwen2.5-coder:14b-instruct-q8_0[bolt.new 上可运行，cline待验证]
+
+QwenQ-32B 暂未在 Ollama 市场中发现有调配好的模型， 如果要支持Cline， 可以使用 Llamma.cpp 启动。
+
+参数设置对比， 原模型 vs 调配好的模型：
+
+```
+ollama show deepseek-r1:14b  --parameters
+stop                           "<｜begin▁of▁sentence｜>"
+stop                           "<｜end▁of▁sentence｜>"
+stop                           "<｜User｜>"
+stop                           "<｜Assistant｜>"
+```
+
+```
+ollama show ishumilin/deepseek-r1-coder-tools:14b --parameters
+num_ctx                        32768
+stop                           "<|im_start|>"
+stop                           "<|im_end|>"
+stop                           "<|endoftext|>"
+temperature                    0.6
+```
+
+模板设置对比， 原模型 vs 调配好的模型：
+
+```
+ollama show deepseek-r1:14b  --template
+{{- if .System }}{{ .System }}{{ end }}
+{{- range $i, $_ := .Messages }}
+{{- $last := eq (len (slice $.Messages $i)) 1}}
+{{- if eq .Role "user" }}<｜User｜>{{ .Content }}
+{{- else if eq .Role "assistant" }}<｜Assistant｜>{{ .Content }}{{- if not $last }}<｜end▁of▁sentence｜>{{- end }}
+{{- end }}
+{{- if and $last (ne .Role "assistant") }}<｜Assistant｜>{{- end }}
+{{- end }}
+```
+
+```
+ollama show ishumilin/deepseek-r1-coder-tools:14b --template
+{{- if .Suffix }}<|fim_prefix|>{{ .Prompt }}<|fim_suffix|>{{ .Suffix }}<|fim_middle|>
+{{- else if .Messages }}
+{{- if or .System .Tools }}<|im_start|>system
+{{- if .System }}
+{{ .System }}
+{{- end }}
+{{- if .Tools }}
+
+You may call one or more functions to assist with the user query.
+
+You are provided with function signatures within <tools></tools> XML tags:
+<tools>
+{{- range .Tools }}
+{"type": "function", "function": {{ .Function }}}
+{{- end }}
+</tools>
+
+For each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:
+<tool_call>
+{"name": <function-name>, "arguments": <args-json-object>}
+</tool_call>
+{{- end }}<|im_end|>
+{{ end }}
+{{- range $i, $_ := .Messages }}
+{{- $last := eq (len (slice $.Messages $i)) 1 -}}
+{{- if eq .Role "user" }}<|im_start|>user
+{{ .Content }}<|im_end|>
+{{ else if eq .Role "assistant" }}<|im_start|>assistant
+{{ if .Content }}{{ .Content }}
+{{- else if .ToolCalls }}<tool_call>
+{{ range .ToolCalls }}{"name": "{{ .Function.Name }}", "arguments": {{ .Function.Arguments }}}
+{{ end }}</tool_call>
+{{- end }}{{ if not $last }}<|im_end|>
+{{ end }}
+{{- else if eq .Role "tool" }}<|im_start|>user
+<tool_response>
+{{ .Content }}
+</tool_response><|im_end|>
+{{ end }}
+{{- if and (ne .Role "assistant") $last }}<|im_start|>assistant
+{{ end }}
+{{- end }}
+{{- else }}
+{{- if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+{{ end }}{{ .Response }}{{ if .Response }}<|im_end|>{{ end }}
+```
 
 ## Cline 任务实践
 
