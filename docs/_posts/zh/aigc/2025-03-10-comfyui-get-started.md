@@ -35,4 +35,19 @@ step2:
 
 - Restart ComfyUI
 
+## 模型下载
+
+有两种方式：
+
+- 1. 通过 ComfyUI Manager 下载模型
+- 2. 手动下载模型，然后将模型文件放入 `~/Documents/ComfyUI/models/checkpoints` 文件夹中
+
+
+## Workflow加载
+
+有几种方式：
+
+- 1. 通过 工作流->浏览模板
+- 2. 将 包含 工作流的图片，加载到工作流中 或者 拖动图片到工作窗口，会自动打开工作流。 参考： [flux](https://comfyanonymous.github.io/ComfyUI_examples/flux/)
+- 3. 下载第三方 workflow，然后拖动到工作流中。
 
