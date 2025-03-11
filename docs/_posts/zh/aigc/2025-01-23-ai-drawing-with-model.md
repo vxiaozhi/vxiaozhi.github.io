@@ -43,6 +43,7 @@ Prompt 怎么写呢，这里提供一些方法：
 有一些大模型可以用来根据关键词生成详细的Prompt， 如：
 
 - [kyrick/prompt-parrot](https://replicate.com/kyrick/prompt-parrot)
+- [flux-prompt](https://ollama.com/abedalswaity7/flux-prompt) 基于 Llama-3.2 3B 微调的模型
 
 ### 方法3：大模型生成Prompt
 
