@@ -9,6 +9,12 @@ tags:
     - aigc
 ---
 
+## 术语解释
+
+- VAE：变分自动编码器
+- CLIP模型： 全称 Contrastive Language-Image Pre-Training（对比性语言-图像预训练模型
+
+
 ## 安装
 
 参考 gihtub 官网，直接下载桌面安装包：
@@ -60,7 +66,7 @@ step2:
 
 - [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
 
-安装步骤如下：
+### 安装步骤如下
 
 - 下载 ComfyUI-GGUF 到 `~/Documents/ComfyUI/custom_nodes` 文件夹中
 ```
@@ -75,6 +81,16 @@ git clone https://github.com/city96/ComfyUI-GGUF
 
 - 更新插件（Manager -> Update All Custom Nodes）
 - 重启 ComfyUI
+
+### 下载依赖模型
+
+- [FLUX.1-schnell-gguf](https://huggingface.co/city96/FLUX.1-schnell-gguf)
+- [clip-vit-large-patch14/pytorch_model.bin](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin)
+- [t5-v1_1-xxl-encoder-bf16/model.safetensors](https://huggingface.co/city96/t5-v1_1-xxl-encoder-bf16/blob/main/model.safetensors)
+
+### 加载 workflow 
+
+todo
 
 ## 其它模型
 
