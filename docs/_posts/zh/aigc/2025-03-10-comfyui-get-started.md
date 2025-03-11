@@ -21,7 +21,7 @@ tags:
 
 ## 安装扩展
 
-- [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager)
+- [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager) 【可忽略】最新版本（0.4.29）已默认内置该扩展。
 
 这里选用最直接的 Git clone 安装方法：
 
@@ -53,4 +53,31 @@ step2:
 
 ## GGUF
 
+默认的模型，如 [Flux-schnell]() 会消耗显存较大， 在 Mac M1 32G 上出一张 1024*1024 的图，大概耗时 7~8 分钟。
+而使用 GGUF 量化模型可以大大减少 显存的消耗。
+
+支持 量化模型， 需要先安装 GGUF 插件:
+
 - [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
+
+安装步骤如下：
+
+- 下载 ComfyUI-GGUF 到 `~/Documents/ComfyUI/custom_nodes` 文件夹中
+```
+git clone https://github.com/city96/ComfyUI-GGUF
+```
+
+- 安装依赖(具体Python版本及路径可以通过 ComfyUI 日志查看）
+
+```
+./.venv/bin/python -m pip install  -r custom_nodes/ComfyUI-GGUF/requirements.tx
+```
+
+- 更新插件（Manager -> Update All Custom Nodes）
+- 重启 ComfyUI
+
+## 其它模型
+
+**SDXL-Lightning**
+
+在 [SDXL-Lightning huggingface](https://huggingface.co/ByteDance/SDXL-Lightning) 上不仅提供模型下载，而且贴心的提供了 Workflow Json 文件，直接拖到 ComfyUI 中即可使用。
