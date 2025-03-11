@@ -51,3 +51,6 @@ step2:
 - 2. 将 包含 工作流的图片，加载到工作流中 或者 拖动图片到工作窗口，会自动打开工作流。 参考： [flux](https://comfyanonymous.github.io/ComfyUI_examples/flux/)
 - 3. 下载第三方 workflow，然后拖动到工作流中。
 
+## GGUF
+
+- [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
