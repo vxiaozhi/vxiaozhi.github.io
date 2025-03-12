@@ -85,10 +85,10 @@ git clone https://github.com/city96/ComfyUI-GGUF
 
 ### 下载依赖模型
 
-- [FLUX.1-schnell-gguf](https://huggingface.co/city96/FLUX.1-schnell-gguf)
-- [FLUX.1-schnell-vae](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors)
-- [clip-vit-large-patch14/pytorch_model.bin](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin)
-- [t5-v1_1-xxl-encoder-bf16/model.safetensors](https://huggingface.co/city96/t5-v1_1-xxl-encoder-bf16/blob/main/model.safetensors)
+- [FLUX.1-schnell-gguf](https://huggingface.co/city96/FLUX.1-schnell-gguf) 放置到ComfyUI/models/unet/ 文件下
+- [FLUX.1-schnell-vae](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors) 放在ComfyUI/models/vae/ 文件夹中
+- [clip-vit-large-patch14/pytorch_model.bin](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin) 放到 ComfyUI/models/clip/ 目录中
+- [t5-v1_1-xxl-encoder-bf16/model.safetensors](https://huggingface.co/city96/t5-v1_1-xxl-encoder-bf16/blob/main/model.safetensors) 放到 ComfyUI/models/clip/ 目录中
 
 ### 加载 workflow 
 
