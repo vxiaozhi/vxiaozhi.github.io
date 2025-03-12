@@ -59,8 +59,9 @@ step2:
 
 ## GGUF
 
-默认的模型，如 [Flux-schnell]() 会消耗显存较大， 在 Mac M1 32G 上出一张 1024*1024 的图，大概耗时 7~8 分钟。
-而使用 GGUF 量化模型可以大大减少 显存的消耗。
+默认的模型，如 [Flux-schnell]() 会消耗显存较大， 在 Mac M1 32G 上出一张 1024*1024 的图，大概耗时 7~8 分钟。内存+显存 大约 28G。
+
+而使用 GGUF 量化模型可以大大减少 显存的消耗。使用 flux-schnell-gguf-Q4 量化模型，出一张 1024*1024 的图，耗时减少至3分钟。内存+显存 降低到 8G 左右。
 
 支持 量化模型， 需要先安装 GGUF 插件:
 
@@ -85,12 +86,13 @@ git clone https://github.com/city96/ComfyUI-GGUF
 ### 下载依赖模型
 
 - [FLUX.1-schnell-gguf](https://huggingface.co/city96/FLUX.1-schnell-gguf)
+- [FLUX.1-schnell-vae](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors)
 - [clip-vit-large-patch14/pytorch_model.bin](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin)
 - [t5-v1_1-xxl-encoder-bf16/model.safetensors](https://huggingface.co/city96/t5-v1_1-xxl-encoder-bf16/blob/main/model.safetensors)
 
 ### 加载 workflow 
 
-todo
+参考：[flux_schnell_gguf.json](https://github.com/vxiaozhi/ComfyUI-GGUF/blob/main/flux_schnell_gguf.json)
 
 ## 其它模型
 
