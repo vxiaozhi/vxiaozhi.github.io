@@ -49,6 +49,7 @@ pngquant --quality=80-90 input.png --output output.png
 ### **方法 1：使用 `convert` 命令（ImageMagick 工具）**
 
 1. **安装 ImageMagick**（如果未安装）：
+2. 
    ```bash
    # Linux (Debian/Ubuntu)
    sudo apt-get install imagemagick
@@ -57,14 +58,14 @@ pngquant --quality=80-90 input.png --output output.png
    brew install imagemagick
    ```
 
-2. **单文件转换**：
+3. **单文件转换**：
    ```bash
    convert input.png -background white -flatten output.jpg
    ```
-   • `-background white`：将透明背景替换为白色（JPEG 不支持透明通道）。
-   • `-quality 85`：可选项，设置压缩质量（默认 92，范围 1-100）。
+   -  `-background white`：将透明背景替换为白色（JPEG 不支持透明通道）。
+   -  `-quality 85`：可选项，设置压缩质量（默认 92，范围 1-100）。
 
-3. **批量转换当前目录下所有 PNG 文件**：
+4. **批量转换当前目录下所有 PNG 文件**：
    ```bash
    for file in *.png; do
      convert "$file" -background white -flatten "${file%.png}.jpg"
@@ -86,7 +87,7 @@ pngquant --quality=80-90 input.png --output output.png
    ```bash
    ffmpeg -i input.png -q:v 2 output.jpg
    ```
-   • `-q:v 2`：设置质量（值越小质量越高，范围 1-31）。
+   - `-q:v 2`：设置质量（值越小质量越高，范围 1-31）。
 
 ---
 
