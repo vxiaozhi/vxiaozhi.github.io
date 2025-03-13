@@ -99,3 +99,21 @@ git clone https://github.com/city96/ComfyUI-GGUF
 **SDXL-Lightning**
 
 在 [SDXL-Lightning huggingface](https://huggingface.co/ByteDance/SDXL-Lightning) 上不仅提供模型下载，而且贴心的提供了 Workflow Json 文件，直接拖到 ComfyUI 中即可使用。
+
+## API 访问
+
+由于ComfyUI没有官方的API文档，所以想要去利用ComfyUI开发一些web应用会比 a1111 webui这种在fastapi加持下有完整交互式API文档的要困难一些，而且不像a1111 sdwebui 对很多pipeline都有比较好的封装，基本可以直接用。
+
+comfyui里，API 接口需要同时使用 普通http 和 websocket 两种协议。
+
+- websocket 接口用来查询任务的状态信息。
+- http 接口用来执行任务，查询任务结果。
+
+可以参考这篇文章分析：[ComfyUI开发指南](https://zhuanlan.zhihu.com/p/687537814)
+
+另外官方代码仓库也提供了几个脚本供参考：
+
+- [basic_api_example.py](https://github.com/comfyanonymous/ComfyUI/blob/master/script_examples/basic_api_example.py) 提供执行任务功能
+- [websockets_api_example.py](https://github.com/comfyanonymous/ComfyUI/blob/master/script_examples/websockets_api_example.py) 提供完整的执行任务、查询任务状态、获取结果并下载功能。
+- [websockets_api_example_ws_images.py](https://github.com/comfyanonymous/ComfyUI/blob/master/script_examples/websockets_api_example_ws_images.py) 提供完整的执行任务、查询任务状态、获取结果并下载功能，但是结果以图片的形式返回。
+
