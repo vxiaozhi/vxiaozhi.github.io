@@ -109,6 +109,8 @@ comfyui里，API 接口需要同时使用 普通http 和 websocket 两种协议�
 - websocket 接口用来查询任务的状态信息。
 - http 接口用来执行任务，查询任务结果。
 
+同时在使用 API 之前，还需要在设置中开启 dev 模式。
+
 可以参考这篇文章分析：[ComfyUI开发指南](https://zhuanlan.zhihu.com/p/687537814)
 
 另外官方代码仓库也提供了几个脚本供参考：
