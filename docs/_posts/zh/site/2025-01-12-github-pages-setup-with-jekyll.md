@@ -145,6 +145,9 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 /usr/jekyll/bin/bundle: line 34:   299 Aborted                 (core dumped) su-exec jekyll $exe "$@"
 ```
 
+## 常用插件
+
+- [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 
 
 
