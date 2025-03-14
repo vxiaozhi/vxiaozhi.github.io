@@ -129,11 +129,21 @@ build: 3ffbbd5c (4840)
 
 ## GGUF 模型推荐
 
+**DeepSeek系列**
+
 - [Tifa-Deepseek-14b-CoT](https://huggingface.co/ValueFX9507/Tifa-Deepsex-14b-CoT-GGUF-Q4) 本模型基于Deepseek-R1-14B进行深度优化，借助Tifa_220B生成的数据集通过三重训练策略显著增强角色扮演、小说文本生成与思维链（CoT）能力。特别适合需要长程上下文关联的创作场景。
 - [DeepSeek-R1-Distill-Qwen-32B-GGUF](https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF)
 - [DeepSeek-R1-Distill-Qwen-14B-Uncensored-GGU](https://huggingface.co/mradermacher/DeepSeek-R1-Distill-Qwen-14B-Uncensored-GGUF)
+
+**QWen系列**
+
 - [Llamacpp imatrix Quantizations of QwQ-32B by Qwen](https://huggingface.co/bartowski/Qwen_QwQ-32B-GGUF)
 
+**Gemma系列**
+
+- [gemma-3-12b](https://huggingface.co/Mungert/gemma-3-12b-it-gguf/tree/main)
+- [gemma-3-27b](https://huggingface.co/unsloth/gemma-3-27b-it-GGUF)
+  
 ## 部署实践
 
 **启动服务**
