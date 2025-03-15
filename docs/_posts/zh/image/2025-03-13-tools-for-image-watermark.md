@@ -39,6 +39,20 @@ convert input.jpg -font Arial -pointsize 40 -fill "rgba(255,255,255,0.5)" \
   • `-gravity southeast`：水印位置（`southeast`=右下角，其他选项：`north`, `center` 等）。
   • `-annotate +20+10`：距离边缘的偏移量（水平+20，垂直+10）。
 
+注意，如果 Ubuntu中，可能存在找不到Arial字体的情况， 通过如下命令安装字体：
+
+```
+#  安装字体包
+sudo apt install ttf-mscorefonts-installer
+
+# 刷新字体缓存
+
+sudo fc-cache -f -v
+
+# 验证安装
+fc-list | grep -i "Arial"
+```
+
 #### **3. 添加图片水印**
 
 ```bash
