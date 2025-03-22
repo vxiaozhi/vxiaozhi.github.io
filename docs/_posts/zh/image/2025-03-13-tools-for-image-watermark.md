@@ -64,6 +64,12 @@ convert input.jpg watermark.png -gravity center -geometry +0+0 -composite output
   • `-geometry +0+0`：水印位置偏移量（`+0+0`=居中，`+20-10`=右20上10）。
   • `-composite`：合并水印和原图。
 
+可以用如下命令生成一张带文字的白色背景图片：
+
+```
+convert -size 200x20 xc:white -font Arial -fill "rgba(255,0,255,0.5)" -gravity center -pointsize 20 -annotate 0 "小智晖的AI单词本：word.vxiaozhi.com" output.png
+```
+
 #### **4. 批量添加水印**
 ```bash
 for file in *.jpg; do
