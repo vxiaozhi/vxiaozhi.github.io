@@ -51,6 +51,13 @@ hgctl 是一个命令行工具，用于管理 Higress 的配置，如：
 
 - [hgctl 工具使用说明](https://higress.cn/docs/latest/ops/hgctl/?spm=36971b57.d107700.0.0.23882d89GafqV0)
 
+
+## 常用插件
+
+- [Web应用程序防火墙（WAF）](https://higress.cn/docs/latest/plugins/security/waf/?spm=36971b57.35684624.0.0.67a97cdcD8mtAf)
+  - [开启 WAF 防护的最佳实践](https://higress.cn/docs/latest/user/waf/?spm=36971b57.35684624.0.0.67a97cdcD8mtAf)
+- [AI 代理](https://higress.cn/docs/latest/plugins/ai/api-provider/ai-proxy/?spm=36971b57.35684624.0.0.67a97cdcD8mtAf)
+
 ## 部署实践
 
 ### 关于 Higress Chat 包的信息。
