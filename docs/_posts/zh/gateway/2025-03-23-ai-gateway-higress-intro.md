@@ -149,4 +149,13 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
   ![](./docs/images/route-service.gif)
 
 
+## 常用插件
+
+- [Wasm插件使用引导](https://higress.cn/docs/latest/plugins/intro/?spm=36971b57.2ef5001f.0.0.2a932c1fgOF3BH)
+- [Wasm插件路由及下发原理](https://higress.cn/docs/ebook/wasm19/?spm=36971b57.42cbd2a4.0.0.99ff63e1R3seiG)
+- [Web应用程序防火墙（WAF）](https://higress.cn/docs/latest/plugins/security/waf/?spm=36971b57.35684624.0.0.67a97cdcD8mtAf)
+  - [开启 WAF 防护的最佳实践](https://higress.cn/docs/latest/user/waf/?spm=36971b57.35684624.0.0.67a97cdcD8mtAf)
+- [AI 代理](https://higress.cn/docs/latest/plugins/ai/api-provider/ai-proxy/?spm=36971b57.35684624.0.0.67a97cdcD8mtAf)
+
+
 

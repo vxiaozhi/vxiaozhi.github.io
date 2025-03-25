@@ -49,6 +49,7 @@ tags:
 - 2025年1月26日：DeepSeek应用登顶苹果中国地区和美国地区应用商店免费APP下载排行榜，在美区下载榜上超越了ChatGPT。
 - 2025年1月31日：DeepSeek-R1模型现已作为NVIDIA NIM微服务预览版提供，可以在单个NVIDIA HGX H200系统上每秒提供多达3872tokens。
 
+
 huggingface
 
 - [DeepSeek-R1](https://huggingface.co/deepseek-ai/DeepSeek-R1)
@@ -70,4 +71,12 @@ Janus-Pro 系列包括两个主要版本：
 
 - [Janus-Pro-1B](https://huggingface.co/deepseek-ai/Janus-Pro-1B)
 - [Janus-Pro-7B](https://huggingface.co/deepseek-ai/Janus-Pro-7B)
+
+**DeepSeek-V3-0324**
+
+DeepSeek V3–0324 是对前代 DeepSeek V3（初代V3发布于2024年12月26日发布） 的一次重要更新。
+虽然官方尚未详细介绍其架构和机制，它主要的亮点：拥有 685B 参数，为Mixture of Experts（MoE）架构已于 Hugging Face 上开源，模型权重全面开放 命名中的“0324”代表发布日期（2025年3月24日） 这一版本被视为 DeepSeek 在通用能力之外，进一步发力编码与推理领域的战略升级。
+
+
+- [](https://huggingface.co/deepseek-ai/DeepSeek-V3-0324)
 
