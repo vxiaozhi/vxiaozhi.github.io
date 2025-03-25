@@ -12,16 +12,17 @@ tags:
 
 # C/C++ 实现的服务器和服务器相关的库
 
+## Http Server 
 
-## NGINX
+### NGINX
 
-## HAProxy
+### HAProxy
 
-## Envoy
+### Envoy
 
-## Apache HTTP Server
+### Apache HTTP Server
 
-## Apache Traffic Server
+### Apache Traffic Server
 
 - [Apache Traffic Server](https://github.com/apache/trafficserver)
 
@@ -29,26 +30,30 @@ Apache Traffic Server™ 是一种高性能 Web 代理缓存，它通过在网�
 
 Apache Traffic Server（ATS或TS）是一个高性能的、模块化的HTTP代理和缓存服务器，与 Nginx 和 Squid 类似。Traffic Server最初是 Inktomi 公司的商业产品，该公司在2003 年被 Yahoo 收购， 2009 年 8月 Yahoo 向 Apache 软件基金会（ASF）贡献了源代码，并于 2010 年 4月成为了 ASF的顶级项目（Top-LevelProject）。 Apache TrafficServer 现在是一个开源项目，开发语言为C++。
 
-## Squid
+### Squid
 
 - [Squid Web Proxy Cache](https://github.com/squid-cache/squid)
 - 注意： github上并没有提供代码的发行版本，直接编译会失败。需要到其[官网](https://www.squid-cache.org/Versions/v6/)下载代码编译。
 
 Squid：是一个高性能的代理缓存服务器，Squid 支持 FTP、gopher、HTTPS 和 HTTP协议。和一般的代理缓存软件不同，Squid用一个单独的、非模块化的、I/O驱动的进程来处理所有的客户端请求，作为应用层的代理服务软件，Squid 主要提供缓存加速、应用层过滤控制的功能。
 
-## lighttpd2
+### lighttpd2
 
 - [lighttpd2](https://github.com/lighttpd/lighttpd2)
 
-## Boa
+### Boa
 
 - [ Boa web server](https://github.com/gpg/boa)
 
-## TinyWebServer
+### TinyWebServer
 
 - [TinyWebServer -- Linux下C++轻量级WebServer服务器 助力初学者快速实践网络编程，搭建属于自己的服务器](https://github.com/qinguoyi/TinyWebServer)
 
-## Proxygen
+------------------
+
+## 类库
+
+### Proxygen
 
 - [Proxygen: Facebook's C++ HTTP Libraries](https://github.com/facebook/proxygen)
 
@@ -58,18 +63,24 @@ Proxygen 并非为了替换 Apache 或者 Nginx，该项目主要是侧重于用
 
 Proxygen是一个Facebook发布的C++ HTTP框架Proxygen， 其中包括了一个HTTP server。Proxygen是oxygen的谐音，支持SPDY/3和SPDY/3.1，未来还将支持HTTP/2。Facebook工程师 称，Proxygen不是设计替代流行的HTTP server Apache或nginx，而是致力于构建一个很容易整合到现有应用程序的高性能C++ HTTP框架，帮助更多人构建和部署高性能C++ HTTP服务。
 
-## muduo
+### muduo
 
 - [muduo -- Event-driven network library for multi-threaded Linux server in C++11](https://github.com/chenshuo/muduo)
 
 
-## POCO
+### POCO
 
 - [POCO (Portable Components) C++ Librarie](https://github.com/pocoproject/poco)
 
-## Seastar
+### Seastar
 
 - [Seastar -- High performance server-side application framework](https://github.com/scylladb/seastar)
+
+### WebSocket
+
+- [WebSocket++ ](https://github.com/zaphoyd/websocketpp)
+  - Header Only的跨平台 WebSocket 库
+  - 网络 IO 基于 Boost::asio 实现
 
 ## 参考
 
