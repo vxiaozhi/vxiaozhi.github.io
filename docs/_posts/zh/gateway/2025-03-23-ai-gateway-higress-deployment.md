@@ -179,7 +179,11 @@ curl -Ls https://raw.githubusercontent.com/alibaba/higress/main/tools/hack/get-h
 hgctl profile dump k8s -o ./k8s.yaml
 
 # 安装， 更多values 参考：https://github.com/alibaba/higress/blob/main/helm/core/values.yaml
-hgctl install --set profile=k8s  --set global.enableIstioAPI=true --set global.enableGatewayAPI=true --set gateway.replicas=2 --set charts.higress.vesion=2.0.7  -f ./values.yaml
+hgctl upgrade --set profile=k8s --set gateway.httpPort=80 --set gateway.httpsPort=443 --set global.namespace=higress-gateway --set chart.higress.version=2.0.7 --kubeconfig ./kube_config_xxx.yaml --context xxx \
+--set values.higress-core.gateway.hub=mirrors.xxx.com/xxx/higress --set values.higress-core.gateway.tag=2.0.7 \
+--set values.higress-core.controller.hub=mirrors.xxx.com/xxx/higress --set values.higress-core.controller.tag=2.0.7 \
+--set values.higress-core.pilot.hub=mirrors.xxx.com/xxx/higress --set values.higress-core.pilot.tag=2.0.7 \
+--set values.higress-console.image.repository=mirrors.xxx.com/xxx/higress/console --set values.higress-console.image.tag=2.0.4
 
 # 更新， 参数 flags 同 hgctl install
 hgctl upgrade [flags]
@@ -187,4 +191,17 @@ hgctl upgrade [flags]
 # Uninstall higress, istioAPI and GatewayAPI from a cluster
 hgctl uninstall --purge-resources  --context string --kubeconfig string
 ```
+
+### 以 Helm 部署higress到k8s为例
+
+```
+helm --kubeconfig ./kube_config_xxx.yaml repo add higress.io https://higress.io/helm-charts
+
+helm upgrade --install --kubeconfig ./kube_config_xxx.yaml higress higress.io/higress   --version 2.0.7  -n higress-gateway-test \
+--set global.watchNamespace="higress-gateway-test" --set global.ingressClass="higress-test" --set higress-core.gateway.hub=mirrors.xxx.com/xxx/higress \
+ --set higress-core.gateway.tag=2.0.7 --set higress-core.controller.hub=mirrors.xxx.com/xxx/higress --set higress-core.controller.tag=2.0.7 \
+ --set higress-core.pilot.hub=mirrors.xxx.com/xxx/higress --set higress-core.pilot.tag=2.0.7 
+```
+**注意**： global.ingressClass global.watchNamespace 这两个参数， 如果要在 一个集群中的多个 namespace 中部署 higress 实例， 那么这两个参数必需设置值，不能使用默认值。
+
 
