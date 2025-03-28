@@ -204,4 +204,14 @@ helm upgrade --install --kubeconfig ./kube_config_xxx.yaml higress higress.io/hi
 ```
 **注意**： global.ingressClass global.watchNamespace 这两个参数， 如果要在 一个集群中的多个 namespace 中部署 higress 实例， 那么这两个参数必需设置值，不能使用默认值。
 
+### Higress Console 中各项配置与 K8s 资源的对应关系
+
+- 服务来源
+- 服务列表
+- 路由配置： 每条路由对应 Ingress 下的一个资源对象。
+- 域名管理
+- 消费者管理
+- 插件
+- AI 流量入口管理
+
 
