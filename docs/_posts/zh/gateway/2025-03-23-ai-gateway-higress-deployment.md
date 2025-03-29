@@ -204,6 +204,15 @@ helm upgrade --install --kubeconfig ./kube_config_xxx.yaml higress higress.io/hi
 ```
 **注意**： global.ingressClass global.watchNamespace 这两个参数， 如果要在 一个集群中的多个 namespace 中部署 higress 实例， 那么这两个参数必需设置值，不能使用默认值。
 
+### 调试技巧
+
+- 如何查看 Envoy 展开配置
+
+Envoy 启动是， 会在 localhost:15000 监听，用于 Admin 管理， 通过以下命令dump Envoy 配置。
+
+```
+curl http://127.0.0.1:15000/config_dump
+```
 ### Higress Console 中各项配置与 K8s 资源的对应关系
 
 - 服务来源
