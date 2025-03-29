@@ -53,6 +53,43 @@ docker pull localhost:5000/myfirstimage
 
 - [ORAS CLI](https://github.com/oras-project/oras)
 - [WASM to OCI](https://github.com/engineerd/wasm-to-oci)
+  
+**install**
+
+- [源码编译安装](https://oras.land/docs/installation)
+
+或者 Mac 通过 Homebrew 安装
+
+```
+brew install oras
+```
+
+拉取镜像[默认拉取下来的镜像存储在当前文件夹， 可以通过 -o 参数指定存储位置]
+
+```
+oras pull  higress-registry.cn-hangzhou.cr.aliyuncs.com/plugins/ai-proxy:1.0.0
+```
+
+推送镜像到本地仓库：
+```
+oras push --insecure localhost:5000/ai_proxy:v1  \
+    ./README.md:application/vnd.module.wasm.doc.v1+markdown \
+    ./README_EN.md:application/vnd.module.wasm.doc.v1.en+markdown \
+    ./README_dev.md:application/vnd.module.wasm.doc.v1.en+markdown \
+    ./plugin.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip
+```
+
+查看仓库是否推送成功：
+
+```
+# 列出仓库下的所有repo
+oras repo ls localhost:5001
+
+# 查看指定repo的所有tag
+oras repo tags localhost:5001/ai_proxy
+```
+
+
 
 ## Wasm 插件
 
@@ -60,3 +97,4 @@ Higress 使用 wasm 插件来扩展 Higress 的功能， 并采用 OCI 仓库来
 
 - [Wasm 插件镜像规范](https://higress.cn/docs/latest/user/wasm-image-spec/?spm=36971b57.2ef5001f.0.0.2a932c1fS4puA3) 介绍插件格式，插件构建，及使用 oras 命令推拉插件到 OCI 仓库。
 - [使用 GO 语言开发 WASM 插件并在本地用Envoy调试](https://higress.cn/docs/latest/user/wasm-go/?spm=36971b57.2ef5001f.0.0.2a932c1fS4puA3)
+- [支持的全部 wasm 插件列表](https://github.com/higress-group/higress-console/blob/main/backend/sdk/src/main/resources/plugins/plugins.properties)
