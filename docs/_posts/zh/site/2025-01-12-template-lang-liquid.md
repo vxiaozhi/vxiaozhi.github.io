@@ -16,6 +16,9 @@ Liquid 是一门开源的模板语言，由 Shopify 创造并用 Ruby 实现。�
 
 从 2006 年起，Liquid 就被 Shopify 所使用，现在更是被大量 web 应用所使用。
 
-jekyll 采用 Liquid 作为器默认模板语言。
+- [liquid github](https://github.com/Shopify/liquid)
 
-- [github](https://github.com/Shopify/liquid)
+jekyll 采用 Liquid 作为器默认模板语言。参考：
+
+-  [Jekyll 高级应用 深入掌握 Liquid 模板语言技巧](https://my.oschina.net/emacs_8901675/blog/17545437)
+
