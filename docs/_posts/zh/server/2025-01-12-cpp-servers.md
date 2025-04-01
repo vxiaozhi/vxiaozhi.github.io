@@ -89,8 +89,12 @@ Proxygen是一个Facebook发布的C++ HTTP框架Proxygen， 其中包括了一�
 
 ### 可观测性
 
-- [The OpenTelemetry C++ Client](https://github.com/open-telemetry/opentelemetry-cpp) 提供 Server 侧接入 Opentelemetry 的类库
-  - 该库是线程安全的， 可参考 demp [http demp ](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/http) [multithreaded demp](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/multithreaded)
+[**The OpenTelemetry C++ Client**](https://github.com/open-telemetry/opentelemetry-cpp) 提供 Server 侧接入 Opentelemetry 的类库
+
+该库是线程安全的， 可参考 demo:
+
+ - [http demp ](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/http)
+ -  [multithreaded demp](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/multithreaded)
   
 ## 参考
 
