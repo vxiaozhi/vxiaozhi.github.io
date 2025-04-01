@@ -87,3 +87,9 @@ qps = 500, latency = 100ms，计算结果 = 500 * 0.1s = 50。基本在同一个
 - 当这个值远大于cpu核数时，说明大部分操作并不耗费cpu，而是让大量线程阻塞着，使用异步可以明显节省线程资源（栈占用的内存）。
 - 当这个值小于或和cpu核数差不多时，异步能节省的线程资源就很有限了，这时候简单易懂的同步代码更重要。
 - 除此之外，还要看具体的业务场景，如果业务服务的场景会面对大量的短/长连接，m:n协程实现性能通常比不上通用线程模型，不太适合。
+
+
+## 参考文档
+
+- [trpc fiber 介绍](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/fiber.md)
+- [trpc fiber 指南](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/fiber_user_guide.md)
