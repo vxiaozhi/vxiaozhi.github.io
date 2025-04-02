@@ -48,6 +48,7 @@ stream 任务调度
 - RetCode FiberStreamJobScheduler::PushSendMessage(StreamSendMessage&& msg, bool push_front)
 
 流调度器的初始化在这里：
+
 ```
 CommonStream::CommonStream(StreamOptions&& options) : options_(std::move(options)) {
   if (options_.fiber_mode) {
@@ -58,7 +59,7 @@ CommonStream::CommonStream(StreamOptions&& options) : options_(std::move(options
   reader_writer_options_.simple_state = ReaderWriterOptions::NotReady;
   StreamVarHelper::GetInstance()->IncrementActiveStreamCount();
 }
-``
+```
 
 
 处理接收流消息的入口函数：
