@@ -31,15 +31,81 @@ tRPC 协议的流式服务支持两种线程模型：
 
 ## 启动过程分析（以 fiber 模型为例）
 
-fiber 启动：
+**fiber 启动流程**
+
 ```
 int InitFrameworkRuntime():trpc/common/runtime_manager.cc
   - void fiber::StartRuntime() :trpc/runtime/fiber_runtime.cc(这里会读取配置中的 fiber 线程模型，根据线程模型决定启动哪一种 ThreadModel)
     - void FiberThreadModel::Start()
-      - void FiberWorker::Start():trpc/runtime/threadmodel/fiber/detail/fiber_worker.cc
+      - void FiberWorker::Start():trpc/runtime/threadmodel/fiber/detail/fiber_worker.cc 创建线程，运行 WorkGroup
+        - void FiberWorker::WorkerProc()
+          - void SchedulingGroup::Schedule()
+            - void SchedulingImpl::Schedule():trpc/runtime/threadmodel/fiber/detail/scheduling/v1/scheduling_impl.cc
+              - FiberEntity* SchedulingImpl::AcquireFiber()
+
 ```
 
-stream 任务调度
+Schedule 循环调用 AcquireFiber 获取一个 fiber 进行运行：
+
+```
+void SchedulingImpl::Schedule() noexcept {
+  while (true) {
+    auto fiber = AcquireFiber();
+
+    if (!fiber) {
+      fiber = SpinningAcquireFiber();
+      if (!fiber) {
+        fiber = StealFiberFromForeignSchedulingGroup();
+        TRPC_CHECK_NE(fiber, kSchedulingGroupShuttingDown);
+        if (!fiber) {
+          fiber = WaitForFiber();
+          TRPC_CHECK_NE(fiber, static_cast<trpc::fiber::detail::FiberEntity*>(nullptr));
+        }
+      }
+    }
+
+    if (TRPC_UNLIKELY(fiber == kSchedulingGroupShuttingDown)) {
+      break;
+    }
+
+    fiber->Resume();
+
+    // HeartBeat(run_queue_.UnsafeSize());
+  }
+}
+```
+
+AcquireFiber 从 run_queue 中获取一个 fiber实体，代码如下：
+
+```
+FiberEntity* SchedulingImpl::AcquireFiber() noexcept {
+  if (auto rc = GetOrInstantiateFiber(run_queue_.Pop())) {
+    {
+      // Acquiring the lock here guarantees us anyone who is working on this fiber
+      // (with the lock held) has done its job before we returning it to the
+      // caller (worker).
+      std::scoped_lock _(rc->scheduler_lock);
+
+      TRPC_CHECK(rc->state == FiberState::Ready);
+      rc->state = FiberState::Running;
+    }
+
+    SchedulingVar::GetInstance()->ready_run_latency.Update(ReadTsc() - rc->last_ready_tsc);
+
+    return rc;
+  }
+
+  return stopped_.load(std::memory_order_relaxed) ? kSchedulingGroupShuttingDown : nullptr;
+}
+```
+
+总结： Fiber 启动后的终态是： 启动了n 个 thread， 每个thread 循环从队列中取出一个 fiber，然后执行。
+
+
+**stream 任务调度**
+
+先预测一下， stream 任务调度流程应该是：在一个合适的时机，比如流数据到来时，将其封装成 fiber 实体，然后放入到 fiber 队列中，等待被调度运行。
+下面通过分析代码把该流程串起来：
 
 从 trpc/stream/fiber_stream_job_scheduler.cc 开始， 这里定义了：
 
@@ -106,6 +172,50 @@ RetCode CommonStream::HandleRecvMessage(StreamRecvMessage&& msg) {
   }
 
   return ret;
+}
+```
+
+从这里开始，将进入收包流程，如下：
+
+```
+- RetCode TrpcServerStream::HandleInit(StreamRecvMessage&& msg) 
+  - RetCode CommonStream::PushSendMessage(StreamSendMessage&& msg, bool push_front)
+    - RetCode FiberStreamJobScheduler::PushSendMessage(StreamSendMessage&& msg, bool push_front)
+      - bool StartFiberDetached(Function<void()>&& start_proc):trpc/coroutine/fiber.cc
+        - bool SchedulingGroup::StartFiber(FiberDesc* fiber):trpc/runtime/threadmodel/fiber/detail/scheduling_group.cc
+          - bool SchedulingImpl::StartFiber(FiberDesc* desc):trpc/runtime/threadmodel/fiber/detail/scheduling/v1/scheduling_impl.cc
+            - bool SchedulingImpl::QueueRunnableEntity(RunnableEntity* entity, bool sg_local, bool wait)
+```
+
+QueueRunnableEntity 最终把包放入到 running_queue_ 中，与上面的fiber启动流程刚好对接上。
+
+```
+bool SchedulingImpl::QueueRunnableEntity(RunnableEntity* entity,
+                                         bool sg_local, bool wait) noexcept {
+  TRPC_DCHECK(!stopped_.load(std::memory_order_relaxed), "The scheduling group has been stopped.");
+
+  // Push the fiber into run queue and (optionally) wake up a worker.
+  if (TRPC_UNLIKELY(!run_queue_.Push(entity, sg_local))) {
+    auto since = ReadSteadyClock();
+
+    while (!run_queue_.Push(entity, sg_local)) {
+      TRPC_FMT_INFO_EVERY_SECOND(
+          "Run queue overflow. Too many ready fibers to run. If you're still "
+          "not overloaded, consider increasing `trpc_fiber_run_queue_size`.");
+      if (TRPC_UNLIKELY(ReadSteadyClock() - since > 2s)) {
+        TRPC_FMT_INFO_EVERY_SECOND(
+            "Failed to push fiber into ready queue after retrying for 2s. Retry again.");
+        if (!wait) {
+          return false;
+        }
+      }
+      std::this_thread::sleep_for(100us);
+    }
+  }
+
+  WakeUpOneWorker();
+
+  return true;
 }
 ```
 
