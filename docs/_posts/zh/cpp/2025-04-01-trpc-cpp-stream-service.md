@@ -175,8 +175,22 @@ RetCode CommonStream::HandleRecvMessage(StreamRecvMessage&& msg) {
 }
 ```
 
-从这里开始，将进入收包流程，如下：
 
+FiberStreamHandler注册：
+```
+- void TrpcServerStreamConnectionHandler::Init(const BindInfo* bind_info, Connection* conn)
+- ServerStreamHandlerFactory::GetInstance()->Create(proto:trpc/grpc, options) [trpc/stream/stream_handler_manager.cc::InitStreamHandler()这里实现各种协议注册]
+- StreamReaderWriterProviderPtr TrpcServerStreamHandler::CreateStream(StreamOptions&& options)
+```
+
+```
+- FiberTrpcServerStreamConnectionHandler::int HandleStreamMessage(const ConnectionPtr& conn, std::any& msg)
+- int TrpcServerStreamConnectionHandler::HandleStreamMessage(const BindInfo* bind_info, const ConnectionPtr& conn, std::any& msg)
+- 
+
+```
+
+从这里开始，将进入收包流程，如下：
 ```
 - RetCode TrpcServerStream::HandleInit(StreamRecvMessage&& msg) 
   - RetCode CommonStream::PushSendMessage(StreamSendMessage&& msg, bool push_front)
