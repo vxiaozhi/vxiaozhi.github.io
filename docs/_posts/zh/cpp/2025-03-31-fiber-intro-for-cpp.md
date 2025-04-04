@@ -40,9 +40,25 @@ n:1协程很大的优点是，可以完全无锁编写同步风格代码，对�
 - boost：fiber https://github.com/boostorg/fiber
 - 魅族：libgo https://github.com/yyzybb537/libgo
 
-典型网络模型如下：
 
-#### default-separate：reactors + thread pool
+
+## Runtime类型
+
+参考： [trpc-cpp Runtime文档](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/runtime.md)
+
+### fiber m:n 协程
+
+优点：
+
+- 采用协程同步编程方式，方便编写逻辑复杂的业务代码；
+- 网络IO和业务处理逻辑可多核并行化，能充分利用多核，做到很低的长尾延时。
+
+缺点：
+
+- 为了不阻塞线程，可能需要使用特定的协程同步原语进行同步，代码侵入性较强；
+- 由于协程数受系统限制，且协程调度存在额外的开销，在QPS或连接数较大场景下性能表现不够好。
+
+### default-separate：reactors + thread pool
 
 优点：
 
@@ -56,7 +72,7 @@ n:1协程很大的优点是，可以完全无锁编写同步风格代码，对�
 - 需要考虑到CPU-Bound或者阻塞逻辑对continuation的影响，否则业务编程困难。
 - 在部分业务场景，合适的IO/Handle线程数量比例难以估算，配置困难。
 
-#### default-merge：reactors in threads
+### default-merge：reactors in threads
 
 优点：
 
