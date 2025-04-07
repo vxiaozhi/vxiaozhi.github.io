@@ -24,7 +24,13 @@ n:1协程很大的优点是，可以完全无锁编写同步风格代码，对�
 
 但是也有一个明显的缺点，各个线程之间无法均衡任务，导致一个线程中的某个协程运行过久，会影响到本线程的其他协程，也即不适合CPU-Bound型业务。
 
-### 纤程
+业界方案：
+
+- [boost.context](https://github.com/boostorg/context)
+- [Tencent Libco](https://github.com/Tencent/libco)
+- [C++20 corouting](/2025/04/06/cpp20-corouting-intro/)
+
+### 纤程(Fiber)
 
 通常指M：N协程（也称作纤程），其实现是支持在多个系统原生线程（std::thread）上调度运行多个用户态线程（fiber）；主要特性如下：
 
