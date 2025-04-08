@@ -46,6 +46,9 @@ n:1协程很大的优点是，可以完全无锁编写同步风格代码，对�
 - boost：fiber https://github.com/boostorg/fiber
 - 魅族：libgo https://github.com/yyzybb537/libgo
 
+trpc fiber 底层依赖：
+
+- [libunifex](https://github.com/facebookexperimental/libunifex) libunifex的意思是lib unified executors，是对C++23 executors提案的一个实现，executors将使得在C++写异步/并行并发程序变得前所未有的简单，调度器、定时器的功能都要包含，线程、协程任由选择，gpu、simd等等也通通支持，并且非常容易扩展，比如说第三方要集成openmp只要写很少的代码就能做到。
 
 
 ## Runtime类型
