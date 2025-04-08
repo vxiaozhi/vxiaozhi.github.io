@@ -46,10 +46,26 @@ n:1协程很大的优点是，可以完全无锁编写同步风格代码，对�
 - boost：fiber https://github.com/boostorg/fiber
 - 魅族：libgo https://github.com/yyzybb537/libgo
 
-trpc fiber 底层依赖：
+
+## 底层原理
+
+### 如何实现上下文切换：
+
+要实现协程切换，底层必须实现两个函数, 并且这两个函数通常是硬件平台相关的， 需要对不同平台（x86_64/ppc64le/aarch64）作不同实现：
+
+- make_context 创建一个上下文
+- jump_fcontext 切换到另一个上下文
+
+
+trpc fiber 的实现看代码注释应该是参照了boost.fcontext 的实现，具体实现代码在：
+
+```
+trpc/runtime/threadmodel/fiber/detail/fcontext
+```
+
+### 如何对系统底层收发包函数进行替换：
 
 - [libunifex](https://github.com/facebookexperimental/libunifex) libunifex的意思是lib unified executors，是对C++23 executors提案的一个实现，executors将使得在C++写异步/并行并发程序变得前所未有的简单，调度器、定时器的功能都要包含，线程、协程任由选择，gpu、simd等等也通通支持，并且非常容易扩展，比如说第三方要集成openmp只要写很少的代码就能做到。
-
 
 ## Runtime类型
 
