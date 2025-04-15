@@ -38,6 +38,8 @@ Go 内置的 `pprof` 包提供 CPU、内存、Goroutine、阻塞等维度的性�
 - **CPU 分析**（采样 CPU 耗时）：
      ```bash
      go tool pprof http://localhost:6060/debug/pprof/profile?seconds=30
+     # seconds参数也可以写在命令行参数上，如：
+     go tool pprof -seconds=30 http://localhost:6060/debug/pprof/profile
      ```
 - **内存分析**（堆内存分配）：
      ```bash
@@ -75,6 +77,15 @@ Serving web UI on http://localhost:8080
 ```
 此时会将采样后的文件保存，然后在 8080 开启监听，接着自动打开浏览器。
 
+有时可能存在网络隔离问题，不能直接从开发机访问测试机、线上机器，或者测试机、线上机器没有安装go，那也可以这么做：
+
+```
+curl http://localhost:6060/debug/pprof/heap?seconds=30 > heap.out
+
+# sz下载heap.out到本地
+go tool pprof -http=:8080 heap.out
+```
+
 默认情况下，会展示 火焰图， 也可以在 View 菜单中展示选择不同维度的数据进行展示：
 
 - • **火焰图（Flame Graph）**：直观展示函数调用耗时。
@@ -83,6 +94,16 @@ Serving web UI on http://localhost:8080
 - • **Peek 命令**：查看特定函数的调用链。
 - Source 展示源代码
 - Disassamble 展示汇编代码
+
+#### 内存问题分析实践
+
+在分析内存时，我们需要有能力区分哪些内存分配是正常情况，哪些情况是异常情况。pprof提供了另外一个有用的选项-diff_base，我们可以在没有服务没有请求时采样30s生成一个采样文件，然后有请求时，我们再采样30s生成另一个采样文件，并将两个采样文件进行对比。这样就容易分析出请求出现时，到底发生了什么。
+
+```
+go tool pprof -http=':8080'           \
+   -diff_base heap-new-16:22:04:N.out \
+   heap-new-17:32:38:N.out
+```
 
 #### 原理说明
 
