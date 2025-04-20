@@ -53,6 +53,12 @@ Squid：是一个高性能的代理缓存服务器，Squid 支持 FTP、gopher�
 
 ## 类库
 
+### 基础库
+
+- [POCO (Portable Components) C++ Librarie](https://github.com/pocoproject/poco)
+- [Abseil - C++ Common Libraries](https://github.com/abseil/abseil-cpp) Google内部的C++轮子库，各种基础能力都包含，值得学习
+- [Folly: Facebook Open-source Library](https://github.com/facebook/folly) Facebook内部的轮子库，线程池、内存池、异步IO、executor等，应有尽有
+
 ### Proxygen
 
 - [Proxygen: Facebook's C++ HTTP Libraries](https://github.com/facebook/proxygen)
@@ -67,10 +73,6 @@ Proxygen是一个Facebook发布的C++ HTTP框架Proxygen， 其中包括了一�
 
 - [muduo -- Event-driven network library for multi-threaded Linux server in C++11](https://github.com/chenshuo/muduo)
 
-
-### POCO
-
-- [POCO (Portable Components) C++ Librarie](https://github.com/pocoproject/poco)
 
 ### Seastar
 
