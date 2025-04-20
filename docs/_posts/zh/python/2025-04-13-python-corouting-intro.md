@@ -54,6 +54,16 @@ Python 官方提供了各个版本的 Pyothon 协程的文档，[协程官方文
 - asyncio提供了完善的异步IO支持，用asyncio.run()调度一个coroutine；
 - 在一个async函数内部，通过await可以调用另一个async函数，这个调用看起来是串行执行的，但实际上是由asyncio内部的消息循环控制；
 - 在一个async函数内部，通过await asyncio.gather()可以并发执行若干个async函数。
+
+## Python VS 其它语言 协程对比
+
+go的协程最大的优势在于它是语言内置的。从内存管理，gc到网络库, syscall以及对应的runtime实现的M:N的调度，都有很深的优化。同时经过多年的积淀，社区也基于内置的协程贡献了很多优秀的开源库，大家走遵照这同一个并发模型，也即是go推荐的模型来编写代码，使用起来很舒服。
+
+js基于回调的特性真的是目前语言协程化做的最好的，因为没有阻塞调用，可以无痛把一个回调风格的API（如readFile）包装成 Promise，然后供async/await使用。任何回调风格的第三方库 API 都可以简单的 util.promisify 变成可供 await 的 Promise，不需要从底层添加API并且要求所有第三方库更改。而且一个API可以同时以回调风格和await被使用，可以说无缝升级。再借助babel，现在的js项目已经async/await用得飞起。
+
+再反过来看很多语言的协程化进程，python为所有阻塞API在asyncio这个包里重新实现了一遍，但是社区所有数据库驱动、网络请求库、http server 库都需要为它重写，这个生态能不能火起来还是未知数。
+
+现在唯一的期待就是rust尽快从语言标准层面拥抱协程，这玩意语言官方越晚接受，社区就越伤筋动骨。
   
 ## 相关协程库
 
