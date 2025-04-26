@@ -52,6 +52,8 @@ w的导数设为0，得到解析解.
   - ∂Loss/∂w₂ = (2/n)Σ(y_pred - y_true)x₂
   - ∂Loss/∂b = (2/n)Σ(y_pred - y_true)
 - 参数更新公式：θ = θ - α*∇θ
+  
+这篇文章对线性回归的梯度下降算法进行了推导：[线性回归的求解：矩阵方程和梯度下降、数学推导及NumPy实现](https://zhuanlan.zhihu.com/p/143150436)
 
 ```
 import random
