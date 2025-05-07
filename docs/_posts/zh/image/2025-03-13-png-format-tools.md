@@ -115,3 +115,12 @@ done
 3. **保留 EXIF 信息**：默认会保留，如需清除可添加 `-strip` 参数。
 
 ---
+
+## ffmpeg 命令备忘
+
+播放原始 PCM 文件：
+
+```
+# 播放16kHz 单声道 16bit的 test.pcm 的PCM文件
+ffplay -ar 16000   -f s16le -i  test.pcm
+```
