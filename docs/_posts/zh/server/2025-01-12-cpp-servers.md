@@ -93,14 +93,14 @@ Proxygen是一个Facebook发布的C++ HTTP框架Proxygen， 其中包括了一�
 
 [**The OpenTelemetry C++ Client**](https://github.com/open-telemetry/opentelemetry-cpp) 提供 Server 侧接入 Opentelemetry 的类库
 
-​​- 历史​​：由 OpenTracing 和 OpenCensus 合并而成（2019年），是​​CNCF孵化项目​​，旨在统一追踪、指标、日志的观测性标准。
-​​- 状态​​：​​活跃开发​​，被视为未来观测性工具的​​事实标准​​。
+- 历史​​：由 OpenTracing 和 OpenCensus 合并而成（2019年），是​​CNCF孵化项目​​，旨在统一追踪、指标、日志的观测性标准。
+- ​​状态​​：​​活跃开发​​，被视为未来观测性工具的​​事实标准​​。
 ​​- 核心目标​​：提供​​全功能的SDK​​（包括API、数据采集、导出等），支持多信号（Tracing、Metrics、Logs）。
 
 该库是线程安全的， 可参考 demo:
 
- - [http demp ](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/http)
- -  [multithreaded demp](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/multithreaded)
+- [http demp ](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/http)
+- [multithreaded demp](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/multithreaded)
 
 [**opentracing-cpp**](https://github.com/opentracing/opentracing-cpp)
 
