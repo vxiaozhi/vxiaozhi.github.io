@@ -30,6 +30,29 @@ Go学习路线图参考：[ go学习线路图](https://www.topgoer.com/%E5%BC%80
 - [opentelemetry-go](https://github.com/open-telemetry/opentelemetry-go)
 - [prometheus 接入库](https://github.com/prometheus/client_golang)， 默认自带了 gorouting数目、内存用量 等监控指标
 
+## 开发实践
+
+Go语言中的单例模式
+```
+package singleton
+
+import (
+    "sync"
+)
+
+type singleton struct {}
+
+var instance *singleton
+var once sync.Once
+
+func GetInstance() *singleton {
+    once.Do(func() {
+        instance = &singleton{}
+    })
+    return instance
+}
+
+```
 ## 参考教程
 
 - [go语言介绍](https://www.topgoer.com/)
