@@ -19,6 +19,8 @@ tags:
 
 Go学习路线图参考：[ go学习线路图](https://www.topgoer.com/%E5%BC%80%E6%BA%90/go%E5%AD%A6%E4%B9%A0%E7%BA%BF%E8%B7%AF%E5%9B%BE.html)
 
+使用 GoPlantUML 阅读 Go 源码：[GoPlantUML V2](https://github.com/jfeliu007/goplantuml)
+
 ## 服务开发常用类库选择
 
 ### rpc框架
