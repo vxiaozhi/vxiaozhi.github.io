@@ -93,11 +93,26 @@ Proxygen是一个Facebook发布的C++ HTTP框架Proxygen， 其中包括了一�
 
 [**The OpenTelemetry C++ Client**](https://github.com/open-telemetry/opentelemetry-cpp) 提供 Server 侧接入 Opentelemetry 的类库
 
+- 历史​​：由 OpenTracing 和 OpenCensus 合并而成（2019年），是​​CNCF孵化项目​​，旨在统一追踪、指标、日志的观测性标准。
+- ​​状态​​：​​活跃开发​​，被视为未来观测性工具的​​事实标准​​。
+​​- 核心目标​​：提供​​全功能的SDK​​（包括API、数据采集、导出等），支持多信号（Tracing、Metrics、Logs）。
+
 该库是线程安全的， 可参考 demo:
 
- - [http demp ](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/http)
- -  [multithreaded demp](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/multithreaded)
-  
+- [http demp ](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/http)
+- [multithreaded demp](https://github.com/open-telemetry/opentelemetry-cpp/tree/main/examples/multithreaded)
+
+[**opentracing-cpp**](https://github.com/opentracing/opentracing-cpp)
+
+​​- 历史​​：OpenTracing 是早期分布式追踪的标准（2016年提出），旨在提供​​统一的API规范​​，由第三方厂商实现具体库（如Jaeger、LightStep等）。
+​​- 状态​​：已进入维护模式（​​不推荐新项目使用​​），其维护者已转向 OpenTelemetry。
+​​- 核心目标​​：标准化追踪API，解耦应用代码与具体追踪后端。
+
+在分布式系统的可观测性（Observability）中，​​Tracing（追踪）、Logging（日志）、Metrics（指标）​​ 是三大核心支柱，它们相互补充，共同帮助开发者理解系统行为、诊断问题并优化性能。
+
+​​- Tracing​​是“纵向”分析（单个请求的生命周期），​​Metrics​​是“横向”统计（系统整体状态），​​Logging​​是“点状”记录（关键事件快照）。
+- 三者结合能构建完整的可观测性体系: Metrics告诉你“有问题”​​ → ​​Tracing告诉你“哪里有问题”​​ → ​​Logging告诉你“为什么有问题”​​。
+
 ## 参考
 
 - [小白视角：一文读懂社长的TinyWebServer](https://huixxi.github.io/2020/06/02/%E5%B0%8F%E7%99%BD%E8%A7%86%E8%A7%92%EF%BC%9A%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%E7%A4%BE%E9%95%BF%E7%9A%84TinyWebServer/#more)

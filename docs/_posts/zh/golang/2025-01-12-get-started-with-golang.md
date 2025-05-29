@@ -19,6 +19,8 @@ tags:
 
 Go学习路线图参考：[ go学习线路图](https://www.topgoer.com/%E5%BC%80%E6%BA%90/go%E5%AD%A6%E4%B9%A0%E7%BA%BF%E8%B7%AF%E5%9B%BE.html)
 
+使用 GoPlantUML 阅读 Go 源码：[GoPlantUML V2](https://github.com/jfeliu007/goplantuml)
+
 ## 服务开发常用类库选择
 
 ### rpc框架
@@ -30,6 +32,29 @@ Go学习路线图参考：[ go学习线路图](https://www.topgoer.com/%E5%BC%80
 - [opentelemetry-go](https://github.com/open-telemetry/opentelemetry-go)
 - [prometheus 接入库](https://github.com/prometheus/client_golang)， 默认自带了 gorouting数目、内存用量 等监控指标
 
+## 开发实践
+
+Go语言中的单例模式
+```
+package singleton
+
+import (
+    "sync"
+)
+
+type singleton struct {}
+
+var instance *singleton
+var once sync.Once
+
+func GetInstance() *singleton {
+    once.Do(func() {
+        instance = &singleton{}
+    })
+    return instance
+}
+
+```
 ## 参考教程
 
 - [go语言介绍](https://www.topgoer.com/)
