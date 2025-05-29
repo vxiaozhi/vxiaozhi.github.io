@@ -80,3 +80,9 @@ DeepSeek V3–0324 是对前代 DeepSeek V3（初代V3发布于2024年12月26日
 
 - [](https://huggingface.co/deepseek-ai/DeepSeek-V3-0324)
 
+**DeepSeek-R1-0528**
+
+DeepSeek-R1-0528 仍然使用 2024 年 12 月所发布的 DeepSeek V3 Base 模型作为基座，但在后训练过程中投入了更多算力，显著提升了模型的思维深度与推理能力。
+
+更新后的 R1 模型在数学、编程与通用逻辑等多个基准测评中取得了当前国内所有模型中首屈一指的优异成绩，并且在整体表现上已接近其他国际顶尖模型，如 o3 与 Gemini-2.5-Pro。
+
