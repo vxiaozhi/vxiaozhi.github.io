@@ -83,6 +83,10 @@ Proxygen是一个Facebook发布的C++ HTTP框架Proxygen， 其中包括了一�
 - [WebSocket++ ](https://github.com/zaphoyd/websocketpp)
   - Header Only的跨平台 WebSocket 库
   - 网络 IO 基于 Boost::asio 实现
+- [uWebSockets](https://github.com/uNetworking/uWebSockets)
+- [Libwebsockets](https://github.com/warmcat/libwebsockets) 纯C实现
+
+更多CPP WebSocket 库参考:[C++ WebSocket 库](https://hanpfei.github.io/2019/10/25/cpp_websocket/)
 
 ### 无锁队列
 
