@@ -90,6 +90,33 @@ Socket 也是一种 I/O 对象，这一点前面已经提及。相比于 timer�
 - poll_one()方法以非阻塞的方式最多运行一个准备好的等待操作：如果至少有一个等待的操作，而且准备好以非阻塞的方式运行，poll_one方法会运行它并且返回1; 否则，方法立即返回0
 - poll()方法会以非阻塞的方式运行所有等待的操作。
 
+## 多线程
+
+有两种思路：
+
+### 思路 1：每个线程一个 I/O Context[
+
+在多线程的场景下，每个线程都持有一个 io_context ，并且每个线程都调用各自的 io_context 的run()方法。
+
+特点：
+
+- 在多核的机器上，这种方案可以充分利用多个 CPU 核心。
+- 某个 socket 描述符并不会在多个线程之间共享，所以不需要引入同步机制。
+- 在 event handler 中不能执行阻塞的操作，否则将会阻塞掉 io_context 所在的线程。
+  
+### 思路 2：多个线程共享一个 I/O  Context
+
+全局只分配一个io_context ，并且让这个 io_context 在多个线程之间共享，每个线程都调用全局的 io_context 的run()方法。
+
+先分配一个全局 io_context，然后开启多个线程，每个线程都调用这个 io_context的run()方法。这样，当某个异步事件完成时，io_context 就会将相应的 event handler 交给任意一个线程去执行。
+
+然而这种方案在实际使用中，需要注意一些问题：
+
+- 在 event handler 中允许执行阻塞的操作 (例如数据库查询操作)。
+- 线程数可以大于 CPU 核心数，譬如说，如果需要在 event handler 中执行阻塞的操作，为了提高程序的响应速度，这时就需要提高线程的数目。
+- 由于多个线程同时运行事件循环(event loop)，所以会导致一个问题：即一个 socket 描述符可能会在多个线程之间共享，容易出现竞态条件 (race condition)。譬如说，如果某个 socket 的可读事件很快发生了两次，那么就会出现两个线程同时读同一个 socket 的问题 (可以使用strand解决这个问题)。
+- 无锁的同步方式：Asio 提供了 io_context::strand：如果多个 event handler 通过同一个 strand 对象分发 (dispatch)，那么这些 event handler 就会保证顺序地执行。
+
 ## 基于 boost.asio 的应用
 
 - [C++ Websocket header only ](https://github.com/zaphoyd/websocketpp)
