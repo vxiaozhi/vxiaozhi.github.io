@@ -123,6 +123,18 @@ Socket 也是一种 I/O 对象，这一点前面已经提及。相比于 timer�
 ```
 break pthread_create
 ```
+```
+- websocketpp::client<websocketpp::config::asio_client>::connect
+    - websocketpp::transport::asio::endpoint<websocketpp::config::asio_client::transport_config>::async_connect
+        - boost::asio::ip::basic_resolver
+            - boost::asio::async_result<boost::asio::detail::wrapped_handler
+                - boost::asio::ip::basic_resolver<boost::asio::ip::tcp, boost::asio::execution::any_executor
+                    - boost::asio::detail::resolver_service<boost::asio::ip::tcp>::async_resolve
+                        - boost::asio::detail::resolver_service_base::start_resolve_op
+                            - boost::asio::detail::resolver_service_base::start_work_thread
+                                - boost::asio::detail::posix_thread::posix_thread<boost::asio::detail::resolver_service_base::work_scheduler_runner>
+                                    - boost::asio::detail::posix_thread::start_thread
+```
 
 查看 scheduler 创建：
 ```
