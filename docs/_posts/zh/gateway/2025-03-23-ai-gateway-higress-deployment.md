@@ -223,4 +223,15 @@ curl http://127.0.0.1:15000/config_dump
 - 插件
 - AI 流量入口管理
 
+**控制台密码**
+
+用户名密码作为 Secrets 资源，名为：higress-console，数据格式如下：
+
+```
+data:
+  adminDisplayName: YWRtaW4=
+  adminPassword: YWRtaW4=
+  adminUsername: YWRtaW4=
+```
+
 
