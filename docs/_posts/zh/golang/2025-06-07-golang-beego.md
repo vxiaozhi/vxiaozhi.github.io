@@ -108,13 +108,34 @@ beego.Router("/api/:id", &controllers.RController{}) //例如对于URL"/api/123"
 
 // RESTful路由
 beego.Router("/api/user", &controllers.UserController{}, "get:GetAll;post:Create")
+```
 
-//Go 语言内部其实已经提供了 http.ServeFile，通过这个函数可以实现静态文件的服务。beego 针对这个功能进行了一层封装，通过下面的方式进行静态文件注册：
+**Static文件路由**
+
+Go 语言内部其实已经提供了 http.ServeFile，通过这个函数可以实现静态文件的服务。beego 针对这个功能进行了一层封装，通过下面的方式进行静态文件注册：
+
+```
 beego.SetStaticPath("/static","public")
 beego.SetStaticPath("/images","images")
 beego.SetStaticPath("/css","css")
 beego.SetStaticPath("/js","js")
 ```
+
+当然，这种方式灵活性比较低，例如返回 Static文件时如果需要对文件内容进行替换后再返回，此时可以使用InsertFilter过滤器的方式，例如 Casdoor 在初始化Static路由时就采用了该方式，如下：
+
+具体可参考：https://github.com/casdoor/casdoor/blob/master/main.go
+
+```
+beego.InsertFilter("*", beego.BeforeRouter, routers.StaticFilter)
+beego.InsertFilter("*", beego.BeforeRouter, routers.AutoSigninFilter)
+beego.InsertFilter("*", beego.BeforeRouter, routers.CorsFilter)
+beego.InsertFilter("*", beego.BeforeRouter, routers.TimeoutFilter)
+beego.InsertFilter("*", beego.BeforeRouter, routers.ApiFilter)
+beego.InsertFilter("*", beego.BeforeRouter, routers.PrometheusFilter)
+beego.InsertFilter("*", beego.BeforeRouter, routers.RecordMessage)
+beego.InsertFilter("*", beego.AfterExec, routers.AfterRecordMessage, false)
+```
+
 
 
 ### 5 丰富的中间件支持
