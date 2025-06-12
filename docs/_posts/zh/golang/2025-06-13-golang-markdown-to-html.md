@@ -21,6 +21,7 @@ GitHub: https://github.com/yuin/goldmark
 - 高性能、符合 CommonMark 标准。
 - 支持扩展（如表格、任务列表、数学公式等）。
 - 被许多知名项目（如 Hugo 静态站点生成器）使用。
+- 提供 Playground：https://yuin.github.io/goldmark/playground/
 
 ```
 import "github.com/yuin/goldmark"
