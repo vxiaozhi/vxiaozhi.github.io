@@ -23,3 +23,11 @@ tags:
 ## [wujie（无界）](https://github.com/Tencent/wujie)
 
 无界微前端是一款基于 Web Components + iframe 微前端框架，具备成本低、速度快、原生隔离、功能强等一系列优点。
+
+## 前后端一体
+
+- [gradio]()
+- [streamit]()
+- [dash]()
+
+对比参考：[快速生成 AI 应用的框架对比：Gradio、Streamlit 和 Dash](https://zhuanlan.zhihu.com/p/611828558)
