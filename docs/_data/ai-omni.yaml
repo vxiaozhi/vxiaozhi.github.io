@@ -9,6 +9,16 @@
         - title: Dify
           url: https://github.com/langgenius/dify
           description: "Dify 是一个开源的 LLM 应用开发平台。其直观的界面结合了 AI 工作流、RAG 管道、Agent、模型管理、可观测性功能等，让您可以快速从原型到生产"
+- taxonomy: "RAG"
+- taxonomy: "AIGC"
+- taxonomy: "MCP"
+    links:
+      - title: context7
+        url: https://github.com/upstash/context7
+        description: Context7 MCP Server
+      - title: MCP Servers
+        url: https://github.com/modelcontextprotocol/servers
+        description: Model Context Protocol servers
 - taxonomy: "Vibe Coding"
   icon: fas fa-flask fa-lg
   list:
@@ -55,12 +65,22 @@
         - title: RooCode
           url: https://github.com/RooCodeInc/Roo-Code
           description: RooCode
-    - term: "MCP github"
-      links:
-        - title: context7
-          url: https://github.com/upstash/context7
-          description: Context7 MCP Server
-        - title: MCP Servers
-          url: https://github.com/modelcontextprotocol/servers
-          description: Model Context Protocol servers
+- taxonomy: "Code2Wiki"
+    links:
+      - title: zread.ai
+        url: https://zread.ai/
+        description: Zread
+      - title: DeepWiki-Open
+        url: https://github.com/AsyncFuncAI/deepwiki-open
+        description: AI驱动的代码分析工具，可将GitHub/GitLab仓库一键转换为交互式Wiki文档
+      - title: RepoAgent
+        url: https://github.com/OpenBMB/RepoAgent
+        description: 由清华大学团队开发，基于LLM的代码库级文档生成框架，支持自动化维护更新
+      - title: Tutorial-Codebase-Knowledge
+        url: https://github.com/The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge
+        description: 从代码库生成初学者友好的教程文档，支持多语言输出
+
+
+        
+    
     
