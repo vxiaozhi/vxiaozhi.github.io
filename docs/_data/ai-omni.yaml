@@ -20,13 +20,16 @@
         - title: "Vibe编程指南"
           url: https://github.com/Troyanovsky/vibe-coding-guide
           description: "Vibe编程指南"
+        - title: "绝大多数 Agent 产品，离了 Claude 以后，什么都不是"
+          url: https://bigeagle.me/2025/07/kimi-k2/
+          description: "绝大多数 Agent 产品，离了 Claude 以后，什么都不是"
         - title: Awesome Cursor Rules
           url: https://github.com/PatrickJS/awesome-cursorrules
           description: Awesome Cursor Rules
         - title: Agent Rules
           url: https://github.com/steipete/agent-rules
           description: Agent Rules
-    - term: "Coding IDE"
+    - term: "Coding IDE/Plugin"
       links:
         - title: cursor
           url: https://cursor.com/en
@@ -46,6 +49,12 @@
         - title: "CodeBuddy海外版"
           url: https://www.codebuddy.ai/
           description: CodeBuddy海外版
+        - title: "Cline"
+          url: https://github.com/cline/cline
+          description: Cline
+        - title: RooCode
+          url: https://github.com/RooCodeInc/Roo-Code
+          description: RooCode
     - term: "MCP github"
       links:
         - title: context7
