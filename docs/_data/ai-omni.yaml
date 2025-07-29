@@ -1,4 +1,4 @@
-- taxonomy: AI Agent
+- taxonomy: "AI Agent"
   icon: fas fa-flask fa-lg
   list:
     - term: github 开源项目
@@ -9,3 +9,49 @@
         - title: Dify
           url: https://github.com/langgenius/dify
           description: "Dify 是一个开源的 LLM 应用开发平台。其直观的界面结合了 AI 工作流、RAG 管道、Agent、模型管理、可观测性功能等，让您可以快速从原型到生产"
+- taxonomy: "Vibe Coding"
+  icon: fas fa-flask fa-lg
+  list:
+    - term: "Wiki介绍"
+      links:
+        - title: "Vibe coding"
+          url: https://zh.wikipedia.org/wiki/Vibe_coding
+          description: "Vibe coding"
+        - title: "Vibe编程指南"
+          url: https://github.com/Troyanovsky/vibe-coding-guide
+          description: "Vibe编程指南"
+        - title: Awesome Cursor Rules
+          url: https://github.com/PatrickJS/awesome-cursorrules
+          description: Awesome Cursor Rules
+        - title: Agent Rules
+          url: https://github.com/steipete/agent-rules
+          description: Agent Rules
+    - term: "Coding IDE"
+      links:
+        - title: cursor
+          url: https://cursor.com/en
+          description: cursor
+        - title: "Github Copilot"
+          url: https://github.com/copilot/
+          description: "Github Copilot"
+        - title: "字节 Trae"
+          url: https://Trae.com/
+          description: trae
+        - title: "通义灵码"
+          url: https://lingma.aliyun.com/download
+          description: 通义灵码
+        - title: "CodeBuddy"
+          url: https://copilot.tencent.com/ide/
+          description: CodeBuddy
+        - title: "CodeBuddy海外版"
+          url: https://www.codebuddy.ai/
+          description: CodeBuddy海外版
+    - term: "MCP github"
+      links:
+        - title: context7
+          url: https://github.com/upstash/context7
+          description: Context7 MCP Server
+        - title: MCP Servers
+          url: https://github.com/modelcontextprotocol/servers
+          description: Model Context Protocol servers
+    
