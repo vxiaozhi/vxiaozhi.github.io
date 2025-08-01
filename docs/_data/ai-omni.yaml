@@ -1,7 +1,18 @@
 - taxonomy: "AI Agent"
   icon: fas fa-flask fa-lg
   list:
-    - term: github 开源项目
+    - term: AI Agent 教程
+      links:
+        - title: ai-agents-for-beginners
+          url: https://github.com/microsoft/ai-agents-for-beginners
+          description: "微软 AI Agent 初学者教程"
+        - title: awesome-ai-agents
+          url: https://github.com/e2b-dev/awesome-ai-agents
+          description: "awesome-ai-agents列举了 AI Agent 相关的各种开源项目"
+        - title: topics/ai-agents
+          url: https://github.com/topics/ai-agents
+          description: "github 上 AI Agent 相关的讨论主题"
+    - term: AI Agent 开发工具
       links:
         - title: Coze
           url: https://github.com/coze-dev/coze-studio
