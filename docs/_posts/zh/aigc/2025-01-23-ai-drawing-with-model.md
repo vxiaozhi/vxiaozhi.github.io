@@ -19,6 +19,7 @@ tags:
 
 - [bytedance/sdxl-lightning-4step](https://replicate.com/bytedance/sdxl-lightning-4step)
 - [black-forest-labs/flux-schnell](https://replicate.com/black-forest-labs/flux-schnell)
+- [black-forest-labs/flux-kontext-max](https://replicate.com/black-forest-labs/flux-kontext-max)
 
 **图片上显示汉字的模型**
 
@@ -27,6 +28,11 @@ tags:
 或者根据人脸生成模型（Use a face to make images）
 
 - [tencentarc/photomaker](https://replicate.com/tencentarc/photomaker)
+
+**[Flux系列开源模型](https://huggingface.co/black-forest-labs)**
+
+- flux-schnell
+- FLUX.1-Kontext-dev
 
 ## Prompt 生成
 
