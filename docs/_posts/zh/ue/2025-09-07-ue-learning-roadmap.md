@@ -21,6 +21,14 @@ tags:
 - 有中英文教程
   - [斯坦福课程 UE4 C++ ActionRoguelike游戏实例教程 0.绪论 ](https://www.cnblogs.com/Qiu-Bai/p/17180550.html)
 
+### Step
+
+```
+git clone git@github.com:vxiaozhi/ActionRoguelike.git
+cd ActionRoguelike
+git chekcout UE5.3
+```
+
 ## 二、把项目改为：UnLua
 
 
