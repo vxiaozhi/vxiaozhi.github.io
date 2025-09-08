@@ -34,7 +34,11 @@ git chekcout UE5.3
 
 ---
 
-### 2. **CARLA - 自动驾驶模拟器**
+### 2. EpicSurvivalGame - Epic求生游戏
+
+- [EpicSurvivalGame](https://github.com/vxiaozhi/EpicSurvivalGame)
+
+### 3. **CARLA - 自动驾驶模拟器**
 - **GitHub 地址**: https://github.com/carla-simulator/carla
 - **描述**: CARLA 是一个开源的自动驾驶模拟器，基于 Unreal Engine 构建。它提供了高度可定制的城市环境、交通模拟、传感器模拟（如摄像头、激光雷达）以及用于训练和测试自动驾驶算法的 API。
 - **特点**:
@@ -44,7 +48,7 @@ git chekcout UE5.3
 
 ---
 
-### 3. **AirSim - 无人机与车辆模拟器**
+### 4. **AirSim - 无人机与车辆模拟器**
 - **GitHub 地址**: https://github.com/microsoft/AirSim
 - **描述**: AirSim 是微软开发的开源模拟器，最初专注于无人机，后来扩展支持车辆模拟。它基于 Unreal Engine（也支持 Unity），提供高保真的物理引擎和传感器模拟，适用于自动驾驶研究和机器学习。
 - **特点**:
@@ -54,7 +58,7 @@ git chekcout UE5.3
 
 ---
 
-### 4. **DeepDrive - 自动驾驶模拟平台**
+### 5. **DeepDrive - 自动驾驶模拟平台**
   - **GitHub 地址**: https://github.com/deepdrive/deepdrive
   - **描述**: DeepDrive 是一个基于 Unreal Engine 的自动驾驶模拟平台，专注于提供大规模数据集和训练环境。它支持端到端的深度学习模型训练，并提供丰富的传感器数据。
   - **特点**:
