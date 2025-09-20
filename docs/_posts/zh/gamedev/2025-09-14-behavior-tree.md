@@ -14,9 +14,27 @@ tags:
 
 ## 开源项目
 
+### BehaviorTree.CPP
 - [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP)
+
+### PyTrees
+
+PyTrees 是一个强大的 Python 行为树实现，专为机器人和其他复杂系统创建决策引擎而设计。PyTrees 提供了一个优雅的模块化框架，使复杂的决策管理变得简单。
+
+PyTrees 可用来实现机器人在动态环境中导航或游戏 AI 角色响应玩家操作
+
+开源代码：
+
 - [PyTrees](https://github.com/splintered-reality/py_trees)
 
+详细的文档：
+
+- [py-trees.readthedocs.io](https://py-trees.readthedocs.io/en/release-2.2.x/composites.html)
+
+基于py_trees实现的的机器人ROS扩展：
+
+- [py_trees_ros](https://github.com/splintered-reality/py_trees_ros)
+- [py-trees-ros-tutorials](https://py-trees-ros-tutorials.readthedocs.io/en/devel/tutorials.html)
 
 ## 🌳 基本结构
 
