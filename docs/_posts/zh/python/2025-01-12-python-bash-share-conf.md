@@ -17,7 +17,7 @@ tags:
 1. 使用不同格式的配置文件，如 Bash 使用 .env 作为配置，Python 则用 json 格式作为配置。
 2. 使用相同格式的配置文件，如都使用 .env 或 json 格式作为配置。
 
-显然能用第二种方式肯定是最好的， 因为第一种方式需要两份配置文件可能不一致。
+显然能用第二种方式肯定是最好的， 因为第一种方式需要两份不同格式配置文件，转换过程中可能导致不一致问题。
 
 那么用什么格式的配置文件让 bash 和 python 不用第三方库都能很方便的读取呢？
 
@@ -62,4 +62,48 @@ main.py 中按照常规方式读取环境变量即可。
 ...
 source_project_dir = os.environ.get("SOURCE_PROJECT_DIR", "/xxx")
 ...
+```
+
+除此之外，python 也提供了类库:pydantic 对读取环境变量也提供了更好的支持：
+
+```
+from pydantic import BaseSettings, Field
+
+class Settings(BaseSettings):
+    api_key: str = Field(..., description="API访问密钥")
+    timeout: float = 5.0
+    debug: bool = False
+
+    class Config:
+        env_file = ".env"       # 1. 从.env文件加载
+        env_file_encoding = "utf-8"
+
+# 加载顺序：
+# 1. 显式传入的参数 (Settings(api_key="abc"))
+# 2. 环境变量
+# 3. .env文件中的变量
+# 4. 字段默认值
+```
+
+BaseSettings 功能很强大，也支持自定义环境变量前缀：
+
+```
+class DatabaseSettings(BaseSettings):
+    db_host: str = "localhost"
+    db_port: int = 5432
+    db_user: str
+    db_pass: str
+
+    class Config:
+        env_prefix = "DB_"  # 自动添加前缀
+
+# 会查找以下环境变量：
+# DB_DB_HOST, DB_DB_PORT, DB_DB_USER, DB_DB_PASS
+```
+也能完全自定义环境变量名称：
+
+```
+class AuthSettings(BaseSettings):
+    secret_key: str = Field(..., env="AUTH_SECRET_KEY")  # 指定特定环境变量名
+    token_expire: int = 3600
 ```
