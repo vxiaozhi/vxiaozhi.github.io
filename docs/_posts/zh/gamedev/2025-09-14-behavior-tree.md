@@ -36,7 +36,7 @@ PyTrees 可用来实现机器人在动态环境中导航或游戏 AI 角色响�
 - [py_trees_ros](https://github.com/splintered-reality/py_trees_ros)
 - [py-trees-ros-tutorials](https://py-trees-ros-tutorials.readthedocs.io/en/devel/tutorials.html)
 
-## 🌳 基本结构
+## 🌳 PyTrees基本结构
 
 ### 节点类型：
 
@@ -51,6 +51,12 @@ PyTrees 可用来实现机器人在动态环境中导航或游戏 AI 角色响�
 
 3. **装饰节点(Decorators)** - 修饰行为
    - 重复、取反、超时等修饰
+  
+### 惯用模式
+
+- idioms.pick_up_where_you_left_off 从中断处继续
+- idioms.either_or 二选一
+- idioms.oneshot 单次执行
 
 ## ⚡ 工作方式
 
