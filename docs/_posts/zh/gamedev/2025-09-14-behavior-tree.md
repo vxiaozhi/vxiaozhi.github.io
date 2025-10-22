@@ -17,6 +17,11 @@ tags:
 ### BehaviorTree.CPP
 - [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP)
 
+### Golang 
+- [behavior3go](https://github.com/magicsea/behavior3go)
+- [go-behave](https://github.com/askft/go-behave)
+- [go-behaviortree](https://github.com/joeycumines/go-behaviortree) 实现了Sequence and Selector，与 PyTrees 类似
+
 ### PyTrees
 
 PyTrees 是一个强大的 Python 行为树实现，专为机器人和其他复杂系统创建决策引擎而设计。PyTrees 提供了一个优雅的模块化框架，使复杂的决策管理变得简单。
