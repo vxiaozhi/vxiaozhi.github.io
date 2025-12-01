@@ -18,6 +18,12 @@ Higress 在阿里内部为解决 Tengine reload 对长连接业务有损，以�
 
 Higress 的 AI 网关能力支持国内外所有[主流模型供应商](https://github.com/alibaba/higress/tree/main/plugins/wasm-go/extensions/ai-proxy/provider)和基于 vllm/ollama 等自建的 DeepSeek 模型；在阿里云内部支撑了通义千问 APP、百炼大模型 API、机器学习 PAI 平台等 AI 业务。同时服务国内头部的 AIGC 企业（如零一万物），以及 AI 产品（如 FastGPT）
 
+什么是 AI 网关?
+
+AI Gateway = AI Native API Gateway
+
+AI 网关的本质依然是 API 网关，AI 原生的意义在于，在这样的 API 网关里，AI 是一等公民。API 研发，API 供应，API 消费，以及 API 观测都基于 AI 场景下的需求，演进出全新的能力。
+
 ## 参考资料
 
 - [**文档**](https://higress.cn/docs/latest/overview/what-is-higress/) 
