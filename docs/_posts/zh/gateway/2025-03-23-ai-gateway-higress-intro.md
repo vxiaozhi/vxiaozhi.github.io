@@ -24,6 +24,7 @@ AI Gateway = AI Native API Gateway
 
 AI 网关的本质依然是 API 网关，AI 原生的意义在于，在这样的 API 网关里，AI 是一等公民。API 研发，API 供应，API 消费，以及 API 观测都基于 AI 场景下的需求，演进出全新的能力。
 
+
 ## 参考资料
 
 - [**文档**](https://higress.cn/docs/latest/overview/what-is-higress/) 
@@ -64,7 +65,7 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
 
 - **AI 网关**:
 
-  Higress 能够用统一的协议对接国内外所有 LLM 模型厂商，同时具备丰富的 AI 可观测、多模型负载均衡/fallback、AI token 流控、AI 缓存等能力：
+  Higress 能够用统一的协议对接国内外所有 LLM 模型厂商，同时具备丰富的 AI 可观测、多模型负载均衡/fallback、AI token 流控、AI 缓存等能力(面向AI Native场景提供原生扩展能力的API网关，帮助开发者高效构建AI应用)：
 
   ![](https://img.alicdn.com/imgextra/i1/O1CN01fNnhCp1cV8mYPRFeS_!!6000000003605-0-tps-1080-608.jpg)
 
