@@ -213,17 +213,50 @@ Envoy 启动是， 会在 localhost:15000 监听，用于 Admin 管理， 通过
 ```
 curl http://127.0.0.1:15000/config_dump
 ```
-### Higress Console 中各项配置与 K8s 资源的对应关系
 
+
+## 配置
+
+Higress Console 中各项配置本质上就是 K8s 资源
+
+- 路由配置
 - 服务来源
 - 服务列表
-- 路由配置： 每条路由对应 Ingress 下的一个资源对象。
 - 域名管理
 - 消费者管理
 - 插件
 - AI 流量入口管理
 
-**控制台密码**
+### 路由配置
+
+每条路由对应 Ingress 下的一个资源对象。
+
+[配置路由执行 gRPC 服务](https://higress.cn/docs/latest/ops/how-tos/grpc-upstream/?spm=36971b57.35684624.0.0.67a94767pTZS2Z)：
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+  name: ingress-grpc-httpbin
+  namespace: default
+spec:
+  ingressClassName: higress
+  rules:
+    - host: foo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grpc-httpbin-v1
+                port:
+                  number: 9091
+```
+  
+### 控制台密码
 
 用户名密码作为 Secrets 资源，名为：higress-console，数据格式如下：
 
